@@ -18,7 +18,7 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>monero-wallet-gui</string>
+  <string>bittube-wallet-gui</string>
   
   <key>CFBundleName</key>
   <string>Monero GUI</string>

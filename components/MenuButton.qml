@@ -107,7 +107,7 @@ Rectangle {
             font.family: MoneroComponents.Style.fontMedium.name
             font.bold: true
             font.pixelSize: 16 * scaleRatio
-            color: "#FFFFFF"
+            color: MoneroComponents.Style.defaultFontColor
         }
     }
 

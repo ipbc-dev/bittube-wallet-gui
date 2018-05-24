@@ -37,7 +37,7 @@ Item {
     property string shadowReleasedColor
     property string pressedColor
     property string releasedColor
-    property string textColor: "#FFFFFF"
+    property string textColor: MoneroComponents.Style.defaultFontColor
     property alias currentIndex: column.currentIndex
     property bool expanded: false
     property int dropdownHeight: 42
@@ -95,7 +95,7 @@ Item {
             font.family: MoneroComponents.Style.fontRegular.name
             font.bold: dropdown.headerFontBold
             font.pixelSize: dropdown.fontHeaderSize
-            color: "#FFFFFF"
+            color: MoneroComponents.Style.defaultFontColor
         }
 
         Item {

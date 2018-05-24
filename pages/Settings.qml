@@ -253,7 +253,7 @@ Rectangle {
                     Layout.bottomMargin: 20 * scaleRatio
 
                     lineEditBackgroundColor: "transparent"
-                    lineEditFontColor: "white"
+                    lineEditFontColor: Style.defaultFontColor
                     lineEditBorderColor: Style.inputBorderColorActive
 
                     daemonAddrLabelText: qsTr("Address")
@@ -285,7 +285,7 @@ Rectangle {
                     Layout.minimumWidth: 100 * scaleRatio
 
                     lineEditBackgroundColor: "transparent"
-                    lineEditFontColor: "white"
+                    lineEditFontColor: Style.defaultFontColor
                     lineEditBorderColor: Qt.rgba(255, 255, 255, 0.35)
 
                     daemonAddrLabelText: qsTr("Address")

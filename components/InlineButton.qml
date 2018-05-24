@@ -39,7 +39,7 @@ Item {
     property string pressedColor: "#FF4304"
     property string releasedColor: "#FF6C3C"
     property string icon: ""
-    property string textColor: "#FFFFFF"
+    property string textColor: MoneroComponents.Style.defaultFontColor
     property int fontSize: 12 * scaleRatio
     property alias text: inlineText.text
     signal clicked()
@@ -53,7 +53,7 @@ Item {
     Rectangle{
         id: rect
         color: MoneroComponents.Style.buttonBackgroundColorDisabled
-        border.color: "black"
+        border.color: "#464646"
         height: 28 * scaleRatio
         width: inlineText.width + 22 * scaleRatio
         radius: 4
@@ -66,7 +66,7 @@ Item {
             font.family: MoneroComponents.Style.fontBold.name
             font.bold: true
             font.pixelSize: 16 * scaleRatio
-            color: "black"
+            color: "#ffffff"
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
         }

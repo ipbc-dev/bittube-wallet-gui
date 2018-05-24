@@ -9,24 +9,35 @@ QtObject {
     property QtObject fontRegular: FontLoader { id: _fontRegular; source: "qrc:/fonts/SFUIDisplay-Regular.otf"; }
 
     property string grey: "#404040"
+    property string legacy_placeholderFontColor: "#BABABA"
 
-    property string defaultFontColor: "white"
+    //font
+    property string defaultFontColor: "#464646"
     property string greyFontColor: "#808080"
     property string dimmedFontColor: "#BBBBBB"
+
+    //inputBox
     property string inputBoxBackground: "black"
     property string inputBoxBackgroundError: "#FFDDDD"
     property string inputBoxColor: "white"
-    property string legacy_placeholderFontColor: "#BABABA"
-    property string inputBorderColorActive: Qt.rgba(255, 255, 255, 0.38)
-    property string inputBorderColorInActive: Qt.rgba(255, 255, 255, 0.32)
-    property string inputBorderColorInvalid: Qt.rgba(255, 0, 0, 0.40)
 
-    property string buttonBackgroundColor: "#FA6800"
-    property string buttonBackgroundColorHover: "#E65E00"
-    property string buttonBackgroundColorDisabled: "#707070"
+    //input
+    property string inputBorderColorActive: Qt.rgba(100, 100, 100, 1)
+    property string inputBorderColorInActive: Qt.rgba(100, 100, 100, 1)
+    property string inputBorderColorInvalid: Qt.rgba(255, 0, 0, 1)
+
+    //button
+    property string buttonBackgroundColor: "#86af49"
+    property string buttonBackgroundColorHover: "#b0e660"
+    property string buttonBackgroundColorDisabled: "#8b8b8b"
     property string buttonBackgroundColorDisabledHover: "#808080"
-    property string buttonTextColor: "white"
-    property string buttonTextColorDisabled: "black"
-    property string dividerColor: "white"
+    property string buttonTextColor: "#ffffff"
+    property string buttonTextColorDisabled: "#464646"
+    
+    //divider
+    property string dividerColor: "black"
     property real dividerOpacity: 0.20
+
+    //progressbar
+    property string progressbarBackgroundColor: "#86af49"
 }
