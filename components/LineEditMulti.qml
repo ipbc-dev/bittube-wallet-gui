@@ -121,15 +121,6 @@ ColumnLayout {
         }
 
         Rectangle {
-            id: inputFill
-            color: "#ffffff"
-            anchors.fill: parent
-            border.width: 0
-            border.color: "#ffffff"
-            radius: 4
-        }
-
-        Rectangle {
             color: "transparent"
             border.width: 0
             border.color: {
