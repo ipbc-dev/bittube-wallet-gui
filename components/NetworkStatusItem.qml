@@ -97,7 +97,7 @@ Rectangle {
                 font.family: MoneroComponents.Style.fontMedium.name
                 font.bold: true
                 font.pixelSize: 13 * scaleRatio
-                color: "white"
+                color: MoneroComponents.Style.defaultFontColor
                 opacity: 0.5
                 text: qsTr("Network status") + translationManager.emptyString
             }
@@ -109,7 +109,7 @@ Rectangle {
                 anchors.topMargin: 14
                 font.family: MoneroComponents.Style.fontMedium.name
                 font.pixelSize: 20 * scaleRatio
-                color: "white"
+                color: MoneroComponents.Style.defaultFontColor
                 text: getConnectionStatusString(item.connected) + translationManager.emptyString
             }
         }

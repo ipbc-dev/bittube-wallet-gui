@@ -106,7 +106,7 @@ Rectangle {
         LabelSubheader {
             Layout.fillWidth: true
             textFormat: Text.RichText
-            text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+            text: "<style type='text/css'>a {text-decoration: none; color: #86af49; font-size: 14px;}</style>" +
                   qsTr("Blackballed outputs") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
             onLinkActivated: {
                 sharedRingDBDialog.title  = qsTr("Blackballed outputs") + translationManager.emptyString;
@@ -238,7 +238,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.topMargin: 24 * scaleRatio
             textFormat: Text.RichText
-            text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+            text: "<style type='text/css'>a {text-decoration: none; color: #86af49; font-size: 14px;}</style>" +
                   qsTr("Rings") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
             onLinkActivated: {
                 sharedRingDBDialog.title  = qsTr("Rings") + translationManager.emptyString;

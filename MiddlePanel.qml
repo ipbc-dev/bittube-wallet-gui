@@ -227,7 +227,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         width: 1
-        color: "#313131"
+        color: "#d2d2d2"
     }
 
     /* connect "payment" click */

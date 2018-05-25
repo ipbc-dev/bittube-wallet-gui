@@ -55,7 +55,7 @@ ColumnLayout {
     spacing: 0
     Rectangle {
         id: inputLabelRect
-        color: "transparent"
+        color: "#eeeeee"
         Layout.fillWidth: true
         height: (inputLabel.height + 10) * scaleRatio
         visible: showingHeader ? true : false
@@ -121,8 +121,17 @@ ColumnLayout {
         }
 
         Rectangle {
+            id: inputFill
+            color: "#ffffff"
+            anchors.fill: parent
+            border.width: 0
+            border.color: "#ffffff"
+            radius: 4
+        }
+
+        Rectangle {
             color: "transparent"
-            border.width: 1
+            border.width: 0
             border.color: {
               if(multiLine.error && multiLine.text !== ""){
                   return MoneroComponents.Style.inputBorderColorInvalid;

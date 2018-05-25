@@ -66,7 +66,7 @@ Rectangle {
             font.family: MoneroComponents.Style.fontMedium.name
             font.pixelSize: 13 * scaleRatio
             font.bold: true
-            color: "white"
+            color: MoneroComponents.Style.defaultFontColor
             text: qsTr("Synchronizing %1").arg(syncType)
             height: 18 * scaleRatio
         }
@@ -79,7 +79,7 @@ Rectangle {
             font.family: MoneroComponents.Style.fontMedium.name
             font.pixelSize: 13 * scaleRatio
             font.bold: true
-            color: "white"
+            color: MoneroComponents.Style.defaultFontColor
             height:18 * scaleRatio
         }
 

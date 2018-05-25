@@ -53,7 +53,7 @@ Item {
     Rectangle{
         id: rect
         color: MoneroComponents.Style.buttonBackgroundColorDisabled
-        border.color: "#464646"
+        // border.color: "#464646"
         height: 28 * scaleRatio
         width: inlineText.width + 22 * scaleRatio
         radius: 4
@@ -83,7 +83,7 @@ Item {
             }
             onExited: {
                 rect.opacity = 1.0;
-                rect.color = "#808080";
+                rect.color = "#464646";
             }
         }
     }

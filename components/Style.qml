@@ -10,34 +10,36 @@ QtObject {
 
     property string grey: "#404040"
     property string legacy_placeholderFontColor: "#BABABA"
-
     //font
     property string defaultFontColor: "#464646"
     property string greyFontColor: "#808080"
     property string dimmedFontColor: "#BBBBBB"
-
     //inputBox
     property string inputBoxBackground: "black"
     property string inputBoxBackgroundError: "#FFDDDD"
     property string inputBoxColor: "white"
-
     //input
-    property string inputBorderColorActive: Qt.rgba(100, 100, 100, 1)
-    property string inputBorderColorInActive: Qt.rgba(100, 100, 100, 1)
-    property string inputBorderColorInvalid: Qt.rgba(255, 0, 0, 1)
-
+    property string inputBorderColorActive: "#464646"
+    property string inputBorderColorInActive: "#404040"
+    property string inputBorderColorInvalid: "#ff0000"
     //button
     property string buttonBackgroundColor: "#86af49"
     property string buttonBackgroundColorHover: "#b0e660"
-    property string buttonBackgroundColorDisabled: "#8b8b8b"
+    property string buttonBackgroundColorDisabled: "#BABABA"
     property string buttonBackgroundColorDisabledHover: "#808080"
     property string buttonTextColor: "#ffffff"
     property string buttonTextColorDisabled: "#464646"
-    
     //divider
-    property string dividerColor: "black"
-    property real dividerOpacity: 0.20
-
+    property string dividerColor: "#d2d2d2"
+    property real dividerOpacity: 1
     //progressbar
     property string progressbarBackgroundColor: "#86af49"
+    //datepicker
+    property string datepickerBackgroundColor: "#ffffff"
+    property string datepickerBorderColor: "#404040"
+    //dropdown
+    property string dropdownContentBackgroundColor: "#ffffff"
+    property string dropdownContentFontColor: "#404040"
+    property string dropdownContentSelectedBackgroundColor: "#ffffff"
+    property string dropdownContentSelectedFontColor: "#86af49"
 }

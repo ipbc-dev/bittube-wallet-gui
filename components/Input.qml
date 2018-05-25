@@ -42,6 +42,6 @@ TextField {
     selectedTextColor: MoneroComponents.Style.defaultFontColor
 
     background: Rectangle {
-        color: "transparent"
+        color: "#ffffff"
     }
 }

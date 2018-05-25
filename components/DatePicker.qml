@@ -37,10 +37,12 @@ Item {
     property bool expanded: false
     property date currentDate
     property bool showCurrentDate: true
-    property color backgroundColor : "#404040"
+    property color backgroundColor : MoneroComponents.Style.datepickerBackgroundColor
     property color errorColor : "red"
     property bool error: false
     property alias inputLabel: inputLabel
+    property bool headerBorder: true
+    property string colorBorder: MoneroComponents.Style.datepickerBorderColor
 
     signal dateChanged();
 
@@ -104,6 +106,8 @@ Item {
             radius: 4
             y: 1
             color: datePicker.backgroundColor
+            border.width: datePicker.headerBorder ? 1 : 0
+            border.color: datePicker.colorBorder
         }
 
         Item {

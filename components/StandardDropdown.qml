@@ -33,10 +33,10 @@ import "../components" as MoneroComponents
 Item {
     id: dropdown
     property alias dataModel: repeater.model
-    property string shadowPressedColor
-    property string shadowReleasedColor
-    property string pressedColor
-    property string releasedColor
+    property string shadowPressedColor: MoneroComponents.Style.dropdownContentSelectedFontColor
+    property string shadowReleasedColor: MoneroComponents.Style.dropdownContentSelectedFontColor
+    property string pressedColor: MoneroComponents.Style.dropdownContentBackgroundColor
+    property string releasedColor: MoneroComponents.Style.dropdownContentSelectedBackgroundColor
     property string textColor: MoneroComponents.Style.defaultFontColor
     property alias currentIndex: column.currentIndex
     property bool expanded: false
@@ -44,8 +44,8 @@ Item {
     property int fontHeaderSize: 16 * scaleRatio
     property int fontItemSize: 14 * scaleRatio
     property string colorBorder: MoneroComponents.Style.inputBorderColorInActive
-    property string colorHeaderBackground: "transparent"
-    property bool headerBorder: true
+    property string colorHeaderBackground: "#ffffff"
+    property bool headerBorder: false
     property bool headerFontBold: false
 
     height: dropdownHeight
@@ -188,7 +188,7 @@ Item {
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.bold: true
                         font.pixelSize: fontItemSize
-                        color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
+                        color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? MoneroComponents.Style.dropdownContentSelectedFontColor : MoneroComponents.Style.dropdownContentFontColor
                         text: qsTr(column1) + translationManager.emptyString
                     }
 
@@ -199,7 +199,7 @@ Item {
                         anchors.rightMargin: 45 * scaleRatio
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 14 * scaleRatio
-                        color: "#FFFFFF"
+                        color: MoneroComponents.Style.defaultFontColor
                         text: ""
                     }
 

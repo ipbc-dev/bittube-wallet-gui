@@ -57,16 +57,16 @@ Item {
             return MoneroComponents.Style.inputBorderColorInActive;
         }
     }
-    property bool borderDisabled: false
+    property bool borderDisabled: true
     property int fontSize: 18 * scaleRatio
-    property bool showBorder: true
+    property bool showBorder: false
     property bool fontBold: false
     property alias fontColor: input.color
     property bool error: false
     property alias labelText: inputLabel.text
     property alias labelColor: inputLabel.color
     property alias labelTextFormat: inputLabel.textFormat
-    property string backgroundColor: "transparent"
+    property string backgroundColor: "#ffffff"
     property string tipText: ""
     property int labelFontSize: 16 * scaleRatio
     property bool labelFontBold: false

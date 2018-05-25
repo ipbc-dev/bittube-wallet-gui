@@ -127,7 +127,7 @@ Rectangle {
             hoverEnabled: true
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
-            onEntered: goToBasicVersionButton.color = "#262626";
+            // onEntered: goToBasicVersionButton.color = "#262626";
             onExited: goToBasicVersionButton.color = "transparent";
             onClicked: {
                 releaseFocus()
@@ -163,7 +163,7 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: minimizeButton.color = "#262626";
+                // onEntered: minimizeButton.color = "#262626";
                 onExited: minimizeButton.color = "transparent";
                 onClicked: minimizeClicked();
             }
@@ -190,7 +190,7 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: maximizeButton.color = "#262626";
+                // onEntered: maximizeButton.color = "#262626";
                 onExited: maximizeButton.color = "transparent";
                 onClicked: maximizeClicked();
             }
@@ -216,7 +216,7 @@ Rectangle {
                 onClicked: closeClicked();
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: closeButton.color = "#262626";
+                // onEntered: closeButton.color = "#262626";
                 onExited: closeButton.color = "transparent";
             }
         }
@@ -228,7 +228,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.left: parent.left
         height: 1
-        color: "#2F2F2F"
+        color: "#d2d2d2"
         z: parent.z + 1
     }
 
@@ -238,7 +238,7 @@ Rectangle {
         anchors.left: parent.left
         visible: titleBar.small
         height: 1
-        color: "#2F2F2F"
+        color: "#d2d2d2"
         z: parent.z + 1
     }
 }

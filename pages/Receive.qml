@@ -196,7 +196,7 @@ Rectangle {
             LabelSubheader {
                 Layout.fillWidth: true
                 textFormat: Text.RichText
-                text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+                text: "<style type='text/css'>a {text-decoration: none; color: #86af49; font-size: 14px;}</style>" +
                       qsTr("Addresses") +
                       "<font size='2'> </font><a href='#'>" +
                       qsTr("Help") + "</a>" +
@@ -251,7 +251,7 @@ Rectangle {
 
                             Label {
                                 id: idLabel
-                                color: index === current_subaddress_table_index ? "white" : "#757575"
+                                color: index === current_subaddress_table_index ? "#464646" : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6
@@ -272,7 +272,7 @@ Rectangle {
                             }
 
                             Label {
-                                color: "white"
+                                color: "#464646"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: nameLabel.right
                                 anchors.leftMargin: 6
@@ -425,7 +425,7 @@ Rectangle {
                 LabelSubheader {
                     Layout.fillWidth: true
                     textFormat: Text.RichText
-                    text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+                    text: "<style type='text/css'>a {text-decoration: none; color: #86af49; font-size: 14px;}</style>" +
                           qsTr("QR Code") +
                           "<font size='2'> </font><a href='#'>" +
                           qsTr("Help") + "</a>" +
@@ -511,7 +511,7 @@ Rectangle {
                 LabelSubheader {
                     Layout.fillWidth: true
                     textFormat: Text.RichText
-                    text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+                    text: "<style type='text/css'>a {text-decoration: none; color: #86af49; font-size: 14px;}</style>" +
                           qsTr("Tracking") +
                           "<font size='2'> </font><a href='#'>" +
                           qsTr("Help") + "</a>" +
