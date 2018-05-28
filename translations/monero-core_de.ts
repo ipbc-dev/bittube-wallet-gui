@@ -2101,8 +2101,8 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
-        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support BitTube development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support BitTube development.</source>
-        <translation>Für jede Transaktion fällt eine kleine Transaktionsgebühr an. Mit dieser Option kannst Du diese Gebühr um einen zusätzlichen Prozentsatz erhöhen, um die Entwicklung von BitTube voranzutreiben. Beispielsweise würden bei einer 50-%igen automatischen Spende und einer Transaktionsgebühr von 0.005 XMR zusätzliche 0.0025 XMR der Entwicklung von BitTube zukommen.</translation>
+        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support BitTube development. For instance, a 50% autodonation take a transaction fee of 0.005 TUBE and add a 0.0025 TUBE to support BitTube development.</source>
+        <translation>Für jede Transaktion fällt eine kleine Transaktionsgebühr an. Mit dieser Option kannst Du diese Gebühr um einen zusätzlichen Prozentsatz erhöhen, um die Entwicklung von BitTube voranzutreiben. Beispielsweise würden bei einer 50-%igen automatischen Spende und einer Transaktionsgebühr von 0.005 TUBE zusätzliche 0.0025 TUBE der Entwicklung von BitTube zukommen.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>

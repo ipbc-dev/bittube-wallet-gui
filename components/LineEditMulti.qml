@@ -105,6 +105,7 @@ ColumnLayout {
         wrapAnywhere: parent.wrapAnywhere
         fontSize: parent.fontSize
         fontBold: parent.fontBold
+        z: 2
 
         Text {
             id: placeholderLabel
@@ -137,4 +138,14 @@ ColumnLayout {
             visible: lineditmulti.showBorder
         }
     }
+
+    // Rectangle {
+    //     id: inputFill
+    //     color: "#ffffff"
+    //     anchors.fill: parent
+    //     Layout.fillWidth: true
+    //     radius: 4
+    // }
+
+
 }

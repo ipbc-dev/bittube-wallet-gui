@@ -63,8 +63,8 @@ ColumnLayout {
     signal useMoneroClicked()
     signal openWalletFromFileClicked()
 //    border.color: "#DBDBDB"
-//    border.width: 1
-//    color: "#FFFFFF"
+    // border.width: 1
+    // color: "#FFFFFF"
 
     function restart(){
         wizard.currentPage = 0;
@@ -317,7 +317,7 @@ ColumnLayout {
 
         width: 50 * scaleRatio; height: 50 * scaleRatio
         radius: 25
-        color: prevArea.containsMouse ? "#FF4304" : "#FF6C3C"
+        color: prevArea.containsMouse ? "#a1d257" : "#86af49"
 
         Image {
             anchors.centerIn: parent
@@ -342,7 +342,7 @@ ColumnLayout {
         visible: currentPage > 1 && currentPage < pages.length - 1
         width: 50 * scaleRatio; height: 50 * scaleRatio
         radius: 25
-        color: enabled ? nextArea.containsMouse ? "#FF4304" : "#FF6C3C" : "#DBDBDB"
+        color: enabled ? nextArea.containsMouse ? "#a1d257" : "#86af49" : "#DBDBDB"
 
 
         Image {
@@ -364,7 +364,7 @@ ColumnLayout {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins:  (isMobile) ? 20 * scaleRatio : 50 * scaleRatio
-        text: qsTr("USE MONERO") + translationManager.emptyString
+        text: qsTr("USE BitTube") + translationManager.emptyString
         visible: parent.paths[currentPath][currentPage] === finishPage
         onClicked: {
             wizard.applySettings();

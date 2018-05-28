@@ -65,8 +65,8 @@ ColumnLayout {
 
         ListModel {
             id: dotsModel
-            ListElement { dotColor: "#36B05B" }
-            ListElement { dotColor: "#36B05B" }
+            ListElement { dotColor: "#86af49" }
+            ListElement { dotColor: "#86af49" }
             ListElement { dotColor: "#FFE00A" }
             ListElement { dotColor: "#DBDBDB" }
         }
@@ -111,7 +111,7 @@ ColumnLayout {
             color: "#4A4646"
             textFormat: Text.RichText
 //            horizontalAlignment: Text.AlignHCenter
-            text: qsTr("To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it's recommended to run your own node. \
+            text: qsTr("To be able to communicate with the BitTube network your wallet needs to be connected to a BitTube node. For best privacy it's recommended to run your own node. \
                         <br><br> \
                         If you don't have the option to run your own node, there's an option to connect to a remote node.")
                     + translationManager.emptyString

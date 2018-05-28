@@ -46,7 +46,7 @@ ColumnLayout {
         echoMode: TextInput.Password
         style: TextFieldStyle {
             renderType: Text.NativeRendering
-            textColor: "#35B05A"
+            textColor: "#86af49"
             passwordCharacter: "•"
             background: Rectangle {
                 radius: 0
