@@ -173,9 +173,9 @@ ListView {
                         _amount = (_amount *1);
                     }
 
-                    return _amount + " XMR";
+                    return _amount + " TUBE";
                 }
-                color: isOut ? "white" : "#2eb358"
+                color: isOut ? "#808080" : "#2eb358"
             }
 
             Rectangle {
@@ -425,7 +425,7 @@ ListView {
                 }
 
                 Text {
-                    color: MoneroComponents.Style.defaultFontColor
+                    color: "#ffffff"
                     text: "P"
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
@@ -470,7 +470,7 @@ ListView {
                 }
 
                 Text {
-                    color: MoneroComponents.Style.defaultFontColor
+                    color: "#ffffff"
                     text: "?"
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter

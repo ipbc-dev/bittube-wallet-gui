@@ -41,7 +41,7 @@ RowLayout {
     height: 26 * scaleRatio
     // legacy properties
     property var checkedColor: "#464646"
-    property var borderColor: checked ? Qt.rgba(70, 70, 70, 0.35) : Qt.rgba(70, 70, 70, 0.25)
+    property var borderColor: "#464646"
 
     function toggle(){
         radioButton.checked = !radioButton.checked
