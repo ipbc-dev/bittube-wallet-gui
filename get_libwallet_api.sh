@@ -17,37 +17,37 @@ if [ ! -d $MONERO_DIR/src ]; then
     git submodule init monero
 fi
 git submodule update --remote
-git -C $MONERO_DIR fetch
-git -C $MONERO_DIR checkout release-v0.12
+# git -C $MONERO_DIR fetch
+# git -C $MONERO_DIR checkout release-v0.12
 
 # get monero core tag
-get_tag
-# create local monero branch
-git -C $MONERO_DIR checkout -B $VERSIONTAG
+# get_tag
+# # create local monero branch
+# git -C $MONERO_DIR checkout -B $VERSIONTAG
 
-git -C $MONERO_DIR submodule init
-git -C $MONERO_DIR submodule update
+# git -C $MONERO_DIR submodule init
+# git -C $MONERO_DIR submodule update
 
 # Merge monero PR dependencies
 
 # Workaround for git username requirements
 # Save current user settings and revert back when we are done with merging PR's
-OLD_GIT_USER=$(git -C $MONERO_DIR config --local user.name)
-OLD_GIT_EMAIL=$(git -C $MONERO_DIR config --local user.email)
-git -C $MONERO_DIR config user.name "Bittube GUI"
-git -C $MONERO_DIR config user.email "gui@bittube.local"
-# check for PR requirements in most recent commit message (i.e requires #xxxx)
-for PR in $(git log --format=%B -n 1 | grep -io "requires #[0-9]*" | sed 's/[^0-9]*//g'); do
-    echo "Merging monero push request #$PR"
-    # fetch pull request and merge
-    git -C $MONERO_DIR fetch origin pull/$PR/head:PR-$PR
-    git -C $MONERO_DIR merge --quiet PR-$PR  -m "Merge monero PR #$PR"
-    BUILD_LIBWALLET=true
-done
+# OLD_GIT_USER=$(git -C $MONERO_DIR config --local user.name)
+# OLD_GIT_EMAIL=$(git -C $MONERO_DIR config --local user.email)
+# git -C $MONERO_DIR config user.name "Bittube GUI"
+# git -C $MONERO_DIR config user.email "gui@bittube.local"
+# # check for PR requirements in most recent commit message (i.e requires #xxxx)
+# for PR in $(git log --format=%B -n 1 | grep -io "requires #[0-9]*" | sed 's/[^0-9]*//g'); do
+#     echo "Merging monero push request #$PR"
+#     # fetch pull request and merge
+#     git -C $MONERO_DIR fetch origin pull/$PR/head:PR-$PR
+#     git -C $MONERO_DIR merge --quiet PR-$PR  -m "Merge monero PR #$PR"
+#     BUILD_LIBWALLET=true
+# done
 
 # revert back to old git config
-$(git -C $MONERO_DIR config user.name "$OLD_GIT_USER")
-$(git -C $MONERO_DIR config user.email "$OLD_GIT_EMAIL")
+# $(git -C $MONERO_DIR config user.name "$OLD_GIT_USER")
+# $(git -C $MONERO_DIR config user.email "$OLD_GIT_EMAIL")
 
 # Build libwallet if it doesnt exist
 if [ ! -f $MONERO_DIR/lib/libwallet_merged.a ]; then 
@@ -119,11 +119,11 @@ else
 fi
 
 
-echo "cleaning up existing monero build dir, libs and includes"
-rm -fr $MONERO_DIR/build
-rm -fr $MONERO_DIR/lib
-rm -fr $MONERO_DIR/include
-rm -fr $MONERO_DIR/bin
+# echo "cleaning up existing monero build dir, libs and includes"
+# rm -fr $MONERO_DIR/build
+# rm -fr $MONERO_DIR/lib
+# rm -fr $MONERO_DIR/include
+# rm -fr $MONERO_DIR/bin
 
 
 mkdir -p $MONERO_DIR/build/$BUILD_TYPE
