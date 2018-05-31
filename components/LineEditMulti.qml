@@ -142,8 +142,7 @@ ColumnLayout {
     // Rectangle {
     //     id: inputFill
     //     color: "#ffffff"
-    //     anchors.fill: parent
-    //     Layout.fillWidth: true
+    //     anchors.fill: placeholderLabel
     //     radius: 4
     // }
 
