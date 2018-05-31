@@ -255,23 +255,23 @@ ColumnLayout {
             }
         }
 
-        Rectangle {
-            width: 100 * scaleRatio
-            RadioButton {
-                id: stageNet
-                text: qsTr("Stagenet") + translationManager.emptyString
-                checkedColor: Qt.rgba(0, 0, 0, 0.75)
-                borderColor: Qt.rgba(0, 0, 0, 0.45)
-                fontColor: "#4A4646"
-                fontSize: 16 * scaleRatio
-                checked: appWindow.persistentSettings.nettype == NetworkType.STAGENET;
-                onClicked: {
-                    persistentSettings.nettype = stageNet.checked ? NetworkType.STAGENET : NetworkType.MAINNET
-                    testNet.checked = false;
-                    console.log("Network type set to ", persistentSettings.nettype == NetworkType.STAGENET ? "Stagenet" : "Mainnet")
-                }
-            }
-        }
+        // Rectangle {
+        //     width: 100 * scaleRatio
+        //     RadioButton {
+        //         id: stageNet
+        //         text: qsTr("Stagenet") + translationManager.emptyString
+        //         checkedColor: Qt.rgba(0, 0, 0, 0.75)
+        //         borderColor: Qt.rgba(0, 0, 0, 0.45)
+        //         fontColor: "#4A4646"
+        //         fontSize: 16 * scaleRatio
+        //         checked: appWindow.persistentSettings.nettype == NetworkType.STAGENET;
+        //         onClicked: {
+        //             persistentSettings.nettype = stageNet.checked ? NetworkType.STAGENET : NetworkType.MAINNET
+        //             testNet.checked = false;
+        //             console.log("Network type set to ", persistentSettings.nettype == NetworkType.STAGENET ? "Stagenet" : "Mainnet")
+        //         }
+        //     }
+        // }
     }
 }
 

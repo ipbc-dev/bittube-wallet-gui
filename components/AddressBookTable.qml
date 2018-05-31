@@ -66,7 +66,7 @@ ListView {
             font.family: "Arial"
             font.bold: true
             font.pixelSize: 19
-            color: "#ffffff"
+            color: "#464646"
             elide: Text.ElideRight
             text: description
 
@@ -87,7 +87,7 @@ ListView {
             anchors.rightMargin: 40
             font.family: "Arial"
             font.pixelSize: 16
-            color: "#ffffff"
+            color: "#464646"
             text: address
             readOnly: true
         }
@@ -101,7 +101,7 @@ ListView {
             width: 139
             font.family: "Arial"
             font.pixelSize: 12
-            color: "#ffffff"
+            color: "#464646"
             text: qsTr("Payment ID:") + translationManager.emptyString
         }
 

@@ -121,7 +121,7 @@ Window {
                     }
                     function logMessage(msg){
                         msg = msg.trim();
-                        var color = "white";
+                        var color = "#464646";
                         if(msg.toLowerCase().indexOf('error') >= 0){
                             color = "red";
                         } else if (msg.toLowerCase().indexOf('warning') >= 0){
@@ -145,7 +145,7 @@ Window {
                             timeZoneName: undefined
                         });
 
-                        var _timestamp = log_color("[" + timestamp + "]", "#FFFFFF");
+                        var _timestamp = log_color("[" + timestamp + "]", "#808080");
                         var _msg = log_color(msg, color);
                         textArea.append(_timestamp + " " + _msg);
 
