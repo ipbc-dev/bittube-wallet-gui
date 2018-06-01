@@ -1,6 +1,6 @@
 #!/bin/bash
 # MONERO_URL=https://github.com/monero-project/monero.git
-MONERO_URL=https://github.com/sebseb7/mon_test.git
+MONERO_URL=http://gitlab.devcups.com/devcups/bittube-daemon.git
 MONERO_BRANCH=master
 
 pushd $(pwd)
@@ -119,11 +119,11 @@ else
 fi
 
 
-# echo "cleaning up existing monero build dir, libs and includes"
-# rm -fr $MONERO_DIR/build
-# rm -fr $MONERO_DIR/lib
-# rm -fr $MONERO_DIR/include
-# rm -fr $MONERO_DIR/bin
+echo "cleaning up existing monero build dir, libs and includes"
+rm -fr $MONERO_DIR/build
+rm -fr $MONERO_DIR/lib
+rm -fr $MONERO_DIR/include
+rm -fr $MONERO_DIR/bin
 
 
 mkdir -p $MONERO_DIR/build/$BUILD_TYPE

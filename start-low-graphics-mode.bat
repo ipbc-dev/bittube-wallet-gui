@@ -2,4 +2,4 @@
 
 set QMLSCENE_DEVICE=softwarecontext
 
-start /b bittube-wallet-gui.exe
+start /b monero-wallet-gui.exe
