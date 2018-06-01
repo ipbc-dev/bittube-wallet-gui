@@ -787,7 +787,7 @@ ApplicationWindow {
                     txid_text += ", "
                 txid_text += txid[i]
             }
-            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Monero sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
+            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("TUBE sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
             informationPopup.icon  = StandardIcon.Information
             if (transactionDescription.length > 0) {
                 for (var i = 0; i < txid.length; ++i)
@@ -858,10 +858,10 @@ ApplicationWindow {
             } else if (received > 0) {
                 received = received / 1e12
                 if (in_pool) {
-                    informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(received);
+                    informationPopup.text = qsTr("This address received %1 TUBE, but the transaction is not yet mined").arg(received);
                 }
                 else {
-                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmation(s).").arg(received).arg(confirmations);
+                    informationPopup.text = qsTr("This address received %1 TUBE, with %2 confirmation(s).").arg(received).arg(confirmations);
                 }
             }
             else {
@@ -1284,7 +1284,7 @@ ApplicationWindow {
 //                PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; visible: true }
 //                PropertyChanges { target: titleBar; y: 0 }
-                PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
+                PropertyChanges { target: titleBar; title: qsTr("BitTube") + translationManager.emptyString }
                 PropertyChanges { target: mobileHeader; visible: isMobile ? true : false }
             }
         ]
