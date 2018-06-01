@@ -41,7 +41,7 @@ Item {
     property color errorColor : "red"
     property bool error: false
     property alias inputLabel: inputLabel
-    property bool headerBorder: true
+    property bool headerBorder: false
     property string colorBorder: MoneroComponents.Style.datepickerBorderColor
 
     signal dateChanged();
