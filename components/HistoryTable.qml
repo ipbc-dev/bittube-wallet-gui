@@ -175,7 +175,7 @@ ListView {
 
                     return _amount + " TUBE";
                 }
-                color: isOut ? "#808080" : "#2eb358"
+                color: isOut ? "#808080" : "#86af49"
             }
 
             Rectangle {

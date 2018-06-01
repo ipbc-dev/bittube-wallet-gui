@@ -139,12 +139,13 @@ ColumnLayout {
         }
     }
 
-    // Rectangle {
-    //     id: inputFill
-    //     color: "#ffffff"
-    //     anchors.fill: placeholderLabel
-    //     radius: 4
-    // }
+    Rectangle {
+        id: inputFill
+        color: "#ffffff"
+        anchors.fill: multiLine
+        radius: 4
+        z: 1
+    }
 
 
 }
