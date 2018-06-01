@@ -117,8 +117,8 @@
     </message>
     <message>
         <location filename="../pages/Dashboard.qml" line="102"/>
-        <source>&lt;style type='text/css'&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        looking for security level and address book? go to &lt;a href='#'&gt;Transfer&lt;/a&gt; tab</source>
-        <translation>&lt;style type='text/css'&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        pour le niveau de sécurité et le carnet d'adresses, aller à l'onglet &lt;a href='#'&gt;Transfert&lt;/a&gt;</translation>
+        <source>&lt;style type='text/css'&gt;a {text-decoration: none; color: #86af49; font-size: 14px;}&lt;/style&gt;                        looking for security level and address book? go to &lt;a href='#'&gt;Transfer&lt;/a&gt; tab</source>
+        <translation>&lt;style type='text/css'&gt;a {text-decoration: none; color: #86af49; font-size: 14px;}&lt;/style&gt;                        pour le niveau de sécurité et le carnet d'adresses, aller à l'onglet &lt;a href='#'&gt;Transfert&lt;/a&gt;</translation>
     </message>
 </context>
 <context>
@@ -1679,7 +1679,7 @@ L'ancien cache du portefeuille sera renommé et vous pouvez le restaurer plus ta
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="46"/>
-        <source>&lt;style type='text/css'&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size='2'&gt; (&lt;/font&gt;&lt;a href='#'&gt;Start daemon&lt;/a&gt;&lt;font size='2'&gt;)&lt;/font&gt;</source>
+        <source>&lt;style type='text/css'&gt;a {text-decoration: none; color: #86af49; font-size: 14px;}&lt;/style&gt;&lt;font size='2'&gt; (&lt;/font&gt;&lt;a href='#'&gt;Start daemon&lt;/a&gt;&lt;font size='2'&gt;)&lt;/font&gt;</source>
         <translation> Lancer le démon </translation>
     </message>
     <message>
