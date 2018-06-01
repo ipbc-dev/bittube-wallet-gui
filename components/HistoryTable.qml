@@ -311,7 +311,7 @@ ListView {
                     if(!isOut && !fee){
                         return "-";
                     } else if(isOut && fee){
-                        return fee + " XMR";
+                        return fee + " TUBE";
                     } else {
                         return "Unknown"
                     }

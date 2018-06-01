@@ -1242,7 +1242,7 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the Bit.tube website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2100,8 +2100,8 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
-        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>За кожну транзакцію береться невелика комісія. Ця опція дозволяє вам додати додаткову суму в процентах від цієї комісії до транзакції для підтримки розробки Monero. Наприклад, 50% автодотації беруть плату за транзакцію 0,005 XMR і додають 0,0025 XMR на користь підтримки розробки Monero.</translation>
+        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 TUBE and add a 0.0025 TUBE to support Monero development.</source>
+        <translation>За кожну транзакцію береться невелика комісія. Ця опція дозволяє вам додати додаткову суму в процентах від цієї комісії до транзакції для підтримки розробки Monero. Наприклад, 50% автодотації беруть плату за транзакцію 0,005 TUBE і додають 0,0025 TUBE на користь підтримки розробки Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
@@ -2654,7 +2654,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="862"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Ця адреса отримала %1 XMR, з %2 підтвердженнями</translation>
+        <translation>Ця адреса отримала %1 TUBE, з %2 підтвердженнями</translation>
     </message>
     <message>
         <location filename="../main.qml" line="873"/>
@@ -2730,7 +2730,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="859"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Ця адреса отримала %1 XMR, але транзакції ще не підтверждені майнерами</translation>
+        <translation>Ця адреса отримала %1 TUBE, але транзакції ще не підтверждені майнерами</translation>
     </message>
     <message>
         <location filename="../main.qml" line="866"/>
