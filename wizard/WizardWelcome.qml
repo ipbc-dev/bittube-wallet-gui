@@ -135,7 +135,7 @@ ColumnLayout {
 //                Layout.alignment: Qt.AlignHCenter
                 Rectangle {
                     id: flagRect
-                    width: 60 * scaleRatio; height: 60 * scaleRatio
+                    width: 40 * scaleRatio; height: 40 * scaleRatio
 //                    anchors.centerIn: parent
                     radius: 30 * scaleRatio
                     Layout.alignment: Qt.AlignHCenter
