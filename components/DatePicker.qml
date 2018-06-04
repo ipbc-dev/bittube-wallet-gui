@@ -298,7 +298,7 @@ Item {
                     Rectangle {
                         anchors.fill: parent
                         radius: parent.implicitHeight / 2
-                        color: dayArea.pressed && styleData.visibleMonth ? "#FF6C3B" : "transparent"
+                        color: dayArea.pressed && styleData.visibleMonth ? "#86af49" : "transparent"
                     }
 
                     Text {
