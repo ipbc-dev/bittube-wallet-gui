@@ -7,7 +7,7 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-WALLET_ROOT=$$PWD/monero
+WALLET_ROOT=$$PWD/bittube
 
 CONFIG += c++11 link_pkgconfig
 packagesExist(libpcsclite) {

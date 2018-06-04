@@ -1,4 +1,4 @@
-[submodule "monero"]
-	path = monero
+[submodule "bittube"]
+	path = bittube
 	url = http://gitlab.devcups.com/devcups/bittube-daemon.git
 	ignore = all
