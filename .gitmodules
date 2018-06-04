@@ -1,4 +1,3 @@
 [submodule "bittube"]
 	path = bittube
 	url = http://gitlab.devcups.com/devcups/bittube-daemon.git
-	ignore = all
