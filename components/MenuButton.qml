@@ -93,7 +93,7 @@ Rectangle {
             Image {
                 anchors.centerIn: parent
                 anchors.left: parent.left
-                source: "../images/arrow-right-medium-white.png"
+                source: "../images/menuArrow.png"
                 visible: button.checked
             }
         }

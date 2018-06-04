@@ -8,7 +8,7 @@
         <file>images/helpIcon.png</file>
         <file>images/maximizeIcon.png</file>
         <file>images/minimizeIcon.png</file>
-        <file>images/moneroLogo.png</file>
+        <file>images/bittubeLogo.png</file>
         <file>components/Label.qml</file>
         <file>images/whatIsIcon.png</file>
         <file>images/lockIcon.png</file>
@@ -52,7 +52,7 @@
         <file>components/Scroll.qml</file>
         <file>components/AddressBookTable.qml</file>
         <file>images/deleteIcon.png</file>
-        <file>images/moneroIcon.png</file>
+        <file>images/bittubeIcon.png</file>
         <file>components/StandardDropdown.qml</file>
         <file>images/whiteDropIndicator.png</file>
         <file>components/PrivacyLevel.qml</file>
@@ -75,7 +75,7 @@
         <file>components/HistoryTableMobile.qml</file>
         <file>images/gotoBasicVersion.png</file>
         <file>images/goToBasicVersionHovered.png</file>
-        <file>images/moneroLogo2.png</file>
+        <file>images/bittubeLogo2.png</file>
         <file>components/PrivacyLevelSmall.qml</file>
         <file>images/checkedVioletIcon.png</file>
         <file>images/resize.png</file>
@@ -166,10 +166,10 @@
         <file>images/minimize.png</file>
         <file>images/fullscreen.png</file>
         <file>images/close.png</file>
-        <file>images/moneroLogo_white.png</file>
-        <file>images/moneroIcon-trans28x28.png</file>
-        <file>images/moneroIcon-trans84x84.png</file>
-        <file>images/moneroIcon-trans56x56.png</file>
+        <file>images/bittubeLogo_white.png</file>
+        <file>images/bittubeIcon-trans28x28.png</file>
+        <file>images/bittubeIcon-trans84x84.png</file>
+        <file>images/bittubeIcon-trans56x56.png</file>
         <file>images/question.png</file>
         <file>images/expand.png</file>
         <file>images/titlebarGradient.jpg</file>
@@ -185,7 +185,7 @@
         <file>components/InlineButton.qml</file>
         <file>images/lightning.png</file>
         <file>images/leftPanelBg.jpg</file>
-        <file>images/moneroIcon-28x28.png</file>
+        <file>images/bittubeIcon-28x28.png</file>
         <file>images/lightning-white.png</file>
         <file>images/middlePanelBg.jpg</file>
         <file>components/InputMulti.qml</file>
