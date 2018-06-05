@@ -155,7 +155,7 @@ Rectangle {
                     id: searchLine
                     fontSize: 14 * scaleRatio
                     inputHeight: 28 * scaleRatio
-                    borderDisabled: false
+                    borderDisabled: true
                     Layout.fillWidth: true
                     backgroundColor: "#ffffff"
                     placeholderText: qsTr("Search") + translationManager.emptyString
