@@ -30,6 +30,8 @@ import QtQuick 2.0
 import QtQuick.Controls 1.4
 import moneroComponents.Wallet 1.0
 
+import "../components" as MoneroComponents
+
 Item {
     id: item
     property string message: ""
@@ -41,7 +43,7 @@ Item {
     y: parent.height - height * scale.yScale - margin * scale.yScale
 
     Rectangle {
-        color: "#86af49"
+        color: MoneroComponents.Style.notifierBackgroundColor
         border.color: "black"
         anchors.fill: parent
 
@@ -54,7 +56,7 @@ Item {
             font.family: "Arial"
             font.pixelSize: 12
             textMargin: 20
-            textColor: "white"
+            textColor: MoneroComponents.Style.notifierFontColor
             text: item.message
         }
     }

@@ -29,6 +29,8 @@
 import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
 
+import "../components" as MoneroComponents
+
 ListView {
     id: listView
     clip: true
@@ -66,7 +68,7 @@ ListView {
             font.family: "Arial"
             font.bold: true
             font.pixelSize: 19
-            color: "#464646"
+            color: MoneroComponents.Style.defaultFontColor
             elide: Text.ElideRight
             text: description
 
@@ -87,7 +89,7 @@ ListView {
             anchors.rightMargin: 40
             font.family: "Arial"
             font.pixelSize: 16
-            color: "#464646"
+            color: MoneroComponents.Style.defaultFontColor
             text: address
             readOnly: true
         }
@@ -101,7 +103,7 @@ ListView {
             width: 139
             font.family: "Arial"
             font.pixelSize: 12
-            color: "#464646"
+            color: MoneroComponents.Style.defaultFontColor
             text: qsTr("Payment ID:") + translationManager.emptyString
         }
 

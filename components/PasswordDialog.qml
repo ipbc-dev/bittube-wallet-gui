@@ -90,7 +90,7 @@ Item {
                 font.pixelSize: 16 * scaleRatio
                 font.family: MoneroComponents.Style.fontLight.name
 
-                color: "#ffffff"
+                color: MoneroComponents.Style.passwordDialogHeaderFontColor
             }
 
             TextField {
@@ -113,7 +113,7 @@ Item {
                     radius: 2
                     border.color: Qt.rgba(255, 255, 255, 0.35)
                     border.width: 1
-                    color: "#ffffff"
+                    color: MoneroComponents.Style.passwordDialogBackgroundColor
 
                     Image {
                         width: 12

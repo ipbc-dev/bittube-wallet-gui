@@ -257,7 +257,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: head.bottom
-        color: "#FFFFFF"
+        color: MoneroComponents.Style.datepickerBackgroundColor
         border.width: 1
         border.color: "#DBDBDB"
         height: datePicker.expanded ? calendar.height + 2 : 0
@@ -274,7 +274,7 @@ Item {
             anchors.leftMargin: 1
             anchors.rightMargin: 1
             anchors.top: parent.top
-            color: "#FFFFFF"
+            color: MoneroComponents.Style.datepickerBackgroundColor
             height: 1
         }
 
@@ -298,7 +298,7 @@ Item {
                     Rectangle {
                         anchors.fill: parent
                         radius: parent.implicitHeight / 2
-                        color: dayArea.pressed && styleData.visibleMonth ? "#86af49" : "transparent"
+                        color: dayArea.pressed && styleData.visibleMonth ? MoneroComponents.Style.calendarSelectedBackgroundColor : "transparent"
                     }
 
                     Text {

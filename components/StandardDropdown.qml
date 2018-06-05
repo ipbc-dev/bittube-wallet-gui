@@ -44,7 +44,7 @@ Item {
     property int fontHeaderSize: 16 * scaleRatio
     property int fontItemSize: 14 * scaleRatio
     property string colorBorder: MoneroComponents.Style.inputBorderColorInActive
-    property string colorHeaderBackground: "#ffffff"
+    property string colorHeaderBackground: MoneroComponents.Style.dropdownHeaderBackgroundColor
     property bool headerBorder: false
     property bool headerFontBold: false
 

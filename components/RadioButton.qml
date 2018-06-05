@@ -40,8 +40,8 @@ RowLayout {
     signal clicked()
     height: 26 * scaleRatio
     // legacy properties
-    property var checkedColor: "#464646"
-    property var borderColor: "#464646"
+    property var checkedColor: MoneroComponents.Style.radiobuttonCheckedColor
+    property var borderColor: MoneroComponents.Style.radiobuttonBorderColor
 
     function toggle(){
         radioButton.checked = !radioButton.checked

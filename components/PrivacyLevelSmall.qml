@@ -28,6 +28,8 @@
 
 import QtQuick 2.0
 
+import "../components" as MoneroComponents
+
 Item {
     id: item
     property alias interactive: mouseArea.enabled
@@ -60,7 +62,7 @@ Item {
         anchors.topMargin: 1
         height: 24
         //radius: 4
-        color: "#86af49"
+        color: MoneroComponents.Style.privacyLevelBackgroundColor
 
         Rectangle {
             id: fillRect
@@ -71,7 +73,7 @@ Item {
             //radius: 2
             width: row.x
 
-            color: "#86af49"
+            color: MoneroComponents.Style.privacyLevelBarColor
 
             Timer {
                 interval: 500

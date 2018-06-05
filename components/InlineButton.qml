@@ -66,7 +66,7 @@ Item {
             font.family: MoneroComponents.Style.fontBold.name
             font.bold: true
             font.pixelSize: 16 * scaleRatio
-            color: "#ffffff"
+            color: MoneroComponents.Style.buttonTextColor
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
         }

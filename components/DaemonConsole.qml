@@ -121,7 +121,7 @@ Window {
                     }
                     function logMessage(msg){
                         msg = msg.trim();
-                        var color = "#464646";
+                        var color = MoneroComponents.Style.defaultFontColor;
                         if(msg.toLowerCase().indexOf('error') >= 0){
                             color = "red";
                         } else if (msg.toLowerCase().indexOf('warning') >= 0){

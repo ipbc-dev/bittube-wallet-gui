@@ -66,7 +66,7 @@ Item {
     property alias labelText: inputLabel.text
     property alias labelColor: inputLabel.color
     property alias labelTextFormat: inputLabel.textFormat
-    property string backgroundColor: "#ffffff"
+    property string backgroundColor: MoneroComponents.Style.lineEditBackgroundColor
     property string tipText: ""
     property int labelFontSize: 16 * scaleRatio
     property bool labelFontBold: false

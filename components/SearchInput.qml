@@ -44,7 +44,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         anchors.topMargin: 1
-        color: "#FFFFFF"
+        color: MoneroComponents.Style.searchInputBackgroundColor
         //radius: 4
 
         Item {
@@ -148,7 +148,7 @@ Item {
             y: dropdown.height
             border.width: 1
             border.color: "#DBDBDB"
-            color: "#FFFFFF"
+            color: MoneroComponents.Style.searchInputBackgroundColor
 
             Rectangle {
                 anchors.left: parent.left
@@ -157,7 +157,7 @@ Item {
                 anchors.leftMargin: 1
                 anchors.rightMargin: 1
                 height: 1
-                color: "#FFFFFF"
+                color: MoneroComponents.Style.searchInputBackgroundColor
             }
 
             Behavior on height {

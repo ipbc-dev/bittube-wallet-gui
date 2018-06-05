@@ -141,7 +141,7 @@ ColumnLayout {
 
     Rectangle {
         id: inputFill
-        color: "#ffffff"
+        color: MoneroComponents.Style.lineEditMultiBackgroundColor
         anchors.fill: multiLine
         radius: 4
         z: 1

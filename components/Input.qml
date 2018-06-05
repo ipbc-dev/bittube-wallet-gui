@@ -42,7 +42,7 @@ TextField {
     selectedTextColor: MoneroComponents.Style.defaultFontColor
 
     background: Rectangle {
-        color: "#ffffff"
+        color: MoneroComponents.Style.inputBackgroundColor
         radius: 4
     }
 }
