@@ -79,7 +79,7 @@ ListView {
 
         TextEdit {
             id: addressText
-            selectByMouse: true
+            // selectByMouse: true
             anchors.bottom: descriptionText.bottom
             anchors.left: descriptionText.right
             anchors.right: dropdown.left
