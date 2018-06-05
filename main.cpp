@@ -105,7 +105,11 @@ int main(int argc, char *argv[])
     app.setOrganizationName("BitTube");
 
 #if defined(Q_OS_LINUX)
-    if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon.ico"));
+    if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon-white.ico"));
+#endif
+
+#if defined(Q_OS_WIN)
+    if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon-white.ico"));
 #endif
 
     filter *eventFilter = new filter;
