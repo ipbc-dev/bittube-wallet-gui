@@ -102,9 +102,9 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    HttpService http_serv;
+    HttpService http_serv(&app);
 
-    http_serv.test(&app);
+    http_serv.test();
 
     app.setApplicationName("BitTube-gui");
     app.setOrganizationDomain("bit.tube");
