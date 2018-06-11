@@ -114,7 +114,17 @@ Rectangle {
                     onClicked: {persistentSettings.allow_background_mining = checked}
                     text: qsTr("Background mining (experimental)") + translationManager.emptyString
                 }
+            }
 
+            RowLayout {
+                Layout.leftMargin: 125
+                CheckBox {
+                    id: gpuMining
+                    enabled: startSoloMinerButton.enabled
+                    checked: persistentSettings.allow_gpu_mining
+                    onClicked: {persistentSettings.allow_gpu_mining = checked}
+                    text: qsTr("Use GPU for mining") + translationManager.emptyString
+                }
             }
 
             RowLayout {
@@ -131,12 +141,13 @@ Rectangle {
             }
 
             RowLayout {
-                Label {
-                    id: manageSoloMinerLabel
-                    color: Style.defaultFontColor
-                    text: qsTr("Manage miner") + translationManager.emptyString
-                    fontSize: 16
-                }
+                Layout.leftMargin: 125
+                // Label {
+                //     id: manageSoloMinerLabel
+                //     color: Style.defaultFontColor
+                //     text: qsTr("Manage miner") + translationManager.emptyString
+                //     fontSize: 16
+                // }
 
                 StandardButton {
                     visible: true
