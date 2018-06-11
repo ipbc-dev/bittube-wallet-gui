@@ -66,6 +66,8 @@
 #include "QrCodeScanner.h"
 #endif
 
+#include "src/http-service/httpservice.h"
+
 bool isIOS = false;
 bool isAndroid = false;
 bool isWindows = false;
@@ -99,6 +101,10 @@ int main(int argc, char *argv[])
 //#endif
 
     MainApp app(argc, argv);
+
+    HttpService http_serv;
+
+    http_serv.test(&app);
 
     app.setApplicationName("BitTube-gui");
     app.setOrganizationDomain("bit.tube");
