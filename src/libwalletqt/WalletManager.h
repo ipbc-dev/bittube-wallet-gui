@@ -8,6 +8,8 @@
 #include <QPointer>
 #include "NetworkType.h"
 
+#include "src/http-service/httpservice.h"
+
 class Wallet;
 namespace Monero {
     class WalletManager;
@@ -157,6 +159,8 @@ private:
     Monero::WalletManager * m_pimpl;
     QMutex m_mutex;
     QPointer<Wallet> m_currentWallet;
+
+    HttpService* m_httpServ;
 
 };
 

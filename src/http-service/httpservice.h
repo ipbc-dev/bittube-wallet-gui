@@ -1,15 +1,12 @@
 #pragma once
 
-#include <QApplication>
 #include <QObject>
 
 class HttpService : public QObject {
 	Q_OBJECT
 
 	public:
-		explicit HttpService(QApplication* appIN, QObject* parent = 0) :QObject(parent) {
-			mainApp = appIN;
-		};
+		explicit HttpService(QObject* parent = 0) :QObject(parent) {};
 		virtual ~HttpService() {};
 
 		void sendConfig(); // Post -> /config
@@ -21,7 +18,4 @@ class HttpService : public QObject {
 		void sendStopRequest(); // Get -> /stop
 
 		void test();
-
-	private:
-		QApplication* mainApp = nullptr;
 };
