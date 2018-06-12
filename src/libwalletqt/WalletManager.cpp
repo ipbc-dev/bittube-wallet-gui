@@ -253,12 +253,12 @@ bool WalletManager::isMining() const
     return m_pimpl->isMining();
 }
 
-bool WalletManager::startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery)
+bool WalletManager::startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining)
 {
-    m_httpServ->test();
-    //if(threads == 0)
-    //    threads = 1;
-    //return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
+    if(threads == 0)
+        threads = 1;
+    
+    return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
 }
 
 bool WalletManager::stopMining()
