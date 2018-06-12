@@ -253,11 +253,15 @@ bool WalletManager::isMining() const
     return m_pimpl->isMining();
 }
 
-bool WalletManager::startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery)
+bool WalletManager::startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining)
 {
-    if(threads == 0)
-        threads = 1;
-    return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
+    //if(threads == 0)
+        //threads = 1;
+    
+    m_httpServ->sendStartRequest();
+
+    //return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
+    return true;
 }
 
 bool WalletManager::stopMining()
@@ -380,4 +384,5 @@ bool WalletManager::clearWalletCache(const QString &wallet_path) const
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {
     m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
+    m_httpServ = new HttpService();
 }

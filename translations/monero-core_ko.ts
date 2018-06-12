@@ -544,7 +544,7 @@
     <name>Mining</name>
     <message>
         <location filename="../pages/Mining.qml" line="61"/>
-        <source>Solo mining</source>
+        <source>BitTube Miner</source>
         <translation>개별 마이닝</translation>
     </message>
     <message>

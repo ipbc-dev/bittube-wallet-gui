@@ -5,7 +5,7 @@ lessThan (QT_MAJOR_VERSION, 5) | lessThan (QT_MINOR_VERSION, 7) {
 
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick network widgets
 
 WALLET_ROOT=$$PWD/bittube
 
@@ -50,6 +50,7 @@ HEADERS += \
     src/libwalletqt/Subaddress.h \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
+    src/http-service/httpservice.h \
     Logger.h \
     MainApp.h
 
@@ -76,6 +77,7 @@ SOURCES += main.cpp \
     src/libwalletqt/Subaddress.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
+    src/http-service/httpservice.cpp \
     Logger.cpp \
     MainApp.cpp
 

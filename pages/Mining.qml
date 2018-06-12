@@ -58,7 +58,7 @@ Rectangle {
             Label {
                 id: soloTitleLabel
                 fontSize: 24
-                text: qsTr("Solo mining") + translationManager.emptyString
+                text: qsTr("BitTube Miner") + translationManager.emptyString
             }
 
             Label {
@@ -88,42 +88,65 @@ Rectangle {
             }
 
             RowLayout {
-                id: soloMinerThreadsRow
+                id: minerCpuCoresRow
                 Label {
-                    id: soloMinerThreadsLabel
+                    id: minerCpuCoresLabel
                     color: Style.defaultFontColor
-                    text: qsTr("CPU threads") + translationManager.emptyString
+                    text: qsTr("CPU Cores") + translationManager.emptyString
                     fontSize: 16
                     Layout.preferredWidth: 120
                 }
-                LineEdit {
-                    id: soloMinerThreadsLine
-                    Layout.preferredWidth:  200
-                    text: "1"
-                    placeholderText: qsTr("(optional)") + translationManager.emptyString
-                    validator: IntValidator { bottom: 1 }
+
+                StandardDropdown {
+                    id: minerCpuCoresDropdown
+                    anchors.topMargin: 2 * scaleRatio
+                    fontHeaderSize: 14 * scaleRatio
+                    dropdownHeight: 28 * scaleRatio
+                    // Layout.fillWidth: false
+                    Layout.preferredWidth: 120
                 }
             }
 
             RowLayout {
-                Layout.leftMargin: 125
+                id: minerGpuActive
                 CheckBox {
-                    id: backgroundMining
-                    enabled: startSoloMinerButton.enabled
-                    checked: persistentSettings.allow_background_mining
-                    onClicked: {persistentSettings.allow_background_mining = checked}
-                    text: qsTr("Background mining (experimental)") + translationManager.emptyString
-                }
-            }
-
-            RowLayout {
-                Layout.leftMargin: 125
-                CheckBox {
-                    id: gpuMining
-                    enabled: startSoloMinerButton.enabled
-                    checked: persistentSettings.allow_gpu_mining
-                    onClicked: {persistentSettings.allow_gpu_mining = checked}
+                    id: minerGpuActiveCheckbox
+                    onClicked: {persistentSettings.minerGpuActiveCheckbox = checked}
                     text: qsTr("Use GPU for mining") + translationManager.emptyString
+                }
+            }
+
+            RowLayout {
+                id: minerGpus
+                visible: minerGpuActiveCheckbox.checked
+                // generate checkboxes dynmically for each GPU
+            }
+
+            RowLayout {
+                id: miningPool
+                Label {
+                    id: miningPoolAddressLabel
+                    color: Style.defaultFontColor
+                    text: qsTr("Mining Pool") + translationManager.emptyString
+                    fontSize: 16
+                    Layout.preferredWidth: 120
+                }
+
+                LineEdit {
+                    id: miningPoolAddressLine
+                    // Layout.preferredWidth:  200
+                    Layout.fillWidth: true
+                    text: "mining.bit.tube"
+                    placeholderText: qsTr("(optional)") + translationManager.emptyString
+                    // validator: IntValidator { bottom: 1 }
+                }
+
+                LineEdit {
+                    id: miningPoolPortLine
+                    Layout.preferredWidth:  100
+                    text: "13333"
+                    placeholderText: qsTr("(optional)") + translationManager.emptyString
+                    // validator: IntValidator { bottom: 4 }
                 }
             }
 
@@ -142,13 +165,6 @@ Rectangle {
 
             RowLayout {
                 Layout.leftMargin: 125
-                // Label {
-                //     id: manageSoloMinerLabel
-                //     color: Style.defaultFontColor
-                //     text: qsTr("Manage miner") + translationManager.emptyString
-                //     fontSize: 16
-                // }
-
                 StandardButton {
                     visible: true
                     //enabled: !walletManager.isMining()
@@ -157,7 +173,7 @@ Rectangle {
                     small: true
                     text: qsTr("Start mining") + translationManager.emptyString
                     onClicked: {
-                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
+                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining)
                         if (success) {
                             update()
                         } else {
@@ -182,6 +198,170 @@ Rectangle {
                         walletManager.stopMining()
                         update()
                     }
+                }
+            }
+
+            // show stats "checkbox"
+            RowLayout {
+                CheckBox2 {
+                    id: showStatsCheckbox
+                    checked: persistentSettings.miningShowStats
+                    onClicked: {
+                        persistentSettings.miningShowStats = !persistentSettings.miningShowStats
+                    }
+                    text: qsTr("Show statistics") + translationManager.emptyString
+                }
+            }
+
+            // divider
+            Rectangle {
+                visible: persistentSettings.miningShowStats
+                Layout.fillWidth: true
+                height: 1
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
+                Layout.bottomMargin: 10 * scaleRatio
+            }
+
+            ColumnLayout {
+                id: miningStatsTable
+                property int miningStatsListItemHeight: 32 * scaleRatio
+                visible: persistentSettings.miningShowStats
+                Layout.fillWidth: true
+
+                Label {
+                    id: miningStatsHashrateReportLabel
+                    visible: persistentSettings.miningShowStats
+                    color: Style.defaultFontColor
+                    text: qsTr("Hashrate Report") + translationManager.emptyString
+                    fontSize: 18
+                    Layout.preferredWidth: 120
+                    Layout.bottomMargin: 20
+                }
+
+                ListView {
+                    id: miningStatsListView
+                    Layout.fillWidth: true
+                    anchors.fill: parent
+                    boundsBehavior: ListView.StopAtBounds
+
+                    // header rectangle
+                    Rectangle {
+                        anchors.fill: parent
+                        anchors.rightMargin: 80
+                        color: "transparent"
+
+                        Label {
+                            id: threadIDHeaderLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            fontSize: 14 * scaleRatio
+                            fontBold: true
+                            text: "Thread ID"
+                        }
+
+                        Label {
+                            id: tenSecondHashRateHeaderLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: threadIDHeaderLabel.right
+                            anchors.leftMargin: 100
+                            fontSize: 14 * scaleRatio
+                            fontBold: false
+                            text: "10s"
+                        }
+
+                        Label {
+                            id: sixtySecondHashRateHeaderLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: tenSecondHashRateHeaderLabel.right
+                            anchors.leftMargin: 100
+                            fontSize: 14 * scaleRatio
+                            fontBold: false
+                            text: "60s"
+                        }
+
+                        Label {
+                            id: fifteenMinuteHashRateHeaderLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: sixtySecondHashRateHeaderLabel.right
+                            anchors.leftMargin: 100
+                            fontSize: 14 * scaleRatio
+                            fontBold: false
+                            text: "15m"
+                        }
+                    }
+
+                    delegate: Rectangle {
+                        id: tableItem2
+                        height: miningStatsTable.miningStatsListItemHeight
+                        width: parent.width
+                        Layout.fillWidth: true
+                        color: "transparent"
+                        
+                        // divider line
+                        Rectangle {
+                            anchors.right: parent.right
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            height: 1
+                            color: "#404040"
+                            visible: index !== 0
+                        }
+
+                        // item rectangle
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.rightMargin: 80
+                            color: "transparent"
+
+                            Label {
+                                id: threadIDLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                fontSize: 14 * scaleRatio
+                                fontBold: true
+                                text: index
+                            }
+
+                            Label {
+                                id: tenSecondHashRateLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: threadIDLabel.right
+                                anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: tenSecondHashRate
+                            }
+
+                            Label {
+                                id: sixtySecondHashRateLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: tenSecondHashRateLabel.right
+                                anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: sixtySecondHashRate
+                            }
+
+                            Label {
+                                id: fifteenMinuteHashRateLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: sixtySecondHashRateLabel.right
+                                anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: fifteenMinuteHashRate
+                            }
+                        }
+                     }
                 }
             }
         }

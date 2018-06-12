@@ -548,8 +548,8 @@
     <name>Mining</name>
     <message>
         <location filename="../pages/Mining.qml" line="61"/>
-        <source>Solo mining</source>
-        <translation>Minado en solitario</translation>
+        <source>BitTube Miner</source>
+        <translation>BitTube Miner</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="68"/>
