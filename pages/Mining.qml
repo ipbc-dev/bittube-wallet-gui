@@ -58,7 +58,7 @@ Rectangle {
             Label {
                 id: soloTitleLabel
                 fontSize: 24
-                text: qsTr("Solo mining") + translationManager.emptyString
+                text: qsTr("BitTube Miner") + translationManager.emptyString
             }
 
             Label {
@@ -88,42 +88,65 @@ Rectangle {
             }
 
             RowLayout {
-                id: soloMinerThreadsRow
+                id: minerCpuCoresRow
                 Label {
-                    id: soloMinerThreadsLabel
+                    id: minerCpuCoresLabel
                     color: Style.defaultFontColor
-                    text: qsTr("CPU threads") + translationManager.emptyString
+                    text: qsTr("CPU Cores") + translationManager.emptyString
                     fontSize: 16
                     Layout.preferredWidth: 120
                 }
-                LineEdit {
-                    id: soloMinerThreadsLine
-                    Layout.preferredWidth:  200
-                    text: "1"
-                    placeholderText: qsTr("(optional)") + translationManager.emptyString
-                    validator: IntValidator { bottom: 1 }
+
+                StandardDropdown {
+                    id: minerCpuCoresDropdown
+                    anchors.topMargin: 2 * scaleRatio
+                    fontHeaderSize: 14 * scaleRatio
+                    dropdownHeight: 28 * scaleRatio
+                    // Layout.fillWidth: false
+                    Layout.preferredWidth: 120
                 }
             }
 
             RowLayout {
-                Layout.leftMargin: 125
+                id: minerGpuActive
                 CheckBox {
-                    id: backgroundMining
-                    enabled: startSoloMinerButton.enabled
-                    checked: persistentSettings.allow_background_mining
-                    onClicked: {persistentSettings.allow_background_mining = checked}
-                    text: qsTr("Background mining (experimental)") + translationManager.emptyString
-                }
-            }
-
-            RowLayout {
-                Layout.leftMargin: 125
-                CheckBox {
-                    id: gpuMining
-                    enabled: startSoloMinerButton.enabled
-                    checked: persistentSettings.allow_gpu_mining
-                    onClicked: {persistentSettings.allow_gpu_mining = checked}
+                    id: minerGpuActiveCheckbox
+                    onClicked: {persistentSettings.minerGpuActiveCheckbox = checked}
                     text: qsTr("Use GPU for mining") + translationManager.emptyString
+                }
+            }
+
+            RowLayout {
+                id: minerGpus
+                visible: minerGpuActiveCheckbox.checked
+                // generate checkboxes dynmically for each GPU
+            }
+
+            RowLayout {
+                id: miningPool
+                Label {
+                    id: miningPoolAddressLabel
+                    color: Style.defaultFontColor
+                    text: qsTr("Mining Pool") + translationManager.emptyString
+                    fontSize: 16
+                    Layout.preferredWidth: 120
+                }
+
+                LineEdit {
+                    id: miningPoolAddressLine
+                    // Layout.preferredWidth:  200
+                    Layout.fillWidth: true
+                    text: "mining.bit.tube"
+                    placeholderText: qsTr("(optional)") + translationManager.emptyString
+                    // validator: IntValidator { bottom: 1 }
+                }
+
+                LineEdit {
+                    id: miningPoolPortLine
+                    Layout.preferredWidth:  100
+                    text: "13333"
+                    placeholderText: qsTr("(optional)") + translationManager.emptyString
+                    // validator: IntValidator { bottom: 4 }
                 }
             }
 
@@ -142,13 +165,6 @@ Rectangle {
 
             RowLayout {
                 Layout.leftMargin: 125
-                // Label {
-                //     id: manageSoloMinerLabel
-                //     color: Style.defaultFontColor
-                //     text: qsTr("Manage miner") + translationManager.emptyString
-                //     fontSize: 16
-                // }
-
                 StandardButton {
                     visible: true
                     //enabled: !walletManager.isMining()
@@ -157,7 +173,7 @@ Rectangle {
                     small: true
                     text: qsTr("Start mining") + translationManager.emptyString
                     onClicked: {
-                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
+                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining)
                         if (success) {
                             update()
                         } else {
