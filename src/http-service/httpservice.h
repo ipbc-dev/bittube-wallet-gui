@@ -12,8 +12,13 @@ class HttpService : public QObject {
 		};
 		virtual ~HttpService() {};
 
-		void sendConfig();
-		void sendStatsRequest();
+		void sendConfig(); // Post -> /config
+
+		void sendPingRequest(); // Get -> /ping
+		void sendInfoRequest(); // Get -> /info
+		void sendStatsRequest(); // Get -> /api.json
+		void sendStartRequest(); // Get -> /start
+		void sendStopRequest(); // Get -> /stop
 
 		void test();
 
