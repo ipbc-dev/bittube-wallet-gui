@@ -255,10 +255,13 @@ bool WalletManager::isMining() const
 
 bool WalletManager::startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining)
 {
-    if(threads == 0)
-        threads = 1;
+    //if(threads == 0)
+        //threads = 1;
     
-    return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
+    m_httpServ->sendStartRequest();
+
+    //return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
+    return true;
 }
 
 bool WalletManager::stopMining()
