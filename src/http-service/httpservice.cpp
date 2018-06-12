@@ -10,7 +10,6 @@
 #include <QUrl>
 
 
-
 /*
  * Description: ...
  */
