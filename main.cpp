@@ -66,7 +66,7 @@
 #include "QrCodeScanner.h"
 #endif
 
-//#include "src/http-service/httpservice.h"
+#include "src/http-service/httpservice.h"
 
 bool isIOS = false;
 bool isAndroid = false;
@@ -102,11 +102,11 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    //HttpService http_serv(&app);
+    HttpService http_serv(&app);
 
     //http_serv.test();
     //http_serv.sendPingRequest();
-    //http_serv.sendInfoRequest();
+    http_serv.sendInfoRequest();
     //http_serv.sendStatsRequest();
 
     app.setApplicationName("BitTube-gui");
