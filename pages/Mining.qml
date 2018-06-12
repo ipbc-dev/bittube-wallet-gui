@@ -200,6 +200,170 @@ Rectangle {
                     }
                 }
             }
+
+            // show stats "checkbox"
+            RowLayout {
+                CheckBox2 {
+                    id: showStatsCheckbox
+                    checked: persistentSettings.miningShowStats
+                    onClicked: {
+                        persistentSettings.miningShowStats = !persistentSettings.miningShowStats
+                    }
+                    text: qsTr("Show statistics") + translationManager.emptyString
+                }
+            }
+
+            // divider
+            Rectangle {
+                visible: persistentSettings.miningShowStats
+                Layout.fillWidth: true
+                height: 1
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
+                Layout.bottomMargin: 10 * scaleRatio
+            }
+
+            ColumnLayout {
+                id: miningStatsTable
+                property int miningStatsListItemHeight: 32 * scaleRatio
+                visible: persistentSettings.miningShowStats
+                Layout.fillWidth: true
+
+                Label {
+                    id: miningStatsHashrateReportLabel
+                    visible: persistentSettings.miningShowStats
+                    color: Style.defaultFontColor
+                    text: qsTr("Hashrate Report") + translationManager.emptyString
+                    fontSize: 18
+                    Layout.preferredWidth: 120
+                    Layout.bottomMargin: 20
+                }
+
+                ListView {
+                    id: miningStatsListView
+                    Layout.fillWidth: true
+                    anchors.fill: parent
+                    boundsBehavior: ListView.StopAtBounds
+
+                    // header rectangle
+                    Rectangle {
+                        anchors.fill: parent
+                        anchors.rightMargin: 80
+                        color: "transparent"
+
+                        Label {
+                            id: threadIDHeaderLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            fontSize: 14 * scaleRatio
+                            fontBold: true
+                            text: "Thread ID"
+                        }
+
+                        Label {
+                            id: tenSecondHashRateHeaderLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: threadIDHeaderLabel.right
+                            anchors.leftMargin: 100
+                            fontSize: 14 * scaleRatio
+                            fontBold: false
+                            text: "10s"
+                        }
+
+                        Label {
+                            id: sixtySecondHashRateHeaderLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: tenSecondHashRateHeaderLabel.right
+                            anchors.leftMargin: 100
+                            fontSize: 14 * scaleRatio
+                            fontBold: false
+                            text: "60s"
+                        }
+
+                        Label {
+                            id: fifteenMinuteHashRateHeaderLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: sixtySecondHashRateHeaderLabel.right
+                            anchors.leftMargin: 100
+                            fontSize: 14 * scaleRatio
+                            fontBold: false
+                            text: "15m"
+                        }
+                    }
+
+                    delegate: Rectangle {
+                        id: tableItem2
+                        height: miningStatsTable.miningStatsListItemHeight
+                        width: parent.width
+                        Layout.fillWidth: true
+                        color: "transparent"
+                        
+                        // divider line
+                        Rectangle {
+                            anchors.right: parent.right
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            height: 1
+                            color: "#404040"
+                            visible: index !== 0
+                        }
+
+                        // item rectangle
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.rightMargin: 80
+                            color: "transparent"
+
+                            Label {
+                                id: threadIDLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                fontSize: 14 * scaleRatio
+                                fontBold: true
+                                text: index
+                            }
+
+                            Label {
+                                id: tenSecondHashRateLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: threadIDLabel.right
+                                anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: tenSecondHashRate
+                            }
+
+                            Label {
+                                id: sixtySecondHashRateLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: tenSecondHashRateLabel.right
+                                anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: sixtySecondHashRate
+                            }
+
+                            Label {
+                                id: fifteenMinuteHashRateLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: sixtySecondHashRateLabel.right
+                                anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: fifteenMinuteHashRate
+                            }
+                        }
+                     }
+                }
+            }
         }
 
         Text {
