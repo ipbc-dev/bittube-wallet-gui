@@ -125,12 +125,10 @@ void HttpService::sendInfoRequest() { // Get -> /info
 					for (uint i = 0; i < m_minerData.nvidia_list.size(); ++i) {
 						std::cout << "      " << m_minerData.nvidia_list[i] << std::endl;
 					}
-					//TODO: show nvidia-list
 					std::cout << "   - amd_list: " << std::endl;
 					for (uint i = 0; i < m_minerData.amd_list.size(); ++i) {
 						std::cout << "      " << m_minerData.amd_list[i] << std::endl;
 					}
-					//TODO: show amd list
 					std::cout << "   - nvidia_current: " << m_minerData.nvidia_current << std::endl;
 					std::cout << "   - amd_current: " << m_minerData.amd_current << std::endl;
 					std::cout << "   - httpd_port: " << m_minerData.httpd_port << std::endl;
@@ -180,8 +178,6 @@ void HttpService::sendInfoRequest() { // Get -> /info
 						foreach (const QJsonValue & val, array) {
 							std::cout << "+++ " << val.toString().toStdString() << std::endl;
 							m_minerData.nvidia_list.push_back(val.toString().toStdString());
-							//QJsonObject dataObj = val.toObject().value("data").toObject();
-							//qDebug() << dataObj.value("enclosure_id").toString();
 						}
 
 					} else {
@@ -202,8 +198,6 @@ void HttpService::sendInfoRequest() { // Get -> /info
 						foreach (const QJsonValue & val, array) {
 							std::cout << "+++ " << val.toString().toStdString() << std::endl;
 							m_minerData.amd_list.push_back(val.toString().toStdString());
-							//QJsonObject dataObj = val.toObject().value("data").toObject();
-							//qDebug() << dataObj.value("enclosure_id").toString();
 						}
 
 					} else {
@@ -287,9 +281,6 @@ void HttpService::sendInfoRequest() { // Get -> /info
 					}
 
 					if(m_minerData.needGUIUpdate) {
-						//m_minerData.updated = true;
-						emit infoReceive();
-
 						//FIXME: delete this ----
 						std::cout << "   - cpu_count: " << m_minerData.cpu_count << std::endl;
 						std::cout << "   - current_cpu_count: " << m_minerData.current_cpu_count << std::endl;
@@ -297,12 +288,10 @@ void HttpService::sendInfoRequest() { // Get -> /info
 						for (uint i = 0; i < m_minerData.nvidia_list.size(); ++i) {
 							std::cout << "      " << m_minerData.nvidia_list[i] << std::endl;
 						}
-						//TODO: show nvidia-list
 						std::cout << "   - amd_list: " << std::endl;
 						for (uint i = 0; i < m_minerData.amd_list.size(); ++i) {
 							std::cout << "      " << m_minerData.amd_list[i] << std::endl;
 						}
-						//TODO: show amd list
 						std::cout << "   - nvidia_current: " << m_minerData.nvidia_current << std::endl;
 						std::cout << "   - amd_current: " << m_minerData.amd_current << std::endl;
 						std::cout << "   - httpd_port: " << m_minerData.httpd_port << std::endl;
@@ -310,6 +299,7 @@ void HttpService::sendInfoRequest() { // Get -> /info
 						std::cout << "   - wallet_address: " << m_minerData.wallet_address << std::endl;
 						std::cout << "   - isMining: " << m_minerData.isMining << std::endl;
 						//-----------------------
+						emit infoReceive();
 					} else {
 						std::cout << "   - nothing change!!!" << std::endl;
 					}
@@ -362,19 +352,223 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 					if (jsonObj.contains("hashrate")) {
 						std::cout << "hashrate found" << std::endl;
 
+						//FIXME: delete this ----
+						std::cout << "   - Threads[" << m_hashRateData.stats.size() << "]: " << std::endl;
+						for (uint i = 0; i < m_hashRateData.stats.size(); ++i) {
+							std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate10s << std::endl;
+							std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate60s << std::endl;
+							std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate15m << std::endl;
+						}
+						std::cout << "   - total: [" << m_hashRateData.total.rate10s  << ", " << m_hashRateData.total.rate60s << ", " << m_hashRateData.total.rate15m << "]: " << std::endl;
+						std::cout << "   - highest: " << m_hashRateData.highest << std::endl;
+						//-----------------------
+
 						QJsonObject jsonObj002(jsonObj.value("hashrate").toObject());
+						
+						//---
 						if(jsonObj002.contains("threads")) {
 							std::cout << "threads (hashrate) found" << std::endl;
-							//QJsonArray array = value.toArray();
+							QJsonValue value = jsonObj002.value("threads");
+							QJsonArray array = value.toArray();
+
+							if (m_hashRateData.stats.size() <= 0)
+							if (array.size() != m_hashRateData.stats.size()) {
+								m_hashRateData.stats.clear();
+							}
+
+							foreach (const QJsonValue & val, array) {
+								QJsonArray arrayTmp = val.toArray();
+								if (arrayTmp.size() == 3) {
+									double value10s = arrayTmp[0].toDouble();
+									double value60s = arrayTmp[1].toDouble();
+									double value15m = arrayTmp[2].toDouble();
+
+									Thread_data dataTmp = {.rate10s = value10s, .rate60s = value60s, .rate15m = value15m};
+									dataTmp.rate10s = value10s;
+									dataTmp.rate60s = value60s;
+									dataTmp.rate15m = value15m;
+									m_hashRateData.stats.push_back(dataTmp);
+								}
+							}
 						}
+
+						//---
+						if(jsonObj002.contains("total")) {
+							std::cout << "total (hashrate) found" << std::endl;
+							QJsonValue value = jsonObj002.value("total");
+							QJsonArray array = value.toArray();
+
+							m_hashRateData.total.rate10s = array[0].toDouble();
+							m_hashRateData.total.rate60s = array[1].toDouble();
+							m_hashRateData.total.rate15m = array[2].toDouble();
+						}
+
+						//---
+						if(jsonObj002.contains("highest")) {
+							std::cout << "highest (hashrate) found" << std::endl;
+
+							m_hashRateData.highest = jsonObj002.value("highest").toDouble();
+						}
+
+						//FIXME: delete this ----
+						std::cout << "   - Threads[" << m_hashRateData.stats.size() << "]: " << std::endl;
+						for (uint i = 0; i < m_hashRateData.stats.size(); ++i) {
+							std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate10s << std::endl;
+							std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate60s << std::endl;
+							std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate15m << std::endl;
+						}
+						std::cout << "   - total: [" << m_hashRateData.total.rate10s  << ", " << m_hashRateData.total.rate60s << ", " << m_hashRateData.total.rate15m << "]: " << std::endl;
+						std::cout << "   - highest: " << m_hashRateData.highest << std::endl;
+						//-----------------------
+
+						emit statsReceive();
 					}
 
 					if (jsonObj.contains("results")) {
+						//TODO: parse error_log atribute
 						std::cout << "results found" << std::endl;
+
+						//FIXME: delete this ----
+						std::cout << "   - diff_current: " << m_resultsData.diff_current << std::endl;
+						std::cout << "   - shares_good: " << m_resultsData.shares_good << std::endl;
+						std::cout << "   - shares_total: " << m_resultsData.shares_total << std::endl;
+						std::cout << "   - avg_time: " << m_resultsData.avg_time << std::endl;
+						std::cout << "   - hashes_total: " << m_resultsData.hashes_total << std::endl;
+
+						std::cout << "   - best0: " << m_resultsData.best0 << std::endl;
+						std::cout << "   - best1: " << m_resultsData.best1 << std::endl;
+						std::cout << "   - best2: " << m_resultsData.best2 << std::endl;
+						std::cout << "   - best3: " << m_resultsData.best3 << std::endl;
+						std::cout << "   - best4: " << m_resultsData.best4 << std::endl;
+						std::cout << "   - best5: " << m_resultsData.best5 << std::endl;
+						std::cout << "   - best6: " << m_resultsData.best6 << std::endl;
+						std::cout << "   - best7: " << m_resultsData.best7 << std::endl;
+						std::cout << "   - best8: " << m_resultsData.best8 << std::endl;
+						std::cout << "   - best9: " << m_resultsData.best9 << std::endl;
+						//-----------------------
+
+						QJsonObject jsonObj002(jsonObj.value("results").toObject());
+						if(jsonObj002.contains("diff_current")) {
+							std::cout << "diff_current [results] found" << std::endl;
+							m_resultsData.diff_current = jsonObj002.value("diff_current").toInt();
+						}
+
+						if(jsonObj002.contains("shares_good")) {
+							std::cout << "shares_good [results] found" << std::endl;
+							m_resultsData.shares_good = jsonObj002.value("shares_good").toInt();
+						}
+
+						if(jsonObj002.contains("shares_total")) {
+							std::cout << "shares_total [results] found" << std::endl;
+							m_resultsData.shares_total = jsonObj002.value("shares_total").toInt();
+						}
+
+						if(jsonObj002.contains("avg_time")) {
+							std::cout << "avg_time [results] found" << std::endl;
+							m_resultsData.avg_time = jsonObj002.value("avg_time").toInt();
+						}
+
+						if(jsonObj002.contains("hashes_total")) {
+							std::cout << "hashes_total [results] found" << std::endl;
+							m_resultsData.hashes_total = jsonObj002.value("hashes_total").toInt();
+						}
+
+						if(jsonObj002.contains("best")) {
+							std::cout << "best [results] found" << std::endl;
+							QJsonValue value = jsonObj002.value("best");
+							QJsonArray array = value.toArray();
+
+							for(int i = 0; i < array.size(); ++i){
+								switch(i) {
+									case 0: 
+										m_resultsData.best0 = array[i].toInt();
+										break;
+									case 1:
+										m_resultsData.best1 = array[i].toInt();
+										break;
+									case 2:
+										m_resultsData.best2 = array[i].toInt();
+										break;
+									case 3:
+										m_resultsData.best3 = array[i].toInt();
+										break;
+									case 4:
+										m_resultsData.best4 = array[i].toInt();
+										break;
+									case 5:
+										m_resultsData.best5 = array[i].toInt();
+										break;
+									case 6: 
+										m_resultsData.best6 = array[i].toInt();
+										break;
+									case 7:
+										m_resultsData.best7 = array[i].toInt();
+										break;
+									case 8:
+										m_resultsData.best8 = array[i].toInt();
+										break;
+									case 9:
+										m_resultsData.best9 = array[i].toInt();
+										break;
+									default:
+										break;
+								}
+							}
+						}
+
+						//FIXME: delete this ----
+						std::cout << "   - diff_current: " << m_resultsData.diff_current << std::endl;
+						std::cout << "   - shares_good: " << m_resultsData.shares_good << std::endl;
+						std::cout << "   - shares_total: " << m_resultsData.shares_total << std::endl;
+						std::cout << "   - avg_time: " << m_resultsData.avg_time << std::endl;
+						std::cout << "   - hashes_total: " << m_resultsData.hashes_total << std::endl;
+
+						std::cout << "   - best0: " << m_resultsData.best0 << std::endl;
+						std::cout << "   - best1: " << m_resultsData.best1 << std::endl;
+						std::cout << "   - best2: " << m_resultsData.best2 << std::endl;
+						std::cout << "   - best3: " << m_resultsData.best3 << std::endl;
+						std::cout << "   - best4: " << m_resultsData.best4 << std::endl;
+						std::cout << "   - best5: " << m_resultsData.best5 << std::endl;
+						std::cout << "   - best6: " << m_resultsData.best6 << std::endl;
+						std::cout << "   - best7: " << m_resultsData.best7 << std::endl;
+						std::cout << "   - best8: " << m_resultsData.best8 << std::endl;
+						std::cout << "   - best9: " << m_resultsData.best9 << std::endl;
+						//------------------------
+
+						emit resultReceive();
 					}
 
 					if (jsonObj.contains("connection")) {
+						//TODO: parse error_log atribute
 						std::cout << "connection found" << std::endl;
+
+						//FIXME: delete this ----
+						std::cout << "   - pool: " << m_connectionData.pool << std::endl;
+						std::cout << "   - uptime: " << m_connectionData.uptime << std::endl;
+						std::cout << "   - ping: " << m_connectionData.ping << std::endl;
+						//-----------------------
+
+						QJsonObject jsonObj002(jsonObj.value("connection").toObject());
+						if(jsonObj002.contains("pool")) {
+							m_connectionData.pool = jsonObj002.value("pool").toString().toStdString();
+						}
+
+						if(jsonObj002.contains("uptime")) {
+							m_connectionData.uptime = jsonObj002.value("uptime").toInt();
+						}
+
+						if(jsonObj002.contains("ping")) {
+							m_connectionData.ping = jsonObj002.value("ping").toInt();
+						}
+
+
+
+						//FIXME: delete this ----
+						std::cout << "   - pool: " << m_connectionData.pool << std::endl;
+						std::cout << "   - uptime: " << m_connectionData.uptime << std::endl;
+						std::cout << "   - ping: " << m_connectionData.ping << std::endl;
+						//-----------------------
+						emit connectionDataReceive();
 					}
 				}
 			}
