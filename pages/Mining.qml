@@ -77,24 +77,35 @@ Rectangle {
                 visible: walletManager.isDaemonLocal(appWindow.currentDaemonAddress) && !appWindow.daemonSynced
             }
 
-            Text {
-                id: soloMainLabel
-                text: qsTr("Mining with your computer helps strengthen the BitTube network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.<br> <br>Mining also gives you a small chance to earn some TUBE. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
-                wrapMode: Text.Wrap
-                Layout.fillWidth: true
-                font.family: Style.fontRegular.name
-                font.pixelSize: 14 * scaleRatio
-                color: Style.defaultFontColor
-            }
+            // Text {
+            //     id: soloMainLabel
+            //     text: qsTr("Mining with your computer helps strengthen the BitTube network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.<br> <br>Mining also gives you a small chance to earn some TUBE. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
+            //     wrapMode: Text.Wrap
+            //     Layout.fillWidth: true
+            //     font.family: Style.fontRegular.name
+            //     font.pixelSize: 14 * scaleRatio
+            //     color: Style.defaultFontColor
+            // }
 
             RowLayout {
                 id: minerCpuCoresRow
+                z: parent.z + 1
                 Label {
                     id: minerCpuCoresLabel
                     color: Style.defaultFontColor
                     text: qsTr("CPU Cores") + translationManager.emptyString
                     fontSize: 16
                     Layout.preferredWidth: 120
+                }
+
+                ListModel {
+                    id: minerCpuCores
+                    // TODO: fill in the available CPU Cores
+                    // HARDCODED FOR NOW
+                    ListElement {column1: qsTr("1"); column2: "";}
+                    ListElement {column1: qsTr("2"); column2: "";}
+                    ListElement {column1: qsTr("3"); column2: "";}
+                    ListElement {column1: qsTr("4"); column2: "";}
                 }
 
                 StandardDropdown {
@@ -119,7 +130,7 @@ Rectangle {
             RowLayout {
                 id: minerGpus
                 visible: minerGpuActiveCheckbox.checked
-                // generate checkboxes dynmically for each GPU
+                // TODO: generate checkboxes dynmically for each GPU
             }
 
             RowLayout {
@@ -189,7 +200,6 @@ Rectangle {
 
                 StandardButton {
                     visible: true
-                    //enabled:  walletManager.isMining()
                     id: stopSoloMinerButton
                     width: 110
                     small: true
@@ -201,37 +211,15 @@ Rectangle {
                 }
             }
 
-            // show stats "checkbox"
-            RowLayout {
-                CheckBox2 {
-                    id: showStatsCheckbox
-                    checked: persistentSettings.miningShowStats
-                    onClicked: {
-                        persistentSettings.miningShowStats = !persistentSettings.miningShowStats
-                    }
-                    text: qsTr("Show statistics") + translationManager.emptyString
-                }
-            }
-
-            // divider
-            Rectangle {
-                visible: persistentSettings.miningShowStats
-                Layout.fillWidth: true
-                height: 1
-                color: Style.dividerColor
-                opacity: Style.dividerOpacity
-                Layout.bottomMargin: 10 * scaleRatio
-            }
-
+            // stats table
             ColumnLayout {
                 id: miningStatsTable
                 property int miningStatsListItemHeight: 32 * scaleRatio
-                visible: persistentSettings.miningShowStats
+                visible: false
                 Layout.fillWidth: true
 
                 Label {
                     id: miningStatsHashrateReportLabel
-                    visible: persistentSettings.miningShowStats
                     color: Style.defaultFontColor
                     text: qsTr("Hashrate Report") + translationManager.emptyString
                     fontSize: 18
@@ -243,6 +231,7 @@ Rectangle {
                     id: miningStatsListView
                     Layout.fillWidth: true
                     anchors.fill: parent
+                    clip: true
                     boundsBehavior: ListView.StopAtBounds
 
                     // header rectangle
@@ -364,6 +353,125 @@ Rectangle {
                      }
                 }
             }
+
+            // show stats "checkbox"
+            RowLayout {
+                CheckBox2 {
+                    id: showStatsCheckbox
+                    checked: persistentSettings.miningShowStats
+                    onClicked: {
+                        persistentSettings.miningShowStats = !persistentSettings.miningShowStats
+                    }
+                    text: qsTr("Show statistics") + translationManager.emptyString
+                }
+            }
+
+            // divider
+            Rectangle {
+                id: showStatsDivider
+                visible: persistentSettings.miningShowStats
+                Layout.fillWidth: true
+                height: 1
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
+                // Layout.bottomMargin: 20
+            }
+
+            // Rectangle {
+            //     visible: persistentSettings.miningShowStats
+            //     Layout.topMargin: 20
+            //     Layout.preferredWidth: 120
+            //     anchors.top: showStatsDivider.bottom
+
+            //     Label {
+            //         anchors.fill: parent
+            //         id: resultStatsHashrateReportLabel
+            //         color: Style.defaultFontColor
+            //         text: qsTr("Result Report") + translationManager.emptyString
+            //         fontSize: 18
+            //     }
+            // }
+
+            // results table
+            ColumnLayout {
+                id: resultStatsTable
+                anchors.top: showStatsDivider.bottom
+                Layout.topMargin: 20
+                Layout.fillWidth: true
+                Layout.preferredHeight: 46 * resultStatsListView.count
+                visible: persistentSettings.miningShowStats
+
+                ListModel {
+                    id: miningResultReportTableModel
+                    ListElement {
+                        label: "Difficulty"
+                        value: "0"
+                    }
+                    ListElement {
+                        label: "Good results"
+                        value: "0"
+                    }
+                    ListElement {
+                        label: "Avg result time"
+                        value: "0"
+                    }
+                    ListElement {
+                        label: "Pool-side hashes"
+                        value: "0"
+                    }
+                }
+
+                ListView {
+                    id: resultStatsListView
+                    Layout.fillWidth: true
+                    Layout.topMargin: 20
+                    anchors.fill: parent
+                    // anchors.top: resultStatsHashrateReportLabel.bottom
+                    // clip: true
+                    // boundsBehavior: ListView.StopAtBounds
+                    model: miningResultReportTableModel
+                    
+                    delegate: Item {
+                        id: tableItem
+                        height: 46
+                        width: parent.width
+                        Layout.fillWidth: true
+
+                        Label {
+                            id: difficultyLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            fontSize: 14 * scaleRatio
+                            fontBold: true
+                            text: label
+                        }
+
+                        Label {
+                            id: difficultyValue
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            // anchors.left: difficultyLabel.right
+                            anchors.right: parent.right
+                            // anchors.leftMargin: 100
+                            fontSize: 14 * scaleRatio
+                            fontBold: false
+                            text: value
+                        }
+
+                        // divider line
+                        Rectangle {
+                            anchors.right: parent.right
+                            anchors.left: parent.left
+                            anchors.top: parent.bottom
+                            height: 1
+                            color: Style.dividerColor
+                            opacity: Style.dividerOpacity
+                            visible: true
+                        }
+                    }
+                }
+            }
         }
 
         Text {
@@ -392,6 +500,7 @@ Rectangle {
         updateStatusText()
         startSoloMinerButton.enabled = !walletManager.isMining()
         stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
+        miningStatsTable.visible = walletManager.isMining()
     }
 
     StandardDialog {
@@ -411,6 +520,10 @@ Rectangle {
         update()
         timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
 
+        //update CPU Cores
+        minerCpuCoresDropdown.dataModel = minerCpuCores;
+        minerCpuCoresDropdown.currentIndex = 0;
+        minerCpuCoresDropdown.update();
     }
     function onPageClosed() {
         timer.running = false
