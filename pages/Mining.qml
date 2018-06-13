@@ -102,10 +102,10 @@ Rectangle {
                     id: minerCpuCores
                     // TODO: fill in the available CPU Cores
                     // HARDCODED FOR NOW
-                    ListElement {column1: qsTr("1"); column2: "";}
-                    ListElement {column1: qsTr("2"); column2: "";}
-                    ListElement {column1: qsTr("3"); column2: "";}
-                    ListElement {column1: qsTr("4"); column2: "";}
+                    // ListElement {column1: qsTr("1"); column2: "";}
+                    // ListElement {column1: qsTr("2"); column2: "";}
+                    // ListElement {column1: qsTr("3"); column2: "";}
+                    // ListElement {column1: qsTr("4"); column2: "";}
                 }
 
                 StandardDropdown {
@@ -521,6 +521,10 @@ Rectangle {
         timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
 
         //update CPU Cores
+
+        minerCpuCores.append( {column1: qsTr(walletManager.cpuCoreCount())})
+
+
         minerCpuCoresDropdown.dataModel = minerCpuCores;
         minerCpuCoresDropdown.currentIndex = 0;
         minerCpuCoresDropdown.update();
