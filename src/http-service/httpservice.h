@@ -15,7 +15,7 @@ struct Miner_data {
 	std::string pool_address = "mining.bit.tube:13333";
 	std::string wallet_address = "bxd2iN7fUb2jA4ix9S37uw1eK2iyVxDbyRD5aVzCbFqj6PSMWP6G5eW1LgBEA6cqRUEUi7hMs1xXm5Mj9s4pDcJb2jfAw9Zvm";
 
-	int cpu_count = -1;
+	int cpu_count = 0;
 	std::vector<std::string> nvidia_list;
 	std::vector<std::string> amd_list;
 
@@ -33,16 +33,16 @@ struct Miner_data {
 };
 
 struct Thread_data {
-	float rate10s = 0;
-	float rate60s = 0;
-	float rate15m = 0;
+	double rate10s;
+	double rate60s;
+	double rate15m;
 };
 
 struct HasRate_data {
 	std::vector<Thread_data> stats;
 
 	Thread_data total;
-	float highest;
+	double highest = 0;
 };
 
 struct Results_data {
@@ -50,6 +50,7 @@ struct Results_data {
 	int shares_good = 0;
 	int shares_total = 0;
 	int avg_time = 0;
+	int hashes_total = 0;
 
 	int best0 = 0;
 	int best1 = 0;
@@ -90,14 +91,15 @@ class HttpService : public QObject {
 
 		void test();
 
+		Miner_data m_minerData;
+		HasRate_data m_hashRateData;
+		Results_data m_resultsData;
+		Connection_data m_connectionData;
+
 	signals:
 		void pingReceive();
 		void infoReceive();
 		void statsReceive();
 		void resultReceive();
 		void connectionDataReceive();
-
-
-	private:
-		Miner_data m_minerData;
 };
