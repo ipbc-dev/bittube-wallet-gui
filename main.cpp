@@ -102,11 +102,11 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    HttpService http_serv(&app);
+    HttpService http_serv();
 
     //http_serv.test();
     //http_serv.sendPingRequest();
-    http_serv.sendInfoRequest();
+    // http_serv.sendInfoRequest();
     // http_serv.sendStatsRequest();
 
     app.setApplicationName("BitTube-gui");

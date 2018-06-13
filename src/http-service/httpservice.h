@@ -15,11 +15,11 @@ struct Miner_data {
 	std::string pool_address = "mining.bit.tube:13333";
 	std::string wallet_address = "bxd2iN7fUb2jA4ix9S37uw1eK2iyVxDbyRD5aVzCbFqj6PSMWP6G5eW1LgBEA6cqRUEUi7hMs1xXm5Mj9s4pDcJb2jfAw9Zvm";
 
-	int cpu_count = -1;
+	int cpu_count = 0;
 	std::vector<std::string> nvidia_list;
 	std::vector<std::string> amd_list;
 
-	int current_cpu_count = -1;
+	int current_cpu_count = 0;
 	bool nvidia_current = false;
 	bool amd_current = false;
 
