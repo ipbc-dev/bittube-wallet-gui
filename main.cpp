@@ -106,8 +106,8 @@ int main(int argc, char *argv[])
 
     //http_serv.test();
     //http_serv.sendPingRequest();
-    http_serv.sendInfoRequest();
-    //http_serv.sendStatsRequest();
+    //http_serv.sendInfoRequest();
+    http_serv.sendStatsRequest();
 
     app.setApplicationName("BitTube-gui");
     app.setOrganizationDomain("bit.tube");

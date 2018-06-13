@@ -5,6 +5,11 @@
 #include <string>
 #include <vector>
 
+struct GraphicsCards_data {
+	std::string name = "";
+	bool current_use = false;
+};
+
 struct Miner_data {
 	int httpd_port = 8282;
 	std::string pool_address = "mining.bit.tube:13333";
@@ -23,7 +28,48 @@ struct Miner_data {
 	bool updated = false;
 	bool needGUIUpdate = false;
 
+	std::vector<GraphicsCards_data> nvidia_listB;//TODO: select or not each graphics card
+	std::vector<GraphicsCards_data> amd_listB; //TODO: select or not each graphics card
 };
+
+struct Thread_data {
+	float rate10s = 0;
+	float rate60s = 0;
+	float rate15m = 0;
+};
+
+struct HasRate_data {
+	std::vector<Thread_data> stats;
+
+	Thread_data total;
+	float highest;
+};
+
+struct Results_data {
+	int diff_current = 0;
+	int shares_good = 0;
+	int shares_total = 0;
+	int avg_time = 0;
+
+	int best0 = 0;
+	int best1 = 0;
+	int best2 = 0;
+	int best3 = 0;
+	int best4 = 0;
+	int best5 = 0;
+	int best6 = 0;
+	int best7 = 0;
+	int best8 = 0;
+	int best9 = 0;
+};
+
+struct Connection_data {
+	std::string pool = "";
+	int uptime = 0;
+	int ping = 0;
+	//array error_log = [] (JSON)
+};
+
 
 
 
@@ -43,6 +89,14 @@ class HttpService : public QObject {
 		void sendStopRequest(); // Get -> /stop
 
 		void test();
+
+	signals:
+		void pingReceive();
+		void infoReceive();
+		void statsReceive();
+		void resultReceive();
+		void connectionDataReceive();
+
 
 	private:
 		Miner_data m_minerData;

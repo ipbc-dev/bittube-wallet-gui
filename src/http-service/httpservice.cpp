@@ -35,7 +35,7 @@ void HttpService::sendConfig() { // Post -> /config
 			reply->deleteLater();
 		});
 
-	
+
 	connect(reply, &QNetworkReply::finished, 
 		[=]() {
 			QByteArray response_data = reply->readAll();
@@ -287,7 +287,8 @@ void HttpService::sendInfoRequest() { // Get -> /info
 					}
 
 					if(m_minerData.needGUIUpdate) {
-
+						//m_minerData.updated = true;
+						emit infoReceive();
 
 						//FIXME: delete this ----
 						std::cout << "   - cpu_count: " << m_minerData.cpu_count << std::endl;
@@ -349,6 +350,35 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 			std::cout << "-------------------------------------------------------------------" << std::endl;
 			std::cout << "[Stats] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
 			std::cout << "-------------------------------------------------------------------" << std::endl;
+
+			QJsonParseError error;
+			QJsonDocument json = QJsonDocument::fromJson(response_data, &error);
+
+			if (json.isNull() || json.isEmpty()){
+				std::cout << "[Stats] Request: Error parsing response data. \n   - JSON fail:  " << error.errorString().toStdString() << error.offset;
+			} else {
+				if(json.isObject()) {
+					QJsonObject jsonObj(json.object());
+					if (jsonObj.contains("hashrate")) {
+						std::cout << "hashrate found" << std::endl;
+
+						QJsonObject jsonObj002(jsonObj.value("hashrate").toObject());
+						if(jsonObj002.contains("threads")) {
+							std::cout << "threads (hashrate) found" << std::endl;
+							//QJsonArray array = value.toArray();
+						}
+					}
+
+					if (jsonObj.contains("results")) {
+						std::cout << "results found" << std::endl;
+					}
+
+					if (jsonObj.contains("connection")) {
+						std::cout << "connection found" << std::endl;
+					}
+				}
+			}
+
 			manager->deleteLater();
 			reply->deleteLater();
 		});
