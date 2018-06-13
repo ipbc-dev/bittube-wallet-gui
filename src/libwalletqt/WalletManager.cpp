@@ -246,6 +246,16 @@ double WalletManager::miningHashRate() const
     return m_pimpl->miningHashRate();
 }
 
+// -------------------------------------------------------
+QString WalletManager::cpuCoreCount() const
+{
+    // return m_httpServ->m_minerData.cpu_count;
+    return QString::number(m_httpServ->m_minerData.cpu_count);
+}
+// -------------------------------------------------------
+
+
+
 bool WalletManager::isMining() const
 {
     if(!m_currentWallet->connected())

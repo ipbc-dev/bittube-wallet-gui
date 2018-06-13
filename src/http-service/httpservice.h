@@ -89,6 +89,8 @@ class HttpService : public QObject {
 		void sendStopRequest(); // Get -> /stop
 
 		void test();
+		
+		Miner_data m_minerData;
 
 	signals:
 		void pingReceive();
@@ -99,5 +101,4 @@ class HttpService : public QObject {
 
 
 	private:
-		Miner_data m_minerData;
 };
