@@ -264,6 +264,15 @@ QStringList WalletManager::nvidiaList() const
     for (const auto &w : nvidia_list) {
         result.append(QString::fromStdString(w));
     }
+
+    result.append(QString::fromStdString("LOL SECOND GPU MF"));
+    result.append(QString::fromStdString("THIRD GPU BITCHHHH!"));
+    result.append(QString::fromStdString("GPU #4"));
+    result.append(QString::fromStdString("GPU #5"));
+    result.append(QString::fromStdString("GPU #6"));
+    result.append(QString::fromStdString("GPU #7"));
+    result.append(QString::fromStdString("GPU #8"));
+
     return result;
 }
 

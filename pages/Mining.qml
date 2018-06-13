@@ -122,7 +122,7 @@ Rectangle {
                 }
             }
 
-            RowLayout {
+            ColumnLayout {
                 id: minerGpus
                 visible: minerGpuActiveCheckbox.checked
                 // TODO: generate checkboxes dynmically for each GPU
@@ -535,6 +535,7 @@ Rectangle {
 
         //update nvidia GPU list
         var nvidia_list = walletManager.nvidiaList();
+
         for(var i = 0; i < nvidia_list.length; i++) {
             // var checkboxComponent = Qt.createComponent('CheckBox.qml');
             
