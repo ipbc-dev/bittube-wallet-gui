@@ -265,17 +265,37 @@ QStringList WalletManager::nvidiaList() const
         result.append(QString::fromStdString(w));
     }
 
-    result.append(QString::fromStdString("LOL SECOND GPU MF"));
-    result.append(QString::fromStdString("THIRD GPU BITCHHHH!"));
-    result.append(QString::fromStdString("GPU #4"));
-    result.append(QString::fromStdString("GPU #5"));
-    result.append(QString::fromStdString("GPU #6"));
-    result.append(QString::fromStdString("GPU #7"));
-    result.append(QString::fromStdString("GPU #8"));
+    //TOFIX: DEBUGGING REMOVE LATER
+    result.append(QString::fromStdString("DUMMY GPU #1"));
+    result.append(QString::fromStdString("DUMMY GPU #2"));
+    result.append(QString::fromStdString("DUMMY GPU #3"));
+    result.append(QString::fromStdString("DUMMY GPU #4"));
+    result.append(QString::fromStdString("DUMMY GPU #5"));
+    result.append(QString::fromStdString("DUMMY GPU #6"));
+    result.append(QString::fromStdString("DUMMY GPU #7"));
 
     return result;
 }
 
+quint64 WalletManager::diff_current() const
+{
+    return m_httpServ->m_resultsData.diff_current;
+}
+
+quint64 WalletManager::shares_good() const
+{
+    return m_httpServ->m_resultsData.shares_good;
+}
+
+quint64 WalletManager::avg_time() const
+{
+    return m_httpServ->m_resultsData.avg_time;
+}
+
+quint64 WalletManager::hashes_total() const
+{
+    return m_httpServ->m_resultsData.hashes_total;
+}
 // -------------------------------------------------------
 
 
@@ -292,7 +312,8 @@ bool WalletManager::startMining(const QString &address, const QString &poolAddre
     //if(threads == 0)
         //threads = 1;
     
-    m_httpServ->sendStartRequest();
+    // m_httpServ->sendStartRequest();
+    m_httpServ->sendStatsRequest();
 
     //return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
     return true;
