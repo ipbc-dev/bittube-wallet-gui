@@ -66,7 +66,13 @@
 #include "QrCodeScanner.h"
 #endif
 
+//test------ FIXME: delete this ----
 #include "src/http-service/httpservice.h"
+#include "src/miner/minermanager.h"
+#include <QProcess>
+#include <QDir>
+#include <QString>
+//----------------------------------
 
 bool isIOS = false;
 bool isAndroid = false;
@@ -102,12 +108,25 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    HttpService http_serv();
-
+    //test------ FIXME: delete this ----
+    //HttpService http_serv();
     //http_serv.test();
     //http_serv.sendPingRequest();
-    // http_serv.sendInfoRequest();
+    //http_serv.sendInfoRequest();
     // http_serv.sendStatsRequest();
+
+    //QProcess *process = new QProcess();
+    //std::cout << "homePath: " << QDir::homePath().toStdString() << std::endl;
+    //std::cout << "currentPath: " << QDir::currentPath().toStdString() << std::endl;
+
+    // C:/Users/Anto/Documents/Development/GRP_workspace/OtherProjects/bittube-coin-gui-wallet
+    //QString file = QDir::currentPath() + "/build/release/bin/miner/bittube-miner.exe";
+    //QString file = QDir::currentPath() + "\miner\ipbc-miner.exe";
+    //process->start(file);
+
+    MinerManager theMiner(&app);
+
+    //----------------------------------
 
     app.setApplicationName("BitTube-gui");
     app.setOrganizationDomain("bit.tube");

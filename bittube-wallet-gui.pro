@@ -51,6 +51,7 @@ HEADERS += \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
     src/http-service/httpservice.h \
+    src/miner/minermanager.h \
     Logger.h \
     MainApp.h
 
@@ -78,6 +79,7 @@ SOURCES += main.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
     src/http-service/httpservice.cpp \
+    src/miner/minermanager.cpp \
     Logger.cpp \
     MainApp.cpp
 

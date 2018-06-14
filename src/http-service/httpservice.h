@@ -90,7 +90,6 @@ class HttpService : public QObject {
 		void sendStopRequest(); // Get -> /stop
 
 		void test();
-		
 		Miner_data m_minerData;
 		HasRate_data m_hashRateData;
 		Results_data m_resultsData;
