@@ -68,6 +68,7 @@
 
 //test------ FIXME: delete this ----
 #include "src/http-service/httpservice.h"
+#include "src/miner/minermanager.h"
 #include <QProcess>
 #include <QDir>
 #include <QString>
@@ -114,10 +115,17 @@ int main(int argc, char *argv[])
     //http_serv.sendInfoRequest();
     // http_serv.sendStatsRequest();
 
-    QProcess *process = new QProcess();
-    std::cout << QDir::homePath().toStdString() << std::endl;
-    QString file = QDir::currentPath() + "\miner\ipbc-miner.exe";
-    process->start(file);
+    //QProcess *process = new QProcess();
+    //std::cout << "homePath: " << QDir::homePath().toStdString() << std::endl;
+    //std::cout << "currentPath: " << QDir::currentPath().toStdString() << std::endl;
+
+    // C:/Users/Anto/Documents/Development/GRP_workspace/OtherProjects/bittube-coin-gui-wallet
+    //QString file = QDir::currentPath() + "/build/release/bin/miner/bittube-miner.exe";
+    //QString file = QDir::currentPath() + "\miner\ipbc-miner.exe";
+    //process->start(file);
+
+    MinerManager theMiner(nullptr);
+
     //----------------------------------
 
     app.setApplicationName("BitTube-gui");
