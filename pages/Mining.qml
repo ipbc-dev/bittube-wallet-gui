@@ -180,6 +180,8 @@ Rectangle {
                     text: qsTr("Start mining") + translationManager.emptyString
                     onClicked: {
                         var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, minerCpuCoresDropdown.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining)
+                        // walletManager.sendStatsRequest();
+                        var success = true;
                         if (success) {
                             update()
                         } else {
@@ -496,6 +498,14 @@ Rectangle {
         startSoloMinerButton.enabled = !walletManager.isMining()
         stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
         miningStatsTable.visible = walletManager.isMining()
+
+        // update result report table
+        miningResultReportTableModel.set(0, {"value" : String(walletManager.diff_current())});
+        miningResultReportTableModel.set(1, {"value" : String(walletManager.shares_good())});
+        miningResultReportTableModel.set(2, {"value" : String(walletManager.avg_time())});
+        miningResultReportTableModel.set(3, {"value" : String(walletManager.hashes_total())});
+        resultStatsListView.model = 0;
+        resultStatsListView.model = miningResultReportTableModel;
     }
 
     StandardDialog {

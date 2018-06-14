@@ -148,6 +148,10 @@ public:
     Q_INVOKABLE quint64 cpuCoreCount() const;
     Q_INVOKABLE QString poolAddress() const;
     Q_INVOKABLE QStringList nvidiaList() const;
+    Q_INVOKABLE quint64 diff_current() const;
+    Q_INVOKABLE quint64 shares_good() const;
+    Q_INVOKABLE quint64 avg_time() const;
+    Q_INVOKABLE quint64 hashes_total() const;
 
 signals:
 
