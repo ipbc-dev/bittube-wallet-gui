@@ -20,30 +20,7 @@
  * Description: ...
  */
 void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wallwetIdIN, int cpuCount, bool nvidiaUses, bool amdUses) { // Post -> /config
-	std::cout << "Sending [Configuration] Request" << std::endl;
-
-	//QString dataIN = "{ \"cpu_count\" : " + QString::number(cpuCount);
-
-	//if (nvidiaUses) {
-	//	dataIN += ", \n \"nvidia_list\" : true";
-	//}
-	//if (amdUses) {
-	//	dataIN += ", \n \"amd_list\" : true";
-	//}
-	//if(httpPortIN > 0) {
-	//	dataIN += ", \n \"httpd_port\" : " + QString::number(httpPortIN);
-	//}
-	//if (!poolAddressIN.isNull() and !poolAddressIN.isEmpty()) {
-	//	dataIN += ", \n \"pool_address\" : " + poolAddressIN;
-	//}
-	
-	//if (!wallwetIdIN.isNull() and !wallwetIdIN.isEmpty()) {
-	//	dataIN += ", \n \"wallet_address\" : " + wallwetIdIN;
-	//}
-	//dataIN += " \n } \n";
-
-	//QByteArray jsonDocument("{}"); //TODO: generate config object
-	//QByteArray jsonDocument(dataIN.toUtf8().constData());
+	//std::cout << "Sending [Configuration] Request" << std::endl;
 
 	QUrlQuery params;
 	params.addQueryItem("cpu_count", QString::number(cpuCount));
@@ -64,22 +41,18 @@ void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wall
 	}
 
 
-	//params.addQueryItem("code", "...");
-
-
 	QUrl url("http://localhost:8282/config");
 	QNetworkRequest request(url);
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
 
 	QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-	//QNetworkReply* reply = manager->post(request, jsonDocument);
 	QNetworkReply* reply = manager->post(request, params.query(QUrl::FullyEncoded).toUtf8());
 
 	connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
 		[=](QNetworkReply::NetworkError code) {
-			std::cout << "-------------------------------------------------------------------" << std::endl;
-			std::cout << "[Configuration] Request: we found an network error with code: " << code << std::endl;
-			std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "[Configuration] Request: we found an network error with code: " << code << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
 			manager->deleteLater();
 			reply->deleteLater();
 		});
@@ -89,9 +62,9 @@ void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wall
 		[=]() {
 			if(reply->error() == QNetworkReply::NoError) {
 				QByteArray response_data = reply->readAll();
-				std::cout << "-------------------------------------------------------------------" << std::endl;
-				std::cout << "[Configuration] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
-				std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "[Configuration] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
 
 				if(m_minerData.startMiningRequest) {
 					QTime dieTime= QTime::currentTime().addSecs(1);
@@ -111,7 +84,7 @@ void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wall
  * Description: ...
  */
 void HttpService::sendPingRequest() { // Get -> /ping
-	std::cout << "Sending [ping] Request" << std::endl;
+	//std::cout << "Sending [ping] Request" << std::endl;
 
 	QUrl url("http://localhost:8282/ping");
 	QNetworkRequest request(url);
@@ -122,9 +95,9 @@ void HttpService::sendPingRequest() { // Get -> /ping
 
 	connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
 		[=](QNetworkReply::NetworkError code) {
-			std::cout << "-------------------------------------------------------------------" << std::endl;
-			std::cout << "[Ping] Request: we found an network error with code: " << code << std::endl;
-			std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "[Ping] Request: we found an network error with code: " << code << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
 			if(m_minerData.startMiningRequest) {
 				sendPingRequest();
 			}
@@ -138,9 +111,9 @@ void HttpService::sendPingRequest() { // Get -> /ping
 		[=]() {
 			if(reply->error() == QNetworkReply::NoError) {
 				QByteArray response_data = reply->readAll();
-				std::cout << "-------------------------------------------------------------------" << std::endl;
-				std::cout << "[Ping] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
-				std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "[Ping] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
 				if(m_minerData.startMiningRequest) {
 					sendStartRequest();
 				}
@@ -154,7 +127,7 @@ void HttpService::sendPingRequest() { // Get -> /ping
  * Description: ...
  */
 void HttpService::sendInfoRequest() { // Get -> /info
-	std::cout << "Sending [Info] Request" << std::endl;
+	//std::cout << "Sending [Info] Request" << std::endl;
 
 	QUrl url("http://localhost:8282/info");
 	QNetworkRequest request(url);
@@ -165,9 +138,9 @@ void HttpService::sendInfoRequest() { // Get -> /info
 
 	connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
 		[=](QNetworkReply::NetworkError code) {
-			std::cout << "-------------------------------------------------------------------" << std::endl;
-			std::cout << "[Info] Request: we found an network error with code: " << code << std::endl;
-			std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "[Info] Request: we found an network error with code: " << code << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
 			manager->deleteLater();
 			reply->deleteLater();
 		});
@@ -177,9 +150,9 @@ void HttpService::sendInfoRequest() { // Get -> /info
 		[=]() {
 			if(reply->error() == QNetworkReply::NoError) {
 				QByteArray response_data = reply->readAll();
-				std::cout << "-------------------------------------------------------------------" << std::endl;
-				std::cout << "[Info] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
-				std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "[Info] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
 				QJsonParseError error;
 				QJsonDocument json = QJsonDocument::fromJson(response_data, &error);
 
@@ -189,28 +162,28 @@ void HttpService::sendInfoRequest() { // Get -> /info
 					if(json.isObject()) {
 
 						//FIXME: delete this ----
-						std::cout << "   - cpu_count: " << m_minerData.cpu_count << std::endl;
-						std::cout << "   - current_cpu_count: " << m_minerData.current_cpu_count << std::endl;
-						std::cout << "   - nvidia_list: " << std::endl;
-						for (uint i = 0; i < m_minerData.nvidia_list.size(); ++i) {
-							std::cout << "      " << m_minerData.nvidia_list[i] << std::endl;
-						}
-						std::cout << "   - amd_list: " << std::endl;
-						for (uint i = 0; i < m_minerData.amd_list.size(); ++i) {
-							std::cout << "      " << m_minerData.amd_list[i] << std::endl;
-						}
-						std::cout << "   - nvidia_current: " << m_minerData.nvidia_current << std::endl;
-						std::cout << "   - amd_current: " << m_minerData.amd_current << std::endl;
-						std::cout << "   - httpd_port: " << m_minerData.httpd_port << std::endl;
-						std::cout << "   - pool_address: " << m_minerData.pool_address << std::endl;
-						std::cout << "   - wallet_address: " << m_minerData.wallet_address << std::endl;
-						std::cout << "   - isMining: " << m_minerData.isMining << std::endl;
+						//std::cout << "   - cpu_count: " << m_minerData.cpu_count << std::endl;
+						//std::cout << "   - current_cpu_count: " << m_minerData.current_cpu_count << std::endl;
+						//std::cout << "   - nvidia_list: " << std::endl;
+						//for (uint i = 0; i < m_minerData.nvidia_list.size(); ++i) {
+						//	std::cout << "      " << m_minerData.nvidia_list[i] << std::endl;
+						//}
+						//std::cout << "   - amd_list: " << std::endl;
+						//for (uint i = 0; i < m_minerData.amd_list.size(); ++i) {
+						//	std::cout << "      " << m_minerData.amd_list[i] << std::endl;
+						//}
+						//std::cout << "   - nvidia_current: " << m_minerData.nvidia_current << std::endl;
+						//std::cout << "   - amd_current: " << m_minerData.amd_current << std::endl;
+						//std::cout << "   - httpd_port: " << m_minerData.httpd_port << std::endl;
+						//std::cout << "   - pool_address: " << m_minerData.pool_address << std::endl;
+						//std::cout << "   - wallet_address: " << m_minerData.wallet_address << std::endl;
+						//std::cout << "   - isMining: " << m_minerData.isMining << std::endl;
 						//-----------------------
 
 
 						QJsonObject jsonObj(json.object());
 						if (jsonObj.contains("cpu_count")) {
-							std::cout << "cpu count found" << std::endl;
+							//std::cout << "cpu count found" << std::endl;
 							int tmpValue = jsonObj.value("cpu_count").toInt();
 
 							if (tmpValue != m_minerData.cpu_count) {
@@ -218,12 +191,12 @@ void HttpService::sendInfoRequest() { // Get -> /info
 								m_minerData.needGUIUpdate = true;
 							}
 						} else {
-							std::cout << "cpu count not found" << std::endl;
+							//std::cout << "cpu count not found" << std::endl;
 							//TODO: error handling
 						}
 
 						if (jsonObj.contains("current_cpu_count")) {
-							std::cout << "current_cpu_count found" << std::endl;
+							//std::cout << "current_cpu_count found" << std::endl;
 							int tmpValue = jsonObj.value("current_cpu_count").toInt();
 
 							if (tmpValue != m_minerData.current_cpu_count) {
@@ -231,12 +204,12 @@ void HttpService::sendInfoRequest() { // Get -> /info
 								m_minerData.needGUIUpdate = true;
 							}
 						} else {
-							std::cout << "current_cpu_count not found" << std::endl;
+							//std::cout << "current_cpu_count not found" << std::endl;
 							//TODO: error handling
 						}
 
 						if (jsonObj.contains("nvidia_list")) {
-							std::cout << "nvidia_list found" << std::endl;
+							//std::cout << "nvidia_list found" << std::endl;
 
 							QJsonValue value = jsonObj.value("nvidia_list");
 							QJsonArray array = value.toArray();
@@ -246,17 +219,17 @@ void HttpService::sendInfoRequest() { // Get -> /info
 							}
 
 							foreach (const QJsonValue & val, array) {
-								std::cout << "+++ " << val.toString().toStdString() << std::endl;
+								//std::cout << "+++ " << val.toString().toStdString() << std::endl;
 								m_minerData.nvidia_list.push_back(val.toString().toStdString());
 							}
 
 						} else {
-							std::cout << "nvidia_list not found" << std::endl;
+							//std::cout << "nvidia_list not found" << std::endl;
 							//TODO: error handling
 						}
 
 						if (jsonObj.contains("amd_list")) {
-							std::cout << "amd_list found" << std::endl;
+							//std::cout << "amd_list found" << std::endl;
 
 							QJsonValue value = jsonObj.value("amd_list");
 							QJsonArray array = value.toArray();
@@ -266,41 +239,41 @@ void HttpService::sendInfoRequest() { // Get -> /info
 							}
 
 							foreach (const QJsonValue & val, array) {
-								std::cout << "+++ " << val.toString().toStdString() << std::endl;
+								//std::cout << "+++ " << val.toString().toStdString() << std::endl;
 								m_minerData.amd_list.push_back(val.toString().toStdString());
 							}
 
 						} else {
-							std::cout << "amd_list not found" << std::endl;
+							//std::cout << "amd_list not found" << std::endl;
 							//TODO: error handling
 						}
 
 						if (jsonObj.contains("nvidia_current")) {
-							std::cout << "nvidia_current found" << std::endl;
+							//std::cout << "nvidia_current found" << std::endl;
 							bool tmpValue = jsonObj.value("nvidia_current").toBool();
 							if (tmpValue != m_minerData.nvidia_current) {
 								m_minerData.nvidia_current = tmpValue;
 								m_minerData.needGUIUpdate = true;
 							}
 						} else {
-							std::cout << "nvidia_current not found" << std::endl;
+							//std::cout << "nvidia_current not found" << std::endl;
 							//TODO: error handling
 						}
 
 						if (jsonObj.contains("amd_current")) {
-							std::cout << "amd_current found" << std::endl;
+							//std::cout << "amd_current found" << std::endl;
 							bool tmpValue = jsonObj.value("amd_current").toBool();
 							if (tmpValue != m_minerData.amd_current) {
 								m_minerData.amd_current = tmpValue;
 								m_minerData.needGUIUpdate = true;
 							}
 						} else {
-							std::cout << "amd_current not found" << std::endl;
+							//std::cout << "amd_current not found" << std::endl;
 							//TODO: error handling
 						}
 
 						if (jsonObj.contains("httpd_port")) {
-							std::cout << "httpd_port found" << std::endl;
+							//std::cout << "httpd_port found" << std::endl;
 							int tmpValue = jsonObj.value("httpd_port").toInt();
 
 							if (tmpValue != m_minerData.httpd_port) {
@@ -308,12 +281,12 @@ void HttpService::sendInfoRequest() { // Get -> /info
 								m_minerData.needGUIUpdate = true;
 							}
 						} else {
-							std::cout << "httpd_port not found" << std::endl;
+							//std::cout << "httpd_port not found" << std::endl;
 							//TODO: error handling
 						}
 
 						if (jsonObj.contains("pool_address")) {
-							std::cout << "pool_address found" << std::endl;
+							//std::cout << "pool_address found" << std::endl;
 							std::string tmpValue = jsonObj.value("pool_address").toString().toStdString();
 
 							if (tmpValue != m_minerData.pool_address) {
@@ -321,12 +294,12 @@ void HttpService::sendInfoRequest() { // Get -> /info
 								m_minerData.needGUIUpdate = true;
 							}
 						} else {
-							std::cout << "pool_address not found" << std::endl;
+							//std::cout << "pool_address not found" << std::endl;
 							//TODO: error handling
 						}
 
 						if (jsonObj.contains("wallet_address")) {
-							std::cout << "wallet_address found" << std::endl;
+							//std::cout << "wallet_address found" << std::endl;
 							std::string tmpValue = jsonObj.value("wallet_address").toString().toStdString();
 
 							if (tmpValue != m_minerData.wallet_address) {
@@ -334,40 +307,40 @@ void HttpService::sendInfoRequest() { // Get -> /info
 								m_minerData.needGUIUpdate = true;
 							}
 						} else {
-							std::cout << "wallet_address not found" << std::endl;
+							//std::cout << "wallet_address not found" << std::endl;
 							//TODO: error handling
 						}
 
 						if (jsonObj.contains("isMining")) {
-							std::cout << "isMining found" << std::endl;
+							//std::cout << "isMining found" << std::endl;
 							bool tmpValue = jsonObj.value("isMining").toBool();
 							if (tmpValue != m_minerData.isMining) {
 								m_minerData.isMining = tmpValue;
 								m_minerData.needGUIUpdate = true;
 							}
 						} else {
-							std::cout << "isMining not found" << std::endl;
+							//std::cout << "isMining not found" << std::endl;
 							//TODO: error handling
 						}
 
 						if(m_minerData.needGUIUpdate) {
 							//FIXME: delete this ----
-							std::cout << "   - cpu_count: " << m_minerData.cpu_count << std::endl;
-							std::cout << "   - current_cpu_count: " << m_minerData.current_cpu_count << std::endl;
-							std::cout << "   - nvidia_list: " << std::endl;
-							for (uint i = 0; i < m_minerData.nvidia_list.size(); ++i) {
-								std::cout << "      " << m_minerData.nvidia_list[i] << std::endl;
-							}
-							std::cout << "   - amd_list: " << std::endl;
-							for (uint i = 0; i < m_minerData.amd_list.size(); ++i) {
-								std::cout << "      " << m_minerData.amd_list[i] << std::endl;
-							}
-							std::cout << "   - nvidia_current: " << m_minerData.nvidia_current << std::endl;
-							std::cout << "   - amd_current: " << m_minerData.amd_current << std::endl;
-							std::cout << "   - httpd_port: " << m_minerData.httpd_port << std::endl;
-							std::cout << "   - pool_address: " << m_minerData.pool_address << std::endl;
-							std::cout << "   - wallet_address: " << m_minerData.wallet_address << std::endl;
-							std::cout << "   - isMining: " << m_minerData.isMining << std::endl;
+							//std::cout << "   - cpu_count: " << m_minerData.cpu_count << std::endl;
+							//std::cout << "   - current_cpu_count: " << m_minerData.current_cpu_count << std::endl;
+							//std::cout << "   - nvidia_list: " << std::endl;
+							//for (uint i = 0; i < m_minerData.nvidia_list.size(); ++i) {
+							//	std::cout << "      " << m_minerData.nvidia_list[i] << std::endl;
+							//}
+							//std::cout << "   - amd_list: " << std::endl;
+							//for (uint i = 0; i < m_minerData.amd_list.size(); ++i) {
+							//	std::cout << "      " << m_minerData.amd_list[i] << std::endl;
+							//}
+							//std::cout << "   - nvidia_current: " << m_minerData.nvidia_current << std::endl;
+							//std::cout << "   - amd_current: " << m_minerData.amd_current << std::endl;
+							//std::cout << "   - httpd_port: " << m_minerData.httpd_port << std::endl;
+							//std::cout << "   - pool_address: " << m_minerData.pool_address << std::endl;
+							//std::cout << "   - wallet_address: " << m_minerData.wallet_address << std::endl;
+							//std::cout << "   - isMining: " << m_minerData.isMining << std::endl;
 							//-----------------------
 							emit infoReceive();
 						} else {
@@ -386,7 +359,7 @@ void HttpService::sendInfoRequest() { // Get -> /info
  * Description: ...
  */
 void HttpService::sendStatsRequest() { // Get -> /api.json
-	std::cout << "Sending [Stats] Request" << std::endl;
+	//std::cout << "Sending [Stats] Request" << std::endl;
 
 	QUrl url("http://localhost:8282/api.json");
 	QNetworkRequest request(url);
@@ -397,9 +370,9 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 
 	connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
 		[=](QNetworkReply::NetworkError code) {
-			std::cout << "-------------------------------------------------------------------" << std::endl;
-			std::cout << "[Stats] Request: we found an network error with code: " << code << std::endl;
-			std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "[Stats] Request: we found an network error with code: " << code << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
 			manager->deleteLater();
 			reply->deleteLater();
 		});
@@ -409,9 +382,9 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 		[=]() {
 			if(reply->error() == QNetworkReply::NoError) {
 				QByteArray response_data = reply->readAll();
-				std::cout << "-------------------------------------------------------------------" << std::endl;
-				std::cout << "[Stats] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
-				std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "[Stats] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
 
 				QJsonParseError error;
 				QJsonDocument json = QJsonDocument::fromJson(response_data, &error);
@@ -422,24 +395,24 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 					if(json.isObject()) {
 						QJsonObject jsonObj(json.object());
 						if (jsonObj.contains("hashrate")) {
-							std::cout << "hashrate found" << std::endl;
+							//std::cout << "hashrate found" << std::endl;
 
 							//FIXME: delete this ----
-							std::cout << "   - Threads[" << m_hashRateData.stats.size() << "]: " << std::endl;
-							for (uint i = 0; i < m_hashRateData.stats.size(); ++i) {
-								std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate10s << std::endl;
-								std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate60s << std::endl;
-								std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate15m << std::endl;
-							}
-							std::cout << "   - total: [" << m_hashRateData.total.rate10s  << ", " << m_hashRateData.total.rate60s << ", " << m_hashRateData.total.rate15m << "]: " << std::endl;
-							std::cout << "   - highest: " << m_hashRateData.highest << std::endl;
+							//std::cout << "   - Threads[" << m_hashRateData.stats.size() << "]: " << std::endl;
+							//for (uint i = 0; i < m_hashRateData.stats.size(); ++i) {
+							//	std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate10s << std::endl;
+							//	std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate60s << std::endl;
+							//	std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate15m << std::endl;
+							//}
+							//std::cout << "   - total: [" << m_hashRateData.total.rate10s  << ", " << m_hashRateData.total.rate60s << ", " << m_hashRateData.total.rate15m << "]: " << std::endl;
+							//std::cout << "   - highest: " << m_hashRateData.highest << std::endl;
 							//-----------------------
 
 							QJsonObject jsonObj002(jsonObj.value("hashrate").toObject());
 							
 							//---
 							if(jsonObj002.contains("threads")) {
-								std::cout << "threads (hashrate) found" << std::endl;
+								//std::cout << "threads (hashrate) found" << std::endl;
 								QJsonValue value = jsonObj002.value("threads");
 								QJsonArray array = value.toArray();
 
@@ -466,7 +439,7 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 
 							//---
 							if(jsonObj002.contains("total")) {
-								std::cout << "total (hashrate) found" << std::endl;
+								//std::cout << "total (hashrate) found" << std::endl;
 								QJsonValue value = jsonObj002.value("total");
 								QJsonArray array = value.toArray();
 
@@ -477,20 +450,20 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 
 							//---
 							if(jsonObj002.contains("highest")) {
-								std::cout << "highest (hashrate) found" << std::endl;
+								//std::cout << "highest (hashrate) found" << std::endl;
 
 								m_hashRateData.highest = jsonObj002.value("highest").toDouble();
 							}
 
 							//FIXME: delete this ----
-							std::cout << "   - Threads[" << m_hashRateData.stats.size() << "]: " << std::endl;
-							for (uint i = 0; i < m_hashRateData.stats.size(); ++i) {
-								std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate10s << std::endl;
-								std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate60s << std::endl;
-								std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate15m << std::endl;
-							}
-							std::cout << "   - total: [" << m_hashRateData.total.rate10s  << ", " << m_hashRateData.total.rate60s << ", " << m_hashRateData.total.rate15m << "]: " << std::endl;
-							std::cout << "   - highest: " << m_hashRateData.highest << std::endl;
+							//std::cout << "   - Threads[" << m_hashRateData.stats.size() << "]: " << std::endl;
+							//for (uint i = 0; i < m_hashRateData.stats.size(); ++i) {
+							//	std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate10s << std::endl;
+							//	std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate60s << std::endl;
+							//	std::cout << "      - [" << i << "]: " << m_hashRateData.stats[i].rate15m << std::endl;
+							//}
+							//std::cout << "   - total: [" << m_hashRateData.total.rate10s  << ", " << m_hashRateData.total.rate60s << ", " << m_hashRateData.total.rate15m << "]: " << std::endl;
+							//std::cout << "   - highest: " << m_hashRateData.highest << std::endl;
 							//-----------------------
 
 							emit statsReceive();
@@ -501,52 +474,52 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 							std::cout << "results found" << std::endl;
 
 							//FIXME: delete this ----
-							std::cout << "   - diff_current: " << m_resultsData.diff_current << std::endl;
-							std::cout << "   - shares_good: " << m_resultsData.shares_good << std::endl;
-							std::cout << "   - shares_total: " << m_resultsData.shares_total << std::endl;
-							std::cout << "   - avg_time: " << m_resultsData.avg_time << std::endl;
-							std::cout << "   - hashes_total: " << m_resultsData.hashes_total << std::endl;
+							//std::cout << "   - diff_current: " << m_resultsData.diff_current << std::endl;
+							//std::cout << "   - shares_good: " << m_resultsData.shares_good << std::endl;
+							//std::cout << "   - shares_total: " << m_resultsData.shares_total << std::endl;
+							//std::cout << "   - avg_time: " << m_resultsData.avg_time << std::endl;
+							//std::cout << "   - hashes_total: " << m_resultsData.hashes_total << std::endl;
 
-							std::cout << "   - best0: " << m_resultsData.best0 << std::endl;
-							std::cout << "   - best1: " << m_resultsData.best1 << std::endl;
-							std::cout << "   - best2: " << m_resultsData.best2 << std::endl;
-							std::cout << "   - best3: " << m_resultsData.best3 << std::endl;
-							std::cout << "   - best4: " << m_resultsData.best4 << std::endl;
-							std::cout << "   - best5: " << m_resultsData.best5 << std::endl;
-							std::cout << "   - best6: " << m_resultsData.best6 << std::endl;
-							std::cout << "   - best7: " << m_resultsData.best7 << std::endl;
-							std::cout << "   - best8: " << m_resultsData.best8 << std::endl;
-							std::cout << "   - best9: " << m_resultsData.best9 << std::endl;
+							//std::cout << "   - best0: " << m_resultsData.best0 << std::endl;
+							//std::cout << "   - best1: " << m_resultsData.best1 << std::endl;
+							//std::cout << "   - best2: " << m_resultsData.best2 << std::endl;
+							//std::cout << "   - best3: " << m_resultsData.best3 << std::endl;
+							//std::cout << "   - best4: " << m_resultsData.best4 << std::endl;
+							//std::cout << "   - best5: " << m_resultsData.best5 << std::endl;
+							//std::cout << "   - best6: " << m_resultsData.best6 << std::endl;
+							//std::cout << "   - best7: " << m_resultsData.best7 << std::endl;
+							//std::cout << "   - best8: " << m_resultsData.best8 << std::endl;
+							//std::cout << "   - best9: " << m_resultsData.best9 << std::endl;
 							//-----------------------
 
 							QJsonObject jsonObj002(jsonObj.value("results").toObject());
 							if(jsonObj002.contains("diff_current")) {
-								std::cout << "diff_current [results] found" << std::endl;
+								//std::cout << "diff_current [results] found" << std::endl;
 								m_resultsData.diff_current = jsonObj002.value("diff_current").toInt();
 							}
 
 							if(jsonObj002.contains("shares_good")) {
-								std::cout << "shares_good [results] found" << std::endl;
+								//std::cout << "shares_good [results] found" << std::endl;
 								m_resultsData.shares_good = jsonObj002.value("shares_good").toInt();
 							}
 
 							if(jsonObj002.contains("shares_total")) {
-								std::cout << "shares_total [results] found" << std::endl;
+								//std::cout << "shares_total [results] found" << std::endl;
 								m_resultsData.shares_total = jsonObj002.value("shares_total").toInt();
 							}
 
 							if(jsonObj002.contains("avg_time")) {
-								std::cout << "avg_time [results] found" << std::endl;
+								//std::cout << "avg_time [results] found" << std::endl;
 								m_resultsData.avg_time = jsonObj002.value("avg_time").toInt();
 							}
 
 							if(jsonObj002.contains("hashes_total")) {
-								std::cout << "hashes_total [results] found" << std::endl;
+								//std::cout << "hashes_total [results] found" << std::endl;
 								m_resultsData.hashes_total = jsonObj002.value("hashes_total").toInt();
 							}
 
 							if(jsonObj002.contains("best")) {
-								std::cout << "best [results] found" << std::endl;
+								//std::cout << "best [results] found" << std::endl;
 								QJsonValue value = jsonObj002.value("best");
 								QJsonArray array = value.toArray();
 
@@ -589,22 +562,22 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 							}
 
 							//FIXME: delete this ----
-							std::cout << "   - diff_current: " << m_resultsData.diff_current << std::endl;
-							std::cout << "   - shares_good: " << m_resultsData.shares_good << std::endl;
-							std::cout << "   - shares_total: " << m_resultsData.shares_total << std::endl;
-							std::cout << "   - avg_time: " << m_resultsData.avg_time << std::endl;
-							std::cout << "   - hashes_total: " << m_resultsData.hashes_total << std::endl;
+							//std::cout << "   - diff_current: " << m_resultsData.diff_current << std::endl;
+							//std::cout << "   - shares_good: " << m_resultsData.shares_good << std::endl;
+							//std::cout << "   - shares_total: " << m_resultsData.shares_total << std::endl;
+							//std::cout << "   - avg_time: " << m_resultsData.avg_time << std::endl;
+							//std::cout << "   - hashes_total: " << m_resultsData.hashes_total << std::endl;
 
-							std::cout << "   - best0: " << m_resultsData.best0 << std::endl;
-							std::cout << "   - best1: " << m_resultsData.best1 << std::endl;
-							std::cout << "   - best2: " << m_resultsData.best2 << std::endl;
-							std::cout << "   - best3: " << m_resultsData.best3 << std::endl;
-							std::cout << "   - best4: " << m_resultsData.best4 << std::endl;
-							std::cout << "   - best5: " << m_resultsData.best5 << std::endl;
-							std::cout << "   - best6: " << m_resultsData.best6 << std::endl;
-							std::cout << "   - best7: " << m_resultsData.best7 << std::endl;
-							std::cout << "   - best8: " << m_resultsData.best8 << std::endl;
-							std::cout << "   - best9: " << m_resultsData.best9 << std::endl;
+							//std::cout << "   - best0: " << m_resultsData.best0 << std::endl;
+							//std::cout << "   - best1: " << m_resultsData.best1 << std::endl;
+							//std::cout << "   - best2: " << m_resultsData.best2 << std::endl;
+							//std::cout << "   - best3: " << m_resultsData.best3 << std::endl;
+							//std::cout << "   - best4: " << m_resultsData.best4 << std::endl;
+							//std::cout << "   - best5: " << m_resultsData.best5 << std::endl;
+							//std::cout << "   - best6: " << m_resultsData.best6 << std::endl;
+							//std::cout << "   - best7: " << m_resultsData.best7 << std::endl;
+							//std::cout << "   - best8: " << m_resultsData.best8 << std::endl;
+							//std::cout << "   - best9: " << m_resultsData.best9 << std::endl;
 							//------------------------
 
 							emit resultReceive();
@@ -612,12 +585,12 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 
 						if (jsonObj.contains("connection")) {
 							//TODO: parse error_log atribute
-							std::cout << "connection found" << std::endl;
+							//std::cout << "connection found" << std::endl;
 
 							//FIXME: delete this ----
-							std::cout << "   - pool: " << m_connectionData.pool << std::endl;
-							std::cout << "   - uptime: " << m_connectionData.uptime << std::endl;
-							std::cout << "   - ping: " << m_connectionData.ping << std::endl;
+							//std::cout << "   - pool: " << m_connectionData.pool << std::endl;
+							//std::cout << "   - uptime: " << m_connectionData.uptime << std::endl;
+							//std::cout << "   - ping: " << m_connectionData.ping << std::endl;
 							//-----------------------
 
 							QJsonObject jsonObj002(jsonObj.value("connection").toObject());
@@ -636,9 +609,9 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 
 
 							//FIXME: delete this ----
-							std::cout << "   - pool: " << m_connectionData.pool << std::endl;
-							std::cout << "   - uptime: " << m_connectionData.uptime << std::endl;
-							std::cout << "   - ping: " << m_connectionData.ping << std::endl;
+							//std::cout << "   - pool: " << m_connectionData.pool << std::endl;
+							//std::cout << "   - uptime: " << m_connectionData.uptime << std::endl;
+							//std::cout << "   - ping: " << m_connectionData.ping << std::endl;
 							//-----------------------
 							emit connectionDataReceive();
 						}
@@ -655,7 +628,7 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
  * Description: ...
  */
 void HttpService::sendStartRequest() { // Get -> /start
-	std::cout << "Sending [Start] Request" << std::endl;
+	//std::cout << "Sending [Start] Request" << std::endl;
 
 	QUrl url("http://localhost:8282/start");
 	QNetworkRequest request(url);
@@ -666,9 +639,9 @@ void HttpService::sendStartRequest() { // Get -> /start
 
 	connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
 		[=](QNetworkReply::NetworkError code) {
-			std::cout << "-------------------------------------------------------------------" << std::endl;
-			std::cout << "[Start] Request: we found an network error with code: " << code << std::endl;
-			std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "[Start] Request: we found an network error with code: " << code << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
 			manager->deleteLater();
 			reply->deleteLater();
 		});
@@ -678,9 +651,9 @@ void HttpService::sendStartRequest() { // Get -> /start
 		[=]() {
 			if(reply->error() == QNetworkReply::NoError) {
 				QByteArray response_data = reply->readAll();
-				std::cout << "-------------------------------------------------------------------" << std::endl;
-				std::cout << "[Start] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
-				std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "[Start] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
 				if(m_minerData.startMiningRequest) {
 					m_minerData.startMiningRequest = false;
 				}
@@ -694,7 +667,7 @@ void HttpService::sendStartRequest() { // Get -> /start
  * Description: ...
  */
 void HttpService::sendStopRequest() { // Get -> /stop
-	std::cout << "Sending [Stop] Request" << std::endl;
+	//std::cout << "Sending [Stop] Request" << std::endl;
 
 	QUrl url("http://localhost:8282/stop");
 	QNetworkRequest request(url);
@@ -705,9 +678,9 @@ void HttpService::sendStopRequest() { // Get -> /stop
 
 	connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
 		[=](QNetworkReply::NetworkError code) {
-			std::cout << "-------------------------------------------------------------------" << std::endl;
-			std::cout << "[Stop] Request: we found an network error with code: " << code << std::endl;
-			std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
+			//std::cout << "[Stop] Request: we found an network error with code: " << code << std::endl;
+			//std::cout << "-------------------------------------------------------------------" << std::endl;
 			manager->deleteLater();
 			reply->deleteLater();
 		});
@@ -717,9 +690,9 @@ void HttpService::sendStopRequest() { // Get -> /stop
 		[=]() {
 			if(reply->error() == QNetworkReply::NoError) {
 				QByteArray response_data = reply->readAll();
-				std::cout << "-------------------------------------------------------------------" << std::endl;
-				std::cout << "[Stop] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
-				std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
+				//std::cout << "[Stop] Request: \n   - Ok, Server response : " << response_data.toStdString() << std::endl;
+				//std::cout << "-------------------------------------------------------------------" << std::endl;
 			}
 			manager->deleteLater();
 			reply->deleteLater();
