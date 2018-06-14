@@ -145,7 +145,9 @@ public:
     // clear/rename wallet cache
     Q_INVOKABLE bool clearWalletCache(const QString &fileName) const;
 
-    Q_INVOKABLE QString cpuCoreCount() const;
+    Q_INVOKABLE quint64 cpuCoreCount() const;
+    Q_INVOKABLE QString poolAddress() const;
+    Q_INVOKABLE QStringList nvidiaList() const;
 
 signals:
 

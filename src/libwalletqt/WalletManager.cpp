@@ -247,11 +247,35 @@ double WalletManager::miningHashRate() const
 }
 
 // -------------------------------------------------------
-QString WalletManager::cpuCoreCount() const
+quint64 WalletManager::cpuCoreCount() const
 {
-    // return m_httpServ->m_minerData.cpu_count;
-    return QString::number(m_httpServ->m_minerData.cpu_count);
+    return m_httpServ->m_minerData.cpu_count;
 }
+
+QString WalletManager::poolAddress() const
+{
+    return QString::fromStdString(m_httpServ->m_minerData.pool_address);
+}
+
+QStringList WalletManager::nvidiaList() const
+{
+    std::vector<std::string> nvidia_list = m_httpServ->m_minerData.nvidia_list;
+    QStringList result;
+    for (const auto &w : nvidia_list) {
+        result.append(QString::fromStdString(w));
+    }
+
+    result.append(QString::fromStdString("LOL SECOND GPU MF"));
+    result.append(QString::fromStdString("THIRD GPU BITCHHHH!"));
+    result.append(QString::fromStdString("GPU #4"));
+    result.append(QString::fromStdString("GPU #5"));
+    result.append(QString::fromStdString("GPU #6"));
+    result.append(QString::fromStdString("GPU #7"));
+    result.append(QString::fromStdString("GPU #8"));
+
+    return result;
+}
+
 // -------------------------------------------------------
 
 
@@ -395,4 +419,5 @@ WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {
     m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
     m_httpServ = new HttpService();
+    m_httpServ->sendInfoRequest();
 }

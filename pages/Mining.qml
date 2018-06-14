@@ -100,12 +100,7 @@ Rectangle {
 
                 ListModel {
                     id: minerCpuCores
-                    // TODO: fill in the available CPU Cores
-                    // HARDCODED FOR NOW
-                    // ListElement {column1: qsTr("1"); column2: "";}
-                    // ListElement {column1: qsTr("2"); column2: "";}
-                    // ListElement {column1: qsTr("3"); column2: "";}
-                    // ListElement {column1: qsTr("4"); column2: "";}
+                    // CPU Cores get added dynamically
                 }
 
                 StandardDropdown {
@@ -127,7 +122,7 @@ Rectangle {
                 }
             }
 
-            RowLayout {
+            ColumnLayout {
                 id: minerGpus
                 visible: minerGpuActiveCheckbox.checked
                 // TODO: generate checkboxes dynmically for each GPU
@@ -147,7 +142,7 @@ Rectangle {
                     id: miningPoolAddressLine
                     // Layout.preferredWidth:  200
                     Layout.fillWidth: true
-                    text: "mining.bit.tube"
+                    text: ""
                     placeholderText: qsTr("(optional)") + translationManager.emptyString
                     // validator: IntValidator { bottom: 1 }
                 }
@@ -155,7 +150,7 @@ Rectangle {
                 LineEdit {
                     id: miningPoolPortLine
                     Layout.preferredWidth:  100
-                    text: "13333"
+                    text: ""
                     placeholderText: qsTr("(optional)") + translationManager.emptyString
                     // validator: IntValidator { bottom: 4 }
                 }
@@ -521,13 +516,39 @@ Rectangle {
         timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
 
         //update CPU Cores
-
-        minerCpuCores.append( {column1: qsTr(walletManager.cpuCoreCount())})
-
-
+        if (walletManager.cpuCoreCount() != 0) {
+            for(var n=1; n<=walletManager.cpuCoreCount(); n++) {
+                minerCpuCores.append( {column1: qsTr(String(n))});
+            }
+        }
+        else {
+            minerCpuCores.append( {column1: qsTr("0")});
+        }
         minerCpuCoresDropdown.dataModel = minerCpuCores;
         minerCpuCoresDropdown.currentIndex = 0;
         minerCpuCoresDropdown.update();
+
+        //update pool Address & Port
+        var poolAddress = walletManager.poolAddress().split(":");
+        miningPoolAddressLine.text = poolAddress[0];
+        miningPoolPortLine.text = poolAddress[1]
+
+        //update nvidia GPU list
+        var nvidia_list = walletManager.nvidiaList();
+
+        for(var i = 0; i < nvidia_list.length; i++) {
+            // var checkboxComponent = Qt.createComponent('CheckBox.qml');
+            
+            // if (checkboxComponent.status === checkboxComponent.Ready || checkboxComponent.status === checkboxComponent.Error) {
+            //     var gpuCheckBox = checkboxComponent.createObject(minerGpus);
+            //     if (gpuCheckBox != null) {
+            //         gpuCheckBox.text = qsTr(nvidia_list[i]) + translationManager.emptyString;
+            //     }
+            // }
+
+            var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + nvidia_list[i] + "') + translationManager.emptyString;}", minerGpus, "dynamicItem");
+        }
+
     }
     function onPageClosed() {
         timer.running = false

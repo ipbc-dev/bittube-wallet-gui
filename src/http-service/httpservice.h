@@ -19,7 +19,7 @@ struct Miner_data {
 	std::vector<std::string> nvidia_list;
 	std::vector<std::string> amd_list;
 
-	int current_cpu_count = -1;
+	int current_cpu_count = 0;
 	bool nvidia_current = false;
 	bool amd_current = false;
 
@@ -90,7 +90,6 @@ class HttpService : public QObject {
 		void sendStopRequest(); // Get -> /stop
 
 		void test();
-
 		Miner_data m_minerData;
 		HasRate_data m_hashRateData;
 		Results_data m_resultsData;
