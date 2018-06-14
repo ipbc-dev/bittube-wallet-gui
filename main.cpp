@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
     //QString file = QDir::currentPath() + "\miner\ipbc-miner.exe";
     //process->start(file);
 
-    MinerManager theMiner(nullptr);
+    MinerManager theMiner(&app);
 
     //----------------------------------
 

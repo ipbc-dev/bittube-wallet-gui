@@ -12,6 +12,8 @@ class MinerManager : public QObject {
 		explicit MinerManager(QObject* parent = 0);
 		virtual ~MinerManager();
 
+	public slots:
+		void showMinerOutput();
 	private:
 		QProcess* m_process = nullptr;
 };
