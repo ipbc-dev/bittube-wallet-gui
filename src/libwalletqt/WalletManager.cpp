@@ -313,7 +313,9 @@ bool WalletManager::startMining(const QString &address, const QString &poolAddre
         //threads = 1;
     
     // m_httpServ->sendStartRequest();
-    m_httpServ->sendStatsRequest();
+    // m_httpServ->sendStatsRequest();
+    m_httpServ->m_minerData.startMiningRequest = true;
+    m_httpServ->sendConfig();
 
     //return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
     return true;
