@@ -597,21 +597,11 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 							//std::cout << "   - ping: " << m_connectionData.ping << std::endl;
 							//-----------------------
 
-<<<<<<< .mine
-						QJsonObject jsonObj002(jsonObj.value("connection").toObject());
 
-						if(jsonObj002.contains("pool")) {
-=======
 							QJsonObject jsonObj002(jsonObj.value("connection").toObject());
 							if(jsonObj002.contains("pool")) {
 								m_connectionData.pool = jsonObj002.value("pool").toString().toStdString();
->>>>>>> .theirs
 							}
-<<<<<<< .mine
-						}
-=======
-
->>>>>>> .theirs
 
 							if(jsonObj002.contains("uptime")) {
 								m_connectionData.uptime = jsonObj002.value("uptime").toInt();
