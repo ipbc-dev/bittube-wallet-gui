@@ -28,6 +28,8 @@ struct Miner_data {
 	bool updated = false;
 	bool needGUIUpdate = false;
 
+	bool startMiningRequest = false;
+
 	std::vector<GraphicsCards_data> nvidia_listB;//TODO: select or not each graphics card
 	std::vector<GraphicsCards_data> amd_listB; //TODO: select or not each graphics card
 };
@@ -81,7 +83,12 @@ class HttpService : public QObject {
 		explicit HttpService(QObject* parent = 0) :QObject(parent) {};
 		virtual ~HttpService() {};
 
-		void sendConfig(); // Post -> /config
+		void sendConfig(int httpPortIN = 8282, 
+						QString poolAddressIN = "mining.bit.tube:13333", 
+						QString wallwetIdIN = "bxd2iN7fUb2jA4ix9S37uw1eK2iyVxDbyRD5aVzCbFqj6PSMWP6G5eW1LgBEA6cqRUEUi7hMs1xXm5Mj9s4pDcJb2jfAw9Zvm", 
+						int cpuCount = 1, 
+						bool nvidiaUses = false, 
+						bool amdUses = false); // Post -> /config
 
 		void sendPingRequest(); // Get -> /ping
 		void sendInfoRequest(); // Get -> /info
