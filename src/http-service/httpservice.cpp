@@ -118,6 +118,8 @@ void HttpService::sendInfoRequest() { // Get -> /info
 			} else {
 				if(json.isObject()) {
 
+					info_json_str = QString::fromStdString(json.toJson().toStdString());
+
 					//FIXME: delete this ----
 					std::cout << "   - cpu_count: " << m_minerData.cpu_count << std::endl;
 					std::cout << "   - current_cpu_count: " << m_minerData.current_cpu_count << std::endl;
@@ -348,6 +350,9 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 				std::cout << "[Stats] Request: Error parsing response data. \n   - JSON fail:  " << error.errorString().toStdString() << error.offset;
 			} else {
 				if(json.isObject()) {
+
+					stats_json_str = QString::fromStdString(json.toJson(QJsonDocument::Compact).toStdString());
+					
 					QJsonObject jsonObj(json.object());
 					if (jsonObj.contains("hashrate")) {
 						std::cout << "hashrate found" << std::endl;
@@ -364,6 +369,8 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 						//-----------------------
 
 						QJsonObject jsonObj002(jsonObj.value("hashrate").toObject());
+
+
 						
 						//---
 						if(jsonObj002.contains("threads")) {
@@ -448,6 +455,10 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 						//-----------------------
 
 						QJsonObject jsonObj002(jsonObj.value("results").toObject());
+
+
+
+
 						if(jsonObj002.contains("diff_current")) {
 							std::cout << "diff_current [results] found" << std::endl;
 							m_resultsData.diff_current = jsonObj002.value("diff_current").toInt();
@@ -549,6 +560,7 @@ void HttpService::sendStatsRequest() { // Get -> /api.json
 						//-----------------------
 
 						QJsonObject jsonObj002(jsonObj.value("connection").toObject());
+
 						if(jsonObj002.contains("pool")) {
 							m_connectionData.pool = jsonObj002.value("pool").toString().toStdString();
 						}

@@ -95,6 +95,9 @@ class HttpService : public QObject {
 		Results_data m_resultsData;
 		Connection_data m_connectionData;
 
+		QString stats_json_str;
+		QString info_json_str;
+	
 	signals:
 		void pingReceive();
 		void infoReceive();

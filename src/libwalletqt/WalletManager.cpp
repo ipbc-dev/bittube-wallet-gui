@@ -296,6 +296,17 @@ quint64 WalletManager::hashes_total() const
 {
     return m_httpServ->m_resultsData.hashes_total;
 }
+
+QString WalletManager::stats_json() const
+{
+    return m_httpServ->stats_json_str;
+}
+
+QString WalletManager::info_json() const
+{
+    return m_httpServ->info_json_str;
+}
+
 // -------------------------------------------------------
 
 
@@ -314,6 +325,7 @@ bool WalletManager::startMining(const QString &address, const QString &poolAddre
     
     // m_httpServ->sendStartRequest();
     m_httpServ->sendStatsRequest();
+    m_httpServ->sendInfoRequest();
 
     //return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
     return true;

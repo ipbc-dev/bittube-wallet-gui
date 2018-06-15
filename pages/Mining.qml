@@ -180,9 +180,8 @@ Rectangle {
                     text: qsTr("Start mining") + translationManager.emptyString
                     onClicked: {
                         var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, minerCpuCoresDropdown.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining)
-                        // walletManager.sendStatsRequest();
-                        var success = true;
                         if (success) {
+                            // miningStatsTable.visible = true;
                             update()
                         } else {
                             errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
@@ -208,151 +207,9 @@ Rectangle {
                 }
             }
 
-            // stats table
-            ColumnLayout {
-                id: miningStatsTable
-                property int miningStatsListItemHeight: 32 * scaleRatio
-                visible: false
-                Layout.fillWidth: true
-
-                Label {
-                    id: miningStatsHashrateReportLabel
-                    color: Style.defaultFontColor
-                    text: qsTr("Hashrate Report") + translationManager.emptyString
-                    fontSize: 18
-                    Layout.preferredWidth: 120
-                    Layout.bottomMargin: 20
-                }
-
-                ListView {
-                    id: miningStatsListView
-                    Layout.fillWidth: true
-                    anchors.fill: parent
-                    clip: true
-                    boundsBehavior: ListView.StopAtBounds
-
-                    // header rectangle
-                    Rectangle {
-                        anchors.fill: parent
-                        anchors.rightMargin: 80
-                        color: "transparent"
-
-                        Label {
-                            id: threadIDHeaderLabel
-                            color: "#404040"
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            fontSize: 14 * scaleRatio
-                            fontBold: true
-                            text: "Thread ID"
-                        }
-
-                        Label {
-                            id: tenSecondHashRateHeaderLabel
-                            color: "#404040"
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: threadIDHeaderLabel.right
-                            anchors.leftMargin: 100
-                            fontSize: 14 * scaleRatio
-                            fontBold: false
-                            text: "10s"
-                        }
-
-                        Label {
-                            id: sixtySecondHashRateHeaderLabel
-                            color: "#404040"
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: tenSecondHashRateHeaderLabel.right
-                            anchors.leftMargin: 100
-                            fontSize: 14 * scaleRatio
-                            fontBold: false
-                            text: "60s"
-                        }
-
-                        Label {
-                            id: fifteenMinuteHashRateHeaderLabel
-                            color: "#404040"
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: sixtySecondHashRateHeaderLabel.right
-                            anchors.leftMargin: 100
-                            fontSize: 14 * scaleRatio
-                            fontBold: false
-                            text: "15m"
-                        }
-                    }
-
-                    delegate: Rectangle {
-                        id: tableItem2
-                        height: miningStatsTable.miningStatsListItemHeight
-                        width: parent.width
-                        Layout.fillWidth: true
-                        color: "transparent"
-                        
-                        // divider line
-                        Rectangle {
-                            anchors.right: parent.right
-                            anchors.left: parent.left
-                            anchors.top: parent.top
-                            height: 1
-                            color: "#404040"
-                            visible: index !== 0
-                        }
-
-                        // item rectangle
-                        Rectangle {
-                            anchors.fill: parent
-                            anchors.rightMargin: 80
-                            color: "transparent"
-
-                            Label {
-                                id: threadIDLabel
-                                color: "#404040"
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: parent.left
-                                fontSize: 14 * scaleRatio
-                                fontBold: true
-                                text: index
-                            }
-
-                            Label {
-                                id: tenSecondHashRateLabel
-                                color: "#404040"
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: threadIDLabel.right
-                                anchors.leftMargin: 100
-                                fontSize: 14 * scaleRatio
-                                fontBold: false
-                                text: tenSecondHashRate
-                            }
-
-                            Label {
-                                id: sixtySecondHashRateLabel
-                                color: "#404040"
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: tenSecondHashRateLabel.right
-                                anchors.leftMargin: 100
-                                fontSize: 14 * scaleRatio
-                                fontBold: false
-                                text: sixtySecondHashRate
-                            }
-
-                            Label {
-                                id: fifteenMinuteHashRateLabel
-                                color: "#404040"
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: sixtySecondHashRateLabel.right
-                                anchors.leftMargin: 100
-                                fontSize: 14 * scaleRatio
-                                fontBold: false
-                                text: fifteenMinuteHashRate
-                            }
-                        }
-                     }
-                }
-            }
-
             // show stats "checkbox"
             RowLayout {
+                // anchors.top: miningStatsTable.bottom
                 CheckBox2 {
                     id: showStatsCheckbox
                     checked: persistentSettings.miningShowStats
@@ -374,25 +231,160 @@ Rectangle {
                 // Layout.bottomMargin: 20
             }
 
-            // Rectangle {
-            //     visible: persistentSettings.miningShowStats
-            //     Layout.topMargin: 20
-            //     Layout.preferredWidth: 120
-            //     anchors.top: showStatsDivider.bottom
+            // stats table
+            ColumnLayout {
+                id: miningStatsTable
+                Layout.topMargin: 20
+                Layout.fillWidth: true
+                Layout.preferredHeight: 46 * miningStatsListView.count + 46
+                visible: persistentSettings.miningShowStats
+                // property int miningStatsListItemHeight: 32 * scaleRatio
 
-            //     Label {
-            //         anchors.fill: parent
-            //         id: resultStatsHashrateReportLabel
-            //         color: Style.defaultFontColor
-            //         text: qsTr("Result Report") + translationManager.emptyString
-            //         fontSize: 18
-            //     }
-            // }
+                // Label {
+                //     id: miningStatsHashrateReportLabel
+                //     color: Style.defaultFontColor
+                //     text: qsTr("Hashrate Report") + translationManager.emptyString
+                //     fontSize: 18
+                //     Layout.preferredWidth: 120
+                //     Layout.bottomMargin: 20
+                // }
+
+                ListModel {
+                    id: miningStatsTableModel
+                    // fill with threads dynamically
+                }
+
+                ListView {
+                    id: miningStatsListView
+                    Layout.fillWidth: true
+                    Layout.topMargin: 20
+                    anchors.fill: parent
+                    model: miningStatsTableModel
+                    header: headerComponent
+
+                    Component {
+                        id: headerComponent
+
+                        // header rectangle
+                        Rectangle {
+                            id: miningsStatsTableHeaderRow
+                            // anchors.fill: parent
+                            color: "transparent"
+                            height: 46
+                            // width: parent.width
+                            // Layout.fillWidth: true
+
+                            Label {
+                                id: threadIDHeaderLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                fontSize: 14 * scaleRatio
+                                fontBold: true
+                                text: "Thread ID"
+                            }
+
+                            Label {
+                                id: tenSecondHashRateHeaderLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: threadIDHeaderLabel.right
+                                anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: "10s"
+                            }
+
+                            Label {
+                                id: sixtySecondHashRateHeaderLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: tenSecondHashRateHeaderLabel.right
+                                anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: "60s"
+                            }
+
+                            Label {
+                                id: fifteenMinuteHashRateHeaderLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: sixtySecondHashRateHeaderLabel.right
+                                anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: "15m"
+                            }
+                        }
+                    }
+
+                    delegate: Item {
+                        id: tableItem2
+                        height: 46
+                        width: parent.width
+                        Layout.fillWidth: true
+
+                        Label {
+                            id: threadIDLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            fontSize: 14 * scaleRatio
+                            fontBold: true
+                            text: index
+                        }
+
+                        Label {
+                            id: tenSecondHashRateLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: threadIDLabel.right
+                            anchors.leftMargin: 100
+                            fontSize: 14 * scaleRatio
+                            fontBold: false
+                            text: tenSecondHashRate
+                        }
+
+                        Label {
+                            id: sixtySecondHashRateLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: tenSecondHashRateLabel.right
+                            anchors.leftMargin: 100
+                            fontSize: 14 * scaleRatio
+                            fontBold: false
+                            text: sixtySecondHashRate
+                        }
+
+                        Label {
+                            id: fifteenMinuteHashRateLabel
+                            color: "#404040"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: sixtySecondHashRateLabel.right
+                            anchors.leftMargin: 100
+                            fontSize: 14 * scaleRatio
+                            fontBold: false
+                            text: fifteenMinuteHashRate
+                        }
+
+                        // divider line
+                        Rectangle {
+                            anchors.right: parent.right
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            height: 1
+                            color: "#404040"
+                            visible: true
+                        }
+                    }
+                }
+            }
 
             // results table
             ColumnLayout {
                 id: resultStatsTable
-                anchors.top: showStatsDivider.bottom
+                // anchors.top: showStatsDivider.bottom
                 Layout.topMargin: 20
                 Layout.fillWidth: true
                 Layout.preferredHeight: 46 * resultStatsListView.count
@@ -469,14 +461,14 @@ Rectangle {
                     }
                 }
             }
-        }
 
-        Text {
-            id: statusText
-            text: qsTr("Status: not mining")
-            color: Style.defaultFontColor
-            textFormat: Text.RichText
-            wrapMode: Text.Wrap
+            // Text {
+            //     id: statusText
+            //     text: qsTr("Status: not mining")
+            //     color: Style.defaultFontColor
+            //     textFormat: Text.RichText
+            //     wrapMode: Text.Wrap
+            // }
         }
     }
 
@@ -494,18 +486,42 @@ Rectangle {
     }
 
     function update() {
-        updateStatusText()
+        // updateStatusText()
         startSoloMinerButton.enabled = !walletManager.isMining()
         stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
-        miningStatsTable.visible = walletManager.isMining()
+        // miningStatsTable.visible = walletManager.isMining()
 
+        // get & parse json from miner
+        var stats_json_str = walletManager.stats_json();
+        var info_json_str = walletManager.info_json();
+
+        if (stats_json_str == "" || info_json_str == "") {
+            return;
+        }
+
+        var stats_json = JSON.parse(stats_json_str);
+        var info_json = JSON.parse(info_json_str);
+        
         // update result report table
-        miningResultReportTableModel.set(0, {"value" : String(walletManager.diff_current())});
-        miningResultReportTableModel.set(1, {"value" : String(walletManager.shares_good())});
-        miningResultReportTableModel.set(2, {"value" : String(walletManager.avg_time())});
-        miningResultReportTableModel.set(3, {"value" : String(walletManager.hashes_total())});
+        miningResultReportTableModel.set(0, {"value" : String(stats_json.results.diff_current)});
+        miningResultReportTableModel.set(1, {"value" : String(stats_json.results.shares_good)});
+        miningResultReportTableModel.set(2, {"value" : String(stats_json.results.avg_time)});
+        miningResultReportTableModel.set(3, {"value" : String(stats_json.results.hashes_total)});
+
         resultStatsListView.model = 0;
         resultStatsListView.model = miningResultReportTableModel;
+        
+        // update hashrate report table
+        miningStatsTableModel.clear();
+        for(var n = 0; n < stats_json.hashrate.threads.length; n ++){
+            miningStatsTableModel.append({  "index": String(n), 
+                                            "tenSecondHashRate": String(stats_json.hashrate.threads[n][0]), 
+                                            "sixtySecondHashRate": String(stats_json.hashrate.threads[n][1]), 
+                                            "fifteenMinuteHashRate": String(stats_json.hashrate.threads[n][2])
+                                        });
+        }
+        miningStatsListView.model = 0;
+        miningStatsListView.model = miningStatsTableModel;
     }
 
     StandardDialog {
