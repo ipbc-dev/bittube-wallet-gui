@@ -152,9 +152,12 @@ public:
     Q_INVOKABLE quint64 shares_good() const;
     Q_INVOKABLE quint64 avg_time() const;
     Q_INVOKABLE quint64 hashes_total() const;
-    
+
     Q_INVOKABLE QString stats_json() const;
     Q_INVOKABLE QString info_json() const;
+
+    Q_INVOKABLE bool requestInfo() const;
+    Q_INVOKABLE bool requestStats() const;
 signals:
 
     void walletOpened(Wallet * wallet);

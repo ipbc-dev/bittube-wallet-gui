@@ -307,6 +307,18 @@ QString WalletManager::info_json() const
     return m_httpServ->info_json_str;
 }
 
+bool WalletManager::requestInfo() const
+{
+    m_httpServ->sendInfoRequest();
+    return false;   //TODO: get return value from sendInfoRequest()
+}
+
+bool WalletManager::requestStats() const
+{
+    m_httpServ->sendStatsRequest();
+    return false;   //TODO: get return value from sendStatsRequest()
+}
+
 // -------------------------------------------------------
 
 

@@ -487,6 +487,13 @@ Rectangle {
 
     function update() {
         // updateStatusText()
+        var infoReqSuccess = walletManager.requestInfo();
+        var statsReqSuccess = walletManager.requestStats();
+
+        if(infoReqSuccess == true || statsReqSuccess == true) {
+            return;
+        }
+
         startSoloMinerButton.enabled = !walletManager.isMining()
         stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
         // miningStatsTable.visible = walletManager.isMining()
