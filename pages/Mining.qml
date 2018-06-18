@@ -44,7 +44,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        // anchors.bottom: parent.bottom
         spacing: 20
 
         // solo
@@ -234,234 +234,592 @@ Rectangle {
             // stats table
             ColumnLayout {
                 id: miningStatsTable
-                Layout.topMargin: 20
+                // Layout.topMargin: 20
                 Layout.fillWidth: true
-                Layout.preferredHeight: 46 * miningStatsListView.count + 46
+                Layout.preferredHeight: 32 * miningStatsListView.count + 20 + miningStatsHashrateReportLabel.height
                 visible: persistentSettings.miningShowStats
                 // property int miningStatsListItemHeight: 32 * scaleRatio
 
-                // Label {
-                //     id: miningStatsHashrateReportLabel
-                //     color: Style.defaultFontColor
-                //     text: qsTr("Hashrate Report") + translationManager.emptyString
-                //     fontSize: 18
-                //     Layout.preferredWidth: 120
-                //     Layout.bottomMargin: 20
-                // }
-
-                ListModel {
-                    id: miningStatsTableModel
-                    // fill with threads dynamically
+                Rectangle {
+                    Layout.preferredWidth: 120
+                    height: miningStatsHashrateReportLabel.height
+                    anchors.top: parent.top
+                    Layout.bottomMargin: 20
+                    id: miningStatsHashrateReportLabelContainer
+                    color: "transparent"
+                    
+                    Label {
+                        id: miningStatsHashrateReportLabel
+                        color: Style.defaultFontColor
+                        text: qsTr("Hashrate Report") + translationManager.emptyString
+                        fontSize: 18
+                        fontBold: true
+                    }
                 }
 
-                ListView {
-                    id: miningStatsListView
+                Rectangle {
+                    color: "transparent"
                     Layout.fillWidth: true
-                    Layout.topMargin: 20
-                    anchors.fill: parent
-                    model: miningStatsTableModel
-                    header: headerComponent
+                    anchors.top: miningStatsHashrateReportLabelContainer.bottom
+                    anchors.bottom: miningStatsTable.bottom
 
-                    Component {
-                        id: headerComponent
+                    ListModel {
+                        id: miningStatsTableModel
+                        // fill with threads dynamically
+                    }
 
-                        // header rectangle
-                        Rectangle {
-                            id: miningsStatsTableHeaderRow
-                            // anchors.fill: parent
-                            color: "transparent"
-                            height: 46
-                            // width: parent.width
-                            // Layout.fillWidth: true
+                    ListView {
+                        id: miningStatsListView
+                        // Layout.topMargin: 20
+                        anchors.fill: parent
+                        model: miningStatsTableModel
+                        header: headerComponent
+
+                        Component {
+                            id: headerComponent
+
+                            // header rectangle
+                            Rectangle {
+                                id: miningsStatsTableHeaderRow
+                                // anchors.fill: parent
+                                color: "transparent"
+                                height: 32
+                                width: parent.width
+                                // Layout.fillWidth: true
+
+                                Label {
+                                    id: threadIDHeaderLabel
+                                    color: "#404040"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    width: parent.width / 4
+                                    fontSize: 14 * scaleRatio
+                                    fontBold: true
+                                    text: "Thread ID"
+                                }
+
+                                Label {
+                                    id: tenSecondHashRateHeaderLabel
+                                    color: "#404040"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: threadIDHeaderLabel.right
+                                    width: parent.width / 4
+                                    // anchors.leftMargin: 100
+                                    fontSize: 14 * scaleRatio
+                                    fontBold: false
+                                    text: "10s"
+                                }
+
+                                Label {
+                                    id: sixtySecondHashRateHeaderLabel
+                                    color: "#404040"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: tenSecondHashRateHeaderLabel.right
+                                    width: parent.width / 4
+                                    // anchors.leftMargin: 100
+                                    fontSize: 14 * scaleRatio
+                                    fontBold: false
+                                    text: "60s"
+                                }
+
+                                Label {
+                                    id: fifteenMinuteHashRateHeaderLabel
+                                    color: "#404040"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: sixtySecondHashRateHeaderLabel.right
+                                    width: parent.width / 4
+                                    // anchors.leftMargin: 100
+                                    fontSize: 14 * scaleRatio
+                                    fontBold: false
+                                    text: "15m"
+                                }
+                            }
+                        }
+
+                        delegate: Item {
+                            id: tableItem2
+                            height: 32
+                            width: parent.width
+                            Layout.fillWidth: true
+
+                            // divider line
+                            Rectangle {
+                                anchors.right: parent.right
+                                anchors.left: parent.left
+                                anchors.top: parent.top
+                                height: 1
+                                color: Style.dividerColor
+                                opacity: Style.dividerOpacity
+                                visible: true
+                            }
 
                             Label {
-                                id: threadIDHeaderLabel
+                                id: threadIDLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                width: parent.width / 4
+                                fontSize: 14 * scaleRatio
+                                fontBold: true
+                                text: index
+                            }
+
+                            Label {
+                                id: tenSecondHashRateLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: threadIDLabel.right
+                                width: parent.width / 4
+                                // anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: tenSecondHashRate
+                            }
+
+                            Label {
+                                id: sixtySecondHashRateLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: tenSecondHashRateLabel.right
+                                width: parent.width / 4
+                                // anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: sixtySecondHashRate
+                            }
+
+                            Label {
+                                id: fifteenMinuteHashRateLabel
+                                color: "#404040"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: sixtySecondHashRateLabel.right
+                                width: parent.width / 4
+                                // anchors.leftMargin: 100
+                                fontSize: 14 * scaleRatio
+                                fontBold: false
+                                text: fifteenMinuteHashRate
+                            }
+                        }
+                    }
+                }
+            }
+
+            RowLayout {
+                width: parent.width
+                Layout.fillWidth: true
+                visible: persistentSettings.miningShowStats
+                Layout.topMargin: 32
+
+                // results table
+                ColumnLayout {
+                    id: resultStatsTable
+                    // anchors.top: showStatsDivider.bottom
+                    Layout.topMargin: 32
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: parent.width / 2
+                    Layout.preferredHeight: 128
+                    anchors.top: parent.top
+                    // visible: persistentSettings.miningShowStats
+
+                    Rectangle {
+                        id: miningStatsResultsReportLabelContainer
+                        height: miningInfoTableReportLabel.height
+                        anchors.top: parent.top
+                        Layout.bottomMargin: 20
+                        color: "transparent"
+
+                        Label {
+                            id: miningInfoTableReportLabel
+                            color: Style.defaultFontColor
+                            text: qsTr("Results Report") + translationManager.emptyString
+                            fontSize: 18
+                            // Layout.preferredWidth: 120
+                            // Layout.bottomMargin: 20
+                            fontBold: true
+                        }
+                    }
+
+                    Rectangle {
+                        color: "transparent"
+                        Layout.fillWidth: true
+                        width: parent.width
+                        anchors.top: miningStatsResultsReportLabelContainer.bottom
+                        anchors.bottom: resultStatsTable.bottom
+
+                        ListModel {
+                            id: miningResultReportTableModel
+                            ListElement {
+                                label: "Difficulty"
+                                value: "0"
+                            }
+                            ListElement {
+                                label: "Good results"
+                                value: "0"
+                            }
+                            ListElement {
+                                label: "Avg result time"
+                                value: "0"
+                            }
+                            ListElement {
+                                label: "Pool-side hashes"
+                                value: "0"
+                            }
+                        }
+
+                        ListView {
+                            id: resultStatsListView
+                            Layout.fillWidth: true
+                            // Layout.topMargin: 20
+                            anchors.fill: parent
+                            // anchors.top: resultStatsHashrateReportLabel.bottom
+                            // clip: true
+                            // boundsBehavior: ListView.StopAtBounds
+                            model: miningResultReportTableModel
+                            
+                            delegate: Item {
+                                id: tableItem
+                                height: 32
+                                width: parent.width
+
+                                // divider line
+                                Rectangle {
+                                    anchors.right: parent.right
+                                    anchors.left: parent.left
+                                    anchors.top: parent.bottom
+                                    height: 1
+                                    color: Style.dividerColor
+                                    opacity: Style.dividerOpacity
+                                    visible: label != "Pool-side hashes"    //dont display last divider
+                                }
+
+                                Label {
+                                    id: difficultyLabel
+                                    color: "#404040"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    fontSize: 14 * scaleRatio
+                                    fontBold: true
+                                    text: label
+                                }
+
+                                Label {
+                                    id: difficultyValue
+                                    color: "#404040"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    // anchors.left: difficultyLabel.right
+                                    anchors.right: parent.right
+                                    // anchors.leftMargin: 100
+                                    fontSize: 14 * scaleRatio
+                                    fontBold: false
+                                    text: value
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //top 10 results table
+                ColumnLayout {
+                    id: topResultStatsTable
+                    Layout.topMargin: 32
+                    Layout.leftMargin: 20
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: parent.width / 2
+                    Layout.preferredHeight: 160
+                    anchors.top: parent.top
+                    
+                    Rectangle {
+                        id: topResultStatsLabelContainer
+                        height: topResultStatsReportLabel.height
+                        anchors.top: parent.top
+                        Layout.bottomMargin: 20
+                        color: "transparent"
+
+                        Label {
+                            id: topResultStatsReportLabel
+                            color: Style.defaultFontColor
+                            text: qsTr("Top 10 best results found") + translationManager.emptyString
+                            fontSize: 18
+                            fontBold: true
+                        }
+                    }
+
+                    //table
+                    RowLayout {
+                        Layout.preferredHeight: 160
+                        Layout.preferredWidth: parent.width
+                        anchors.top: topResultStatsLabelContainer.bottom
+                        Layout.topMargin: 32
+
+                        //first half
+                        ColumnLayout {
+                            id: topResultStatsTable1
+                            // Layout.leftMargin: 20
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: parent.width / 2
+                            Layout.preferredHeight: 160
+                            anchors.top: parent.top
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                width: parent.width
+                                anchors.top: parent.top
+                                anchors.bottom: topResultStatsTable1.bottom
+
+                                ListModel {
+                                    id: topResultStatsModel1
+                                    ListElement {
+                                        label: "1"
+                                        value: "0"
+                                    }
+                                    ListElement {
+                                        label: "2"
+                                        value: "0"
+                                    }
+                                    ListElement {
+                                        label: "3"
+                                        value: "0"
+                                    }
+                                    ListElement {
+                                        label: "4"
+                                        value: "0"
+                                    }
+                                    ListElement {
+                                        label: "5"
+                                        value: "0"
+                                    }
+                                }
+
+                                ListView {
+                                    id: topResultStatsListView1
+                                    Layout.fillWidth: true
+                                    anchors.fill: parent
+                                    model: topResultStatsModel1
+                                    
+                                    delegate: Item {
+                                        id: tableItem
+                                        height: 32
+                                        width: parent.width
+
+                                        // divider line
+                                        Rectangle {
+                                            anchors.right: parent.right
+                                            anchors.left: parent.left
+                                            anchors.top: parent.bottom
+                                            height: 1
+                                            color: Style.dividerColor
+                                            opacity: Style.dividerOpacity
+                                            visible: true
+                                        }
+
+                                        Label {
+                                            id: difficultyLabel
+                                            color: "#404040"
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.left: parent.left
+                                            fontSize: 14 * scaleRatio
+                                            fontBold: true
+                                            text: label
+                                        }
+
+                                        Label {
+                                            id: difficultyValue
+                                            color: "#404040"
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.right: parent.right
+                                            fontSize: 14 * scaleRatio
+                                            fontBold: false
+                                            text: value
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        //second half
+                        ColumnLayout {
+                            id: topResultStatsTable2
+                            // Layout.topMargin: 32
+                            Layout.leftMargin: 20
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: parent.width / 2
+                            Layout.preferredHeight: 160
+                            anchors.top: topResultStatsLabelContainer.bottom
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                width: parent.width
+                                anchors.top: parent.top
+                                anchors.bottom: topResultStatsTable2.bottom
+
+                                ListModel {
+                                    id: topResultStatsModel2
+                                    ListElement {
+                                        label: "6"
+                                        value: "0"
+                                    }
+                                    ListElement {
+                                        label: "7"
+                                        value: "0"
+                                    }
+                                    ListElement {
+                                        label: "8"
+                                        value: "0"
+                                    }
+                                    ListElement {
+                                        label: "9"
+                                        value: "0"
+                                    }
+                                    ListElement {
+                                        label: "10"
+                                        value: "0"
+                                    }
+                                }
+
+                                ListView {
+                                    id: topResultStatsListView2
+                                    Layout.fillWidth: true
+                                    anchors.fill: parent
+                                    model: topResultStatsModel2
+                                    
+                                    delegate: Item {
+                                        id: tableItem
+                                        height: 32
+                                        width: parent.width
+
+                                        // divider line
+                                        Rectangle {
+                                            anchors.right: parent.right
+                                            anchors.left: parent.left
+                                            anchors.top: parent.bottom
+                                            height: 1
+                                            color: Style.dividerColor
+                                            opacity: Style.dividerOpacity
+                                            visible: true
+                                        }
+
+                                        Label {
+                                            id: difficultyLabel
+                                            color: "#404040"
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.left: parent.left
+                                            fontSize: 14 * scaleRatio
+                                            fontBold: true
+                                            text: label
+                                        }
+
+                                        Label {
+                                            id: difficultyValue
+                                            color: "#404040"
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.right: parent.right
+                                            fontSize: 14 * scaleRatio
+                                            fontBold: false
+                                            text: value
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // connection report table
+            ColumnLayout {
+                id: connectionReportTable
+                Layout.fillWidth: true
+                visible: persistentSettings.miningShowStats
+                Layout.preferredHeight: 96
+                    
+                Rectangle {
+                    id: connectionReportTableLabelContainer
+                    height: connectionReportTableLabel.height
+                    anchors.top: parent.top
+                    Layout.bottomMargin: 20
+                    color: "transparent"
+
+                    Label {
+                        id: connectionReportTableLabel
+                        color: Style.defaultFontColor
+                        text: qsTr("Connection Report") + translationManager.emptyString
+                        fontSize: 18
+                        fontBold: true
+                    }
+                }
+                
+                Rectangle {
+                    color: "transparent"
+                    Layout.fillWidth: true
+                    width: parent.width
+                    anchors.top: connectionReportTableLabelContainer.bottom
+                    anchors.bottom: connectionReportTable.bottom
+
+                    ListModel {
+                        id: connectionReportTableModel
+                        ListElement {
+                            label: "Pool address"
+                            value: "0"
+                        }
+                        ListElement {
+                            label: "Connected since"
+                            value: "0"
+                        }
+                        ListElement {
+                            label: "Pool ping time"
+                            value: "0"
+                        }
+                    }
+
+                    ListView {
+                        id: connectionReportListView
+                        Layout.fillWidth: true
+                        anchors.fill: parent
+                        model: connectionReportTableModel
+                        
+                        delegate: Item {
+                            id: tableItem
+                            height: 32
+                            width: parent.width
+
+                            // divider line
+                            Rectangle {
+                                anchors.right: parent.right
+                                anchors.left: parent.left
+                                anchors.top: parent.bottom
+                                height: 1
+                                color: Style.dividerColor
+                                opacity: Style.dividerOpacity
+                                visible: label != "Pool-side hashes"    //dont display last divider
+                            }
+
+                            Label {
+                                id: connectionLabel
                                 color: "#404040"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 fontSize: 14 * scaleRatio
                                 fontBold: true
-                                text: "Thread ID"
+                                text: label
                             }
 
                             Label {
-                                id: tenSecondHashRateHeaderLabel
+                                id: connectionValue
                                 color: "#404040"
                                 anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: threadIDHeaderLabel.right
-                                anchors.leftMargin: 100
+                                anchors.right: parent.right
                                 fontSize: 14 * scaleRatio
                                 fontBold: false
-                                text: "10s"
+                                text: value
                             }
-
-                            Label {
-                                id: sixtySecondHashRateHeaderLabel
-                                color: "#404040"
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: tenSecondHashRateHeaderLabel.right
-                                anchors.leftMargin: 100
-                                fontSize: 14 * scaleRatio
-                                fontBold: false
-                                text: "60s"
-                            }
-
-                            Label {
-                                id: fifteenMinuteHashRateHeaderLabel
-                                color: "#404040"
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: sixtySecondHashRateHeaderLabel.right
-                                anchors.leftMargin: 100
-                                fontSize: 14 * scaleRatio
-                                fontBold: false
-                                text: "15m"
-                            }
-                        }
-                    }
-
-                    delegate: Item {
-                        id: tableItem2
-                        height: 46
-                        width: parent.width
-                        Layout.fillWidth: true
-
-                        Label {
-                            id: threadIDLabel
-                            color: "#404040"
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            fontSize: 14 * scaleRatio
-                            fontBold: true
-                            text: index
-                        }
-
-                        Label {
-                            id: tenSecondHashRateLabel
-                            color: "#404040"
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: threadIDLabel.right
-                            anchors.leftMargin: 100
-                            fontSize: 14 * scaleRatio
-                            fontBold: false
-                            text: tenSecondHashRate
-                        }
-
-                        Label {
-                            id: sixtySecondHashRateLabel
-                            color: "#404040"
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: tenSecondHashRateLabel.right
-                            anchors.leftMargin: 100
-                            fontSize: 14 * scaleRatio
-                            fontBold: false
-                            text: sixtySecondHashRate
-                        }
-
-                        Label {
-                            id: fifteenMinuteHashRateLabel
-                            color: "#404040"
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: sixtySecondHashRateLabel.right
-                            anchors.leftMargin: 100
-                            fontSize: 14 * scaleRatio
-                            fontBold: false
-                            text: fifteenMinuteHashRate
-                        }
-
-                        // divider line
-                        Rectangle {
-                            anchors.right: parent.right
-                            anchors.left: parent.left
-                            anchors.top: parent.top
-                            height: 1
-                            color: "#404040"
-                            visible: true
                         }
                     }
                 }
             }
 
-            // results table
-            ColumnLayout {
-                id: resultStatsTable
-                // anchors.top: showStatsDivider.bottom
-                Layout.topMargin: 20
-                Layout.fillWidth: true
-                Layout.preferredHeight: 46 * resultStatsListView.count
-                visible: persistentSettings.miningShowStats
-
-                ListModel {
-                    id: miningResultReportTableModel
-                    ListElement {
-                        label: "Difficulty"
-                        value: "0"
-                    }
-                    ListElement {
-                        label: "Good results"
-                        value: "0"
-                    }
-                    ListElement {
-                        label: "Avg result time"
-                        value: "0"
-                    }
-                    ListElement {
-                        label: "Pool-side hashes"
-                        value: "0"
-                    }
-                }
-
-                ListView {
-                    id: resultStatsListView
-                    Layout.fillWidth: true
-                    Layout.topMargin: 20
-                    anchors.fill: parent
-                    // anchors.top: resultStatsHashrateReportLabel.bottom
-                    // clip: true
-                    // boundsBehavior: ListView.StopAtBounds
-                    model: miningResultReportTableModel
-                    
-                    delegate: Item {
-                        id: tableItem
-                        height: 46
-                        width: parent.width
-                        Layout.fillWidth: true
-
-                        Label {
-                            id: difficultyLabel
-                            color: "#404040"
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            fontSize: 14 * scaleRatio
-                            fontBold: true
-                            text: label
-                        }
-
-                        Label {
-                            id: difficultyValue
-                            color: "#404040"
-                            anchors.verticalCenter: parent.verticalCenter
-                            // anchors.left: difficultyLabel.right
-                            anchors.right: parent.right
-                            // anchors.leftMargin: 100
-                            fontSize: 14 * scaleRatio
-                            fontBold: false
-                            text: value
-                        }
-
-                        // divider line
-                        Rectangle {
-                            anchors.right: parent.right
-                            anchors.left: parent.left
-                            anchors.top: parent.bottom
-                            height: 1
-                            color: Style.dividerColor
-                            opacity: Style.dividerOpacity
-                            visible: true
-                        }
-                    }
-                }
-            }
-
+            
             // Text {
             //     id: statusText
             //     text: qsTr("Status: not mining")
@@ -527,8 +885,37 @@ Rectangle {
                                             "fifteenMinuteHashRate": String(stats_json.hashrate.threads[n][2])
                                         });
         }
+        //append totals
+        miningStatsTableModel.append({  "index": "Total",
+                                        "tenSecondHashRate": String(stats_json.hashrate.total[0]),
+                                        "sixtySecondHashRate": String(stats_json.hashrate.total[1]),
+                                        "fifteenMinuteHashRate": String(stats_json.hashrate.total[2])
+                                    });
+        //append Highgest
+        miningStatsTableModel.append({  "index": "Highest",
+                                        "tenSecondHashRate": String(stats_json.hashrate.highest),
+                                        "sixtySecondHashRate": "",
+                                        "fifteenMinuteHashRate": ""
+                                    });
         miningStatsListView.model = 0;
         miningStatsListView.model = miningStatsTableModel;
+
+        //update top 10 results table
+        topResultStatsModel1.set(0, {"value": String(stats_json.results.best[0])});
+        topResultStatsModel1.set(1, {"value": String(stats_json.results.best[1])});
+        topResultStatsModel1.set(2, {"value": String(stats_json.results.best[2])});
+        topResultStatsModel1.set(3, {"value": String(stats_json.results.best[3])});
+        topResultStatsModel1.set(4, {"value": String(stats_json.results.best[4])});
+        topResultStatsModel2.set(0, {"value": String(stats_json.results.best[5])});
+        topResultStatsModel2.set(1, {"value": String(stats_json.results.best[6])});
+        topResultStatsModel2.set(2, {"value": String(stats_json.results.best[7])});
+        topResultStatsModel2.set(3, {"value": String(stats_json.results.best[8])});
+        topResultStatsModel2.set(4, {"value": String(stats_json.results.best[9])});
+
+        //update connection report table
+        connectionReportTableModel.set(0, {"value": String(stats_json.connection.pool)});
+        connectionReportTableModel.set(1, {"value": String(stats_json.connection.uptime) + " seconds"});
+        connectionReportTableModel.set(2, {"value": String(stats_json.connection.ping)});
     }
 
     StandardDialog {
