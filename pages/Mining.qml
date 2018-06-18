@@ -36,6 +36,7 @@ Rectangle {
     id: root
     color: "transparent"
     property var currentHashRate: 0
+    property alias miningHeight: mainLayout.height
 
     /* main layout */
     ColumnLayout {
@@ -89,7 +90,11 @@ Rectangle {
 
             RowLayout {
                 id: minerCpuCoresRow
+                Layout.fillWidth: true
                 z: parent.z + 1
+                anchors.left: parent.left
+                anchors.right: parent.right
+
                 Label {
                     id: minerCpuCoresLabel
                     color: Style.defaultFontColor
@@ -110,6 +115,22 @@ Rectangle {
                     dropdownHeight: 28 * scaleRatio
                     // Layout.fillWidth: false
                     Layout.preferredWidth: 120
+                }
+
+                //h/s label
+                Rectangle {
+                    width: 100
+                    height: 28
+                    anchors.right: parent.right
+                    anchors.top: minerCpuCoresLabel.top
+                    color: "transparent"
+
+                    Label {
+                        id: totalHashSec10SecLabel
+                        color: Style.defaultFontColor
+                        text: ""
+                        fontSize: 18
+                    }
                 }
             }
 
@@ -843,12 +864,38 @@ Rectangle {
         statusText.text = qsTr("Status: ") + text
     }
 
+    function reset_all(){
+        miningResultReportTableModel.set(0, {"value" : ""});
+        miningResultReportTableModel.set(1, {"value" : ""});
+        miningResultReportTableModel.set(2, {"value" : ""});
+        miningResultReportTableModel.set(3, {"value" : ""});
+        resultStatsListView.model = 0;
+        resultStatsListView.model = miningResultReportTableModel;
+
+        miningStatsTableModel.clear();
+
+        for(var n = 0; n <= 4; n ++){
+            topResultStatsModel1.set(n, {"value": ""});
+        }
+
+        for(var n = 0; n <= 4; n ++){
+            topResultStatsModel2.set(n, {"value": ""});
+        }
+
+        connectionReportTableModel.set(0, {"value": ""});
+        connectionReportTableModel.set(1, {"value": ""});
+        connectionReportTableModel.set(2, {"value": ""});
+
+        totalHashSec10SecLabel.text = "";
+    }
+
     function update() {
         // updateStatusText()
         var infoReqSuccess = walletManager.requestInfo();
         var statsReqSuccess = walletManager.requestStats();
 
         if(infoReqSuccess == true || statsReqSuccess == true) {
+            reset_all();
             return;
         }
 
@@ -861,11 +908,23 @@ Rectangle {
         var info_json_str = walletManager.info_json();
 
         if (stats_json_str == "" || info_json_str == "") {
+            reset_all();
             return;
         }
 
         var stats_json = JSON.parse(stats_json_str);
         var info_json = JSON.parse(info_json_str);
+
+        if(stats_json.length == 0 || info_json.length == 0){
+            reset_all();
+            return;
+        }
+
+        //TODO: optimize
+        if (!stats_json.hasOwnProperty("results")){
+            reset_all()
+            return;
+        }
         
         // update result report table
         miningResultReportTableModel.set(0, {"value" : String(stats_json.results.diff_current)});
@@ -879,43 +938,55 @@ Rectangle {
         // update hashrate report table
         miningStatsTableModel.clear();
         for(var n = 0; n < stats_json.hashrate.threads.length; n ++){
-            miningStatsTableModel.append({  "index": String(n), 
-                                            "tenSecondHashRate": String(stats_json.hashrate.threads[n][0]), 
-                                            "sixtySecondHashRate": String(stats_json.hashrate.threads[n][1]), 
-                                            "fifteenMinuteHashRate": String(stats_json.hashrate.threads[n][2])
-                                        });
+            var tenSecondHashRate = String(stats_json.hashrate.threads[n][0]);
+            var sixtySecondHashRate = String(stats_json.hashrate.threads[n][1]);
+            var fifteenMinuteHashRate = String(stats_json.hashrate.threads[n][2]);
+
+            if (tenSecondHashRate == "null"){ tenSecondHashRate = ""};
+            if (sixtySecondHashRate == "null"){ sixtySecondHashRate = ""};
+            if (fifteenMinuteHashRate == "null"){ fifteenMinuteHashRate = ""};
+
+            miningStatsTableModel.append({  "index": String(n), "tenSecondHashRate": tenSecondHashRate, "sixtySecondHashRate": sixtySecondHashRate, "fifteenMinuteHashRate": fifteenMinuteHashRate});
         }
+
         //append totals
-        miningStatsTableModel.append({  "index": "Total",
-                                        "tenSecondHashRate": String(stats_json.hashrate.total[0]),
-                                        "sixtySecondHashRate": String(stats_json.hashrate.total[1]),
-                                        "fifteenMinuteHashRate": String(stats_json.hashrate.total[2])
-                                    });
+        var totalTenSecondHashRate = String(stats_json.hashrate.total[0]);
+        var totalSixtySecondHashRate = String(stats_json.hashrate.total[1]);
+        var totalFifteenMinuteHashRate = String(stats_json.hashrate.total[2]);
+
+        if (totalTenSecondHashRate == "null"){ totalTenSecondHashRate = ""};
+        if (totalSixtySecondHashRate == "null"){ totalSixtySecondHashRate = ""};
+        if (totalFifteenMinuteHashRate == "null"){ totalFifteenMinuteHashRate = ""};
+
+        miningStatsTableModel.append({  "index": "Total", "tenSecondHashRate": totalTenSecondHashRate, "sixtySecondHashRate": totalSixtySecondHashRate, "fifteenMinuteHashRate": totalFifteenMinuteHashRate});
+
         //append Highgest
-        miningStatsTableModel.append({  "index": "Highest",
-                                        "tenSecondHashRate": String(stats_json.hashrate.highest),
-                                        "sixtySecondHashRate": "",
-                                        "fifteenMinuteHashRate": ""
-                                    });
+        var highestTenSecondHashRate = String(stats_json.hashrate.highest);
+
+        if (highestTenSecondHashRate == "null"){ highestTenSecondHashRate = ""};
+
+        miningStatsTableModel.append({  "index": "Highest", "tenSecondHashRate": highestTenSecondHashRate, "sixtySecondHashRate": "", "fifteenMinuteHashRate": ""});
         miningStatsListView.model = 0;
         miningStatsListView.model = miningStatsTableModel;
 
         //update top 10 results table
-        topResultStatsModel1.set(0, {"value": String(stats_json.results.best[0])});
-        topResultStatsModel1.set(1, {"value": String(stats_json.results.best[1])});
-        topResultStatsModel1.set(2, {"value": String(stats_json.results.best[2])});
-        topResultStatsModel1.set(3, {"value": String(stats_json.results.best[3])});
-        topResultStatsModel1.set(4, {"value": String(stats_json.results.best[4])});
-        topResultStatsModel2.set(0, {"value": String(stats_json.results.best[5])});
-        topResultStatsModel2.set(1, {"value": String(stats_json.results.best[6])});
-        topResultStatsModel2.set(2, {"value": String(stats_json.results.best[7])});
-        topResultStatsModel2.set(3, {"value": String(stats_json.results.best[8])});
-        topResultStatsModel2.set(4, {"value": String(stats_json.results.best[9])});
+        for(var n = 0; n <= 4; n ++){
+            topResultStatsModel1.set(n, {"value": String(stats_json.results.best[n])});
+        }
+
+        for(var n = 0; n <= 4; n ++){
+            topResultStatsModel2.set(n, {"value": String(stats_json.results.best[n + 5])});
+        }
 
         //update connection report table
         connectionReportTableModel.set(0, {"value": String(stats_json.connection.pool)});
         connectionReportTableModel.set(1, {"value": String(stats_json.connection.uptime) + " seconds"});
         connectionReportTableModel.set(2, {"value": String(stats_json.connection.ping)});
+
+        //populate h/s label
+        if(stats_json.hashrate.total[0] != null){
+            totalHashSec10SecLabel.text = String(stats_json.hashrate.total[0]) + " h/s";
+        }
     }
 
     StandardDialog {

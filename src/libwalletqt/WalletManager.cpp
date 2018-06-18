@@ -319,16 +319,15 @@ bool WalletManager::requestStats() const
     return false;   //TODO: get return value from sendStatsRequest()
 }
 
-// -------------------------------------------------------
-
-
-
 bool WalletManager::isMining() const
 {
-    if(!m_currentWallet->connected())
-        return false;
-    return m_pimpl->isMining();
+    // if(!m_currentWallet->connected())
+    //     return false;
+    // return m_pimpl->isMining();
+    return m_httpServ->m_minerData.isMining;
 }
+
+// -------------------------------------------------------
 
 bool WalletManager::startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining)
 {
@@ -343,12 +342,15 @@ bool WalletManager::startMining(const QString &address, const QString &poolAddre
     m_httpServ->sendStatsRequest();
 
     //return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
-    return true;
+    return true;        //TODO: get return value here
 }
 
 bool WalletManager::stopMining()
 {
-    return m_pimpl->stopMining();
+    // return m_pimpl->stopMining();
+    m_httpServ->sendStopRequest();
+
+    return true;        //TODO: get return value here
 }
 
 bool WalletManager::localDaemonSynced() const

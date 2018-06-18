@@ -145,7 +145,8 @@ Rectangle {
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
-                PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+                // PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+                PropertyChanges { target: mainFlickable; contentHeight: miningView.miningHeight + 100  }
             }, State {
                 name: "Keys"
                 PropertyChanges { target: root; currentView: keysView }
