@@ -1044,7 +1044,6 @@ Rectangle {
             minerGpus.children[i-1].destroy()
         }
 
-
         for(var i = 0; i < nvidia_list.length; i++) {
             // var checkboxComponent = Qt.createComponent('CheckBox.qml');
             
