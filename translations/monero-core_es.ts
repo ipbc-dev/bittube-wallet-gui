@@ -557,25 +557,40 @@
         <translation>(solo disponible para daemons locales)</translation>
     </message>
     <message>
+        <location filename="../pages/Mining.qml" line="77"/>
+        <source>Your daemon must be synchronized before you can start mining</source>
+        <translation>El daemon tiene que estar sincronizado para que pueda minar</translation>
+    </message>
+<!--     <message>
         <location filename="../pages/Mining.qml" line="74"/>
         <source>Mining with your computer helps strengthen the BitTube network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some TUBE. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
         <translation>Minar con tu computadora ayuda a fortalecer la red BitTube. Cuanta más gente minando, más difícil será atacar la red por lo que cada pequeño esfuerzo cuenta.&lt;br&gt; &lt;br&gt;Minar también le da una pequeña oportunidad de ganar algún TUBE dado que el equipo generará una serie de operaciones (hashes) para tratar de añadir nuevos bloques. Si encuentra un bloque, obtendrá una recompensa por ese trabajo. ¡Buena suerte!</translation>
-    </message>
+    </message> -->
     <message>
         <location filename="../pages/Mining.qml" line="87"/>
-        <source>CPU threads</source>
-        <translation>Hilos de CPU</translation>
+        <source>CPU Cores</source>
+        <translation>Nucleos de CPU</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="95"/>
+        <location filename="../pages/Mining.qml" line="142"/>
+        <source>Use GPU for mining</source>
+        <translation>Usar GPU para minar</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="157"/>
+        <source>Mining Pool</source>
+        <translation>Pool de minado</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="167"/>
         <source>(optional)</source>
         <translation>(opcional)</translation>
     </message>
-    <message>
+<!--     <message>
         <location filename="../pages/Mining.qml" line="107"/>
         <source>Background mining (experimental)</source>
         <translation>Minado en segundo plano (experimental)</translation>
-    </message>
+    </message> -->
     <message>
         <location filename="../pages/Mining.qml" line="121"/>
         <source>Enable mining when running on battery</source>
@@ -587,50 +602,132 @@
         <translation>Administrar minero</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="139"/>
+        <location filename="../pages/Mining.qml" line="201"/>
         <source>Start mining</source>
         <translation>Empezar a minar</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="145"/>
+        <location filename="../pages/Mining.qml" line="208"/>
         <source>Error starting mining</source>
-        <translation>Error arrancando el proceso de minera</translation>
+        <translation>Error arrancando el proceso de mineo</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="146"/>
+        <location filename="../pages/Mining.qml" line="209"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
         <translation>No se pudo empezar el proceso de minado.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="148"/>
+        <location filename="../pages/Mining.qml" line="211"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
         <translation>El minado solo está disponible en nodos locales. Arranque un daemon local para poder minar.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="161"/>
+        <location filename="../pages/Mining.qml" line="223"/>
         <source>Stop mining</source>
-        <translation>Parar proceso de minado</translation>
+        <translation>Parar de minar</translation>
     </message>
     <message>
+        <location filename="../pages/Mining.qml" line="240"/>
+        <source>Show statistics</source>
+        <translation>Mostrar estadisticas</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="275"/>
+        <source>Hashrate Report</source>
+        <translation>Informe de hashrate</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="320"/>
+        <source>Thread ID</source>
+        <translation>Thread ID</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="332"/>
+        <source>10s</source>
+        <translation>10s</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="344"/>
+        <source>60s</source>
+        <translation>60s</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="356"/>
+        <source>15m</source>
+        <translation>15m</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="456"/>
+        <source>Results Report</source>
+        <translation>Informe de resultados</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="474"/>
+        <source>Difficulty</source>
+        <translation>Dificultad</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="478"/>
+        <source>Good results</source>
+        <translation>Resultados correctos</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="482"/>
+        <source>Avg result time</source>
+        <translation>Media de tiempos de resultados</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="486"/>
+        <source>Pool-side hashes</source>
+        <translation>Pool hashes</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="560"/>
+        <source>Top 10 best results found</source>
+        <translation>Top 10 resultados correctos</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="768"/>
+        <source>Connection Report</source>
+        <translation>Informe de conexion</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="784"/>
+        <source>Pool address</source>
+        <translation>Direccion del pool</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="788"/>
+        <source>Connected since</source>
+        <translation>Conectado desde</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="792"/>
+        <source>Pool ping time</source>
+        <translation>Tiempo ping pool</translation>
+    </message>
+
+
+<!--     <message>
         <location filename="../pages/Mining.qml" line="172"/>
         <source>Status: not mining</source>
-        <translation>Estado: no está minando</translation>
+        <translation>Status: Kein Mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="184"/>
         <source>Mining at %1 H/s</source>
-        <translation>Minando a %1 H/s</translation>
+        <translation>Mining mit %1 H/s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="187"/>
         <source>Not mining</source>
-        <translation>No está minando</translation>
+        <translation>Kein Mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="189"/>
         <source>Status: </source>
-        <translation>Estado: </translation>
-    </message>
+        <translation>Status: </translation>
+    </message> -->
 </context>
 <context>
     <name>MobileHeader</name>

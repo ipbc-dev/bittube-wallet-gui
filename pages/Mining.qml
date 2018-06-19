@@ -295,6 +295,7 @@ Rectangle {
                         anchors.fill: parent
                         model: miningStatsTableModel
                         header: headerComponent
+                        interactive: false
 
                         Component {
                             id: headerComponent
@@ -316,7 +317,7 @@ Rectangle {
                                     width: parent.width / 4
                                     fontSize: 14 * scaleRatio
                                     fontBold: true
-                                    text: "Thread ID"
+                                    text: qsTr("Thread ID") + translationManager.emptyString
                                 }
 
                                 Label {
@@ -328,7 +329,7 @@ Rectangle {
                                     // anchors.leftMargin: 100
                                     fontSize: 14 * scaleRatio
                                     fontBold: false
-                                    text: "10s"
+                                    text: qsTr("10s") + translationManager.emptyString
                                 }
 
                                 Label {
@@ -340,7 +341,7 @@ Rectangle {
                                     // anchors.leftMargin: 100
                                     fontSize: 14 * scaleRatio
                                     fontBold: false
-                                    text: "60s"
+                                    text: qsTr("60s") + translationManager.emptyString
                                 }
 
                                 Label {
@@ -352,7 +353,7 @@ Rectangle {
                                     // anchors.leftMargin: 100
                                     fontSize: 14 * scaleRatio
                                     fontBold: false
-                                    text: "15m"
+                                    text: qsTr("15m") + translationManager.emptyString
                                 }
                             }
                         }
@@ -490,12 +491,9 @@ Rectangle {
                         ListView {
                             id: resultStatsListView
                             Layout.fillWidth: true
-                            // Layout.topMargin: 20
                             anchors.fill: parent
-                            // anchors.top: resultStatsHashrateReportLabel.bottom
-                            // clip: true
-                            // boundsBehavior: ListView.StopAtBounds
                             model: miningResultReportTableModel
+                            interactive: false
                             
                             delegate: Item {
                                 id: tableItem
@@ -617,6 +615,7 @@ Rectangle {
                                     Layout.fillWidth: true
                                     anchors.fill: parent
                                     model: topResultStatsModel1
+                                    interactive: false
                                     
                                     delegate: Item {
                                         id: tableItem
@@ -704,6 +703,7 @@ Rectangle {
                                     Layout.fillWidth: true
                                     anchors.fill: parent
                                     model: topResultStatsModel2
+                                    interactive: false
                                     
                                     delegate: Item {
                                         id: tableItem
@@ -799,6 +799,7 @@ Rectangle {
                         Layout.fillWidth: true
                         anchors.fill: parent
                         model: connectionReportTableModel
+                        interactive: false
                         
                         delegate: Item {
                             id: tableItem
@@ -1006,6 +1007,16 @@ Rectangle {
         update()
         timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
 
+        //update table labels for translations to work
+        connectionReportTableModel.set(0, {"label": qsTr("Pool address") + translationManager.emptyString});
+        connectionReportTableModel.set(1, {"label": qsTr("Connected since") + translationManager.emptyString});
+        connectionReportTableModel.set(2, {"label": qsTr("Pool ping time") + translationManager.emptyString});
+
+        miningResultReportTableModel.set(0, {"label" : qsTr("Difficulty") + translationManager.emptyString});
+        miningResultReportTableModel.set(1, {"label" : qsTr("Good results") + translationManager.emptyString});
+        miningResultReportTableModel.set(2, {"label" : qsTr("Avg result time") + translationManager.emptyString});
+        miningResultReportTableModel.set(3, {"label" : qsTr("Pool-side hashes") + translationManager.emptyString});
+
         //update CPU Cores
         if (walletManager.cpuCoreCount() != 0) {
             for(var n=1; n<=walletManager.cpuCoreCount(); n++) {
@@ -1026,6 +1037,13 @@ Rectangle {
 
         //update nvidia GPU list
         var nvidia_list = walletManager.nvidiaList();
+
+        //remove old
+        for(var i = minerGpus.children.length; i > 0 ; i--) {
+            console.log("destroying: " + i)
+            minerGpus.children[i-1].destroy()
+        }
+
 
         for(var i = 0; i < nvidia_list.length; i++) {
             // var checkboxComponent = Qt.createComponent('CheckBox.qml');
