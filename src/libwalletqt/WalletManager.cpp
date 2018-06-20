@@ -323,25 +323,20 @@ bool WalletManager::isMining() const
 
 bool WalletManager::startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining)
 {
-    //if(threads == 0)
-        //threads = 1;
-    
-    // m_httpServ->sendStartRequest();
-    // m_httpServ->sendStatsRequest();
+    QString poolAddressPort = poolAddress;
+    poolAddressPort += ":";
+    poolAddressPort += QString::number(poolPort);
 
-    //std::cout << "Comprobando datos en [WalletManager::startMining] => " << std::endl;
-    //std::cout << "address = " << address.toStdString() << std::endl;
-    //std::cout << "poolAddress = " << poolAddress.toStdString() << std::endl;
+    std::cout << "--->>>" << poolAddressPort.toStdString() << std::endl;
+    std::cout << "--->>>" << threads << std::endl;
 
-    //*poolAddress += ":1333";
 
-    //QString tmp("miniauaung.bit.tube:13333");
 
     m_httpServ->m_minerData.startMiningRequest = true;
     m_httpServ->sendConfig(8282, 
-                           poolAddress,
+                           poolAddressPort,
                            address,
-                           1,
+                           threads,
                            true,
                            false);
 

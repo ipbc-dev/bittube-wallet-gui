@@ -200,7 +200,14 @@ Rectangle {
                     small: true
                     text: qsTr("Start mining") + translationManager.emptyString
                     onClicked: {
-                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, minerCpuCoresDropdown.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining)
+                        var cpucoresTmp;
+                        try {
+                           cpucoresTmp = parseInt(minerCpuCoresDropdown.text);
+                        }
+                        catch(err) {
+                           cpucoresTmp = 1;
+                        }
+                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, cpucoresTmp, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining)
                         if (success) {
                             // miningStatsTable.visible = true;
                             update()
