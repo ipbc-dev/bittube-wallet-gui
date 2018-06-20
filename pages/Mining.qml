@@ -906,7 +906,8 @@ Rectangle {
         }
 
         //handle start & stop buttons
-        startSoloMinerButton.enabled = !walletManager.isMining()
+        // startSoloMinerButton.enabled = !walletManager.isMining()
+        startSoloMinerButton.enabled = !info_json.isMining;
         stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
 
         var stats_json = readStatsJson();
