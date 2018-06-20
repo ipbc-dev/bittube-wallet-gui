@@ -249,45 +249,45 @@ double WalletManager::miningHashRate() const
 }
 
 // -------------------------------------------------------
-quint64 WalletManager::cpuCoreCount() const
-{
-    return m_httpServ->m_minerData.cpu_count;
-}
+// quint64 WalletManager::cpuCoreCount() const
+// {
+//     return m_httpServ->m_minerData.cpu_count;
+// }
 
-QString WalletManager::poolAddress() const
-{
-    return QString::fromStdString(m_httpServ->m_minerData.pool_address);
-}
+// QString WalletManager::poolAddress() const
+// {
+//     return QString::fromStdString(m_httpServ->m_minerData.pool_address);
+// }
 
-QStringList WalletManager::nvidiaList() const
-{
-    std::vector<std::string> nvidia_list = m_httpServ->m_minerData.nvidia_list;
-    QStringList result;
-    for (const auto &w : nvidia_list) {
-        result.append(QString::fromStdString(w));
-    }
-    return result;
-}
+// QStringList WalletManager::nvidiaList() const
+// {
+//     std::vector<std::string> nvidia_list = m_httpServ->m_minerData.nvidia_list;
+//     QStringList result;
+//     for (const auto &w : nvidia_list) {
+//         result.append(QString::fromStdString(w));
+//     }
+//     return result;
+// }
 
-quint64 WalletManager::diff_current() const
-{
-    return m_httpServ->m_resultsData.diff_current;
-}
+// quint64 WalletManager::diff_current() const
+// {
+//     return m_httpServ->m_resultsData.diff_current;
+// }
 
-quint64 WalletManager::shares_good() const
-{
-    return m_httpServ->m_resultsData.shares_good;
-}
+// quint64 WalletManager::shares_good() const
+// {
+//     return m_httpServ->m_resultsData.shares_good;
+// }
 
-quint64 WalletManager::avg_time() const
-{
-    return m_httpServ->m_resultsData.avg_time;
-}
+// quint64 WalletManager::avg_time() const
+// {
+//     return m_httpServ->m_resultsData.avg_time;
+// }
 
-quint64 WalletManager::hashes_total() const
-{
-    return m_httpServ->m_resultsData.hashes_total;
-}
+// quint64 WalletManager::hashes_total() const
+// {
+//     return m_httpServ->m_resultsData.hashes_total;
+// }
 
 QString WalletManager::stats_json() const
 {

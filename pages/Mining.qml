@@ -202,7 +202,7 @@ Rectangle {
                     onClicked: {
                         var cpucoresTmp;
                         try {
-                           cpucoresTmp = parseInt(minerCpuCoresDropdown.text);
+                           cpucoresTmp = parseInt( minerCpuCores.get(minerCpuCoresDropdown.currentIndex).column1);
                         }
                         catch(err) {
                            cpucoresTmp = 1;
@@ -210,6 +210,7 @@ Rectangle {
                         var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, cpucoresTmp, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining)
                         if (success) {
                             // miningStatsTable.visible = true;
+                            // startSoloMinerButton.text = minerCpuCoresDropdown.currentIndex.text;
                             update()
                         } else {
                             errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;

@@ -47,7 +47,7 @@ Item {
     property string colorHeaderBackground: MoneroComponents.Style.dropdownHeaderBackgroundColor
     property bool headerBorder: false
     property bool headerFontBold: false
-
+    
     height: dropdownHeight
 
     signal changed();

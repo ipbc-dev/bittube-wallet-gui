@@ -145,13 +145,13 @@ public:
     // clear/rename wallet cache
     Q_INVOKABLE bool clearWalletCache(const QString &fileName) const;
 
-    Q_INVOKABLE quint64 cpuCoreCount() const;
-    Q_INVOKABLE QString poolAddress() const;
-    Q_INVOKABLE QStringList nvidiaList() const;
-    Q_INVOKABLE quint64 diff_current() const;
-    Q_INVOKABLE quint64 shares_good() const;
-    Q_INVOKABLE quint64 avg_time() const;
-    Q_INVOKABLE quint64 hashes_total() const;
+    // Q_INVOKABLE quint64 cpuCoreCount() const;
+    // Q_INVOKABLE QString poolAddress() const;
+    // Q_INVOKABLE QStringList nvidiaList() const;
+    // Q_INVOKABLE quint64 diff_current() const;
+    // Q_INVOKABLE quint64 shares_good() const;
+    // Q_INVOKABLE quint64 avg_time() const;
+    // Q_INVOKABLE quint64 hashes_total() const;
 
     Q_INVOKABLE QString stats_json() const;
     Q_INVOKABLE QString info_json() const;
