@@ -327,9 +327,9 @@ bool WalletManager::startMining(const QString &address, const QString &poolAddre
     poolAddressPort += ":";
     poolAddressPort += QString::number(poolPort);
 
-    std::cout << "--->>>" << poolAddressPort.toStdString() << std::endl;
-    std::cout << "--->>>" << threads << std::endl;
-
+    // std::cout << "--->>>" << poolAddressPort.toStdString() << std::endl;
+    // std::cout << "--->>>" << threads << std::endl;
+    std::cout << "--->>>" << gpuMining << std::endl;
 
 
     m_httpServ->m_minerData.startMiningRequest = true;
@@ -337,8 +337,9 @@ bool WalletManager::startMining(const QString &address, const QString &poolAddre
                            poolAddressPort,
                            address,
                            threads,
-                           true,
-                           false);
+                           false,
+                           false,
+                           gpuMining);
 
     //m_httpServ->sendInfoRequest();
     //m_httpServ->sendStatsRequest();

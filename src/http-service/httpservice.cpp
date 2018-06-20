@@ -19,7 +19,7 @@
 /*
  * Description: ...
  */
-void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wallwetIdIN, int cpuCount, bool nvidiaUses, bool amdUses) { // Post -> /config
+void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wallwetIdIN, int cpuCount, bool nvidiaUses, bool amdUses, bool gpuUses) { // Post -> /config
 	//std::cout << "Sending [Configuration] Request" << std::endl;
 
 	QUrlQuery params;
@@ -36,6 +36,12 @@ void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wall
 		params.addQueryItem("amd_list", "true");
 	} else {
 		params.addQueryItem("amd_list", "false");
+	}
+
+	if (gpuUses) {
+		params.addQueryItem("gpu_active", "true");
+	} else {
+		params.addQueryItem("gpu_active", "false");
 	}
 
 	if(httpPortIN > 0) {

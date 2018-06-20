@@ -138,7 +138,7 @@ Rectangle {
                 id: minerGpuActive
                 CheckBox {
                     id: minerGpuActiveCheckbox
-                    onClicked: {persistentSettings.minerGpuActiveCheckbox = checked}
+                    onClicked: {persistentSettings.allow_gpu_mining = checked}
                     text: qsTr("Use GPU for mining") + translationManager.emptyString
                 }
             }
