@@ -182,6 +182,21 @@ Rectangle {
             Layout.fillHeight: true
             clip: true
 
+            states: State {
+                name: "autoscroll"
+                PropertyChanges {
+                    target: mainFlickable
+                    contentY: stackView.height - height
+                }
+            }
+            onMovementEnded: {
+                if (contentY === stackView.height - height) {
+                    state = "autoscroll"
+                } else {
+                    state = ""
+                }
+            }
+
             onFlickingChanged: {
                 releaseFocus();
             }

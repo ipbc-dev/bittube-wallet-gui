@@ -553,25 +553,40 @@
         <translation>(nur verfügbar bei lokalem Daemon)</translation>
     </message>
     <message>
+        <location filename="../pages/Mining.qml" line="77"/>
+        <source>Your daemon must be synchronized before you can start mining</source>
+        <translation>Der Daemon muss synchronisiert sein before Sie minen können</translation>
+    </message>
+<!--     <message>
         <location filename="../pages/Mining.qml" line="74"/>
         <source>Mining with your computer helps strengthen the BitTube network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some TUBE. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
         <translation>Mit Deinem Computer zu minen hilft dabei, das BitTube-Netzwerk zu stärken. Je mehr Leute minen, desto schwieriger kann das Netzwerk angegriffen werden. Jeder kann helfen! &lt;br&gt; &lt;br&gt;Das Mining bietet Dir die Möglichkeit, TUBE zu verdienen. Dein Computer errechnet dabei Hash-Werte für neue Blöcke. Wenn Du einen neuen Block findest, bekommst Du die Belohnung dafür. Viel Erfolg!</translation>
-    </message>
+    </message> -->
     <message>
         <location filename="../pages/Mining.qml" line="87"/>
-        <source>CPU threads</source>
-        <translation>CPU-Threads</translation>
+        <source>CPU Cores</source>
+        <translation>CPU-Kerne</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="95"/>
+        <location filename="../pages/Mining.qml" line="142"/>
+        <source>Use GPU for mining</source>
+        <translation>GPU zum minen nutzen</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="157"/>
+        <source>Mining Pool</source>
+        <translation>Mining Pool</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="167"/>
         <source>(optional)</source>
         <translation>(optional)</translation>
     </message>
-    <message>
+<!--     <message>
         <location filename="../pages/Mining.qml" line="107"/>
         <source>Background mining (experimental)</source>
         <translation>Im Hintergrund minen (experimentell)</translation>
-    </message>
+    </message> -->
     <message>
         <location filename="../pages/Mining.qml" line="121"/>
         <source>Enable mining when running on battery</source>
@@ -583,31 +598,113 @@
         <translation>Verwalte Miner</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="139"/>
+        <location filename="../pages/Mining.qml" line="201"/>
         <source>Start mining</source>
         <translation>Starte Mining</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="145"/>
+        <location filename="../pages/Mining.qml" line="208"/>
         <source>Error starting mining</source>
         <translation>Fehler beim Starten des Minings</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="146"/>
+        <location filename="../pages/Mining.qml" line="209"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
         <translation>Das Mining konnte nicht gestartet werden.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="148"/>
+        <location filename="../pages/Mining.qml" line="211"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
         <translation>Mining ist nur auf dem lokalen Daemon verfügbar. Starte den lokalen Daemon, um zu minen.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="161"/>
+        <location filename="../pages/Mining.qml" line="223"/>
         <source>Stop mining</source>
         <translation>Beende Mining</translation>
     </message>
     <message>
+        <location filename="../pages/Mining.qml" line="240"/>
+        <source>Show statistics</source>
+        <translation>Statistik anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="275"/>
+        <source>Hashrate Report</source>
+        <translation>Hashratebericht</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="320"/>
+        <source>Thread ID</source>
+        <translation>Thread ID</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="332"/>
+        <source>10s</source>
+        <translation>10s</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="344"/>
+        <source>60s</source>
+        <translation>60s</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="356"/>
+        <source>15m</source>
+        <translation>15m</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="456"/>
+        <source>Results Report</source>
+        <translation>Ergebnisbericht</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="474"/>
+        <source>Difficulty</source>
+        <translation>Schwierigkeit</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="478"/>
+        <source>Good results</source>
+        <translation>Gute Resultate</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="482"/>
+        <source>Avg result time</source>
+        <translation>durchschnittliche Ergebniszeit</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="486"/>
+        <source>Pool-side hashes</source>
+        <translation>Pool hashes</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="560"/>
+        <source>Top 10 best results found</source>
+        <translation>Top 10 besten Resultate</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="768"/>
+        <source>Connection Report</source>
+        <translation>Verbindungsbericht</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="784"/>
+        <source>Pool address</source>
+        <translation>Pool Adresse</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="788"/>
+        <source>Connected since</source>
+        <translation>Verbunden seit</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="792"/>
+        <source>Pool ping time</source>
+        <translation>Pool ping-zeiten</translation>
+    </message>
+
+
+<!--     <message>
         <location filename="../pages/Mining.qml" line="172"/>
         <source>Status: not mining</source>
         <translation>Status: Kein Mining</translation>
@@ -626,7 +723,7 @@
         <location filename="../pages/Mining.qml" line="189"/>
         <source>Status: </source>
         <translation>Status: </translation>
-    </message>
+    </message> -->
 </context>
 <context>
     <name>MobileHeader</name>
