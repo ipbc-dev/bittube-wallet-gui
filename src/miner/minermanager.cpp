@@ -37,6 +37,7 @@ MinerManager::MinerManager(QObject* parent) : QObject(parent) {
 		connect(m_process, SIGNAL(readyReadStandardOutput()), this, SLOT(showMinerOutput()) );
 		m_process->setWorkingDirectory(QDir::currentPath() + "/build/release/bin/miner/");
 		m_process->start(file);
+		//m_process->startDetached(file);
 	} else {
 		std::cout << "[MinerManager] - Error: miner binary app, not found." << std::endl;
 		//TODO: more error handling ¿?

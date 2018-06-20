@@ -13,6 +13,8 @@
 #include <QMutexLocker>
 #include <QString>
 
+#include <iostream>
+
 WalletManager * WalletManager::m_instance = nullptr;
 
 WalletManager *WalletManager::instance()
@@ -336,10 +338,25 @@ bool WalletManager::startMining(const QString &address, const QString &poolAddre
     
     // m_httpServ->sendStartRequest();
     // m_httpServ->sendStatsRequest();
+
+    //std::cout << "Comprobando datos en [WalletManager::startMining] => " << std::endl;
+    //std::cout << "address = " << address.toStdString() << std::endl;
+    //std::cout << "poolAddress = " << poolAddress.toStdString() << std::endl;
+
+    //*poolAddress += ":1333";
+
+    //QString tmp("miniauaung.bit.tube:13333");
+
     m_httpServ->m_minerData.startMiningRequest = true;
-    m_httpServ->sendConfig();
-    m_httpServ->sendInfoRequest();
-    m_httpServ->sendStatsRequest();
+    m_httpServ->sendConfig(8282, 
+                           poolAddress,
+                           address,
+                           1,
+                           true,
+                           false);
+
+    //m_httpServ->sendInfoRequest();
+    //m_httpServ->sendStatsRequest();
 
     //return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
     return true;        //TODO: get return value here

@@ -23,21 +23,38 @@ void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wall
 	//std::cout << "Sending [Configuration] Request" << std::endl;
 
 	QUrlQuery params;
+
+	std::cout << "   +++--- cpuCount = " << cpuCount << std::endl;
 	params.addQueryItem("cpu_count", QString::number(cpuCount));
 	if (nvidiaUses) {
 		params.addQueryItem("nvidia_list", "true");
+	} else {
+		params.addQueryItem("nvidia_list", "false");
 	}
+
 	if (amdUses) {
 		params.addQueryItem("amd_list", "true");
+	} else {
+		params.addQueryItem("amd_list", "false");
 	}
+
 	if(httpPortIN > 0) {
 		params.addQueryItem("httpd_port", QString::number(httpPortIN));
 	}
+
+	std::cout << "   +++--- poolAddress = " << poolAddressIN.toStdString() << std::endl;
 	if (!poolAddressIN.isNull() and !poolAddressIN.isEmpty()) {
-		params.addQueryItem("pool_address", poolAddressIN);
+		//std::cout << "   +++--- poolAddress found" << std::endl;
+		params.addQueryItem("pool_address", QString(poolAddressIN));
+		//QString::fromStdString(const std::string &str)
+		//params.addQueryItem("pool_address", QString("miniangbittube"));
 	}
+
+	std::cout << "   +++--- address = " << wallwetIdIN.toStdString() << std::endl;
 	if (!wallwetIdIN.isNull() and !wallwetIdIN.isEmpty()) {
-		params.addQueryItem("wallet_address", wallwetIdIN);
+		//std::cout << "   +++--- address found" << std::endl;
+		params.addQueryItem("wallet_address", QString(wallwetIdIN));
+		//params.addQueryItem("wallet_address", QString("mierdaPaTodos"));
 	}
 
 

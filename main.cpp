@@ -69,9 +69,9 @@
 //test------ FIXME: delete this ----
 #include "src/http-service/httpservice.h"
 #include "src/miner/minermanager.h"
-#include <QProcess>
-#include <QDir>
-#include <QString>
+//#include <QProcess>
+//#include <QDir>
+//#include <QString>
 //----------------------------------
 
 bool isIOS = false;
