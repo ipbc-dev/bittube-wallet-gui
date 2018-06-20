@@ -898,39 +898,19 @@ Rectangle {
     }
 
     function update() {
-        // updateStatusText()
-        var infoReqSuccess = walletManager.requestInfo();
-        var statsReqSuccess = walletManager.requestStats();
-
-        if(infoReqSuccess == true || statsReqSuccess == true) {
+        var info_json = readInfoJson();
+        if (info_json == null) {
             reset_all();
             return;
         }
 
+        //handle start & stop buttons
         startSoloMinerButton.enabled = !walletManager.isMining()
         stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
-        // miningStatsTable.visible = walletManager.isMining()
 
-        // get & parse json from miner
-        var stats_json_str = walletManager.stats_json();
-        var info_json_str = walletManager.info_json();
-
-        if (stats_json_str == "" || info_json_str == "") {
+        var stats_json = readStatsJson();
+        if (stats_json == null) {
             reset_all();
-            return;
-        }
-
-        var stats_json = JSON.parse(stats_json_str);
-        var info_json = JSON.parse(info_json_str);
-
-        if(stats_json.length == 0 || info_json.length == 0){
-            reset_all();
-            return;
-        }
-
-        //TODO: optimize
-        if (!stats_json.hasOwnProperty("results")){
-            reset_all()
             return;
         }
         
@@ -1008,8 +988,62 @@ Rectangle {
         onTriggered: update()
     }
 
+    function readInfoJson() {
+        var infoReqSuccess = walletManager.requestInfo();
+        if(infoReqSuccess == true) {
+            return null;
+        }
+
+        var info_json_str = walletManager.info_json();
+        if (info_json_str == "") {
+            return null;
+        }
+
+        var info_json = JSON.parse(info_json_str);
+        if(info_json.length == 0){
+            return null;
+        }
+
+        if (!info_json.hasOwnProperty("cpu_count")){
+            return null;
+        }
+
+        return info_json;
+    }
+
+    function readStatsJson() {
+        var statsReqSuccess = walletManager.requestStats();
+        if(statsReqSuccess == true) {
+            return null;
+        }
+
+        var stats_json_str = walletManager.stats_json();
+        if (stats_json_str == "") {
+            return null;
+        }
+
+        var stats_json = JSON.parse(stats_json_str);
+        if(stats_json.length == 0){
+            return null;
+        }
+
+        if (!stats_json.hasOwnProperty("results")){
+            return null;
+        }
+
+        return stats_json;
+    }
+
+
     function onPageCompleted() {
         console.log("Mining page loaded");
+
+        //get json
+        var info_json = readInfoJson();
+        if (info_json == null) {
+            reset_all();
+            return;
+        }
 
         update()
         timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
@@ -1025,25 +1059,26 @@ Rectangle {
         miningResultReportTableModel.set(3, {"label" : qsTr("Pool-side hashes") + translationManager.emptyString});
 
         //update CPU Cores
-        if (walletManager.cpuCoreCount() != 0) {
-            for(var n=1; n<=walletManager.cpuCoreCount(); n++) {
-                minerCpuCores.append( {column1: qsTr(String(n))});
+        minerCpuCores.clear();
+        if (info_json.cpu_count != 0) {
+            for (var n = 1; n <= info_json.cpu_count; n ++) {
+                minerCpuCores.append({column1: qsTr(String(n))});
             }
-        }
-        else {
-            minerCpuCores.append( {column1: qsTr("0")});
+        } else {
+            minerCpuCores.append({column1: qsTr("0")});
         }
         minerCpuCoresDropdown.dataModel = minerCpuCores;
         minerCpuCoresDropdown.currentIndex = 0;
         minerCpuCoresDropdown.update();
 
         //update pool Address & Port
-        var poolAddress = walletManager.poolAddress().split(":");
+        var poolAddress = info_json.pool_address;
+        poolAddress = poolAddress.split(":");
         miningPoolAddressLine.text = poolAddress[0];
-        miningPoolPortLine.text = poolAddress[1]
+        miningPoolPortLine.text = poolAddress[1];
 
         //update nvidia GPU list
-        var nvidia_list = walletManager.nvidiaList();
+        var nvidia_list = info_json.nvidia_list;
 
         //remove old
         for(var i = minerGpus.children.length; i > 0 ; i--) {
@@ -1060,7 +1095,6 @@ Rectangle {
             //         gpuCheckBox.text = qsTr(nvidia_list[i]) + translationManager.emptyString;
             //     }
             // }
-
             var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + nvidia_list[i] + "') + translationManager.emptyString;}", minerGpus, "dynamicItem");
         }
 
