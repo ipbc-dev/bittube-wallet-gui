@@ -200,6 +200,7 @@ Rectangle {
                     small: true
                     text: qsTr("Start mining") + translationManager.emptyString
                     onClicked: {
+                        //Get selected CPU Cores
                         var cpucoresTmp;
                         try {
                            cpucoresTmp = parseInt( minerCpuCores.get(minerCpuCoresDropdown.currentIndex).column1);
@@ -207,7 +208,15 @@ Rectangle {
                         catch(err) {
                            cpucoresTmp = 1;
                         }
-                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, cpucoresTmp, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining)
+
+                        //Get GPU List
+                        var selected_gpus = [];
+                        for(var i = minerGpus.children.length; i > 0 ; i--) {
+                            var checkbox = minerGpus.children[i-1];
+                            selected_gpus.push({"gpu_name": checkbox.text, "isUsing": checkbox.checked});
+                        }
+
+                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, cpucoresTmp, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining, selected_gpus)
                         if (success) {
                             // miningStatsTable.visible = true;
                             // startSoloMinerButton.text = minerCpuCoresDropdown.currentIndex.text;

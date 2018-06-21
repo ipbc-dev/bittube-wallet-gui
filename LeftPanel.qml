@@ -403,30 +403,30 @@ Rectangle {
             }
 
             // ------------- Mining tab ---------------
-            MenuButton {
-                id: miningButton
-                visible: !isAndroid && !isIOS
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Mining") + translationManager.emptyString
-                symbol: qsTr("M") + translationManager.emptyString
-                dotColor: "#86af49"
-                // under: advancedButton
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = miningButton
-                    panel.miningClicked()
-                }
-            }
+            // MenuButton {
+            //     id: miningButton
+            //     visible: !isAndroid && !isIOS
+            //     anchors.left: parent.left
+            //     anchors.right: parent.right
+            //     text: qsTr("Mining") + translationManager.emptyString
+            //     symbol: qsTr("M") + translationManager.emptyString
+            //     dotColor: "#86af49"
+            //     // under: advancedButton
+            //     onClicked: {
+            //         parent.previousButton.checked = false
+            //         parent.previousButton = miningButton
+            //         panel.miningClicked()
+            //     }
+            // }
 
-            Rectangle {
-                visible: miningButton.present
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 16
-                color: "#d2d2d2"
-                height: 1
-            }
+            // Rectangle {
+            //     visible: miningButton.present
+            //     anchors.left: parent.left
+            //     anchors.right: parent.right
+            //     anchors.leftMargin: 16
+            //     color: "#d2d2d2"
+            //     height: 1
+            // }
 
             // ------------- Advanced tab ---------------
             MenuButton {

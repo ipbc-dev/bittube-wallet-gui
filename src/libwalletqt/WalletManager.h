@@ -117,7 +117,7 @@ public:
     Q_INVOKABLE bool isDaemonLocal(const QString &daemon_address) const;
 
     Q_INVOKABLE bool isMining() const;
-    Q_INVOKABLE bool startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining);
+    Q_INVOKABLE bool startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining, std::vector<std::string> selectedGPUs);
     Q_INVOKABLE bool stopMining();
 
     // QML missing such functionality, implementing these helpers here
