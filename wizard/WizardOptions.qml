@@ -48,6 +48,9 @@ ColumnLayout {
         appWindow.persistentSettings.language = wizard.settings.language
         appWindow.persistentSettings.locale   = wizard.settings.locale
 
+        //FORCE TESTNET, REMOVE LATER
+        appWindow.persistentSettings.nettype = NetworkType.TESTNET;
+
         return true;
     }
 
@@ -246,17 +249,18 @@ ColumnLayout {
                 borderColor: Qt.rgba(0, 0, 0, 0.45)
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
+                //we will force testnet just for the testing release TODO: remove this
+                
                 // checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
 
-                //we will force testnet just for the testing release TODO: remove this
                 checked: true;
                 visible: false;
-                
-                onClicked: {
-                    persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
-                    stageNet.checked = false;
-                    console.log("Network type set to ", persistentSettings.nettype == NetworkType.TESTNET ? "Testnet" : "Mainnet")
-                }
+
+                // onClicked: {
+                //     persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
+                //     stageNet.checked = false;
+                //     console.log("Network type set to ", persistentSettings.nettype == NetworkType.TESTNET ? "Testnet" : "Mainnet")
+                // }
             }
         }
 
