@@ -246,7 +246,12 @@ ColumnLayout {
                 borderColor: Qt.rgba(0, 0, 0, 0.45)
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
-                checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
+                // checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
+
+                //we will force testnet just for the testing release TODO: remove this
+                checked: true;
+                visible: false;
+                
                 onClicked: {
                     persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
                     stageNet.checked = false;
