@@ -321,16 +321,14 @@ bool WalletManager::isMining() const
 
 // -------------------------------------------------------
 
-bool WalletManager::startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining, std::vector<std::string> selectedGPUs)
+bool WalletManager::startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining, const QString &selectedGPUs)
 {
     QString poolAddressPort = poolAddress;
     poolAddressPort += ":";
     poolAddressPort += QString::number(poolPort);
 
-    for (int n = 0; n < selectedGPUs.size(); n ++){
-        std::cout << "--->>>" << selectedGPUs[n] << std::endl;
-    }
 
+    std::cout << "--->>> " << selectedGPUs.toStdString() << " <<<---" << std::endl;
     // std::cout << "--->>>" << poolAddressPort.toStdString() << std::endl;
     // std::cout << "--->>>" << threads << std::endl;
     std::cout << "--->>>" << gpuMining << std::endl;

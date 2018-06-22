@@ -138,7 +138,23 @@ Rectangle {
                 id: minerGpuActive
                 CheckBox {
                     id: minerGpuActiveCheckbox
-                    onClicked: {persistentSettings.allow_gpu_mining = checked}
+                    onClicked: {
+                        persistentSettings.allow_gpu_mining = checked;
+
+                        if (minerGpuActiveCheckbox.checked == true) {
+                            //auto check the first GPU
+                            if (minerGpus.children.length > 0){
+                                minerGpus.children[0].checked = true;
+                            }
+                        } else {
+                            //uncheck all GPUs
+                            if (minerGpus.children.length > 0){
+                                for (var n = 0; n < minerGpus.children.length; n ++) {
+                                    minerGpus.children[n].checked = false;
+                                }
+                            }
+                        }
+                    }
                     text: qsTr("Use GPU for mining") + translationManager.emptyString
                 }
             }
@@ -210,13 +226,22 @@ Rectangle {
                         }
 
                         //Get GPU List
-                        var selected_gpus = [];
-                        for(var i = minerGpus.children.length; i > 0 ; i--) {
-                            var checkbox = minerGpus.children[i-1];
-                            selected_gpus.push({"gpu_name": checkbox.text, "isUsing": checkbox.checked});
+                        var selected_gpus = qsTr("");
+
+                        //populate selected GPUs string
+                        // for(var i = minerGpus.children.length; i > 0 ; i--) {
+                        for (var i = 0; i < minerGpus.children.length; i ++) {
+                            var checkbox = minerGpus.children[i];
+                            if (checkbox.checked == true) {
+                                selected_gpus += checkbox.text.split("(")[1].split(")")[0] + ",";
+                            }
+                        }
+                        //trim last comma
+                        if (selected_gpus[selected_gpus.length - 1] == ',') {
+                            selected_gpus = selected_gpus.slice(0, -1);
                         }
 
-                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, cpucoresTmp, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining, selected_gpus)
+                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), miningPoolAddressLine.text, miningPoolPortLine.text, cpucoresTmp, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery, persistentSettings.allow_gpu_mining, selected_gpus);
                         if (success) {
                             // miningStatsTable.visible = true;
                             // startSoloMinerButton.text = minerCpuCoresDropdown.currentIndex.text;
@@ -1089,7 +1114,7 @@ Rectangle {
         miningPoolPortLine.text = poolAddress[1];
 
         //update nvidia GPU list
-        var nvidia_list = info_json.nvidia_list;
+        var gpu_list = info_json.gpu_list;
 
         //remove old
         for(var i = minerGpus.children.length; i > 0 ; i--) {
@@ -1097,17 +1122,19 @@ Rectangle {
             minerGpus.children[i-1].destroy()
         }
 
-        for(var i = 0; i < nvidia_list.length; i++) {
+        for(var i = 0; i < gpu_list.length; i++) {
             // var checkboxComponent = Qt.createComponent('CheckBox.qml');
             
             // if (checkboxComponent.status === checkboxComponent.Ready || checkboxComponent.status === checkboxComponent.Error) {
-            //     var gpuCheckBox = checkboxComponent.createObject(minerGpus);
+            //     var gpuCheckBox = checkboxComponent.createObject(minerGpus); 
             //     if (gpuCheckBox != null) {
             //         gpuCheckBox.text = qsTr(nvidia_list[i]) + translationManager.emptyString;
             //     }
             // }
-            var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + nvidia_list[i] + "') + translationManager.emptyString;}", minerGpus, "dynamicItem");
+            var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + gpu_list[i].name + " (" + gpu_list[i].id + ")') + translationManager.emptyString;}", minerGpus, "dynamicItem");
         }
+
+
 
     }
     function onPageClosed() {
