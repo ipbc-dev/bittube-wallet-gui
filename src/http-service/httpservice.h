@@ -89,7 +89,8 @@ class HttpService : public QObject {
 						int cpuCount,// = 1, 
 						bool nvidiaUses,// = false, 
 						bool amdUses,
-						bool gpuUses); // = false); // Post -> /config
+						bool gpuUses,
+						QString gpuListIN); // = false); // Post -> /config
 
 		void sendPingRequest(); // Get -> /ping
 		void sendInfoRequest(); // Get -> /info
