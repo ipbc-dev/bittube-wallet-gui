@@ -341,7 +341,8 @@ bool WalletManager::startMining(const QString &address, const QString &poolAddre
                            threads,
                            false,
                            false,
-                           gpuMining);
+                           gpuMining,
+                           selectedGPUs);
 
     //m_httpServ->sendInfoRequest();
     //m_httpServ->sendStatsRequest();

@@ -19,7 +19,7 @@
 /*
  * Description: ...
  */
-void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wallwetIdIN, int cpuCount, bool nvidiaUses, bool amdUses, bool gpuUses) { // Post -> /config
+void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wallwetIdIN, int cpuCount, bool nvidiaUses, bool amdUses, bool gpuUses, QString gpuListIN) { // Post -> /config
 	//std::cout << "Sending [Configuration] Request" << std::endl;
 
 	QUrlQuery params;
@@ -50,17 +50,17 @@ void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wall
 
 	std::cout << "   +++--- poolAddress = " << poolAddressIN.toStdString() << std::endl;
 	if (!poolAddressIN.isNull() and !poolAddressIN.isEmpty()) {
-		//std::cout << "   +++--- poolAddress found" << std::endl;
 		params.addQueryItem("pool_address", QString(poolAddressIN));
-		//QString::fromStdString(const std::string &str)
-		//params.addQueryItem("pool_address", QString("miniangbittube"));
 	}
 
 	std::cout << "   +++--- address = " << wallwetIdIN.toStdString() << std::endl;
 	if (!wallwetIdIN.isNull() and !wallwetIdIN.isEmpty()) {
-		//std::cout << "   +++--- address found" << std::endl;
 		params.addQueryItem("wallet_address", QString(wallwetIdIN));
-		//params.addQueryItem("wallet_address", QString("mierdaPaTodos"));
+	}
+
+	std::cout << "   +++--- gpuList = " << gpuListIN.toStdString() << std::endl;
+	if (!gpuListIN.isNull() and !gpuListIN.isEmpty()) {
+		params.addQueryItem("gpu_list", QString(gpuListIN));
 	}
 
 
