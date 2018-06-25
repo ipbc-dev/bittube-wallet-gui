@@ -74,7 +74,7 @@ ApplicationWindow {
     property bool remoteNodeConnected: false
     property bool androidCloseTapped: false;
     // Default daemon addresses
-    readonly property string localDaemonAddress : persistentSettings.nettype == NetworkType.MAINNET ? "localhost:24182" : persistentSettings.nettype == NetworkType.TESTNET ? "localhost:34182" : "localhost:24182"
+    readonly property string localDaemonAddress : persistentSettings.nettype == NetworkType.MAINNET ? "localhost:24182" : persistentSettings.nettype == NetworkType.TESTNET ? "localhost:34182" : "localhost:44182"
     property string currentDaemonAddress;
     property bool startLocalNodeCancelled: false
     property int estimatedBlockchainSize: 50 // GB
@@ -625,7 +625,7 @@ ApplicationWindow {
             transactionConfirmationPopup.text +=  qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount);
             transactionConfirmationPopup.text +=  qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee);
             transactionConfirmationPopup.text +=  qsTr("\nRingsize: ") + (mixinCount + 1);
-            if(mixinCount !== 6){
+            if(mixinCount !== 2){
                 transactionConfirmationPopup.text +=  qsTr("\n\nWARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.");
             }
             transactionConfirmationPopup.text +=  qsTr("\n\nNumber of transactions: ") + transaction.txCount
@@ -1006,7 +1006,7 @@ ApplicationWindow {
         property bool   allow_background_mining : false
         property bool   miningIgnoreBattery : true
         property var    nettype: NetworkType.MAINNET
-        property string daemon_address: nettype == NetworkType.TESTNET ? "localhost:24182" : nettype == NetworkType.STAGENET ? "localhost:34182" : "localhost:24182"
+        property string daemon_address: nettype == NetworkType.TESTNET ? "localhost:34182" : nettype == NetworkType.STAGENET ? "localhost:44182" : "localhost:24182"
         property string payment_id
         property int    restore_height : 0
         property bool   is_recovering : false
@@ -1608,7 +1608,7 @@ ApplicationWindow {
             showMinimizeButton: true
             showMaximizeButton: true
             showWhatIsButton: false
-            showMoneroLogo: true
+            showMoneroLogo: !isMobile
             onCloseClicked: appWindow.close();
             onMaximizeClicked: {
                 appWindow.visibility = appWindow.visibility !== Window.FullScreen ? Window.FullScreen :

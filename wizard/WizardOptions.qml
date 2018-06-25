@@ -48,8 +48,8 @@ ColumnLayout {
         appWindow.persistentSettings.language = wizard.settings.language
         appWindow.persistentSettings.locale   = wizard.settings.locale
 
-        //FORCE TESTNET, REMOVE LATER
-        appWindow.persistentSettings.nettype = NetworkType.TESTNET;
+        //FORCE STAGENET, REMOVE LATER
+        appWindow.persistentSettings.nettype = NetworkType.STAGENET;
 
         return true;
     }
