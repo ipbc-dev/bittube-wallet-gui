@@ -65,6 +65,13 @@ Rectangle {
     }
 
     function update() {
+        //hide subaddress creation until blockchainheight 110k
+        if (walletManager.blockchainHeight() > 110000){
+            createAddressRow.visible = true;
+        } else {
+            createAddressRow.visible = false;
+        }
+
         if (!appWindow.currentWallet || !trackingEnabled.checked) {
             trackingLineText.text = "";
             trackingModel.clear();
@@ -364,6 +371,7 @@ Rectangle {
                     Layout.fillWidth: true
 
                     Label {
+                        id: createAddressLabel
                         color: "#757575"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
