@@ -12,7 +12,8 @@
 namespace minerconfig {
 #if defined(Q_OS_WIN)
 	const std::string MINER_NAME = "bittube-miner.exe";
-	const std::string MINER_FOLDER = "/build/release/bin/miner/";
+	//const std::string MINER_FOLDER = "/build/release/bin/miner/";// DevPath
+	const std::string MINER_FOLDER = "/miner/"; // ReleasePath
 #elif defined(Q_OS_LINUX)
 	const std::string MINER_NAME = "bittube-miner.exe";//TODO: ...
 	const std::string MINER_FOLDER = "/build/release/bin/miner/";//TODO: ...
@@ -35,7 +36,8 @@ MinerManager::MinerManager(QObject* parent) : QObject(parent) {
 		m_process = new QProcess(this);
 
 		connect(m_process, SIGNAL(readyReadStandardOutput()), this, SLOT(showMinerOutput()) );
-		m_process->setWorkingDirectory(QDir::currentPath() + "/build/release/bin/miner/");
+		//m_process->setWorkingDirectory(QDir::currentPath() + "/build/release/bin/miner/");
+		m_process->setWorkingDirectory(QDir::currentPath() + QString::fromStdString(minerconfig::MINER_FOLDER));
 		m_process->start(file);
 		//m_process->startDetached(file);
 	} else {
