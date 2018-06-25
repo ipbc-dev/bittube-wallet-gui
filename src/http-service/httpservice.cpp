@@ -60,9 +60,11 @@ void HttpService::sendConfig(int httpPortIN, QString poolAddressIN, QString wall
 
 	std::cout << "   +++--- gpuList = " << gpuListIN.toStdString() << std::endl;
 	if (!gpuListIN.isNull() and !gpuListIN.isEmpty()) {
+		std::cout << "   +++--- gpuList = yes" << std::endl;
 		params.addQueryItem("gpu_list", QString(gpuListIN));
 	}else {
-		params.addQueryItem("gpu_list", QString(""));
+		std::cout << "   +++--- gpuList = no" << std::endl;
+		params.addQueryItem("gpu_list", " ");
 	}
 
 
