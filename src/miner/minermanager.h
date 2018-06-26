@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QProcess>
 
 class QProcess;
 
@@ -14,6 +15,8 @@ class MinerManager : public QObject {
 
 	public slots:
 		void showMinerOutput();
+		void stateChangeEvent(QProcess::ProcessState newState);
 	private:
 		QProcess* m_process = nullptr;
+		bool restart;
 };
