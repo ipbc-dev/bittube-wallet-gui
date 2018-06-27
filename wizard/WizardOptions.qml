@@ -48,9 +48,7 @@ ColumnLayout {
         appWindow.persistentSettings.language = wizard.settings.language
         appWindow.persistentSettings.locale   = wizard.settings.locale
 
-        //FORCE STAGENET, REMOVE LATER
-        appWindow.persistentSettings.nettype = NetworkType.STAGENET;
-
+        // appWindow.persistentSettings.nettype = NetworkType.STAGENET;
         return true;
     }
 
@@ -240,29 +238,23 @@ ColumnLayout {
         Layout.fillWidth: true
         spacing: 38 * scaleRatio
 
-        // Rectangle {
-        //     width: 100 * scaleRatio
-        //     RadioButton {
-        //         id: testNet
-        //         text: qsTr("Testnet") + translationManager.emptyString
-        //         checkedColor: Qt.rgba(0, 0, 0, 0.75)
-        //         borderColor: Qt.rgba(0, 0, 0, 0.45)
-        //         fontColor: "#4A4646"
-        //         fontSize: 16 * scaleRatio
-        //         //we will force testnet just for the testing release TODO: remove this
-                
-        //         // checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
-
-        //         checked: true;
-        //         visible: false;
-
-        //         // onClicked: {
-        //         //     persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
-        //         //     stageNet.checked = false;
-        //         //     console.log("Network type set to ", persistentSettings.nettype == NetworkType.TESTNET ? "Testnet" : "Mainnet")
-        //         // }
-        //     }
-        // }
+        Rectangle {
+            width: 100 * scaleRatio
+            RadioButton {
+                id: testNet
+                text: qsTr("Testnet") + translationManager.emptyString
+                checkedColor: Qt.rgba(0, 0, 0, 0.75)
+                borderColor: Qt.rgba(0, 0, 0, 0.45)
+                fontColor: "#4A4646"
+                fontSize: 16 * scaleRatio
+                checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
+                onClicked: {
+                    persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
+                    stageNet.checked = false;
+                    console.log("Network type set to ", persistentSettings.nettype == NetworkType.TESTNET ? "Testnet" : "Mainnet")
+                }
+            }
+        }
 
         Rectangle {
             width: 100 * scaleRatio
@@ -274,12 +266,11 @@ ColumnLayout {
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
                 checked: appWindow.persistentSettings.nettype == NetworkType.STAGENET;
-                // onClicked: {
-                //     persistentSettings.nettype = stageNet.checked ? NetworkType.STAGENET : NetworkType.MAINNET
-                //     testNet.checked = false;
-                //     console.log("Network type set to ", persistentSettings.nettype == NetworkType.STAGENET ? "Stagenet" : "Mainnet")
-                // }
-                visible: false;
+                onClicked: {
+                    persistentSettings.nettype = stageNet.checked ? NetworkType.STAGENET : NetworkType.MAINNET
+                    testNet.checked = false;
+                    console.log("Network type set to ", persistentSettings.nettype == NetworkType.STAGENET ? "Stagenet" : "Mainnet")
+                }
             }
         }
     }
