@@ -940,27 +940,6 @@ Rectangle {
             return;
         }
 
-        //handle start & stop buttons
-        //if no CPU & no GPU is selected
-        if (minerCpuCores.count > 0){
-            if (minerCpuCores.get(minerCpuCoresDropdown.currentIndex).column1 == "0" && minerGpuActiveCheckbox.checked == false) {
-                startSoloMinerButton.enabled = false;
-                stopSoloMinerButton.enabled = false;
-            } else {
-                //if mining
-                if (info_json.isMining) {
-                    startSoloMinerButton.enabled = false;
-                    stopSoloMinerButton.enabled = true;
-                } else {
-                    startSoloMinerButton.enabled = true;
-                    stopSoloMinerButton.enabled = false;
-                }
-            }
-        } else {
-            startSoloMinerButton.enabled = false;
-            stopSoloMinerButton.enabled = false;
-        }
-
         //update stuff from info if not mining
         if (!info_json.isMining) {
 
@@ -987,33 +966,56 @@ Rectangle {
                 miningPoolPortLine.text = poolAddress[1];
             }
 
-            if (minerGpus.children.length == 0) {
-                //update nvidia GPU list
-                var gpu_list = info_json.gpu_list;
+            if (info_json.hasOwnProperty("gpu_list")){
+                if (minerGpus.children.length == 0) {
+                    //update nvidia GPU list
+                    var gpu_list = info_json.gpu_list;
 
-                //remove old
-                for(var i = minerGpus.children.length; i > 0 ; i--) {
-                    console.log("destroying: " + i);
-                    minerGpus.children[i-1].destroy();
-                }
+                    //remove old
+                    for(var i = minerGpus.children.length; i > 0 ; i--) {
+                        console.log("destroying: " + i);
+                        minerGpus.children[i-1].destroy();
+                    }
 
-                for(var i = 0; i < gpu_list.length; i++) {
-                    // var checkboxComponent = Qt.createComponent('CheckBox.qml');
-                    
-                    // if (checkboxComponent.status === checkboxComponent.Ready || checkboxComponent.status === checkboxComponent.Error) {
-                    //     var gpuCheckBox = checkboxComponent.createObject(minerGpus); 
-                    //     if (gpuCheckBox != null) {
-                    //         gpuCheckBox.text = qsTr(nvidia_list[i]) + translationManager.emptyString;
-                    //     }
-                    // }
-                    var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + gpu_list[i].name + " (" + gpu_list[i].id + ")') + translationManager.emptyString;}", minerGpus, "dynamicItem");
-                }
+                    for(var i = 0; i < gpu_list.length; i++) {
+                        // var checkboxComponent = Qt.createComponent('CheckBox.qml');
+                        
+                        // if (checkboxComponent.status === checkboxComponent.Ready || checkboxComponent.status === checkboxComponent.Error) {
+                        //     var gpuCheckBox = checkboxComponent.createObject(minerGpus); 
+                        //     if (gpuCheckBox != null) {
+                        //         gpuCheckBox.text = qsTr(nvidia_list[i]) + translationManager.emptyString;
+                        //     }
+                        // }
+                        var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + gpu_list[i].name + " (" + gpu_list[i].id + ")') + translationManager.emptyString;}", minerGpus, "dynamicItem");
+                    }
 
-                //hide GPU checkbox if no GPU is found
-                if (gpu_list.length == 0) {
-                    minerGpuActive.visible = false;
+                    //hide GPU checkbox if no GPU is found
+                    if (gpu_list.length == 0) {
+                        minerGpuActive.visible = false;
+                    }
                 }
             }
+        }
+
+        //handle start & stop buttons
+        //if no CPU & no GPU is selected
+        if (minerCpuCores.count > 0){
+            if (minerCpuCores.get(minerCpuCoresDropdown.currentIndex).column1 == "0" && minerGpuActiveCheckbox.checked == false) {
+                startSoloMinerButton.enabled = false;
+                stopSoloMinerButton.enabled = false;
+            } else {
+                //if mining
+                if (info_json.isMining) {
+                    startSoloMinerButton.enabled = false;
+                    stopSoloMinerButton.enabled = true;
+                } else {
+                    startSoloMinerButton.enabled = true;
+                    stopSoloMinerButton.enabled = false;
+                }
+            }
+        } else {
+            startSoloMinerButton.enabled = false;
+            stopSoloMinerButton.enabled = false;
         }
 
         var stats_json = readStatsJson();
