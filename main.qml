@@ -299,10 +299,10 @@ ApplicationWindow {
         viewOnly = currentWallet.viewOnly;
 
         // New wallets saves the testnet flag in keys file.
-        // if(persistentSettings.nettype != currentWallet.nettype) {
-        //     console.log("Using network type from keys file")
-        //     persistentSettings.nettype = currentWallet.nettype;
-        // }
+        if(persistentSettings.nettype != currentWallet.nettype) {
+            console.log("Using network type from keys file")
+            persistentSettings.nettype = currentWallet.nettype;
+        }
 
         // connect handlers
         currentWallet.refreshed.connect(onWalletRefresh)

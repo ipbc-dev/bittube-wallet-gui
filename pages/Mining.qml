@@ -940,6 +940,76 @@ Rectangle {
             return;
         }
 
+        //update stuff from info if not mining
+        // if (!info_json.isMining) {
+
+            if (minerCpuCores.count == 0) {
+                //update CPU Cores
+                minerCpuCores.clear();
+                if (info_json.cpu_count != 0) {
+                    for (var n = 0; n <= info_json.cpu_count; n ++) {
+                        minerCpuCores.append({column1: qsTr(String(n))});
+                    }
+                } else {
+                    minerCpuCores.append({column1: qsTr("0")});
+                }
+                minerCpuCoresDropdown.dataModel = minerCpuCores;
+                // minerCpuCoresDropdown.currentIndex = 0;
+
+                // get previously selected CPU count from miner
+                var current_cpu_count = info_json.current_cpu_count;
+                if (current_cpu_count != 0) {
+                    minerCpuCoresDropdown.currentIndex = current_cpu_count;
+                } else {
+                    minerCpuCoresDropdown.currentIndex = 0;
+                }
+                minerCpuCoresDropdown.update();
+            }
+
+            if (miningPoolAddressLine.text == "" && miningPoolPortLine.text == "") {
+                //update pool Address & Port
+                var poolAddress = info_json.pool_address;
+                poolAddress = poolAddress.split(":");
+                miningPoolAddressLine.text = poolAddress[0];
+                miningPoolPortLine.text = poolAddress[1];
+            }
+
+            if (info_json.hasOwnProperty("gpu_list")){
+                if (minerGpus.children.length == 0) {
+                    //update nvidia GPU list
+                    var gpu_list = info_json.gpu_list;
+
+                    //remove old
+                    for(var i = minerGpus.children.length; i > 0 ; i--) {
+                        console.log("destroying: " + i);
+                        minerGpus.children[i-1].destroy();
+                    }
+
+                    for(var i = 0; i < gpu_list.length; i++) {
+                        if (gpu_list[i].isUsing == true) {
+                            var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + gpu_list[i].name + " (" + gpu_list[i].id + ")') + translationManager.emptyString; checked: true}", minerGpus, "dynamicItem");                            
+                            minerGpuActiveCheckbox.checked = true;
+                        } else {
+                            var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + gpu_list[i].name + " (" + gpu_list[i].id + ")') + translationManager.emptyString;}", minerGpus, "dynamicItem");
+                        }
+                    }
+
+                    //hide GPU checkbox if no GPU is found
+                    if (gpu_list.length == 0) {
+                        minerGpuActive.visible = false;
+                    }
+
+                    // //get used GPUs from miner (quick and dirty, dont hate)
+                    // for (var i = 0; i < gpu_list.length; i++) {
+                    //     if (gpu_list[i].isUsing == true) {
+                    //         minerGpuActiveCheckbox.checked = true;
+                    //         break;
+                    //     }
+                    // }
+                }
+            }
+        // }
+
         //handle start & stop buttons
         //if no CPU & no GPU is selected
         if (minerCpuCores.count > 0){
@@ -960,9 +1030,6 @@ Rectangle {
             startSoloMinerButton.enabled = false;
             stopSoloMinerButton.enabled = false;
         }
-
-        // startSoloMinerButton.enabled = !info_json.isMining;
-        // stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
 
         var stats_json = readStatsJson();
         if (stats_json == null) {
@@ -1094,12 +1161,12 @@ Rectangle {
     function onPageCompleted() {
         console.log("Mining page loaded");
 
-        //get json
-        var info_json = readInfoJson();
-        if (info_json == null) {
-            reset_all();
-            return;
-        }
+        // //get json
+        // var info_json = readInfoJson();
+        // if (info_json == null) {
+        //     reset_all();
+        //     return;
+        // }
 
         update()
         timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
@@ -1114,50 +1181,50 @@ Rectangle {
         miningResultReportTableModel.set(2, {"label" : qsTr("Avg result time") + translationManager.emptyString});
         miningResultReportTableModel.set(3, {"label" : qsTr("Pool-side hashes") + translationManager.emptyString});
 
-        //update CPU Cores
-        minerCpuCores.clear();
-        if (info_json.cpu_count != 0) {
-            for (var n = 0; n <= info_json.cpu_count; n ++) {
-                minerCpuCores.append({column1: qsTr(String(n))});
-            }
-        } else {
-            minerCpuCores.append({column1: qsTr("0")});
-        }
-        minerCpuCoresDropdown.dataModel = minerCpuCores;
-        minerCpuCoresDropdown.currentIndex = 0;
-        minerCpuCoresDropdown.update();
+        // //update CPU Cores
+        // minerCpuCores.clear();
+        // if (info_json.cpu_count != 0) {
+        //     for (var n = 0; n <= info_json.cpu_count; n ++) {
+        //         minerCpuCores.append({column1: qsTr(String(n))});
+        //     }
+        // } else {
+        //     minerCpuCores.append({column1: qsTr("0")});
+        // }
+        // minerCpuCoresDropdown.dataModel = minerCpuCores;
+        // minerCpuCoresDropdown.currentIndex = 0;
+        // minerCpuCoresDropdown.update();
 
-        //update pool Address & Port
-        var poolAddress = info_json.pool_address;
-        poolAddress = poolAddress.split(":");
-        miningPoolAddressLine.text = poolAddress[0];
-        miningPoolPortLine.text = poolAddress[1];
+        // //update pool Address & Port
+        // var poolAddress = info_json.pool_address;
+        // poolAddress = poolAddress.split(":");
+        // miningPoolAddressLine.text = poolAddress[0];
+        // miningPoolPortLine.text = poolAddress[1];
 
-        //update nvidia GPU list
-        var gpu_list = info_json.gpu_list;
+        // //update nvidia GPU list
+        // var gpu_list = info_json.gpu_list;
 
-        //remove old
-        for(var i = minerGpus.children.length; i > 0 ; i--) {
-            console.log("destroying: " + i);
-            minerGpus.children[i-1].destroy();
-        }
+        // //remove old
+        // for(var i = minerGpus.children.length; i > 0 ; i--) {
+        //     console.log("destroying: " + i);
+        //     minerGpus.children[i-1].destroy();
+        // }
 
-        for(var i = 0; i < gpu_list.length; i++) {
-            // var checkboxComponent = Qt.createComponent('CheckBox.qml');
+        // for(var i = 0; i < gpu_list.length; i++) {
+        //     // var checkboxComponent = Qt.createComponent('CheckBox.qml');
             
-            // if (checkboxComponent.status === checkboxComponent.Ready || checkboxComponent.status === checkboxComponent.Error) {
-            //     var gpuCheckBox = checkboxComponent.createObject(minerGpus); 
-            //     if (gpuCheckBox != null) {
-            //         gpuCheckBox.text = qsTr(nvidia_list[i]) + translationManager.emptyString;
-            //     }
-            // }
-            var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + gpu_list[i].name + " (" + gpu_list[i].id + ")') + translationManager.emptyString;}", minerGpus, "dynamicItem");
-        }
+        //     // if (checkboxComponent.status === checkboxComponent.Ready || checkboxComponent.status === checkboxComponent.Error) {
+        //     //     var gpuCheckBox = checkboxComponent.createObject(minerGpus); 
+        //     //     if (gpuCheckBox != null) {
+        //     //         gpuCheckBox.text = qsTr(nvidia_list[i]) + translationManager.emptyString;
+        //     //     }
+        //     // }
+        //     var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + gpu_list[i].name + " (" + gpu_list[i].id + ")') + translationManager.emptyString;}", minerGpus, "dynamicItem");
+        // }
 
-        //hide GPU checkbox if no GPU is found
-        if (gpu_list.length == 0) {
-            minerGpuActive.visible = false;
-        }
+        // //hide GPU checkbox if no GPU is found
+        // if (gpu_list.length == 0) {
+        //     minerGpuActive.visible = false;
+        // }
     }
     function onPageClosed() {
         timer.running = false
