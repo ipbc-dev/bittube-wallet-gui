@@ -48,7 +48,7 @@ ColumnLayout {
         appWindow.persistentSettings.language = wizard.settings.language
         appWindow.persistentSettings.locale   = wizard.settings.locale
 
-        // appWindow.persistentSettings.nettype = NetworkType.STAGENET;
+        appWindow.persistentSettings.nettype = NetworkType.MAINNET;
         return true;
     }
 
@@ -230,49 +230,49 @@ ColumnLayout {
         }
     }
 
-    ColumnLayout {
-        Layout.leftMargin: wizardLeftMargin
-        Layout.rightMargin: wizardRightMargin
-        Layout.topMargin: 30 * scaleRatio
-        Layout.alignment: Qt.AlignCenter
-        Layout.fillWidth: true
-        spacing: 38 * scaleRatio
+    // ColumnLayout {
+    //     Layout.leftMargin: wizardLeftMargin
+    //     Layout.rightMargin: wizardRightMargin
+    //     Layout.topMargin: 30 * scaleRatio
+    //     Layout.alignment: Qt.AlignCenter
+    //     Layout.fillWidth: true
+    //     spacing: 38 * scaleRatio
 
-        Rectangle {
-            width: 100 * scaleRatio
-            RadioButton {
-                id: testNet
-                text: qsTr("Testnet") + translationManager.emptyString
-                checkedColor: Qt.rgba(0, 0, 0, 0.75)
-                borderColor: Qt.rgba(0, 0, 0, 0.45)
-                fontColor: "#4A4646"
-                fontSize: 16 * scaleRatio
-                checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
-                onClicked: {
-                    persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
-                    stageNet.checked = false;
-                    console.log("Network type set to ", persistentSettings.nettype == NetworkType.TESTNET ? "Testnet" : "Mainnet")
-                }
-            }
-        }
+    //     Rectangle {
+    //         width: 100 * scaleRatio
+    //         RadioButton {
+    //             id: testNet
+    //             text: qsTr("Testnet") + translationManager.emptyString
+    //             checkedColor: Qt.rgba(0, 0, 0, 0.75)
+    //             borderColor: Qt.rgba(0, 0, 0, 0.45)
+    //             fontColor: "#4A4646"
+    //             fontSize: 16 * scaleRatio
+    //             checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
+    //             onClicked: {
+    //                 persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
+    //                 stageNet.checked = false;
+    //                 console.log("Network type set to ", persistentSettings.nettype == NetworkType.TESTNET ? "Testnet" : "Mainnet")
+    //             }
+    //         }
+    //     }
 
-        Rectangle {
-            width: 100 * scaleRatio
-            RadioButton {
-                id: stageNet
-                text: qsTr("Stagenet") + translationManager.emptyString
-                checkedColor: Qt.rgba(0, 0, 0, 0.75)
-                borderColor: Qt.rgba(0, 0, 0, 0.45)
-                fontColor: "#4A4646"
-                fontSize: 16 * scaleRatio
-                checked: appWindow.persistentSettings.nettype == NetworkType.STAGENET;
-                onClicked: {
-                    persistentSettings.nettype = stageNet.checked ? NetworkType.STAGENET : NetworkType.MAINNET
-                    testNet.checked = false;
-                    console.log("Network type set to ", persistentSettings.nettype == NetworkType.STAGENET ? "Stagenet" : "Mainnet")
-                }
-            }
-        }
-    }
+    //     Rectangle {
+    //         width: 100 * scaleRatio
+    //         RadioButton {
+    //             id: stageNet
+    //             text: qsTr("Stagenet") + translationManager.emptyString
+    //             checkedColor: Qt.rgba(0, 0, 0, 0.75)
+    //             borderColor: Qt.rgba(0, 0, 0, 0.45)
+    //             fontColor: "#4A4646"
+    //             fontSize: 16 * scaleRatio
+    //             checked: appWindow.persistentSettings.nettype == NetworkType.STAGENET;
+    //             onClicked: {
+    //                 persistentSettings.nettype = stageNet.checked ? NetworkType.STAGENET : NetworkType.MAINNET
+    //                 testNet.checked = false;
+    //                 console.log("Network type set to ", persistentSettings.nettype == NetworkType.STAGENET ? "Stagenet" : "Mainnet")
+    //             }
+    //         }
+    //     }
+    // }
 }
 

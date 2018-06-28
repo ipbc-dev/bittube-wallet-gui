@@ -174,6 +174,6 @@ void MinerManager::stateChangeEvent(QProcess::ProcessState newState) {
 		connect(m_process, SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChangeEvent(QProcess::ProcessState)) );
 		//m_process->setWorkingDirectory(QDir::currentPath() + "/build/release/bin/miner/");
 		m_process->setWorkingDirectory(QDir::currentPath() + QString::fromStdString(minerconfig::MINER_FOLDER));
-		m_process->start(file);
+		m_process->start("\"" + file + "\"");
 	}
 }
