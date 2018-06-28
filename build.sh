@@ -112,7 +112,7 @@ fi
 $QMAKE ../bittube-wallet-gui.pro "$CONFIG" || exit
 $MAKE || exit 
 
-# Copy monerod to bin folder
+# Copy bittubed to bin folder
 if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
 cp ../$BITTUBE_DIR/bin/$BITTUBED_EXEC $BIN_PATH
 fi

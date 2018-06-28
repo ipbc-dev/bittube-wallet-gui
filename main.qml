@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 //
 // All rights reserved.
 //
@@ -1793,7 +1794,7 @@ ApplicationWindow {
     }
 
     function checkUpdates() {
-        walletManager.checkUpdatesAsync("bittube-gui", "gui")
+        walletManager.checkUpdatesAsync("bittube-wallet-gui", "gui")
     }
 
     Timer {

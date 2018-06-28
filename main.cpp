@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 // 
 // All rights reserved.
 // 
@@ -128,9 +129,9 @@ int main(int argc, char *argv[])
 
     //----------------------------------
 
-    app.setApplicationName("BitTube-gui");
+    app.setApplicationName("bittube-wallet-gui");
     app.setOrganizationDomain("bit.tube");
-    app.setOrganizationName("BitTube");
+    app.setOrganizationName("bittube");
 
 #if defined(Q_OS_LINUX)
     if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon-white.ico"));
