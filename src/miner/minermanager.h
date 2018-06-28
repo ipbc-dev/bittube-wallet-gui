@@ -13,6 +13,8 @@ class MinerManager : public QObject {
 		explicit MinerManager(QObject* parent = 0);
 		virtual ~MinerManager();
 
+		bool checkExternalRunning ();
+
 	public slots:
 		void showMinerOutput();
 		void stateChangeEvent(QProcess::ProcessState newState);
