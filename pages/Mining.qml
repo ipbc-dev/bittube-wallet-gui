@@ -941,7 +941,7 @@ Rectangle {
         }
 
         //update stuff from info if not mining
-        if (!info_json.isMining) {
+        // if (!info_json.isMining) {
 
             if (minerCpuCores.count == 0) {
                 //update CPU Cores
@@ -954,7 +954,15 @@ Rectangle {
                     minerCpuCores.append({column1: qsTr("0")});
                 }
                 minerCpuCoresDropdown.dataModel = minerCpuCores;
-                minerCpuCoresDropdown.currentIndex = 0;
+                // minerCpuCoresDropdown.currentIndex = 0;
+
+                // get previously selected CPU count from miner
+                var current_cpu_count = info_json.current_cpu_count;
+                if (current_cpu_count != 0) {
+                    minerCpuCoresDropdown.currentIndex = current_cpu_count;
+                } else {
+                    minerCpuCoresDropdown.currentIndex = 0;
+                }
                 minerCpuCoresDropdown.update();
             }
 
@@ -978,24 +986,29 @@ Rectangle {
                     }
 
                     for(var i = 0; i < gpu_list.length; i++) {
-                        // var checkboxComponent = Qt.createComponent('CheckBox.qml');
-                        
-                        // if (checkboxComponent.status === checkboxComponent.Ready || checkboxComponent.status === checkboxComponent.Error) {
-                        //     var gpuCheckBox = checkboxComponent.createObject(minerGpus); 
-                        //     if (gpuCheckBox != null) {
-                        //         gpuCheckBox.text = qsTr(nvidia_list[i]) + translationManager.emptyString;
-                        //     }
-                        // }
-                        var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + gpu_list[i].name + " (" + gpu_list[i].id + ")') + translationManager.emptyString;}", minerGpus, "dynamicItem");
+                        if (gpu_list[i].isUsing == true) {
+                            var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + gpu_list[i].name + " (" + gpu_list[i].id + ")') + translationManager.emptyString; checked: true}", minerGpus, "dynamicItem");                            
+                            minerGpuActiveCheckbox.checked = true;
+                        } else {
+                            var newCheckBox = Qt.createQmlObject("import QtQuick 2.0; import '../components'; CheckBox {text: qsTr('" + gpu_list[i].name + " (" + gpu_list[i].id + ")') + translationManager.emptyString;}", minerGpus, "dynamicItem");
+                        }
                     }
 
                     //hide GPU checkbox if no GPU is found
                     if (gpu_list.length == 0) {
                         minerGpuActive.visible = false;
                     }
+
+                    // //get used GPUs from miner (quick and dirty, dont hate)
+                    // for (var i = 0; i < gpu_list.length; i++) {
+                    //     if (gpu_list[i].isUsing == true) {
+                    //         minerGpuActiveCheckbox.checked = true;
+                    //         break;
+                    //     }
+                    // }
                 }
             }
-        }
+        // }
 
         //handle start & stop buttons
         //if no CPU & no GPU is selected
