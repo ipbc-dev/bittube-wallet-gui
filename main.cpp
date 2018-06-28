@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 // 
 // All rights reserved.
 // 
@@ -66,7 +67,13 @@
 #include "QrCodeScanner.h"
 #endif
 
-//#include "src/http-service/httpservice.h"
+//test------ FIXME: delete this ----
+#include "src/http-service/httpservice.h"
+#include "src/miner/minermanager.h"
+//#include <QProcess>
+//#include <QDir>
+//#include <QString>
+//----------------------------------
 
 bool isIOS = false;
 bool isAndroid = false;
@@ -102,16 +109,29 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    //HttpService http_serv(&app);
-
+    //test------ FIXME: delete this ----
+    //HttpService http_serv();
     //http_serv.test();
     //http_serv.sendPingRequest();
     //http_serv.sendInfoRequest();
-    //http_serv.sendStatsRequest();
+    // http_serv.sendStatsRequest();
 
-    app.setApplicationName("BitTube-gui");
+    //QProcess *process = new QProcess();
+    //std::cout << "homePath: " << QDir::homePath().toStdString() << std::endl;
+    //std::cout << "currentPath: " << QDir::currentPath().toStdString() << std::endl;
+
+    // C:/Users/Anto/Documents/Development/GRP_workspace/OtherProjects/bittube-coin-gui-wallet
+    //QString file = QDir::currentPath() + "/build/release/bin/miner/bittube-miner.exe";
+    //QString file = QDir::currentPath() + "\miner\ipbc-miner.exe";
+    //process->start(file);
+
+    MinerManager theMiner(&app);
+
+    //----------------------------------
+
+    app.setApplicationName("bittube-wallet-gui");
     app.setOrganizationDomain("bit.tube");
-    app.setOrganizationName("BitTube");
+    app.setOrganizationName("bittube");
 
 #if defined(Q_OS_LINUX)
     if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon-white.ico"));

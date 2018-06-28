@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 //
 // All rights reserved.
 //
@@ -53,7 +54,7 @@ Rectangle {
     property alias addressText : pageReceive.current_address
 
     function makeQRCodeString() {
-        var s = "monero:"
+        var s = "bittube:"
         var nfields = 0
         s += current_address;
         var amount = amountToReceiveLine.text.trim()
@@ -65,6 +66,13 @@ Rectangle {
     }
 
     function update() {
+        //hide subaddress creation until blockchainheight 110k
+        if (walletManager.blockchainHeight() > 110000){
+            createAddressRow.visible = true;
+        } else {
+            createAddressRow.visible = false;
+        }
+
         if (!appWindow.currentWallet || !trackingEnabled.checked) {
             trackingLineText.text = "";
             trackingModel.clear();
@@ -364,6 +372,7 @@ Rectangle {
                     Layout.fillWidth: true
 
                     Label {
+                        id: createAddressLabel
                         color: "#757575"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left

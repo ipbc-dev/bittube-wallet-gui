@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 // 
 // All rights reserved.
 // 
@@ -145,7 +146,8 @@ Rectangle {
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
-                PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+                // PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+                PropertyChanges { target: mainFlickable; contentHeight: miningView.miningHeight + 100  }
             }, State {
                 name: "Keys"
                 PropertyChanges { target: root; currentView: keysView }
@@ -180,6 +182,21 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
+
+            states: State {
+                name: "autoscroll"
+                PropertyChanges {
+                    target: mainFlickable
+                    contentY: stackView.height - height
+                }
+            }
+            onMovementEnded: {
+                if (contentY === stackView.height - height) {
+                    state = "autoscroll"
+                } else {
+                    state = ""
+                }
+            }
 
             onFlickingChanged: {
                 releaseFocus();

@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 // 
 // All rights reserved.
 // 
@@ -50,7 +51,7 @@ Rectangle {
     Clipboard { id: clipboard }
 
     function scaleValueToMixinCount(scaleValue) {
-        var scaleToMixinCount = [6,7,8,9,10,11,12,13,14,16,18,20,22,25];
+        var scaleToMixinCount = [2,3,4,5,6,7,8,9,10,11,12,13,14,16,18,20,22,25];
         if (scaleValue < scaleToMixinCount.length) {
             return scaleToMixinCount[scaleValue];
         } else {
@@ -255,7 +256,7 @@ Rectangle {
                 Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
                 + translationManager.emptyString
               labelButtonText: qsTr("Resolve") + translationManager.emptyString
-              placeholderText: "4.. / 8.."
+              placeholderText: "bx.. / bs.."
               onInputLabelLinkActivated: { appWindow.showPageRequest("AddressBook") }
           }
 

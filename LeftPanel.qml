@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 // 
 // All rights reserved.
 // 
@@ -402,6 +403,32 @@ Rectangle {
                 height: 1
             }
 
+            // ------------- Mining tab ---------------
+            MenuButton {
+                id: miningButton
+                visible: !isAndroid && !isIOS
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Mining") + translationManager.emptyString
+                symbol: qsTr("M") + translationManager.emptyString
+                dotColor: "#86af49"
+                // under: advancedButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = miningButton
+                    panel.miningClicked()
+                }
+            }
+
+            Rectangle {
+                visible: miningButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#d2d2d2"
+                height: 1
+            }
+
             // ------------- Advanced tab ---------------
             MenuButton {
                 id: advancedButton
@@ -424,31 +451,6 @@ Rectangle {
                 height: 1
             }
 
-            // ------------- Mining tab ---------------
-            MenuButton {
-                id: miningButton
-                visible: !isAndroid && !isIOS
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Mining") + translationManager.emptyString
-                symbol: qsTr("M") + translationManager.emptyString
-                dotColor: "#86af49"
-                under: advancedButton
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = miningButton
-                    panel.miningClicked()
-                }
-            }
-
-            Rectangle {
-                visible: miningButton.present
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 16
-                color: "#d2d2d2"
-                height: 1
-            }
             // ------------- TxKey tab ---------------
             MenuButton {
                 id: txkeyButton
@@ -472,6 +474,7 @@ Rectangle {
                 color: "#d2d2d2"
                 height: 1
             }
+
             // ------------- Shared RingDB tab ---------------
             MenuButton {
                 id: sharedringdbButton
@@ -495,7 +498,6 @@ Rectangle {
                 color: "#d2d2d2"
                 height: 1
             }
-
 
             // ------------- Sign/verify tab ---------------
             MenuButton {
@@ -528,6 +530,7 @@ Rectangle {
                 text: qsTr("Settings") + translationManager.emptyString
                 symbol: qsTr("E") + translationManager.emptyString
                 dotColor: "#86af49"
+                under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = settingsButton
@@ -550,7 +553,7 @@ Rectangle {
                 text: qsTr("Seed & Keys") + translationManager.emptyString
                 symbol: qsTr("Y") + translationManager.emptyString
                 dotColor: "#86af49"
-                under: settingsButton
+                under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = keysButton

@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 //
 // All rights reserved.
 //
@@ -74,7 +75,7 @@ ApplicationWindow {
     property bool remoteNodeConnected: false
     property bool androidCloseTapped: false;
     // Default daemon addresses
-    readonly property string localDaemonAddress : persistentSettings.nettype == NetworkType.MAINNET ? "localhost:24182" : persistentSettings.nettype == NetworkType.TESTNET ? "localhost:34182" : "localhost:24182"
+    readonly property string localDaemonAddress : persistentSettings.nettype == NetworkType.MAINNET ? "localhost:24182" : persistentSettings.nettype == NetworkType.TESTNET ? "localhost:34182" : "localhost:44182"
     property string currentDaemonAddress;
     property bool startLocalNodeCancelled: false
     property int estimatedBlockchainSize: 50 // GB
@@ -185,12 +186,6 @@ ApplicationWindow {
     function initialize() {
         console.log("initializing..")
 
-        // Use stored log level
-        if (persistentSettings.logLevel == 5)
-          walletManager.setLogCategories(persistentSettings.logCategories)
-        else
-          walletManager.setLogLevel(persistentSettings.logLevel)
-
         // setup language
         var locale = persistentSettings.locale
         if (locale !== "") {
@@ -299,10 +294,10 @@ ApplicationWindow {
         viewOnly = currentWallet.viewOnly;
 
         // New wallets saves the testnet flag in keys file.
-        if(persistentSettings.nettype != currentWallet.nettype) {
-            console.log("Using network type from keys file")
-            persistentSettings.nettype = currentWallet.nettype;
-        }
+        // if(persistentSettings.nettype != currentWallet.nettype) {
+        //     console.log("Using network type from keys file")
+        //     persistentSettings.nettype = currentWallet.nettype;
+        // }
 
         // connect handlers
         currentWallet.refreshed.connect(onWalletRefresh)
@@ -625,7 +620,7 @@ ApplicationWindow {
             transactionConfirmationPopup.text +=  qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount);
             transactionConfirmationPopup.text +=  qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee);
             transactionConfirmationPopup.text +=  qsTr("\nRingsize: ") + (mixinCount + 1);
-            if(mixinCount !== 6){
+            if(mixinCount !== 2){
                 transactionConfirmationPopup.text +=  qsTr("\n\nWARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.");
             }
             transactionConfirmationPopup.text +=  qsTr("\n\nNumber of transactions: ") + transaction.txCount
@@ -941,6 +936,12 @@ ApplicationWindow {
     onWidthChanged: x -= 0
 
     Component.onCompleted: {
+        // Use stored log level
+        if (persistentSettings.logLevel == 5)
+          walletManager.setLogCategories(persistentSettings.logCategories)
+        else
+          walletManager.setLogLevel(persistentSettings.logLevel)
+
         x = (Screen.width - width) / 2
         y = (Screen.height - maxWindowHeight) / 2
         //
@@ -1006,7 +1007,7 @@ ApplicationWindow {
         property bool   allow_background_mining : false
         property bool   miningIgnoreBattery : true
         property var    nettype: NetworkType.MAINNET
-        property string daemon_address: nettype == NetworkType.TESTNET ? "localhost:24182" : nettype == NetworkType.STAGENET ? "localhost:34182" : "localhost:24182"
+        property string daemon_address: nettype == NetworkType.TESTNET ? "localhost:34182" : nettype == NetworkType.STAGENET ? "localhost:44182" : "localhost:24182"
         property string payment_id
         property int    restore_height : 0
         property bool   is_recovering : false
@@ -1018,6 +1019,7 @@ ApplicationWindow {
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
         property bool miningShowStats: false
+        property bool allow_gpu_mining: false
         property string blockchainDataDir: ""
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
@@ -1285,7 +1287,7 @@ ApplicationWindow {
 //                PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; visible: true }
 //                PropertyChanges { target: titleBar; y: 0 }
-                PropertyChanges { target: titleBar; title: qsTr("BitTube") + translationManager.emptyString }
+                // PropertyChanges { target: titleBar; title: qsTr("BitTube") + translationManager.emptyString }
                 PropertyChanges { target: mobileHeader; visible: isMobile ? true : false }
             }
         ]
@@ -1607,7 +1609,7 @@ ApplicationWindow {
             showMinimizeButton: true
             showMaximizeButton: true
             showWhatIsButton: false
-            showMoneroLogo: true
+            showMoneroLogo: !isMobile
             onCloseClicked: appWindow.close();
             onMaximizeClicked: {
                 appWindow.visibility = appWindow.visibility !== Window.FullScreen ? Window.FullScreen :
@@ -1792,7 +1794,7 @@ ApplicationWindow {
     }
 
     function checkUpdates() {
-        walletManager.checkUpdatesAsync("bittube-gui", "gui")
+        walletManager.checkUpdatesAsync("bittube-wallet-gui", "gui")
     }
 
     Timer {

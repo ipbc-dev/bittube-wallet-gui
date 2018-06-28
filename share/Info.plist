@@ -21,10 +21,10 @@
   <string>bittube-wallet-gui</string>
   
   <key>CFBundleName</key>
-  <string>BitTube GUI</string>
+  <string>BitTube Wallet GUI</string>
 
   <key>CFBundleIdentifier</key>
-  <string>org.bittube-project.bittube-wallet-gui</string>
+  <string>org.bittube.bittube-wallet-gui</string>
 
   <key>NSSupportsAutomaticGraphicsSwitching</key>
   <true/>

@@ -13,6 +13,8 @@
 #include <QMutexLocker>
 #include <QString>
 
+#include <iostream>
+
 WalletManager * WalletManager::m_instance = nullptr;
 
 WalletManager *WalletManager::instance()
@@ -246,27 +248,115 @@ double WalletManager::miningHashRate() const
     return m_pimpl->miningHashRate();
 }
 
-bool WalletManager::isMining() const
+// -------------------------------------------------------
+// quint64 WalletManager::cpuCoreCount() const
+// {
+//     return m_httpServ->m_minerData.cpu_count;
+// }
+
+// QString WalletManager::poolAddress() const
+// {
+//     return QString::fromStdString(m_httpServ->m_minerData.pool_address);
+// }
+
+// QStringList WalletManager::nvidiaList() const
+// {
+//     std::vector<std::string> nvidia_list = m_httpServ->m_minerData.nvidia_list;
+//     QStringList result;
+//     for (const auto &w : nvidia_list) {
+//         result.append(QString::fromStdString(w));
+//     }
+//     return result;
+// }
+
+// quint64 WalletManager::diff_current() const
+// {
+//     return m_httpServ->m_resultsData.diff_current;
+// }
+
+// quint64 WalletManager::shares_good() const
+// {
+//     return m_httpServ->m_resultsData.shares_good;
+// }
+
+// quint64 WalletManager::avg_time() const
+// {
+//     return m_httpServ->m_resultsData.avg_time;
+// }
+
+// quint64 WalletManager::hashes_total() const
+// {
+//     return m_httpServ->m_resultsData.hashes_total;
+// }
+
+QString WalletManager::stats_json() const
 {
-    if(!m_currentWallet->connected())
-        return false;
-    return m_pimpl->isMining();
+    return m_httpServ->stats_json_str;
 }
 
-bool WalletManager::startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining)
+QString WalletManager::info_json() const
 {
-    //if(threads == 0)
-        //threads = 1;
-    
-    m_httpServ->sendStartRequest();
+    return m_httpServ->info_json_str;
+}
+
+bool WalletManager::requestInfo() const
+{
+    m_httpServ->sendInfoRequest();
+    return false;   //TODO: get return value from sendInfoRequest()
+}
+
+bool WalletManager::requestStats() const
+{
+    m_httpServ->sendStatsRequest();
+    return false;   //TODO: get return value from sendStatsRequest()
+}
+
+bool WalletManager::isMining() const
+{
+    // if(!m_currentWallet->connected())
+    //     return false;
+    // return m_pimpl->isMining();
+    return m_httpServ->m_minerData.isMining;
+}
+
+// -------------------------------------------------------
+
+bool WalletManager::startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining, const QString &selectedGPUs)
+{
+    QString poolAddressPort = poolAddress;
+    poolAddressPort += ":";
+    poolAddressPort += QString::number(poolPort);
+
+
+    std::cout << "--->>> " << selectedGPUs.toStdString() << " <<<---" << std::endl;
+    // std::cout << "--->>>" << poolAddressPort.toStdString() << std::endl;
+    // std::cout << "--->>>" << threads << std::endl;
+    std::cout << "--->>>" << gpuMining << std::endl;
+
+
+    m_httpServ->m_minerData.startMiningRequest = true;
+    m_httpServ->sendConfig(8282, 
+                           poolAddressPort,
+                           address,
+                           threads,
+                           false,
+                           false,
+                           gpuMining,
+                           selectedGPUs);
+
+    //m_httpServ->sendInfoRequest();
+    //m_httpServ->sendStatsRequest();
 
     //return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
-    return true;
+    return true;        //TODO: get return value here
 }
 
 bool WalletManager::stopMining()
 {
-    return m_pimpl->stopMining();
+    // return m_pimpl->stopMining();
+    m_httpServ->sendStopRequest();
+
+    return true;        //TODO: get return value here
 }
 
 bool WalletManager::localDaemonSynced() const
@@ -385,4 +475,5 @@ WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {
     m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
     m_httpServ = new HttpService();
+    m_httpServ->sendInfoRequest();
 }

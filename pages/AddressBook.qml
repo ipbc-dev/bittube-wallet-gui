@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 // 
 // All rights reserved.
 // 
@@ -63,7 +64,7 @@ Rectangle {
                 id: addressLine
                 labelText: qsTr("Address") + translationManager.emptyString
                 error: true;
-                placeholderText: qsTr("4.. / 8..") + translationManager.emptyString
+                placeholderText: qsTr("bx.. / bs..") + translationManager.emptyString
             }
         }
 

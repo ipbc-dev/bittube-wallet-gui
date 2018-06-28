@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 // 
 // All rights reserved.
 // 
@@ -47,7 +48,7 @@ Item {
     property string colorHeaderBackground: MoneroComponents.Style.dropdownHeaderBackgroundColor
     property bool headerBorder: false
     property bool headerFontBold: false
-
+    
     height: dropdownHeight
 
     signal changed();

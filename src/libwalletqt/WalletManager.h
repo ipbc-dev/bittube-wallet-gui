@@ -117,7 +117,7 @@ public:
     Q_INVOKABLE bool isDaemonLocal(const QString &daemon_address) const;
 
     Q_INVOKABLE bool isMining() const;
-    Q_INVOKABLE bool startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining);
+    Q_INVOKABLE bool startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining, const QString &selectedGPUs);
     Q_INVOKABLE bool stopMining();
 
     // QML missing such functionality, implementing these helpers here
@@ -145,6 +145,19 @@ public:
     // clear/rename wallet cache
     Q_INVOKABLE bool clearWalletCache(const QString &fileName) const;
 
+    // Q_INVOKABLE quint64 cpuCoreCount() const;
+    // Q_INVOKABLE QString poolAddress() const;
+    // Q_INVOKABLE QStringList nvidiaList() const;
+    // Q_INVOKABLE quint64 diff_current() const;
+    // Q_INVOKABLE quint64 shares_good() const;
+    // Q_INVOKABLE quint64 avg_time() const;
+    // Q_INVOKABLE quint64 hashes_total() const;
+
+    Q_INVOKABLE QString stats_json() const;
+    Q_INVOKABLE QString info_json() const;
+
+    Q_INVOKABLE bool requestInfo() const;
+    Q_INVOKABLE bool requestStats() const;
 signals:
 
     void walletOpened(Wallet * wallet);

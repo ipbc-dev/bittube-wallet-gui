@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The BitTube Project
 // 
 // All rights reserved.
 // 
@@ -232,7 +233,7 @@ ColumnLayout {
         appWindow.persistentSettings.auto_donations_enabled = false //settings.auto_donations_enabled
         appWindow.persistentSettings.auto_donations_amount = false //settings.auto_donations_amount
         appWindow.persistentSettings.restore_height = (isNaN(settings.restore_height))? 0 : settings.restore_height
-        appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering
+        appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering      
     }
 
     // reading settings from persistent storage

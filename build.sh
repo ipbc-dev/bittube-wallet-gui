@@ -72,7 +72,7 @@ if [[ $platform == *bsd* ]]; then
 fi
 
 # build libwallet
-#./get_libwallet_api.sh $BUILD_TYPE
+# ./get_libwallet_api.sh $BUILD_TYPE
  
 # build zxcvbn
 if [ "$DISABLE_PASS_STRENGTH_METER" != true ]; then
@@ -112,7 +112,7 @@ fi
 $QMAKE ../bittube-wallet-gui.pro "$CONFIG" || exit
 $MAKE || exit 
 
-# Copy monerod to bin folder
+# Copy bittubed to bin folder
 if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
 cp ../$BITTUBE_DIR/bin/$BITTUBED_EXEC $BIN_PATH
 fi
