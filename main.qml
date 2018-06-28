@@ -185,12 +185,6 @@ ApplicationWindow {
     function initialize() {
         console.log("initializing..")
 
-        // Use stored log level
-        if (persistentSettings.logLevel == 5)
-          walletManager.setLogCategories(persistentSettings.logCategories)
-        else
-          walletManager.setLogLevel(persistentSettings.logLevel)
-
         // setup language
         var locale = persistentSettings.locale
         if (locale !== "") {
@@ -941,6 +935,12 @@ ApplicationWindow {
     onWidthChanged: x -= 0
 
     Component.onCompleted: {
+        // Use stored log level
+        if (persistentSettings.logLevel == 5)
+          walletManager.setLogCategories(persistentSettings.logCategories)
+        else
+          walletManager.setLogLevel(persistentSettings.logLevel)
+
         x = (Screen.width - width) / 2
         y = (Screen.height - maxWindowHeight) / 2
         //
