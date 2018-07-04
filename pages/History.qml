@@ -189,7 +189,7 @@ Rectangle {
                         id: fromDatePicker
                         Layout.fillWidth: true
                         width: 100 * scaleRatio
-                        inputLabel.text: "Date from"
+                        inputLabel.text: qsTr("Date from") + translationManager.emptyString
 
                         onCurrentDateChanged: {
                             onFilterChanged()
@@ -212,7 +212,7 @@ Rectangle {
                         id: toDatePicker
                         Layout.fillWidth: true
                         width: 100 * scaleRatio
-                        inputLabel.text: "Date to"
+                        inputLabel.text: qsTr("Date to") + translationManager.emptyString
 
                         onCurrentDateChanged: {
                             onFilterChanged()
@@ -232,10 +232,16 @@ Rectangle {
                 }
 
                 ListModel {
-                     id: priorityModelV5
+                    id: priorityModelV5
 
-                     ListElement { column1: qsTr("Block height") ; column2: "";}
-                     ListElement { column1: qsTr("Date") ; column2: ""; }
+                    ListElement { 
+                        column1: qsTr("Block height");
+                        column2: "";
+                    }
+                    ListElement {
+                        column1: qsTr("Date");
+                        column2: "";
+                    }
                  }
 
                 StandardDropdown {
@@ -265,7 +271,6 @@ Rectangle {
                         }
                         model.sort(0, Qt.DescendingOrder);
                     }
-
                 }
             }
         }

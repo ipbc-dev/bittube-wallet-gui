@@ -223,6 +223,35 @@
     </message>
 </context>
 <context>
+    <name>History</name>
+    <message>
+        <location filename="../pages/History.qml" line="162"/>
+        <source>Search</source>
+        <translation>Suchen</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="192"/>
+        <source>Date from</source>
+        <translation>Datum von</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="215"/>
+        <source>Date to</source>
+        <translation>Datum bis</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="230"/>
+        <source>Sort</source>
+        <translation>Suchen nach</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="279"/>
+        <source>No history...</source>
+        <translation>Keine Transaktionen vorhanden...</translation>
+    </message>
+</context>
+
+<context>
     <name>HistoryTableInnerColumn</name>
     <message>
         <location filename="../components/HistoryTableInnerColumn.qml" line="87"/>
@@ -670,7 +699,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="482"/>
         <source>Avg result time</source>
-        <translation>durchschnittliche Ergebniszeit</translation>
+        <translation>Durchschnittliche Ergebniszeit</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="486"/>
@@ -700,9 +729,23 @@
     <message>
         <location filename="../pages/Mining.qml" line="792"/>
         <source>Pool ping time</source>
-        <translation>Pool ping-zeiten</translation>
+        <translation>Pool ping-Zeiten</translation>
     </message>
-
+    <message>
+        <location filename="../pages/Mining.qml" line="1073"/>
+        <source>Total</source>
+        <translation>Total</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="1080"/>
+        <source>Highest</source>
+        <translation>Höchste</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="1095"/>
+        <source> Seconds</source>
+        <translation> Sekunden</translation>
+    </message>
 
 <!--     <message>
         <location filename="../pages/Mining.qml" line="172"/>
