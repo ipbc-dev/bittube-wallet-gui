@@ -581,7 +581,7 @@ Rectangle {
             anchors.rightMargin: 0
             anchors.bottom: networkStatus.top;
             height: 10 * scaleRatio
-            color: "transparent"
+            color: "#eeeeee"
         }
 
         NetworkStatusItem {
@@ -593,6 +593,7 @@ Rectangle {
             anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
             height: 48 * scaleRatio
+            color: "#eeeeee"
         }
 
         ProgressBar {
@@ -603,6 +604,7 @@ Rectangle {
             height: 48 * scaleRatio
             syncType: qsTr("Wallet")
             visible: networkStatus.connected
+            color: "#eeeeee"
         }
 
         ProgressBar {
@@ -613,6 +615,7 @@ Rectangle {
             syncType: qsTr("Daemon")
             visible: networkStatus.connected
             height: 62 * scaleRatio
+            color: "#eeeeee"
         }
     } // menuRect
 
