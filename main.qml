@@ -851,7 +851,7 @@ ApplicationWindow {
                 informationPopup.text = qsTr("Bad signature");
                 informationPopup.icon = StandardIcon.Critical;
             } else if (received > 0) {
-                received = received / 1e12
+                received = received / 1e8
                 if (in_pool) {
                     informationPopup.text = qsTr("This address received %1 TUBE, but the transaction is not yet mined").arg(received);
                 }
