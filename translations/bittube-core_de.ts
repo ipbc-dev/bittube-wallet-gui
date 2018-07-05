@@ -26,12 +26,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
         <source>Paste 64 hexadecimal characters</source>
-        <translation>Füge 64 hexadezimale Zeichen ein</translation>
+        <translation>64 hexadezimale Zeichen einfügen</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="82"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Beschreibung &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</translation>
+        <translation>Beschreibung &lt;font size=&apos;2&apos;&gt;(optional)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="83"/>
@@ -335,7 +335,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="115"/>
         <source>Mnemonic seed</source>
-        <translation>Mnemonischer Seed</translation>
+        <translation>MMnemonic Seed</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="162"/>
@@ -957,12 +957,16 @@
         <location filename="../pages/Receive.qml" line="521"/>
         <source>Help</source>
         <translation>Hilfe</translation>
+        </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="435"/>
+        <source>&lt;p&gt;This QR code includes the address you selected above and the amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Dieser QR-Code enthält die oben ausgewählte Adresse und den von Ihnen eingegebenen Betrag. Teilen Sie es mit anderen (rechte Maustaste -> Speichern), damit sie Ihnen leichter genaue Beträge senden können.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="206"/>
-        <location filename="../pages/Receive.qml" line="435"/>
         <source>&lt;p&gt;This QR code includes the address you selected above andthe amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Dieser QR-Code enthält die oben gewählte Adresse und den unten eingegebenen Betrag. Teile ihn mit anderen (Rechtsklick-&gt;Speichern), sodass diese dir einfacher exakte Beträge senden können.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Dies ist Ihre Adresse der zugrunde liegenden Wallet. Zum Teilen dieser Adresse, klicken Sie auf das rechts stehende Symbol und sie wird in die Zwischenablage kopiert.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="373"/>
@@ -1665,8 +1669,8 @@ Die bisherige Wallet-Cache-Datei wird umbenannt und kann später wiederhergestel
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="167"/>
-        <source>Default (x1 fee)</source>
-        <translation>Standard (1-fache Gebühr)</translation>
+        <source>Default</source>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="168"/>
@@ -1677,6 +1681,11 @@ Die bisherige Wallet-Cache-Datei wird umbenannt und kann später wiederhergestel
         <location filename="../components/StandardDropdown.qml" line="169"/>
         <source>Fastest (x41.5 fee)</source>
         <translation>Schnellste (41,5-fache Gebühr)</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="169"/>
+        <source>Normal (x1 fee)</source>
+        <translation>Normal (1-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="170"/>
@@ -2194,7 +2203,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
         <source>To be able to communicate with the BitTube network your wallet needs to be connected to a BitTube node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Um mit dem BitTube-Netzwerk zu kommunizieren muss dein Wallet mit einem BitTube Node verbunden sein. Für die beste Privatsphäre wird es empfohlen einen eigenen Node laufen zu lassen</translation>
+        <translation>Um mit dem BitTube-Netzwerk zu kommunizieren, muss Ihre Wallet mit einem BitTube-Node verbunden sein. Für die beste Privatsphäre wird empfohlen, einen eigenen Node laufen zu lassen.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
@@ -2220,6 +2229,11 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
         <location filename="../wizard/WizardDaemonSettings.qml" line="210"/>
         <source>Connect to a remote node</source>
         <translation>Mit einem remote-Node verbinden</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="100"/>
+        <source>Daemon settings</source>
+        <translation>Daemon-Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -2292,7 +2306,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardFinish.qml" line="69"/>
         <source>Backup seed</source>
-        <translation>Mnemonischer Seed</translation>
+        <translation>Mnemonic Seed</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="70"/>
@@ -2322,7 +2336,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardFinish.qml" line="87"/>
         <source>New wallet details:</source>
-        <translation>Details des neuen Wallets:</translation>
+        <translation>Details der neuen Wallet:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="91"/>
@@ -2332,7 +2346,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardFinish.qml" line="137"/>
         <source>You’re all set up!</source>
-        <translation>Du bist fertig!</translation>
+        <translation>Sie sind fertig!</translation>
     </message>
 </context>
 <context>
@@ -2340,12 +2354,12 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardMain.qml" line="183"/>
         <source>A wallet with same name already exists. Please change wallet name</source>
-        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte wähle einen anderen Namen</translation>
+        <translation>Eine Wallet mit diesem Namen ist bereits vorhanden. Bitte wählen Sie einen anderen Namen.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="367"/>
         <source>USE BITTUBE</source>
-        <translation>BENUTZE BITTUBE</translation>
+        <translation>Zur BitTube-Wallet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="380"/>
@@ -2384,7 +2398,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="184"/>
         <source>Restore from seed</source>
-        <translation>Mit mnemonischem Seed wiederherstellen</translation>
+        <translation>Mit Mnemonic Seed wiederherstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="194"/>
@@ -2419,7 +2433,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="315"/>
         <source>Your wallet is stored in</source>
-        <translation>Dein Wallet ist gespeichert unter</translation>
+        <translation>Ihre Wallet ist gespeichert in</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="345"/>
@@ -2432,7 +2446,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="45"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation>Gib deinen aus 25 (oder 24) Wörtern bestehenden mnemonischen Seed ein</translation>
+        <translation>Geben Sie den aus 25 (oder 24) Wörtern bestehenden Mnemonic Seed ein</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="65"/>
@@ -2455,22 +2469,22 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardOptions.qml" line="86"/>
         <source>Please select one of the following options:</source>
-        <translation>Bitte wähle eine der folgenden Optionen:</translation>
+        <translation>Bitte wählen Sie eine der folgenden Optionen:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="142"/>
         <source>Create a new wallet</source>
-        <translation>Erstelle ein neues Wallet</translation>
+        <translation>Eine neue Wallet erstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="183"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Stelle Wallet mit Schlüssel oder mnemonischem Seed wieder her</translation>
+        <translation>Wallet mit Schlüssel oder Mnemonic Seed wiederherstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="226"/>
         <source>Open a wallet from file</source>
-        <translation>Öffne Wallet von einer Datei</translation>
+        <translation>Wallet mit einer Datei öffnen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="244"/>
@@ -2489,14 +2503,14 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
-        <translation>Erstelle ein Passwort für dein Wallet</translation>
+        <translation>Erstellen Sie ein Passwort für Ihre Wallet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation> &lt;br&gt;Info: Das Passwort kann nicht wiederhergestellt werden. Wenn Du es vergisst, kannst Du nur Zugriff auf Dein Wallet erhalten, indem Du den&lt;br/&gt;
-                        aus 25 Wörtern bestehenden mnemonischen Seed eingibst. Wähle ein sicheres Passwort (bestehend aus Buchstaben, Zahlen und/oder Sonderzeichen):</translation>
+        <translation> &lt;br&gt;Info: Das Passwort kann nicht wiederhergestellt werden. Wenn Sie es vergessen, können Sie nur Zugriff auf Ihre Wallet erhalten, indem Sie den&lt;br/&gt;
+                        aus 25 Wörtern bestehenden Mnemonic Seed eingeben. Wählen Sie ein sicheres Passwort (bestehend aus Buchstaben, Zahlen und/oder Sonderzeichen):</translation>
     </message>
 </context>
 <context>
@@ -2705,7 +2719,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../main.qml" line="535"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Bitte überprüfe dein Wallet und Daemon-Log auf Fehler. Du kannst auch versuchen %1 manuell zu starten.</translation>
+        <translation>Bitte überprüfen Sie Ihre Wallet und Daemon-Log auf Fehler. Sie können auch versuchen, %1 manuell zu starten.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="739"/>
