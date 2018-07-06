@@ -122,7 +122,7 @@ Window {
             MoneroComponents.StandardButton {
                 id: cancelButton
                 fontSize: 14
-                text: qsTr("Use custom settings")
+                text: qsTr("Use custom settings") + translationManager.emptyString
 
                 onClicked: {
                     timer.stop();

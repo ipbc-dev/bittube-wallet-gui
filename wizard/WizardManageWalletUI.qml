@@ -313,7 +313,7 @@ ColumnLayout {
             fontSize: 14
             fontFamily: "Arial"
             fontColor: "#555555"
-            text: qsTr("Your wallet is stored in") + ": " + fileUrlInput.text;
+            text: qsTr("Your wallet is stored in") + translationManager.emptyString + ": " + fileUrlInput.text;
         }
 
         LineEdit {

@@ -21,17 +21,17 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
         <source>bx.. / bs..</source>
-        <translation type="unfinished"></translation>
+        <translation>bx.. / bs..</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
         <source>Paste 64 hexadecimal characters</source>
-        <translation>Füge 64 hexadezimale Zeichen ein</translation>
+        <translation>64 hexadezimale Zeichen einfügen</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="82"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Beschreibung &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</translation>
+        <translation>Beschreibung &lt;font size=&apos;2&apos;&gt;(optional)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="83"/>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="177"/>
         <source>command + enter (e.g help)</source>
-        <translation>Befehl + Eingabe (z. B. help)</translation>
+        <translation>Befehl + Eingabe (z.B. Hilfe)</translation>
     </message>
 </context>
 <context>
@@ -184,7 +184,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
         <source>Address copied to clipboard</source>
-        <translation>Adresse in die Zwischenablage kopiert</translation>
+        <translation>Adresse in Zwischenablage kopiert</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="343"/>
@@ -222,6 +222,35 @@
         <translation>Gebühr</translation>
     </message>
 </context>
+<context>
+    <name>History</name>
+    <message>
+        <location filename="../pages/History.qml" line="162"/>
+        <source>Search</source>
+        <translation>Suchen</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="192"/>
+        <source>Date from</source>
+        <translation>Datum von</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="215"/>
+        <source>Date to</source>
+        <translation>Datum bis</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="230"/>
+        <source>Sort</source>
+        <translation>Suchen nach</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="279"/>
+        <source>No history...</source>
+        <translation>Keine Transaktionen vorhanden...</translation>
+    </message>
+</context>
+
 <context>
     <name>HistoryTableInnerColumn</name>
     <message>
@@ -306,7 +335,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="115"/>
         <source>Mnemonic seed</source>
-        <translation>Mnemonischer Seed</translation>
+        <translation>Mnemonic Seed</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="162"/>
@@ -321,7 +350,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="169"/>
         <source>Keys copied to clipboard</source>
-        <translation>Schlüssel in die Zwischenablage kopiert</translation>
+        <translation>Schlüssel in Zwischenablage kopiert</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="182"/>
@@ -396,7 +425,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="457"/>
         <source>Prove/check</source>
-        <translation>Beweis/prüfen</translation>
+        <translation>Beweisen/prüfen</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="458"/>
@@ -411,7 +440,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="137"/>
         <source>View Only</source>
-        <translation>View-only</translation>
+        <translation>Nur zur Ansicht</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="124"/>
@@ -555,7 +584,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="77"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation>Der Daemon muss synchronisiert sein before Sie minen können</translation>
+        <translation>Ihr Daemon muss synchronisiert sein, bevor Sie minen können</translation>
     </message>
 <!--     <message>
         <location filename="../pages/Mining.qml" line="74"/>
@@ -590,17 +619,17 @@
     <message>
         <location filename="../pages/Mining.qml" line="121"/>
         <source>Enable mining when running on battery</source>
-        <translation>Aktiviere Mining im Akkubetrieb</translation>
+        <translation>Mining im Akkubetrieb aktivieren</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="129"/>
         <source>Manage miner</source>
-        <translation>Verwalte Miner</translation>
+        <translation>Miner verwalten</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="201"/>
         <source>Start mining</source>
-        <translation>Starte Mining</translation>
+        <translation>Mining starten</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="208"/>
@@ -615,12 +644,12 @@
     <message>
         <location filename="../pages/Mining.qml" line="211"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Mining ist nur auf dem lokalen Daemon verfügbar. Starte den lokalen Daemon, um zu minen.&lt;br&gt;</translation>
+        <translation>Mining ist nur auf dem lokalen Daemon verfügbar. Starten Sie den lokalen Daemon, um zu minen.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="223"/>
         <source>Stop mining</source>
-        <translation>Beende Mining</translation>
+        <translation>Mining beenden</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="240"/>
@@ -635,22 +664,22 @@
     <message>
         <location filename="../pages/Mining.qml" line="320"/>
         <source>Thread ID</source>
-        <translation>Thread ID</translation>
+        <translation>Thread-ID</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="332"/>
         <source>10s</source>
-        <translation>10s</translation>
+        <translation>10 s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="344"/>
         <source>60s</source>
-        <translation>60s</translation>
+        <translation>60 s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="356"/>
         <source>15m</source>
-        <translation>15m</translation>
+        <translation>15 m</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="456"/>
@@ -670,17 +699,17 @@
     <message>
         <location filename="../pages/Mining.qml" line="482"/>
         <source>Avg result time</source>
-        <translation>durchschnittliche Ergebniszeit</translation>
+        <translation>Durchschnittliche Ergebniszeit</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="486"/>
         <source>Pool-side hashes</source>
-        <translation>Pool hashes</translation>
+        <translation>Pool-Seiten-Hashes</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="560"/>
         <source>Top 10 best results found</source>
-        <translation>Top 10 besten Resultate</translation>
+        <translation>Top 10 der besten Resultate</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="768"/>
@@ -690,7 +719,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="784"/>
         <source>Pool address</source>
-        <translation>Pool Adresse</translation>
+        <translation>Pool-Adresse</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="788"/>
@@ -700,9 +729,23 @@
     <message>
         <location filename="../pages/Mining.qml" line="792"/>
         <source>Pool ping time</source>
-        <translation>Pool ping-zeiten</translation>
+        <translation>Pool ping-Zeiten</translation>
     </message>
-
+    <message>
+        <location filename="../pages/Mining.qml" line="1073"/>
+        <source>Total</source>
+        <translation>Total</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="1080"/>
+        <source>Highest</source>
+        <translation>Höchste</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="1095"/>
+        <source> Seconds</source>
+        <translation> Sekunden</translation>
+    </message>
 
 <!--     <message>
         <location filename="../pages/Mining.qml" line="172"/>
@@ -753,7 +796,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Remote node</source>
-        <translation>remote-Node</translation>
+        <translation>Remote-Node</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="49"/>
@@ -799,7 +842,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="86"/>
         <source>Please enter wallet password</source>
-        <translation>Bitte Wallet-Passwort eingeben</translation>
+        <translation>Bitte Walletpasswort eingeben</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="86"/>
@@ -845,7 +888,7 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="70"/>
         <source>Synchronizing %1</source>
-        <translation>Synchronisiere %1</translation>
+        <translation>Synchronisiert %1</translation>
     </message>
 </context>
 <context>
@@ -881,12 +924,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
         <source>With more TUBE</source>
-        <translation>Mit mehr TUBE</translation>
+        <translation>Mit mehr TUBEs</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="139"/>
         <source>With not enough TUBE</source>
-        <translation>Mit nicht genug TUBE</translation>
+        <translation>Mit nicht genug TUBEs</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="141"/>
@@ -901,7 +944,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="165"/>
         <source>Set the label of the selected address:</source>
-        <translation>Setze die Beschreibung der gewählten Adresse:</translation>
+        <translation>Beschreibung der gewählten Adresse hinzufügen:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="200"/>
@@ -914,22 +957,26 @@
         <location filename="../pages/Receive.qml" line="521"/>
         <source>Help</source>
         <translation>Hilfe</translation>
+        </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="435"/>
+        <source>&lt;p&gt;This QR code includes the address you selected above and the amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Dieser QR-Code enthält die oben ausgewählte Adresse und den von Ihnen eingegebenen Betrag. Teilen Sie es mit anderen (rechte Maustaste -> Speichern), so können Ihnen leichter genaue Beträge gesendet werden.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="206"/>
-        <location filename="../pages/Receive.qml" line="435"/>
         <source>&lt;p&gt;This QR code includes the address you selected above andthe amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Dieser QR-Code enthält die oben gewählte Adresse und den unten eingegebenen Betrag. Teile ihn mit anderen (Rechtsklick-&gt;Speichern), sodass diese dir einfacher exakte Beträge senden können.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Dies ist Ihre Adresse der zugrunde liegenden Wallet. Zum Teilen dieser Adresse, klicken Sie auf das rechts stehende Symbol und sie wird in die Zwischenablage kopiert.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="373"/>
         <source>Create new address</source>
-        <translation>Erstelle neue Adresse</translation>
+        <translation>Neue Adresse erstellen</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="388"/>
         <source>Set the label of the new address:</source>
-        <translation>Setze die Beschreibung der neuen Adresse:</translation>
+        <translation>Beschreibung der neuen Adresse hinzufügen:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="389"/>
@@ -1622,8 +1669,8 @@ Die bisherige Wallet-Cache-Datei wird umbenannt und kann später wiederhergestel
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="167"/>
-        <source>Default (x1 fee)</source>
-        <translation>Standard (1-fache Gebühr)</translation>
+        <source>Default</source>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="168"/>
@@ -1634,6 +1681,11 @@ Die bisherige Wallet-Cache-Datei wird umbenannt und kann später wiederhergestel
         <location filename="../components/StandardDropdown.qml" line="169"/>
         <source>Fastest (x41.5 fee)</source>
         <translation>Schnellste (41,5-fache Gebühr)</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="169"/>
+        <source>Normal (x1 fee)</source>
+        <translation>Normal (1-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="170"/>
@@ -2024,13 +2076,13 @@ Ringgröße: </translation>
         <location filename="../pages/TxKey.qml" line="70"/>
         <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
-        <translation>Erstelle einen Nachweis deiner Eingangs- und Ausgangszahlungen, indem du die Transaktions-ID, die Empfängeradresse und eine optionale Nachricht angibst. Für den Fall von Ausgangszahlungen, kannst du einen Sendenachweis erstellen, der die Urheberschaft einer Transaktion nachweist. In diesem Fall musst du die Empfängeradresse nicht angeben.</translation>
+        <translation>Erstellen Sie einen Nachweis Ihrer Eingangs- und Ausgangszahlungen, indem Sie die Transaktions-ID, die Empfängeradresse und eine Nachricht angeben. Für den Fall einer Ausgangszahlung, können Sie einen Sendenachweis erstellen, der die Urheberschaft einer Transaktion nachweist. In diesem Fall müssen Sie die Empfängeradresse nicht angeben.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="84"/>
         <location filename="../pages/TxKey.qml" line="159"/>
         <source>Paste tx ID</source>
-        <translation>Füge Tx-ID ein</translation>
+        <translation>Tx-ID hinzufügen</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="107"/>
@@ -2059,8 +2111,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
         <translatorcomment>Sendenachweis richtig? Nochmal nachsehen.</translatorcomment>
-        <translation>Vergewissere dich, dass das Geld an eine Adresse gezahlt wurde, indem du die Transaktions-ID, die Empfängeradresse, die Nachricht, welche zum signieren genutzt wurde, und die Signatur angibst.
-Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werden.</translation>
+        <translation>Vergewissern Sie sich, dass die Coins an eine Adresse gezahlt wurde, indem Sie die Transaktions-ID, die Empfängeradresse, die Nachricht, welche zum Signieren genutzt wurde, und die Signatur angeben. Für den Fall mit Sendenachweis, muss die Empfängeradresse nicht angegeben werden.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="197"/>
@@ -2151,7 +2202,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
         <source>To be able to communicate with the BitTube network your wallet needs to be connected to a BitTube node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Um mit dem BitTube-Netzwerk zu kommunizieren muss dein Wallet mit einem BitTube Node verbunden sein. Für die beste Privatsphäre wird es empfohlen einen eigenen Node laufen zu lassen</translation>
+        <translation>Um mit dem BitTube-Netzwerk zu kommunizieren, muss Ihre Wallet mit einem BitTube-Node verbunden sein. Für die beste Privatsphäre wird empfohlen, einen eigenen Node laufen zu lassen.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
@@ -2177,6 +2228,11 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
         <location filename="../wizard/WizardDaemonSettings.qml" line="210"/>
         <source>Connect to a remote node</source>
         <translation>Mit einem remote-Node verbinden</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="100"/>
+        <source>Daemon settings</source>
+        <translation>Daemon-Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -2249,7 +2305,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardFinish.qml" line="69"/>
         <source>Backup seed</source>
-        <translation>Mnemonischer Seed</translation>
+        <translation>Mnemonic Seed</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="70"/>
@@ -2279,7 +2335,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardFinish.qml" line="87"/>
         <source>New wallet details:</source>
-        <translation>Details des neuen Wallets:</translation>
+        <translation>Details der neuen Wallet:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="91"/>
@@ -2289,7 +2345,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardFinish.qml" line="137"/>
         <source>You’re all set up!</source>
-        <translation>Du bist fertig!</translation>
+        <translation>Sie sind fertig!</translation>
     </message>
 </context>
 <context>
@@ -2297,12 +2353,12 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardMain.qml" line="183"/>
         <source>A wallet with same name already exists. Please change wallet name</source>
-        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte wähle einen anderen Namen</translation>
+        <translation>Eine Wallet mit diesem Namen ist bereits vorhanden. Bitte wählen Sie einen anderen Namen.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="367"/>
         <source>USE BITTUBE</source>
-        <translation>BENUTZE BITTUBE</translation>
+        <translation>Zur BitTube-Wallet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="380"/>
@@ -2341,7 +2397,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="184"/>
         <source>Restore from seed</source>
-        <translation>Mit mnemonischem Seed wiederherstellen</translation>
+        <translation>Mit Mnemonic Seed wiederherstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="194"/>
@@ -2376,7 +2432,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="315"/>
         <source>Your wallet is stored in</source>
-        <translation>Dein Wallet ist gespeichert unter</translation>
+        <translation>Ihre Wallet ist gespeichert in</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="345"/>
@@ -2389,7 +2445,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="45"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation>Gib deinen aus 25 (oder 24) Wörtern bestehenden mnemonischen Seed ein</translation>
+        <translation>Geben Sie den aus 25 (oder 24) Wörtern bestehenden Mnemonic Seed ein</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="65"/>
@@ -2412,22 +2468,22 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardOptions.qml" line="86"/>
         <source>Please select one of the following options:</source>
-        <translation>Bitte wähle eine der folgenden Optionen:</translation>
+        <translation>Bitte wählen Sie eine der folgenden Optionen:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="142"/>
         <source>Create a new wallet</source>
-        <translation>Erstelle ein neues Wallet</translation>
+        <translation>Eine neue Wallet erstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="183"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Stelle Wallet mit Schlüssel oder mnemonischem Seed wieder her</translation>
+        <translation>Wallet mit Schlüssel oder Mnemonic Seed wiederherstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="226"/>
         <source>Open a wallet from file</source>
-        <translation>Öffne Wallet von einer Datei</translation>
+        <translation>Wallet mit einer Datei öffnen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="244"/>
@@ -2446,14 +2502,14 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
-        <translation>Erstelle ein Passwort für dein Wallet</translation>
+        <translation>Erstellen Sie ein Passwort für Ihre Wallet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation> &lt;br&gt;Info: Das Passwort kann nicht wiederhergestellt werden. Wenn Du es vergisst, kannst Du nur Zugriff auf Dein Wallet erhalten, indem Du den&lt;br/&gt;
-                        aus 25 Wörtern bestehenden mnemonischen Seed eingibst. Wähle ein sicheres Passwort (bestehend aus Buchstaben, Zahlen und/oder Sonderzeichen):</translation>
+        <translation> &lt;br&gt;Info: Das Passwort kann nicht wiederhergestellt werden. Wenn Sie es vergessen, können Sie nur Zugriff auf Ihre Wallet erhalten, indem Sie den&lt;br/&gt;
+                        aus 25 Wörtern bestehenden Mnemonic Seed eingeben. Wählen Sie ein sicheres Passwort (bestehend aus Buchstaben, Zahlen und/oder Sonderzeichen):</translation>
     </message>
 </context>
 <context>
@@ -2662,7 +2718,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../main.qml" line="535"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Bitte überprüfe dein Wallet und Daemon-Log auf Fehler. Du kannst auch versuchen %1 manuell zu starten.</translation>
+        <translation>Bitte überprüfen Sie Ihre Wallet und Daemon-Log auf Fehler. Sie können auch versuchen, %1 manuell zu starten.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="739"/>

@@ -1070,14 +1070,14 @@ Rectangle {
         if (totalSixtySecondHashRate == "null"){ totalSixtySecondHashRate = ""};
         if (totalFifteenMinuteHashRate == "null"){ totalFifteenMinuteHashRate = ""};
 
-        miningStatsTableModel.append({  "index": "Total", "tenSecondHashRate": totalTenSecondHashRate, "sixtySecondHashRate": totalSixtySecondHashRate, "fifteenMinuteHashRate": totalFifteenMinuteHashRate});
+        miningStatsTableModel.append({  "index": qsTr("Total") + translationManager.emptyString, "tenSecondHashRate": totalTenSecondHashRate, "sixtySecondHashRate": totalSixtySecondHashRate, "fifteenMinuteHashRate": totalFifteenMinuteHashRate});
 
         //append Highgest
         var highestTenSecondHashRate = String(stats_json.hashrate.highest);
 
         if (highestTenSecondHashRate == "null"){ highestTenSecondHashRate = ""};
 
-        miningStatsTableModel.append({  "index": "Highest", "tenSecondHashRate": highestTenSecondHashRate, "sixtySecondHashRate": "", "fifteenMinuteHashRate": ""});
+        miningStatsTableModel.append({  "index": qsTr("Highest") + translationManager.emptyString, "tenSecondHashRate": highestTenSecondHashRate, "sixtySecondHashRate": "", "fifteenMinuteHashRate": ""});
         miningStatsListView.model = 0;
         miningStatsListView.model = miningStatsTableModel;
 
@@ -1092,7 +1092,7 @@ Rectangle {
 
         //update connection report table
         connectionReportTableModel.set(0, {"value": String(stats_json.connection.pool)});
-        connectionReportTableModel.set(1, {"value": String(stats_json.connection.uptime) + " seconds"});
+        connectionReportTableModel.set(1, {"value": String(stats_json.connection.uptime) + qsTr(" Seconds") + translationManager.emptyString});
         connectionReportTableModel.set(2, {"value": String(stats_json.connection.ping)});
 
         //populate h/s label

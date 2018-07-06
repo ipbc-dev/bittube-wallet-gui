@@ -97,7 +97,7 @@ ColumnLayout {
             horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
-            text: "Daemon settings"
+            text: qsTr("Daemon settings") + translationManager.emptyString
 
         }
 

@@ -225,6 +225,35 @@
     </message>
 </context>
 <context>
+    <name>History</name>
+    <message>
+        <location filename="../pages/History.qml" line="162"/>
+        <source>Search</source>
+        <translation>Buscar</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="192"/>
+        <source>Date from</source>
+        <translation>Fecha desde</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="215"/>
+        <source>Date to</source>
+        <translation>Fecha hasta</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="230"/>
+        <source>Sort</source>
+        <translation>Buscar en</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="279"/>
+        <source>No history...</source>
+        <translation>No hay transacciones...</translation>
+    </message>
+</context>
+
+<context>
     <name>HistoryTableInnerColumn</name>
     <message>
         <location filename="../components/HistoryTableInnerColumn.qml" line="87"/>
@@ -706,7 +735,21 @@
         <source>Pool ping time</source>
         <translation>Tiempo ping pool</translation>
     </message>
-
+    <message>
+        <location filename="../pages/Mining.qml" line="1073"/>
+        <source>Total</source>
+        <translation>Total</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="1080"/>
+        <source>Highest</source>
+        <translation>Mas alto</translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="1095"/>
+        <source> Seconds</source>
+        <translation> Segundos</translation>
+    </message>
 
 <!--     <message>
         <location filename="../pages/Mining.qml" line="172"/>
