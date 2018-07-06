@@ -21,7 +21,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
         <source>bx.. / bs..</source>
-        <translation type="unfinished"></translation>
+        <translation>bx.. / bs..</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="177"/>
         <source>command + enter (e.g help)</source>
-        <translation>Befehl + Eingabe (z. B. help)</translation>
+        <translation>Befehl + Eingabe (z.B. Hilfe)</translation>
     </message>
 </context>
 <context>
@@ -184,7 +184,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
         <source>Address copied to clipboard</source>
-        <translation>Adresse in die Zwischenablage kopiert</translation>
+        <translation>Adresse in Zwischenablage kopiert</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="343"/>
@@ -335,7 +335,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="115"/>
         <source>Mnemonic seed</source>
-        <translation>MMnemonic Seed</translation>
+        <translation>Mnemonic Seed</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="162"/>
@@ -350,7 +350,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="169"/>
         <source>Keys copied to clipboard</source>
-        <translation>Schlüssel in die Zwischenablage kopiert</translation>
+        <translation>Schlüssel in Zwischenablage kopiert</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="182"/>
@@ -425,7 +425,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="457"/>
         <source>Prove/check</source>
-        <translation>Beweis/prüfen</translation>
+        <translation>Beweisen/prüfen</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="458"/>
@@ -440,7 +440,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="137"/>
         <source>View Only</source>
-        <translation>View-only</translation>
+        <translation>Nur zur Ansicht</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="124"/>
@@ -584,7 +584,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="77"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation>Der Daemon muss synchronisiert sein before Sie minen können</translation>
+        <translation>Ihr Daemon muss synchronisiert sein, bevor Sie minen können</translation>
     </message>
 <!--     <message>
         <location filename="../pages/Mining.qml" line="74"/>
@@ -619,17 +619,17 @@
     <message>
         <location filename="../pages/Mining.qml" line="121"/>
         <source>Enable mining when running on battery</source>
-        <translation>Aktiviere Mining im Akkubetrieb</translation>
+        <translation>Mining im Akkubetrieb aktivieren</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="129"/>
         <source>Manage miner</source>
-        <translation>Verwalte Miner</translation>
+        <translation>Miner verwalten</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="201"/>
         <source>Start mining</source>
-        <translation>Starte Mining</translation>
+        <translation>Mining starten</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="208"/>
@@ -644,12 +644,12 @@
     <message>
         <location filename="../pages/Mining.qml" line="211"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Mining ist nur auf dem lokalen Daemon verfügbar. Starte den lokalen Daemon, um zu minen.&lt;br&gt;</translation>
+        <translation>Mining ist nur auf dem lokalen Daemon verfügbar. Starten Sie den lokalen Daemon, um zu minen.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="223"/>
         <source>Stop mining</source>
-        <translation>Beende Mining</translation>
+        <translation>Mining beenden</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="240"/>
@@ -664,22 +664,22 @@
     <message>
         <location filename="../pages/Mining.qml" line="320"/>
         <source>Thread ID</source>
-        <translation>Thread ID</translation>
+        <translation>Thread-ID</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="332"/>
         <source>10s</source>
-        <translation>10s</translation>
+        <translation>10 s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="344"/>
         <source>60s</source>
-        <translation>60s</translation>
+        <translation>60 s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="356"/>
         <source>15m</source>
-        <translation>15m</translation>
+        <translation>15 m</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="456"/>
@@ -704,12 +704,12 @@
     <message>
         <location filename="../pages/Mining.qml" line="486"/>
         <source>Pool-side hashes</source>
-        <translation>Pool hashes</translation>
+        <translation>Pool-Seiten-Hashes</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="560"/>
         <source>Top 10 best results found</source>
-        <translation>Top 10 besten Resultate</translation>
+        <translation>Top 10 der besten Resultate</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="768"/>
@@ -719,7 +719,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="784"/>
         <source>Pool address</source>
-        <translation>Pool Adresse</translation>
+        <translation>Pool-Adresse</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="788"/>
@@ -796,7 +796,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Remote node</source>
-        <translation>remote-Node</translation>
+        <translation>Remote-Node</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="49"/>
@@ -842,7 +842,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="86"/>
         <source>Please enter wallet password</source>
-        <translation>Bitte Wallet-Passwort eingeben</translation>
+        <translation>Bitte Walletpasswort eingeben</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="86"/>
@@ -888,7 +888,7 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="70"/>
         <source>Synchronizing %1</source>
-        <translation>Synchronisiere %1</translation>
+        <translation>Synchronisiert %1</translation>
     </message>
 </context>
 <context>
@@ -924,12 +924,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
         <source>With more TUBE</source>
-        <translation>Mit mehr TUBE</translation>
+        <translation>Mit mehr TUBEs</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="139"/>
         <source>With not enough TUBE</source>
-        <translation>Mit nicht genug TUBE</translation>
+        <translation>Mit nicht genug TUBEs</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="141"/>
@@ -944,7 +944,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="165"/>
         <source>Set the label of the selected address:</source>
-        <translation>Setze die Beschreibung der gewählten Adresse:</translation>
+        <translation>Beschreibung der gewählten Adresse hinzufügen:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="200"/>
@@ -961,7 +961,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="435"/>
         <source>&lt;p&gt;This QR code includes the address you selected above and the amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Dieser QR-Code enthält die oben ausgewählte Adresse und den von Ihnen eingegebenen Betrag. Teilen Sie es mit anderen (rechte Maustaste -> Speichern), damit sie Ihnen leichter genaue Beträge senden können.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Dieser QR-Code enthält die oben ausgewählte Adresse und den von Ihnen eingegebenen Betrag. Teilen Sie es mit anderen (rechte Maustaste -> Speichern), so können Ihnen leichter genaue Beträge gesendet werden.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="206"/>
@@ -971,12 +971,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="373"/>
         <source>Create new address</source>
-        <translation>Erstelle neue Adresse</translation>
+        <translation>Neue Adresse erstellen</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="388"/>
         <source>Set the label of the new address:</source>
-        <translation>Setze die Beschreibung der neuen Adresse:</translation>
+        <translation>Beschreibung der neuen Adresse hinzufügen:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="389"/>
@@ -2076,13 +2076,13 @@ Ringgröße: </translation>
         <location filename="../pages/TxKey.qml" line="70"/>
         <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
-        <translation>Erstelle einen Nachweis deiner Eingangs- und Ausgangszahlungen, indem du die Transaktions-ID, die Empfängeradresse und eine optionale Nachricht angibst. Für den Fall von Ausgangszahlungen, kannst du einen Sendenachweis erstellen, der die Urheberschaft einer Transaktion nachweist. In diesem Fall musst du die Empfängeradresse nicht angeben.</translation>
+        <translation>Erstellen Sie einen Nachweis Ihrer Eingangs- und Ausgangszahlungen, indem Sie die Transaktions-ID, die Empfängeradresse und eine Nachricht angeben. Für den Fall einer Ausgangszahlung, können Sie einen Sendenachweis erstellen, der die Urheberschaft einer Transaktion nachweist. In diesem Fall müssen Sie die Empfängeradresse nicht angeben.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="84"/>
         <location filename="../pages/TxKey.qml" line="159"/>
         <source>Paste tx ID</source>
-        <translation>Füge Tx-ID ein</translation>
+        <translation>Tx-ID hinzufügen</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="107"/>
@@ -2111,8 +2111,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
         <translatorcomment>Sendenachweis richtig? Nochmal nachsehen.</translatorcomment>
-        <translation>Vergewissere dich, dass das Geld an eine Adresse gezahlt wurde, indem du die Transaktions-ID, die Empfängeradresse, die Nachricht, welche zum signieren genutzt wurde, und die Signatur angibst.
-Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werden.</translation>
+        <translation>Vergewissern Sie sich, dass die Coins an eine Adresse gezahlt wurde, indem Sie die Transaktions-ID, die Empfängeradresse, die Nachricht, welche zum Signieren genutzt wurde, und die Signatur angeben. Für den Fall mit Sendenachweis, muss die Empfängeradresse nicht angegeben werden.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="197"/>
