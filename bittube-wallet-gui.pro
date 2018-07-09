@@ -11,7 +11,9 @@ WALLET_ROOT=$$PWD/bittube
 
 CONFIG += c++11 link_pkgconfig
 packagesExist(libpcsclite) {
-    PKGCONFIG += libpcsclite
+    !win32 {
+        PKGCONFIG += libpcsclite
+    }
 }
 QMAKE_CXXFLAGS += -fPIC -fstack-protector
 QMAKE_LFLAGS += -fstack-protector
@@ -251,6 +253,7 @@ win32 {
         -Wl,-Bdynamic \
         -lws2_32 \
         -lwsock32 \
+        -lwinscard \
         -lIphlpapi \
         -lgdi32
     

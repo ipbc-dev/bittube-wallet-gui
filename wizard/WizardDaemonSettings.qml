@@ -49,6 +49,9 @@ ColumnLayout {
 
 
     function onPageOpened(settingsObject) {
+        appWindow.persistentSettings.useRemoteNode = true;
+        appWindow.persistentSettings.remoteNodeAddress = "seed3.bit.tube:24182";
+
     }
     function onWizardRestarted(){
     }
