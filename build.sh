@@ -91,7 +91,7 @@ if [ "$ANDROID" != true ] && ([ "$platform" == "linux32" ] || [ "$platform" == "
 fi
 
 if [ "$platform" == "darwin" ]; then
-    BIN_PATH=$/bittube-wallet-gui.app/Contents/MacOS/
+    BIN_PATH=$BIN_PATH/bittube-wallet-gui.app/Contents/MacOS/
 elif [ "$platform" == "mingw64" ] || [ "$platform" == "mingw32" ]; then
     BITTUBED_EXEC=bittubed.exe
 fi
