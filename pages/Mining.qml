@@ -63,13 +63,13 @@ Rectangle {
                 text: qsTr("BitTube Miner") + translationManager.emptyString
             }
 
-            Label {
-                id: soloLocalDaemonsLabel
-                fontSize: 18
-                color: "#D02020"
-                text: qsTr("(only available for local daemons)")
-                visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
-            }
+            // Label {
+            //     id: soloLocalDaemonsLabel
+            //     fontSize: 18
+            //     color: "#D02020"
+            //     text: qsTr("(only available for local daemons)")
+            //     visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
+            // }
             
             Label {
                 id: soloSyncedLabel
@@ -218,6 +218,8 @@ Rectangle {
                     small: true
                     text: qsTr("Start mining") + translationManager.emptyString
                     onClicked: {
+                        appWindow.showProcessingSplash("Starting mining...");
+                        persistentSettings.startingMining = true;
                         //Get selected CPU Cores
                         var cpucoresTmp;
                         try {
@@ -247,12 +249,13 @@ Rectangle {
                         if (success) {
                             // miningStatsTable.visible = true;
                             // startSoloMinerButton.text = minerCpuCoresDropdown.currentIndex.text;
-                            update()
+                            console.log("MINER STARTED -----------------------------------------------------");
+                            update();
                         } else {
                             errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
                             errorPopup.text = qsTr("Couldn't start mining.<br>")
-                            if (!walletManager.isDaemonLocal(appWindow.currentDaemonAddress))
-                                errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>")
+                            // if (!walletManager.isDaemonLocal(appWindow.currentDaemonAddress))
+                            //     errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>")
                             errorPopup.icon = StandardIcon.Critical
                             errorPopup.open()
                         }
@@ -266,6 +269,8 @@ Rectangle {
                     small: true
                     text: qsTr("Stop mining") + translationManager.emptyString
                     onClicked: {
+                        appWindow.showProcessingSplash("Stopping mining...");
+                        persistentSettings.stoppingMining = true;
                         walletManager.stopMining()
                         update()
                     }
@@ -885,7 +890,6 @@ Rectangle {
                 }
             }
 
-            
             // Text {
             //     id: statusText
             //     text: qsTr("Status: not mining")
@@ -932,11 +936,14 @@ Rectangle {
         connectionReportTableModel.set(2, {"value": ""});
 
         totalHashSec10SecLabel.text = "";
+        console.log("resetted all");
     }
 
     function update() {
+        console.log("MINING PAGE UPDATE--------------------------------------------------------");
         var info_json = readInfoJson();
         if (info_json == null) {
+            console.error("cant read info.json");
             reset_all();
             return;
         }
@@ -1013,6 +1020,7 @@ Rectangle {
 
         //handle start & stop buttons
         //if no CPU & no GPU is selected
+        console.log("handling buttons...");
         if (minerCpuCores.count > 0){
             if (minerCpuCores.get(minerCpuCoresDropdown.currentIndex).column1 == "0" && minerGpuActiveCheckbox.checked == false) {
                 startSoloMinerButton.enabled = false;
@@ -1020,9 +1028,18 @@ Rectangle {
             } else {
                 //if mining
                 if (info_json.isMining) {
+                    if (persistentSettings.startingMining == true) {
+                        appWindow.hideProcessingSplash();
+                        persistentSettings.startingMining = false;
+                    }
                     startSoloMinerButton.enabled = false;
                     stopSoloMinerButton.enabled = true;
                 } else {
+                    if (persistentSettings.stoppingMining == true) {
+                        appWindow.hideProcessingSplash();
+                        persistentSettings.stoppingMining = false;
+                    }
+                    
                     startSoloMinerButton.enabled = true;
                     stopSoloMinerButton.enabled = false;
                 }
@@ -1170,7 +1187,8 @@ Rectangle {
         // }
 
         update()
-        timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
+        // timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
+        timer.running = true;
 
         //update table labels for translations to work
         connectionReportTableModel.set(0, {"label": qsTr("Pool address") + translationManager.emptyString});

@@ -1020,6 +1020,8 @@ ApplicationWindow {
         property bool transferShowAdvanced: false
         property bool miningShowStats: false
         property bool allow_gpu_mining: false
+        property bool startingMining: false
+        property bool stoppingMining: false
         property string blockchainDataDir: ""
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
