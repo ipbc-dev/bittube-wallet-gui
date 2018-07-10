@@ -68,8 +68,8 @@
 #endif
 
 //test------ FIXME: delete this ----
-#include "src/http-service/httpservice.h"
-#include "src/miner/minermanager.h"
+// #include "src/http-service/httpservice.h"
+// #include "src/miner/minermanager.h"
 //#include <QProcess>
 //#include <QDir>
 //#include <QString>
@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
     //QString file = QDir::currentPath() + "\miner\ipbc-miner.exe";
     //process->start(file);
 
-    MinerManager theMiner(&app);
+    // MinerManager theMiner(&app);
 
     //----------------------------------
 

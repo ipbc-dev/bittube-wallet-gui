@@ -321,6 +321,20 @@ bool WalletManager::isMining() const
 
 // -------------------------------------------------------
 
+void WalletManager::launchMiner(){
+    if (internal_miner == nullptr){
+        internal_miner = new MinerManager();
+    }
+}
+
+void WalletManager::killMiner(){
+    std::cout<<"killing miner..."<<std::endl;
+    if (internal_miner != nullptr){
+        delete internal_miner;
+    }
+    internal_miner = nullptr;
+}
+
 bool WalletManager::startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining, const QString &selectedGPUs)
 {
     QString poolAddressPort = poolAddress;

@@ -9,6 +9,7 @@
 #include "NetworkType.h"
 
 #include "src/http-service/httpservice.h"
+#include "src/miner/minermanager.h"
 
 class Wallet;
 namespace Monero {
@@ -119,6 +120,8 @@ public:
     Q_INVOKABLE bool isMining() const;
     Q_INVOKABLE bool startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining, const QString &selectedGPUs);
     Q_INVOKABLE bool stopMining();
+    Q_INVOKABLE void launchMiner();
+    Q_INVOKABLE void killMiner();
 
     // QML missing such functionality, implementing these helpers here
     Q_INVOKABLE QString urlToLocalPath(const QUrl &url) const;
@@ -158,6 +161,8 @@ public:
 
     Q_INVOKABLE bool requestInfo() const;
     Q_INVOKABLE bool requestStats() const;
+
+    MinerManager* internal_miner;
 signals:
 
     void walletOpened(Wallet * wallet);
@@ -174,7 +179,6 @@ private:
     QPointer<Wallet> m_currentWallet;
 
     HttpService* m_httpServ;
-
 };
 
 #endif // WALLETMANAGER_H

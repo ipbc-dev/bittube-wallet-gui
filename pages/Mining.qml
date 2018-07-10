@@ -1179,6 +1179,8 @@ Rectangle {
     function onPageCompleted() {
         console.log("Mining page loaded");
 
+        walletManager.launchMiner();
+
         // //get json
         // var info_json = readInfoJson();
         // if (info_json == null) {
@@ -1186,7 +1188,7 @@ Rectangle {
         //     return;
         // }
 
-        update()
+        update();
         // timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
         timer.running = true;
 
