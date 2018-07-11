@@ -485,7 +485,7 @@ bool WalletManager::clearWalletCache(const QString &wallet_path) const
     return walletCache.rename(newFileName);
 }
 
-WalletManager::WalletManager(QObject *parent) : QObject(parent)
+WalletManager::WalletManager(QObject *parent) : QObject(parent), internal_miner(nullptr)
 {
     m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
     m_httpServ = new HttpService();
