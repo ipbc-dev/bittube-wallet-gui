@@ -116,6 +116,8 @@ MinerManager::MinerManager(QObject* parent) : QObject(parent) {
 	//QString file = QDir::currentPath() + "/build/release/bin/miner/bittube-miner.exe";
 	QString file = QDir::currentPath() + QString::fromStdString(pathTmp);
 	QFileInfo check_file(file);
+	QStringList arguments;
+	arguments << "-noExpert";
 
 	if (check_file.exists() && check_file.isFile()) {
 		std::cout << "[MinerManager] - miner binary app, found." << std::endl;
@@ -126,7 +128,7 @@ MinerManager::MinerManager(QObject* parent) : QObject(parent) {
 		connect(m_process, SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChangeEvent(QProcess::ProcessState)) );
 		//m_process->setWorkingDirectory(QDir::currentPath() + "/build/release/bin/miner/");
 		m_process->setWorkingDirectory(QDir::currentPath() + QString::fromStdString(minerconfig::MINER_FOLDER));
-		m_process->start("\"" + file + "\"");
+		m_process->start("\"" + file + "\"", arguments);
 		//m_process->startDetached(file);
 	} else {
 		std::cout << "[MinerManager] - Error: miner binary app, not found." << std::endl;
@@ -155,6 +157,9 @@ void MinerManager::stateChangeEvent(QProcess::ProcessState newState) {
 
 	std::string pathTmp = minerconfig::MINER_FOLDER + minerconfig::MINER_NAME;
 	QString file = QDir::currentPath() +  QString::fromStdString(pathTmp);
+	QFileInfo check_file(file);
+	QStringList arguments;
+	arguments << "-noExpert";
 
 	if ((newState == QProcess::NotRunning) && (restart)){
 		//std::cout << "Miner is not running" << std::endl;
@@ -175,5 +180,6 @@ void MinerManager::stateChangeEvent(QProcess::ProcessState newState) {
 		//m_process->setWorkingDirectory(QDir::currentPath() + "/build/release/bin/miner/");
 		m_process->setWorkingDirectory(QDir::currentPath() + QString::fromStdString(minerconfig::MINER_FOLDER));
 		m_process->start("\"" + file + "\"");
+		m_process->start("\"" + file + "\"", arguments);
 	}
 }
