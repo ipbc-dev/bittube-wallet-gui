@@ -1022,6 +1022,7 @@ ApplicationWindow {
         property bool allow_gpu_mining: false
         property bool startingMining: false
         property bool stoppingMining: false
+        property bool isMining: false
         property string blockchainDataDir: ""
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
@@ -1774,7 +1775,7 @@ ApplicationWindow {
         // Close wallet non async on exit
         daemonManager.exit();
         walletManager.closeWallet();
-        walletManager.killMiner();
+        // walletManager.killMiner();
         Qt.quit();
     }
 
