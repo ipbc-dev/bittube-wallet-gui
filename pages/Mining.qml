@@ -1200,7 +1200,8 @@ Rectangle {
         miningResultReportTableModel.set(1, {"label" : qsTr("Good results") + translationManager.emptyString});
         miningResultReportTableModel.set(2, {"label" : qsTr("Avg result time") + translationManager.emptyString});
         miningResultReportTableModel.set(3, {"label" : qsTr("Pool-side hashes") + translationManager.emptyString});
-
+    }
+    
     function onPageClosed() {
         timer.running = false
 
