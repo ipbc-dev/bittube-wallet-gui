@@ -1775,7 +1775,9 @@ ApplicationWindow {
         // Close wallet non async on exit
         daemonManager.exit();
         walletManager.closeWallet();
-        // walletManager.killMiner();
+        if (walletManager.isMining() == false) {
+            walletManager.killMiner();
+        }
         Qt.quit();
     }
 
