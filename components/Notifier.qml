@@ -37,12 +37,17 @@ Item {
     id: item
     property string message: ""
     property bool active: false
-    height: 120
-    width: 240
+    // height: 120
+    // width: 240
     property int margin: 15
-    x: parent.width - width - margin
-    y: parent.height - height * scale.yScale - margin * scale.yScale
-
+    // x: parent.width - width - margin
+    // y: parent.height - height * scale.yScale - margin * scale.yScale
+    width: 600
+    height: 200
+    opacity: 0.7
+    x: parent.width / 2 - 300
+    y: parent.height / 2 - 100
+    
     Rectangle {
         color: MoneroComponents.Style.notifierBackgroundColor
         border.color: "black"
@@ -53,12 +58,15 @@ Item {
             readOnly: true
             backgroundVisible: false
             textFormat: TextEdit.AutoText
+            horizontalAlignment: TextInput.AlignHCenter
+            verticalAlignment: TextInput.AlignVCenter
             anchors.fill: parent
             font.family: "Arial"
-            font.pixelSize: 12
+            font.pixelSize: 20
             textMargin: 20
             textColor: MoneroComponents.Style.notifierFontColor
             text: item.message
+            onLinkActivated: Qt.openUrlExternally(item.message.split("'")[1].split("'")[0])
         }
     }
 
@@ -66,14 +74,14 @@ Item {
         id: scale
         yScale: item.active ? 1 : 0
 
-        Behavior on yScale {
-            NumberAnimation { duration: 500; easing.type: Easing.InOutCubic }
-        }
+        // Behavior on yScale {
+        //     NumberAnimation { duration: 500; easing.type: Easing.InOutCubic }
+        // }
     }
 
     Timer {
         id: hider
-        interval: 12000; running: false; repeat: false
+        interval: 10000; running: false; repeat: false
         onTriggered: { item.active = false }
     }
 

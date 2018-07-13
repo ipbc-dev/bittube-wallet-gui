@@ -1791,7 +1791,7 @@ ApplicationWindow {
           var hash = parts[1]
           var user_url = parts[2]
           var auto_url = parts[3]
-          var msg = qsTr("New version of bittube-wallet-gui is available: %1<br>%2").arg(version).arg(user_url) + translationManager.emptyString
+          var msg = qsTr("New version of bittube-wallet-gui is available: %1<br><a href='%2'>Download here</a>").arg(version).arg(user_url) + translationManager.emptyString
           notifier.show(msg)
         }
         else {
@@ -1824,6 +1824,29 @@ ApplicationWindow {
         height:500
         width:800
         title: qsTr("Daemon log") + translationManager.emptyString
+        onAccepted: {
+            close();
+        }
+    }
+
+    //miner logs
+    DaemonConsole {
+        id: minerResultsErrorLogPopup
+        commandArea: false
+        height: 500
+        width: 800
+        title: qsTr("Miner Results Error Log") + translationManager.emptyString
+        onAccepted: {
+            close();
+        }
+    }
+
+    DaemonConsole {
+        id: minerConnectionErrorLogPopup
+        commandArea: false
+        height: 500
+        width: 800
+        title: qsTr("Miner Connection Error Log") + translationManager.emptyString
         onAccepted: {
             close();
         }

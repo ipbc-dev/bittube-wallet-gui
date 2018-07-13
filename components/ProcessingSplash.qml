@@ -78,7 +78,6 @@ Rectangle {
             Layout.fillWidth: true
         }
 
-
         Text {
             id: heightProgress
             font {
