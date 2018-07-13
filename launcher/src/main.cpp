@@ -40,36 +40,42 @@ bool startup(LPCTSTR lpApplicationName, char *argv[])
 }
 
 
-int main(int argc, char *argv[])
-{
-	std::string currentFolder = ExePath();
-	std::cout << "Current folder 001: " << currentFolder << std::endl;
+int main(int argc, char *argv[]) {
 
+	std::string currentFolder = ExePath();
 	currentFolder += "\\bin";
 
+	std::cout << "   - Changing current working directory to: " << currentFolder << std::endl;
 	bool changeResult = SetCurrentDirectory(currentFolder.c_str());
-	std::cout << "Current folder 002: " << currentFolder << std::endl;
+	std::cout << "      - Result: ";
 
-	std::cout << "Error changing cwd ¿?: " << changeResult << std::endl;
+	if (!changeResult) {
+		std::cout << "Changed fail" << std::endl;
+		//TODO: error handling
+	}
+	else {
+		std::cout << "Changed ok" << std::endl;
 
-	//currentFolder += "\\bittube-wallet-gui.exe";
-	currentFolder += "\\start-low-graphics-mode.bat";
-	
-	
-	bool result = startup(currentFolder.c_str(), argv);
-	std::cout << "Current folder 003: " << currentFolder << std::endl;
+#ifdef LOWRESBIN
+		currentFolder += "\\start-low-graphics-mode.bat";
+#else
+		currentFolder += "\\bittube-wallet-gui.exe";
+#endif
+		std::cout << "   - Launching wallet: " << currentFolder << std::endl;
+		bool launchResult = startup(currentFolder.c_str(), argv);
+		std::cout << "      - Result: ";
 
-	std::cout << "Error launch bin ¿?: " << result << std::endl;
-	
-	//----
-	int number;
-	
-	std::cout << "my directory is " << ExePath() << std::endl;
+		if (!launchResult) {
+			std::cout << "Launched fail" << std::endl;
+			//TODO: error handling
+		}
+		else {
+			std::cout << "Launched ok" << std::endl;
+		}
+	}
 
-	std::cout << "hola" << std::endl;
-
-	std::cin >> number;
-
+	std::cout << std::endl << "Press any key to finish...";
+	std::cin.get();
 
 	return 0;
 }
