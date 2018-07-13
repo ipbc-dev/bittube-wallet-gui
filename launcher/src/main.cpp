@@ -61,37 +61,29 @@ int main(int argc, char *argv[]) {
 	std::string currentFolder = ExePath();
 	currentFolder += "\\bin";
 
-	//std::cout << "   - Changing current working directory to: " << currentFolder << std::endl;
 	bool changeResult = SetCurrentDirectory(currentFolder.c_str());
-	//std::cout << "      - Result: ";
 
 	if (!changeResult) {
-		std::cout << "Changed fail" << std::endl;
+		std::cout << "   - Changing current working directory to: " << currentFolder << std::endl;
+		std::cout << "   - Status: ERROR! - Changed fail" << std::endl;
 		exitPause();
 	}
 	else {
-		std::cout << "Changed ok" << std::endl;
 
 #ifdef LOWRESBIN
 		currentFolder += "\\start-low-graphics-mode.bat";
 #else
 		currentFolder += "\\bittube-wallet-gui.exe";
 #endif
-		//std::cout << "   - Launching wallet: " << currentFolder << std::endl;
+
 		bool launchResult = startup(currentFolder.c_str(), argv);
-		//std::cout << "      - Result: ";
 
 		if (!launchResult) {
-			std::cout << "Launched fail" << std::endl;
+			std::cout << "   - Launching wallet: " << currentFolder << std::endl;
+			std::cout << "   - Status: ERROR! - Launched fail" << std::endl;
 			exitPause();
 		}
-		//else {
-			//std::cout << "Launched ok" << std::endl;
-		//}
 	}
-
-	//std::cout << std::endl << "Press any key to finish...";
-	//std::cin.get();
 
 	return 0;
 }
