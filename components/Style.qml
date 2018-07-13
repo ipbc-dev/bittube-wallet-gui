@@ -47,8 +47,8 @@ QtObject {
     //calendar
     property string calendarSelectedBackgroundColor:        "#86af49"
     //notifier
-    property string notifierBackgroundColor:                "#86af49"
-    property string notifierFontColor:                      "#ffffff"
+    property string notifierBackgroundColor:                "#ffffff"
+    property string notifierFontColor:                      "#464646"
     //privacyLevel
     property string privacyLevelBackgroundColor:            "#ffffff"
     property string privacyLevelBarColor:                   "#86af49"

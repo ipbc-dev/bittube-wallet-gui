@@ -210,6 +210,7 @@ Rectangle {
 
             RowLayout {
                 Layout.leftMargin: 125
+
                 StandardButton {
                     visible: true
                     //enabled: !walletManager.isMining()
@@ -299,6 +300,30 @@ Rectangle {
                 color: Style.dividerColor
                 opacity: Style.dividerOpacity
                 // Layout.bottomMargin: 20
+            }
+
+            RowLayout {
+                StandardButton {
+                    id: minerResultsErrorLogButton
+                    width: 110
+                    small: true
+                    visible: persistentSettings.miningShowStats
+                    text: qsTr("Results Error Log") + translationManager.emptyString
+                        onClicked: {
+                            minerResultsErrorLogPopup.open();
+                    }
+                }
+                
+                StandardButton {
+                    id: minerConnectionErrorLogButton
+                    width: 110
+                    small: true
+                    visible: persistentSettings.miningShowStats
+                    text: qsTr("Connection Error Log") + translationManager.emptyString
+                        onClicked: {
+                            minerConnectionErrorLogPopup.open();
+                    }
+                }
             }
 
             // stats table
@@ -1115,6 +1140,17 @@ Rectangle {
         //populate h/s label
         if(stats_json.hashrate.total[0] != null){
             totalHashSec10SecLabel.text = String(stats_json.hashrate.total[0]) + " h/s";
+        }
+
+        //update error logs
+        minerResultsErrorLogPopup.textArea.clear();
+        for(var n = 0; n < stats_json.results.error_log.length; n ++){
+            minerResultsErrorLogPopup.textArea.logMessage(stats_json.results.error_log[n].text);
+        }
+
+        minerConnectionErrorLogPopup.textArea.clear();
+        for(var n= 0; n < stats_json.connection.error_log.length; n ++){
+            minerConnectionErrorLogPopup.textArea.logMessage(stats_json.connection.error_log[n].text);
         }
     }
 

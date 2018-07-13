@@ -46,6 +46,8 @@ Window {
     property alias text: dialogContent.text
     property alias content: root.text
     property alias textArea: dialogContent
+    property bool commandArea: true
+
     property var icon
 
     // same signals as Dialog has
@@ -171,6 +173,7 @@ Window {
 
         RowLayout {
             Layout.fillWidth: true
+            visible: commandArea
 
             MoneroComponents.LineEdit {
                 id: sendCommandText
