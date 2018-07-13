@@ -42,6 +42,7 @@ import moneroComponents.NetworkType 1.0
 import "components"
 import "wizard"
 import "js/Windows.js" as Windows
+import "version.js" as Version
 
 ApplicationWindow {
     id: appWindow
@@ -1800,7 +1801,7 @@ ApplicationWindow {
     }
 
     function checkUpdates() {
-        walletManager.checkUpdatesAsync("bittube-wallet-gui", "gui")
+        walletManager.checkUpdatesAsync("bittube-wallet-gui", "gui", Version.GUI_VERSION)
     }
 
     Timer {
