@@ -2,6 +2,9 @@
 #include <string>
 #include <iostream>
 
+/*
+ * Description: Get .exe folder path
+ */
 std::string ExePath() {
 	char buffer[MAX_PATH];
 	GetModuleFileName(NULL, buffer, MAX_PATH);
@@ -9,6 +12,9 @@ std::string ExePath() {
 	return std::string(buffer).substr(0, pos);
 }
 
+/*
+ * Description: Launch external .exe
+ */
 bool startup(LPCTSTR lpApplicationName, char *argv[])
 {
 	bool result = false;
@@ -39,19 +45,29 @@ bool startup(LPCTSTR lpApplicationName, char *argv[])
 	return result;
 }
 
+/*
+ * Description: Waiting user key press to exit (console)
+ */
+void exitPause() {
+	std::cout << std::endl << "Press any key to finish...";
+	std::cin.get();
+
+	exit(EXIT_FAILURE);
+}
+
 
 int main(int argc, char *argv[]) {
 
 	std::string currentFolder = ExePath();
 	currentFolder += "\\bin";
 
-	std::cout << "   - Changing current working directory to: " << currentFolder << std::endl;
+	//std::cout << "   - Changing current working directory to: " << currentFolder << std::endl;
 	bool changeResult = SetCurrentDirectory(currentFolder.c_str());
-	std::cout << "      - Result: ";
+	//std::cout << "      - Result: ";
 
 	if (!changeResult) {
 		std::cout << "Changed fail" << std::endl;
-		//TODO: error handling
+		exitPause();
 	}
 	else {
 		std::cout << "Changed ok" << std::endl;
@@ -61,21 +77,21 @@ int main(int argc, char *argv[]) {
 #else
 		currentFolder += "\\bittube-wallet-gui.exe";
 #endif
-		std::cout << "   - Launching wallet: " << currentFolder << std::endl;
+		//std::cout << "   - Launching wallet: " << currentFolder << std::endl;
 		bool launchResult = startup(currentFolder.c_str(), argv);
-		std::cout << "      - Result: ";
+		//std::cout << "      - Result: ";
 
 		if (!launchResult) {
 			std::cout << "Launched fail" << std::endl;
-			//TODO: error handling
+			exitPause();
 		}
-		else {
-			std::cout << "Launched ok" << std::endl;
-		}
+		//else {
+			//std::cout << "Launched ok" << std::endl;
+		//}
 	}
 
-	std::cout << std::endl << "Press any key to finish...";
-	std::cin.get();
+	//std::cout << std::endl << "Press any key to finish...";
+	//std::cin.get();
 
 	return 0;
 }
