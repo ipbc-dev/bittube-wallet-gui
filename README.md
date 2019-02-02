@@ -159,7 +159,7 @@ The BitTube Wallet GUI on Windows is 64 bits only; 32-bit Windows GUI builds are
 3. Install MSYS2 packages for BitTube dependencies; the needed 64-bit packages have `x86_64` in their names
 
     ```
-    pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium
+    pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi
     ```
 
     You find more details about those dependencies in the [BitTube documentation](https://github.com/ipbc-dev/bittube). Note that that there is no more need to compile Boost from source; like everything else, you can install it now with a MSYS2 package.

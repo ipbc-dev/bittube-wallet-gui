@@ -255,6 +255,9 @@ win32 {
         -lwsock32 \
         -lwinscard \
         -lIphlpapi \
+        -lcrypt32 \
+        -lhidapi \
+        -lsodium \
         -lgdi32
     
     !contains(QMAKE_TARGET.arch, x86_64) {
