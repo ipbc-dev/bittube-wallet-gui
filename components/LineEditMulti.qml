@@ -68,7 +68,7 @@ ColumnLayout {
     property int labelFontSize: 16 * scaleRatio
     property bool labelButtonVisible: false
 
-    property string fontColor: "white"
+    property string fontColor: MoneroComponents.Style.defaultFontColor
     property bool fontBold: false
     property int fontSize: 16 * scaleRatio
 
@@ -91,7 +91,7 @@ ColumnLayout {
     spacing: 0
     Rectangle {
         id: inputLabelRect
-        color: "#eeeeee"
+        color: MoneroComponents.Style.background
         Layout.fillWidth: true
         height: (inputLabel.height + 10) * scaleRatio
         visible: showingHeader ? true : false
@@ -104,7 +104,7 @@ ColumnLayout {
             font.pixelSize: item.labelFontSize
             font.bold: labelFontBold
             textFormat: Text.RichText
-            color: item.labelFontColor
+            color: MoneroComponents.Style.defaultFontColor
             onLinkActivated: inputLabelLinkActivated()
 
             MouseArea {
@@ -153,11 +153,12 @@ ColumnLayout {
         Layout.fillWidth: true
         topPadding: 10 * scaleRatio
         bottomPadding: 10 * scaleRatio
-        wrapAnywhere: parent.wrapAnywhere
+        // wrapAnywhere: parent.wrapAnywhere
+        wrapMode: item.wrapMode
         fontSize: parent.fontSize
         fontBold: parent.fontBold
         z: 2
-        fontColor: item.fontColor
+        fontColor: MoneroComponents.Style.defaultFontColor
         mouseSelection: item.mouseSelection
         onEditingFinished: item.editingFinished()
         error: item.error
@@ -169,7 +170,7 @@ ColumnLayout {
             anchors.left: parent.left
             anchors.leftMargin: 10 * scaleRatio
             opacity: item.placeholderOpacity
-            color: item.placeholderColor
+            color: MoneroComponents.Style.defaultFontColor
             font.family: item.placeholderFontFamily
             font.bold: item.placeholderFontBold
             font.pixelSize: item.placeholderFontSize
@@ -179,11 +180,11 @@ ColumnLayout {
 
         Rectangle {
             color: "transparent"
-            border.width: 0
+            border.width: 1
             border.color: {
-              if(multiLine.error && multiLine.text !== ""){
+              if(input.error && input.text !== ""){
                   return MoneroComponents.Style.inputBorderColorInvalid;
-              } else if(multiLine.activeFocus){
+              } else if(input.activeFocus){
                   return MoneroComponents.Style.inputBorderColorActive;
               } else {
                   return MoneroComponents.Style.inputBorderColorInActive;
@@ -198,7 +199,7 @@ ColumnLayout {
     Rectangle {
         id: inputFill
         color: MoneroComponents.Style.lineEditMultiBackgroundColor
-        anchors.fill: multiLine
+        anchors.fill: input
         radius: 4
         z: 1
     }

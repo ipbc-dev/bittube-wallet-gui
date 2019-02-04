@@ -61,7 +61,6 @@ Item {
             return MoneroComponents.Style.inputBorderColorInActive;
         }
     }
-    property bool borderDisabled: true
     property int fontSize: 18 * scaleRatio
     property bool showBorder: false
     property bool fontBold: false

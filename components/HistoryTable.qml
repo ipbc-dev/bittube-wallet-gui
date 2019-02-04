@@ -178,17 +178,17 @@ ListView {
 
                     return _amount + " TUBE";
                 }
-                color: isOut ? "#808080" : "#86af49"
+                color: isOut ? "#808080" : MoneroComponents.Style.highlitedFontColor
 
                 MouseArea {
                         hoverEnabled: true
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onEntered: {
-                            parent.color = MoneroComponents.Style.orange
+                            parent.color = MoneroComponents.Style.blue
                         }
                         onExited: {
-                            parent.color = isOut ? "#808080" : "#86af49"                        }
+                            parent.color = isOut ? "#808080" : MoneroComponents.Style.highlitedFontColor                        }
                         onClicked: {
                                 console.log("Copied to clipboard");
                                 clipboard.setText(parent.text.split(" ")[0]);

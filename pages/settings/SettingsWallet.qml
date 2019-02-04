@@ -82,7 +82,7 @@ Rectangle {
 
                 TextArea {
                     Layout.fillWidth: true
-                    color: MoneroComponents.Style.dimmedFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft
@@ -150,7 +150,7 @@ Rectangle {
 
                 TextArea {
                     Layout.fillWidth: true
-                    color: MoneroComponents.Style.dimmedFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft
@@ -215,7 +215,7 @@ Rectangle {
 
                 TextArea {
                     Layout.fillWidth: true
-                    color: MoneroComponents.Style.dimmedFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft
@@ -280,7 +280,7 @@ Rectangle {
 
                 TextArea {
                     Layout.fillWidth: true
-                    color: MoneroComponents.Style.dimmedFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft
@@ -357,7 +357,7 @@ Rectangle {
 
                 TextArea {
                     Layout.fillWidth: true
-                    color: MoneroComponents.Style.dimmedFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft

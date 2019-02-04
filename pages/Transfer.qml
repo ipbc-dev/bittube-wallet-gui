@@ -48,7 +48,7 @@ Rectangle {
     color: "transparent"
     property int mixin: 10  // (ring size 11)
     property string warningContent: ""
-    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #86af49; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
+    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #00abff; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
     radius: 4
 
@@ -157,6 +157,7 @@ Rectangle {
                   id: amountLine
                   Layout.fillWidth: true
                   inlineIcon: true
+                  borderDisabled: true
                   labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
                                    Amount <font size='2'>  ( </font> <a href='#'>Change account</a><font size='2'> )</font>")
                              + translationManager.emptyString

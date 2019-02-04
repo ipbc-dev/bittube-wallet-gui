@@ -120,7 +120,7 @@ Rectangle{
                     anchors.topMargin: 4 * scaleRatio
                     anchors.left: localNodeIcon.right
                     anchors.leftMargin: 14 * scaleRatio
-                    color: MoneroComponents.Style.dimmedFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft
@@ -220,7 +220,7 @@ Rectangle{
                     anchors.topMargin: 4 * scaleRatio
                     anchors.left: remoteNodeIcon.right
                     anchors.leftMargin: 14 * scaleRatio
-                    color: MoneroComponents.Style.dimmedFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15 * scaleRatio
                     activeFocusOnPress: false
@@ -375,7 +375,7 @@ Rectangle{
                     Layout.fillWidth: true
                     fontSize: 15 * scaleRatio
                     labelFontSize: 14 * scaleRatio
-                    property string style: "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #FF6C3C}</style>"
+                    property string style: "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #00abff}</style>"
                     labelText: qsTr("Blockchain location") + style + qsTr(" <a href='#'> (change)</a>") + translationManager.emptyString
                     placeholderText: qsTr("(default)") + translationManager.emptyString
                     placeholderFontSize: 15 * scaleRatio

@@ -87,7 +87,7 @@ Rectangle {
                 Text {
                     text: qsTr("Total balance: ")
                     Layout.fillWidth: true
-                    color: "#757575"
+                    color: MoneroComponents.Style.defaultFontColor
                     font.pixelSize: 14
                     font.family: MoneroComponents.Style.fontRegular.name
                 }
@@ -95,16 +95,16 @@ Rectangle {
                     id: balanceAll
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 
-                    color: MoneroComponents.Style.white 
+                    color: MoneroComponents.Style.defaultFontColor 
                     MouseArea {
                         hoverEnabled: true
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onEntered: {
-                            parent.color = MoneroComponents.Style.orange
+                            parent.color = MoneroComponents.Style.blue
                         }
                         onExited: {
-                            parent.color = MoneroComponents.Style.white
+                            parent.color = MoneroComponents.Style.defaultFontColor
                         }
                         onClicked: {
                                 console.log("Copied to clipboard");
@@ -120,7 +120,7 @@ Rectangle {
                 Text {
                     text: qsTr("Total unlocked balance: ")
                     Layout.fillWidth: true
-                    color: "#757575"
+                    color: MoneroComponents.Style.defaultFontColor
                     font.pixelSize: 14 
                     font.family: MoneroComponents.Style.fontRegular.name
                 }
@@ -128,16 +128,16 @@ Rectangle {
                     id: unlockedBalanceAll
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14
-                    color: MoneroComponents.Style.white
+                    color: MoneroComponents.Style.defaultFontColor
                     MouseArea {
                         hoverEnabled: true
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onEntered: {
-                            parent.color = MoneroComponents.Style.orange
+                            parent.color = MoneroComponents.Style.blue
                         }
                         onExited: {
-                            parent.color = MoneroComponents.Style.white
+                            parent.color = MoneroComponents.Style.defaultFontColor
                         }
                         onClicked: {
                                 console.log("Copied to clipboard");
@@ -197,7 +197,8 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: idLabel
-                                color: index === appWindow.current_subaddress_account_table_index ? "white" : "#757575"
+                                // color: index === appWindow.current_subaddress_account_table_index ? MoneroComponents.Style.defaultFontColor : "#757575"
+                                color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6 * scaleRatio
@@ -221,7 +222,7 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: addressLabel
-                                color: "white"
+                                color: MoneroComponents.Style.defaultFontColor 
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: balanceLabel.left
                                 anchors.leftMargin: (mainLayout.width < 510 ? -70 : -125) * scaleRatio
@@ -232,7 +233,7 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: balanceLabel
-                                color: "white"
+                                color: MoneroComponents.Style.defaultFontColor 
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
                                 anchors.leftMargin: (mainLayout.width < 510 ? -120 : -180) * scaleRatio

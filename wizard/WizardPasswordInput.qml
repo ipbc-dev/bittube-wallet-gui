@@ -27,6 +27,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import "../components" as MoneroComponents
 import QtQuick 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
@@ -47,7 +48,7 @@ ColumnLayout {
         echoMode: TextInput.Password
         style: TextFieldStyle {
             renderType: Text.NativeRendering
-            textColor: "#86af49"
+            textColor: MoneroComponents.Style.highlitedFontColor
             passwordCharacter: "•"
             background: Rectangle {
                 radius: 0

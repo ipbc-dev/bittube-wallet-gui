@@ -93,9 +93,9 @@ Rectangle {
                         Layout.leftMargin: 6
                         text: qsTr("WARNING: Do not reuse your BitTube keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy." + translationManager.emptyString)
                         wrapMode: Text.Wrap
-                        font.family: Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 15 * scaleRatio
-                        color: Style.defaultFontColor
+                        color: MoneroComponents.Style.defaultFontColor
                         textFormat: Text.RichText
                         onLinkActivated: {
                             appWindow.startDaemon(appWindow.persistentSettings.daemonFlags);

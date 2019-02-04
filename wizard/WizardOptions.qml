@@ -113,7 +113,8 @@ ColumnLayout {
                 Layout.preferredHeight: page.buttonSize
                 Layout.preferredWidth: page.buttonSize
                 radius: page.buttonSize
-                color: createWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
+                // color: createWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
+                color: "transparent"
 
 
                 Image {
@@ -159,12 +160,15 @@ ColumnLayout {
                 Layout.preferredHeight: page.buttonSize
                 Layout.preferredWidth:  page.buttonSize
                 radius: page.buttonSize
-                color: recoverWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
+                // color: recoverWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
+                color: "transparent"
 
                 Image {
                     width: page.buttonImageSize
                     height: page.buttonImageSize
                     fillMode: Image.PreserveAspectFit
+                    horizontalAlignment: Image.AlignRight
+                    verticalAlignment: Image.AlignTop
                     anchors.centerIn: parent
                     source: "qrc:///images/recoverWallet.png"
                 }
@@ -203,12 +207,15 @@ ColumnLayout {
                 Layout.preferredHeight: page.buttonSize
                 Layout.preferredWidth:  page.buttonSize
                 radius: page.buttonSize
-                color: openWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
+                // color: openWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
+                color: "transparent"
 
                 Image {
                     width: page.buttonImageSize
                     height: page.buttonImageSize
                     fillMode: Image.PreserveAspectFit
+                    horizontalAlignment: Image.AlignRight
+                    verticalAlignment: Image.AlignTop
                     anchors.centerIn: parent
                     source: "qrc:///images/openAccount.png"
                 }
@@ -246,7 +253,8 @@ ColumnLayout {
                 Layout.preferredHeight: page.buttonSize
                 Layout.preferredWidth: page.buttonSize
                 radius: page.buttonSize
-                color: createWalletFromDeviceArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
+                // color: createWalletFromDeviceArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
+                color: "transparent"
 
 
                 Image {
@@ -323,7 +331,7 @@ ColumnLayout {
         Rectangle {
             width: 100 * scaleRatio
             RadioButton {
-                visible: showAdvancedCheckbox.checked
+                // visible: showAdvancedCheckbox.checked
                 enabled: !this.checked
                 id: testNet
                 text: qsTr("Testnet") + translationManager.emptyString
@@ -345,7 +353,7 @@ ColumnLayout {
         Rectangle {
             width: 100 * scaleRatio
             RadioButton {
-                visible: showAdvancedCheckbox.checked
+                // visible: showAdvancedCheckbox.checked
                 enabled: !this.checked
                 id: stageNet
                 text: qsTr("Stagenet") + translationManager.emptyString

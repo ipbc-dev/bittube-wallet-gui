@@ -174,7 +174,7 @@ ListView {
                     Layout.leftMargin: 5 * scaleRatio
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 * scaleRatio
-                    color:  (confirmations < confirmationsRequired)? "#FF6C3C" : "#545454"
+                    color:  (confirmations < confirmationsRequired)? Style.highlitedFontColor : "#545454"
                     text: {
                         if (!isPending)
                             if(confirmations < confirmationsRequired)

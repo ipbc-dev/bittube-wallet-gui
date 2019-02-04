@@ -336,7 +336,7 @@ ColumnLayout {
 
         width: 50 * scaleRatio; height: 50 * scaleRatio
         radius: 25
-        color: prevArea.containsMouse ? "#a1d257" : "#86af49"
+        color: prevArea.containsMouse ? Style.navButtonHoverColor : Style.navButtonColor
 
         Image {
             anchors.centerIn: parent
@@ -362,7 +362,7 @@ ColumnLayout {
         visible: currentPage > 1 && currentPage < pages.length - 1
         width: 50 * scaleRatio; height: 50 * scaleRatio
         radius: 25
-        color: enabled ? nextArea.containsMouse ? "#a1d257" : "#86af49" : "#DBDBDB"
+        color: prevArea.containsMouse ? Style.navButtonHoverColor : Style.navButtonColor
 
 
         Image {

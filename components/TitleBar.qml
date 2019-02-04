@@ -114,7 +114,7 @@ Rectangle {
             anchors.topMargin: 11
             width: 132
             height: 22
-            source: "../images/moneroLogo_white.png"
+            source: "../images/bittubeLogo_white.png"
         }
     }
 

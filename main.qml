@@ -1691,7 +1691,7 @@ ApplicationWindow {
             property alias text: content.text
             width: content.width + 12
             height: content.height + 17
-            color: "#86af49"
+            color: Style.tooltipBackgroundColor
             //radius: 3
             visible:false;
 

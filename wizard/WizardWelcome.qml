@@ -31,8 +31,8 @@ import QtQuick 2.2
 import QtQuick.XmlListModel 2.0
 import QtQuick.Layouts 1.1
 import QtQml 2.2
-
 import "../components" as MoneroComponents
+
 
 ColumnLayout {
 //    anchors.fill:parent
@@ -112,7 +112,7 @@ ColumnLayout {
     }
 
     ColumnLayout{
-        // Flags view
+    // Flags view
         GridView {
             property int margin: (isMobile) ? 0 : Math.floor(appWindow.width/12);
 
@@ -129,16 +129,12 @@ ColumnLayout {
 
             clip: true
 
-            delegate: Item {
+            delegate: ColumnLayout {
                 id: flagDelegate
-                height: gridView.cellHeight
                 width: gridView.cellWidth
-//                height: gridView.cellHeight
-//                Layout.alignment: Qt.AlignHCenter
                 Rectangle {
                     id: flagRect
                     width: 40 * scaleRatio; height: 40 * scaleRatio
-//                    anchors.centerIn: parent
                     radius: 30 * scaleRatio
                     Layout.alignment: Qt.AlignHCenter
                     color: gridView.currentIndex === index ? "#DBDBDB" : "#FFFFFF"
@@ -146,22 +142,19 @@ ColumnLayout {
                         anchors.fill: parent
                         source: flag
                     }
-
-                    Text {
-                        font.family: "Arial"
-                        font.pixelSize: 18 * scaleRatio
-                        font.bold: gridView.currentIndex === index
-                        color: "#3F3F3F"
-                        text: display_name
-                        Layout.alignment: Qt.AlignHCenter
-                    }
                 }
 
+                Text {
+                    font.family: "Arial"
+                    font.pixelSize: 18 * scaleRatio
+                    font.bold: gridView.currentIndex === index
+                    color: "#3F3F3F"
+                    text: display_name
+                    Layout.alignment: Qt.AlignHCenter
+                }
                 MouseArea {
                     id: delegateArea
                     anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    hoverEnabled: true
                     onClicked:  {
                         gridView.currentIndex = index
                         var data = languagesModel.get(gridView.currentIndex);
@@ -172,14 +165,10 @@ ColumnLayout {
                         }
                     }
                 }
-            } // delegate
-
+            }
+        }
     }
 
 
-
-
-    }
-
-
+    
 }

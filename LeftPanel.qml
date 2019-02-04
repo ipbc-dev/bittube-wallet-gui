@@ -216,7 +216,7 @@ Rectangle {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onEntered: {
-                            parent.color = MoneroComponents.Style.orange
+                            parent.color = MoneroComponents.Style.blue
                         }
                         onExited: {
                             parent.color = MoneroComponents.Style.white
@@ -254,7 +254,7 @@ Rectangle {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onEntered: {
-                            parent.color = MoneroComponents.Style.orange
+                            parent.color = MoneroComponents.Style.blue
                         }
                         onExited: {
                             parent.color = MoneroComponents.Style.white
@@ -342,7 +342,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Account") + translationManager.emptyString
                 symbol: qsTr("T") + translationManager.emptyString
-                dotColor: "#44AAFF"
+                dotColor: MoneroComponents.Style.dotColor
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = accountButton
@@ -366,7 +366,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Send") + translationManager.emptyString
                 symbol: qsTr("S") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = transferButton
@@ -391,7 +391,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Address book") + translationManager.emptyString
                 symbol: qsTr("B") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 under: transferButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -416,7 +416,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Receive") + translationManager.emptyString
                 symbol: qsTr("R") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = receiveButton
@@ -433,14 +433,14 @@ Rectangle {
             }
 
             // ------------- Merchant tab ---------------
-
+            /*
             MoneroComponents.MenuButton {
                 id: merchantButton
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Merchant") + translationManager.emptyString
                 symbol: qsTr("U") + translationManager.emptyString
-                dotColor: "#FF4F41"
+                dotColor: MoneroComponents.Style.dotColor
                 under: receiveButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -457,7 +457,7 @@ Rectangle {
                 color: "#313131"
                 height: 1
             }
-
+            */
             // ------------- History tab ---------------
 
             MoneroComponents.MenuButton {
@@ -466,7 +466,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("History") + translationManager.emptyString
                 symbol: qsTr("H") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = historyButton
@@ -483,14 +483,14 @@ Rectangle {
             }
 
             // ------------- Mining tab ---------------
-            MenuButton {
+            MoneroComponents.MenuButton {
                 id: miningButton
                 visible: !isAndroid && !isIOS
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Mining") + translationManager.emptyString
                 symbol: qsTr("M") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 // under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -509,13 +509,13 @@ Rectangle {
             }
 
             // ------------- Advanced tab ---------------
-            MenuButton {
+            MoneroComponents.MenuButton {
                 id: advancedButton
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Advanced") + translationManager.emptyString
                 symbol: qsTr("D") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = advancedButton
@@ -537,7 +537,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Prove/check") + translationManager.emptyString
                 symbol: qsTr("K") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -561,7 +561,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Shared RingDB") + translationManager.emptyString
                 symbol: qsTr("A") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -585,7 +585,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Sign/verify") + translationManager.emptyString
                 symbol: qsTr("I") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -608,7 +608,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Settings") + translationManager.emptyString
                 symbol: qsTr("E") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -631,7 +631,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Seed & Keys") + translationManager.emptyString
                 symbol: qsTr("Y") + translationManager.emptyString
-                dotColor: "#86af49"
+                dotColor: MoneroComponents.Style.dotColor
                 under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -660,7 +660,7 @@ Rectangle {
             anchors.rightMargin: 0
             anchors.bottom: networkStatus.top;
             height: 10 * scaleRatio
-            color: "#eeeeee"
+            color: MoneroComponents.Style.background
         }
 
         MoneroComponents.NetworkStatusItem {
@@ -672,7 +672,7 @@ Rectangle {
             anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
             height: 48 * scaleRatio
-            color: "#eeeeee"
+            color: MoneroComponents.Style.background
         }
 
         MoneroComponents.ProgressBar {
@@ -683,7 +683,7 @@ Rectangle {
             height: 48 * scaleRatio
             syncType: qsTr("Wallet")
             visible: networkStatus.connected
-            color: "#eeeeee"
+            color: MoneroComponents.Style.background
         }
 
         MoneroComponents.ProgressBar {
@@ -694,7 +694,7 @@ Rectangle {
             syncType: qsTr("Daemon")
             visible: networkStatus.connected
             height: 62 * scaleRatio
-            color: "#eeeeee"
+            color: MoneroComponents.Style.background
         }
     } // menuRect
 

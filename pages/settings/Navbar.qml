@@ -53,7 +53,7 @@ Rectangle {
             id: grid
             Layout.alignment: Qt.AlignHCenter
             columnSpacing: 0
-            property string fontColor: "white"
+            property string fontColor: MoneroComponents.Style.defaultFontColor
             property int fontSize: 13 * scaleRatio
             property bool fontBold: true
             property var fontFamily: MoneroComponents.Style.fontRegular.name

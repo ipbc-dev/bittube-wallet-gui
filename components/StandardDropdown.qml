@@ -40,7 +40,7 @@ Item {
     property string pressedColor: MoneroComponents.Style.dropdownContentBackgroundColor
     property string releasedColor: MoneroComponents.Style.dropdownContentSelectedBackgroundColor
     property string textColor: MoneroComponents.Style.defaultFontColor
-    property alias currentIndex: column.currentIndex
+    property alias currentIndex: columnid.currentIndex
     property bool expanded: false
     property int dropdownHeight: 42
     property int fontHeaderSize: 16 * scaleRatio

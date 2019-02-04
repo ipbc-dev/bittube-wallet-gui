@@ -44,6 +44,7 @@ Item {
         if(small) return 14 * scaleRatio;
         else return 16 * scaleRatio;
     }
+
     signal clicked()
 
     height: small ?  30 * scaleRatio : 36 * scaleRatio

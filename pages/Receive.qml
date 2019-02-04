@@ -47,6 +47,7 @@ Rectangle {
     id: pageReceive
     color: "transparent"
     property var model
+    property var current_address
     property alias receiveHeight: mainLayout.height
     property alias addressText : pageReceive.current_address
 
@@ -201,7 +202,7 @@ Rectangle {
             MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
                 textFormat: Text.RichText
-                text: "<style type='text/css'>a {text-decoration: none; color: #86af49; font-size: 14px;}</style>" +
+                text: "<style type='text/css'>a {text-decoration: none; color: #00abff; font-size: 14px;}</style>" +
                       qsTr("Addresses") +
                       "<font size='2'> </font><a href='#'>" +
                       qsTr("Help") + "</a>" +
@@ -257,7 +258,7 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: idLabel
-                                color: index === appWindow.current_subaddress_table_index ? "#464646" : "#757575"
+                                color: index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.defaultFontColor : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6
@@ -278,7 +279,7 @@ Rectangle {
                             }
 
                             MoneroComponents.Label {
-                                color: "#464646"
+                                color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: nameLabel.right
                                 anchors.leftMargin: 6
@@ -410,29 +411,8 @@ Rectangle {
 
             Rectangle {
                 id: qrContainer
-                color: "white"
+                color: "#A9A9A9"
                 Layout.fillWidth: true
-                spacing: 20 * scaleRatio
-
-                LabelSubheader {
-                    Layout.fillWidth: true
-                    textFormat: Text.RichText
-                    text: "<style type='text/css'>a {text-decoration: none; color: #86af49; font-size: 14px;}</style>" +
-                          qsTr("QR Code") +
-                          "<font size='2'> </font><a href='#'>" +
-                          qsTr("Help") + "</a>" +
-                          translationManager.emptyString
-                    onLinkActivated: {
-                        receivePageDialog.title  = qsTr("QR Code") + translationManager.emptyString;
-                        receivePageDialog.text = qsTr(
-                            "<p>This QR code includes the address you selected above and " +
-                            "the amount you entered below. Share it with others (right-click->Save) " +
-                            "so they can more easily send you exact amounts.</p>"
-                        )
-                        receivePageDialog.icon = StandardIcon.Information
-                        receivePageDialog.open()
-                    }
-                }
                 Layout.maximumWidth: parent.qrSize
                 Layout.preferredHeight: width
                 radius: 4 * scaleRatio
@@ -454,37 +434,8 @@ Rectangle {
                 }
             }
 
-            ColumnLayout {
-                id: trackingRow
-                Layout.alignment: Qt.AlignTop
-                Layout.fillWidth: true
-                spacing: 0 * scaleRatio
-
-                LabelSubheader {
-                    Layout.fillWidth: true
-                    textFormat: Text.RichText
-                    text: "<style type='text/css'>a {text-decoration: none; color: #86af49; font-size: 14px;}</style>" +
-                          qsTr("Tracking") +
-                          "<font size='2'> </font><a href='#'>" +
-                          qsTr("Help") + "</a>" +
-                          translationManager.emptyString
-                    onLinkActivated: {
-                        receivePageDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
-                        receivePageDialog.text = qsTr(
-                            "<p><font size='+2'>This is a simple sales tracker:</font></p>" +
-                            "<p>Let your customer scan that QR code to make a payment (if that customer has software which " +
-                            "supports QR code scanning).</p>" +
-                            "<p>This page will automatically scan the blockchain and the tx pool " +
-                            "for incoming transactions using this QR code. If you input an amount, it will also check " +
-                            "that incoming transactions total up to that amount.</p>" +
-                            "<p>It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
-                            "confirmed in short order, but there is still a possibility they might not, so for larger " +
-                            "values you may want to wait for one or more confirmation(s).</p>"
-                        )
-                        receivePageDialog.icon = StandardIcon.Information
-                        receivePageDialog.open()
-                    }
-                }
+            RowLayout {
+                spacing: parent.spacing
 
                 MoneroComponents.StandardButton {
                     rightIcon: "../images/download-white.png"
