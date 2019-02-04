@@ -29,6 +29,7 @@
 
 import QtQuick 2.2
 import QtQml 2.2
+import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import moneroComponents.NetworkType 1.0
 import "../components"
@@ -38,9 +39,10 @@ ColumnLayout {
     signal createWalletClicked()
     signal recoveryWalletClicked()
     signal openWalletClicked()
+    signal createWalletFromDeviceClicked()
     opacity: 0
     visible: false
-    property int buttonSize: (isMobile) ? 80 * scaleRatio : 190 * scaleRatio
+    property int buttonSize: (isMobile) ? 80 * scaleRatio : 140 * scaleRatio
     property int buttonImageSize: (isMobile) ? buttonSize - 10 * scaleRatio : buttonSize - 30 * scaleRatio
 
     function onPageClosed() {
@@ -127,6 +129,7 @@ ColumnLayout {
                 MouseArea {
                     id: createWalletArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.createWalletClicked()
@@ -169,6 +172,7 @@ ColumnLayout {
                 MouseArea {
                     id: recoverWalletArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.recoveryWalletClicked()
@@ -212,6 +216,7 @@ ColumnLayout {
                 MouseArea {
                     id: openWalletArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.openWalletClicked()
@@ -229,6 +234,52 @@ ColumnLayout {
                 wrapMode: Text.WordWrap
             }
         }
+
+        GridLayout {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
+            rowSpacing: 20 * scaleRatio
+            columnSpacing: 10 * scaleRatio
+
+            Rectangle {
+                Layout.preferredHeight: page.buttonSize
+                Layout.preferredWidth: page.buttonSize
+                radius: page.buttonSize
+                color: createWalletFromDeviceArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
+
+
+                Image {
+                    width: page.buttonImageSize
+                    height: page.buttonImageSize
+                    fillMode: Image.PreserveAspectFit
+                    horizontalAlignment: Image.AlignRight
+                    verticalAlignment: Image.AlignTop
+                    anchors.centerIn: parent
+                    source: "qrc:///images/createWalletFromDevice.png"
+                }
+
+                MouseArea {
+                    id: createWalletFromDeviceArea
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onClicked: {
+                        page.createWalletFromDeviceClicked()
+                    }
+                }
+            }
+
+            Text {
+                Layout.preferredWidth: page.buttonSize
+                font.family: "Arial"
+                font.pixelSize: 16 * scaleRatio
+                color: "#4A4949"
+                horizontalAlignment: Text.AlignHCenter
+                wrapMode: Text.WordWrap
+                text: qsTr("Create a new wallet from hardware device") + translationManager.emptyString
+            }
+        }
     }
 
     ColumnLayout {
@@ -239,9 +290,41 @@ ColumnLayout {
         Layout.fillWidth: true
         spacing: 38 * scaleRatio
 
+        RowLayout {
+            CheckBox2 {
+                id: showAdvancedCheckbox
+                darkDropIndicator: true
+                text: qsTr("Advanced options") + translationManager.emptyString
+                fontColor: "#4A4646"
+            }
+        }
+
         Rectangle {
             width: 100 * scaleRatio
             RadioButton {
+                visible: showAdvancedCheckbox.checked
+                enabled: !this.checked
+                id: mainNet
+                text: qsTr("Mainnet") + translationManager.emptyString
+                checkedColor: Qt.rgba(0, 0, 0, 0.75)
+                borderColor: Qt.rgba(0, 0, 0, 0.45)
+                fontColor: "#4A4646"
+                fontSize: 16 * scaleRatio
+                checked: appWindow.persistentSettings.nettype == NetworkType.MAINNET;
+                onClicked: {
+                    persistentSettings.nettype = NetworkType.MAINNET
+                    testNet.checked = false;
+                    stageNet.checked = false;
+                    console.log("Network type set to MainNet")
+                }
+            }
+        }
+
+        Rectangle {
+            width: 100 * scaleRatio
+            RadioButton {
+                visible: showAdvancedCheckbox.checked
+                enabled: !this.checked
                 id: testNet
                 text: qsTr("Testnet") + translationManager.emptyString
                 checkedColor: Qt.rgba(0, 0, 0, 0.75)
@@ -262,6 +345,8 @@ ColumnLayout {
         Rectangle {
             width: 100 * scaleRatio
             RadioButton {
+                visible: showAdvancedCheckbox.checked
+                enabled: !this.checked
                 id: stageNet
                 text: qsTr("Stagenet") + translationManager.emptyString
                 checkedColor: Qt.rgba(0, 0, 0, 0.75)
@@ -276,6 +361,36 @@ ColumnLayout {
                 // }
                 checked: false
                 visible: false
+            }
+        }
+    }
+
+    RowLayout {
+        Layout.leftMargin: wizardLeftMargin
+        Layout.rightMargin: wizardRightMargin
+        Layout.topMargin: 50 * scaleRatio
+        Layout.alignment: Qt.AlignHCenter
+        Layout.fillWidth: true
+        visible: showAdvancedCheckbox.checked
+
+        Text {
+            font.family: "Arial"
+            font.pixelSize: 16 * scaleRatio
+            color: "#4A4949"
+            text: qsTr("Number of KDF rounds:") + translationManager.emptyString
+        }
+        TextField {
+            id: kdfRoundsText
+            font.family: "Arial"
+            font.pixelSize: 16 * scaleRatio
+            Layout.preferredWidth: 60
+            horizontalAlignment: TextInput.AlignRight
+            selectByMouse: true
+            color: "#4A4949"
+            text: persistentSettings.kdfRounds
+            validator: IntValidator { bottom: 1 }
+            onEditingFinished: {
+                kdfRoundsText.text = persistentSettings.kdfRounds = parseInt(kdfRoundsText.text) >= 1 ? parseInt(kdfRoundsText.text) : 1;
             }
         }
     }

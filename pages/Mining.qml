@@ -30,7 +30,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
-import "../components"
+import "../components" as MoneroComponents
 import moneroComponents.Wallet 1.0
 
 Rectangle {
@@ -39,10 +39,10 @@ Rectangle {
     property var currentHashRate: 0
     property alias miningHeight: mainLayout.height
 
-    /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40
+        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
+        anchors.topMargin: 40 * scaleRatio
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -194,19 +194,20 @@ Rectangle {
                     // validator: IntValidator { bottom: 4 }
                 }
             }
+        }
 
-            RowLayout {
-                // Disable this option until stable
-                visible: false
-                Layout.leftMargin: 125
-                CheckBox {
-                    id: ignoreBattery
-                    enabled: startSoloMinerButton.enabled
-                    checked: !persistentSettings.miningIgnoreBattery
-                    onClicked: {persistentSettings.miningIgnoreBattery = !checked}
-                    text: qsTr("Enable mining when running on battery") + translationManager.emptyString
-                }
+        RowLayout {
+            // Disable this option until stable
+            visible: false
+            Layout.leftMargin: 125 * scaleRatio
+            MoneroComponents.CheckBox {
+                id: ignoreBattery
+                enabled: startSoloMinerButton.enabled
+                checked: !persistentSettings.miningIgnoreBattery
+                onClicked: {persistentSettings.miningIgnoreBattery = !checked}
+                text: qsTr("Enable mining when running on battery") + translationManager.emptyString
             }
+        }
 
             RowLayout {
                 Layout.leftMargin: 125
@@ -262,6 +263,7 @@ Rectangle {
                         }
                     }
                 }
+            }
 
                 StandardButton {
                     visible: true
@@ -926,16 +928,12 @@ Rectangle {
     }
 
     function updateStatusText() {
-        var text = ""
-        if (walletManager.isMining()) {
-            if (text !== "")
-                text += "<br>";
-            text += qsTr("Mining at %1 H/s").arg(walletManager.miningHashRate())
+        if (appWindow.isMining) {
+            statusText.text = qsTr("Mining at %1 H/s").arg(walletManager.miningHashRate()) + translationManager.emptyString;
         }
-        if (text === "") {
-            text += qsTr("Not mining") + translationManager.emptyString;
+        else {
+            statusText.text = qsTr("Not mining") + translationManager.emptyString;
         }
-        statusText.text = qsTr("Status: ") + text
     }
 
     function reset_all(){
@@ -1154,7 +1152,7 @@ Rectangle {
         }
     }
 
-    StandardDialog {
+    MoneroComponents.StandardDialog {
         id: errorPopup
         cancelVisible: false
     }

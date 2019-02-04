@@ -15,8 +15,13 @@ packagesExist(libpcsclite) {
         PKGCONFIG += libpcsclite
     }
 }
-QMAKE_CXXFLAGS += -fPIC -fstack-protector
-QMAKE_LFLAGS += -fstack-protector
+packagesExist(hidapi-libusb) {
+    PKGCONFIG += hidapi-libusb
+}
+!win32 {
+    QMAKE_CXXFLAGS += -fPIC -fstack-protector -fstack-protector-strong
+    QMAKE_LFLAGS += -fstack-protector -fstack-protector-strong
+}
 
 # cleaning "auto-generated" bittube directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
@@ -50,6 +55,8 @@ HEADERS += \
     src/libwalletqt/AddressBook.h \
     src/model/SubaddressModel.h \
     src/libwalletqt/Subaddress.h \
+    src/model/SubaddressAccountModel.h \
+    src/libwalletqt/SubaddressAccount.h \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
     src/http-service/httpservice.h \
@@ -78,6 +85,8 @@ SOURCES += main.cpp \
     src/libwalletqt/AddressBook.cpp \
     src/model/SubaddressModel.cpp \
     src/libwalletqt/Subaddress.cpp \
+    src/model/SubaddressAccountModel.cpp \
+    src/libwalletqt/SubaddressAccount.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
     src/http-service/httpservice.cpp \
@@ -100,10 +109,14 @@ lupdate_only {
 SOURCES = *.qml \
           components/*.qml \
           pages/*.qml \
+          pages/settings/*.qml \
+          pages/merchant/*.qml \
           wizard/*.qml \
           wizard/*js
 }
 
+# Linker flags required by Trezor
+TREZOR_LINKER = $$cat($$WALLET_ROOT/lib/trezor_link_flags.txt)
 
 ios:armv7 {
     message("target is armv7")
@@ -121,7 +134,8 @@ LIBS += -L$$WALLET_ROOT/lib \
         -llmdb \
         -lepee \
         -lunbound \
-        -leasylogging \
+        -lsodium \
+        -leasylogging
 }
 
 android {
@@ -131,13 +145,14 @@ android {
         -llmdb \
         -lepee \
         -lunbound \
+        -lsodium \
         -leasylogging
 }
 
 
 
-QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security -fstack-protector -fstack-protector-strong
-QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security -fstack-protector -fstack-protector-strong
+QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security
+QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security
 
 ios {
     message("Host is IOS")
@@ -150,6 +165,7 @@ ios {
         -llmdb \
         -lepee \
         -lunbound \
+        -lsodium \
         -leasylogging
 
     LIBS+= \
@@ -249,13 +265,17 @@ win32 {
         -licutu \
         -liconv \
         -lssl \
+        -lsodium \
         -lcrypto \
         -Wl,-Bdynamic \
+        -lwinscard \
         -lws2_32 \
         -lwsock32 \
         -lwinscard \
         -lIphlpapi \
-        -lgdi32
+        -lcrypt32 \
+        -lhidapi \
+        -lgdi32 $$TREZOR_LINKER
     
     !contains(QMAKE_TARGET.arch, x86_64) {
         message("Target is 32bit")
@@ -276,7 +296,10 @@ linux {
         LIBS+= -Wl,-Bstatic    
         QMAKE_LFLAGS += -static-libgcc -static-libstdc++
    #     contains(QT_ARCH, x86_64) {
-            LIBS+= -lunbound
+            LIBS+= -lunbound \
+                   -lusb-1.0 \
+                   -lhidapi-hidraw \
+                   -ludev
    #     }
     } else {
       # On some distro's we need to add dynload
@@ -294,7 +317,9 @@ linux {
         -lboost_program_options \
         -lssl \
         -llmdb \
-        -lcrypto
+        -lsodium \
+        -lhidapi-libusb \
+        -lcrypto $$TREZOR_LINKER
 
     if(!android) {
         LIBS+= \
@@ -324,6 +349,7 @@ macx {
         -L/usr/local/opt/openssl/lib \
         -L/usr/local/opt/boost/lib \
         -lboost_serialization \
+        -lhidapi \
         -lboost_thread-mt \
         -lboost_system \
         -lboost_date_time \
@@ -332,9 +358,9 @@ macx {
         -lboost_chrono \
         -lboost_program_options \
         -lssl \
+        -lsodium \
         -lcrypto \
-        -ldl
-    LIBS+= -framework PCSC
+        -ldl $$TREZOR_LINKER
 
     QMAKE_LFLAGS += -pie
 }
@@ -447,7 +473,9 @@ OTHER_FILES += \
 DISTFILES += \
     notes.txt \
     bittube/src/wallet/CMakeLists.txt \
-    components/MobileHeader.qml
+    components/MobileHeader.qml \
+    pages/merchant/Merchant.qml \
+    pages/merchant/MerchantCheckbox.qml
 
 
 # windows application icon

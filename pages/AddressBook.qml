@@ -33,18 +33,17 @@ import "../components"
 import moneroComponents.AddressBook 1.0
 import moneroComponents.AddressBookModel 1.0
 
-Rectangle {
+ColumnLayout {
     id: root
-    color: "transparent"
     property var model
+    property bool selectAndSend: false
 
     ColumnLayout {
-        id: columnLayout
-        anchors.margins: (isMobile)? 17 : 40
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.right: parent.right
+        Layout.margins: (isMobile ? 17 : 20) * scaleRatio
+        Layout.topMargin: 40 * scaleRatio
+        Layout.fillWidth: true
         spacing: 26 * scaleRatio
+        visible: !root.selectAndSend
 
         RowLayout {
             StandardButton {
@@ -59,29 +58,34 @@ Rectangle {
                 }
             }
 
-            LineEdit {
+            LineEditMulti {
                 Layout.fillWidth: true;
                 id: addressLine
                 labelText: qsTr("Address") + translationManager.emptyString
                 error: true;
                 placeholderText: qsTr("bx.. / bs..") + translationManager.emptyString
+                wrapMode: Text.WrapAnywhere
+                addressValidation: true
             }
         }
 
-        LineEdit {
+        LineEditMulti {
             id: paymentIdLine
+            visible: appWindow.persistentSettings.showPid
             Layout.fillWidth: true;
             labelText: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
             placeholderText: qsTr("Paste 64 hexadecimal characters") + translationManager.emptyString
+            wrapMode: Text.WrapAnywhere
 //            tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during the transfer")
 //                    + translationManager.emptyString
         }
 
-        LineEdit {
+        LineEditMulti {
             id: descriptionLine
             Layout.fillWidth: true;
             labelText: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
             placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
+            wrapMode: Text.WrapAnywhere
         }
 
 
@@ -106,9 +110,7 @@ Rectangle {
                         informationPopup.onCloseCallback = null
                         informationPopup.open();
                     } else {
-                        addressLine.text = "";
-                        paymentIdLine.text = "";
-                        descriptionLine.text = "";
+                        clearFields();
                     }
                 }
             }
@@ -117,13 +119,11 @@ Rectangle {
 
     Rectangle {
         id: tableRect
-        anchors.top: columnLayout.bottom
-        anchors.leftMargin: (isMobile)? 17 : 40
-        anchors.rightMargin: (isMobile)? 17 : 40
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        height: parent.height - addButton.y - addButton.height - 36 * scaleRatio
+        Layout.leftMargin: (isMobile ? 17 : 40) * scaleRatio
+        Layout.rightMargin: (isMobile ? 17 : 40) * scaleRatio
+        Layout.topMargin: (root.selectAndSend ? 40 : 0) * scaleRatio
+        Layout.fillHeight: true
+        Layout.fillWidth: true
         color: "transparent"
 
         Behavior on height {
@@ -147,6 +147,7 @@ Rectangle {
             anchors.bottom: parent.bottom
             onContentYChanged: flickableScroll.flickableContentYChanged()
             model: root.model
+            selectAndSend: root.selectAndSend
         }
     }
 
@@ -166,6 +167,10 @@ Rectangle {
       return address_ok && payment_id_ok
     }
 
+    function onPageClosed() {
+        root.selectAndSend = false;
+    }
+
     function onPageCompleted() {
         console.log("adress book");
         root.model = currentWallet.addressBookModel;
@@ -180,4 +185,9 @@ Rectangle {
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
     }
 
+    function clearFields() {
+        addressLine.text = "";
+        paymentIdLine.text = "";
+        descriptionLine.text = "";
+    }
 }

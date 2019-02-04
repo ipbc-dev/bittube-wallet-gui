@@ -54,9 +54,16 @@ GridLayout {
     property string lineEditBorderColor: Qt.rgba(0, 0, 0, 0.15)
     property string lineEditBackgroundColor: "white"
     property string lineEditFontColor: "black"
+    property int lineEditFontSize: 18 * scaleRatio
+    property int labelFontSize: 16 * scaleRatio
     property bool lineEditFontBold: true
 
     signal editingFinished()
+    signal textChanged()
+
+    function isValid() {
+        return daemonAddr.text.trim().length > 0 && daemonPort.acceptableInput
+    }
 
     function getAddress() {
         return daemonAddr.text.trim() + ":" + daemonPort.text.trim()
@@ -71,11 +78,14 @@ GridLayout {
         placeholderFontSize: root.placeholderFontSize
         placeholderColor: root.placeholderColor
         placeholderOpacity: root.placeholderOpacity
-        onEditingFinished: root.editingFinished()
+        labelFontSize: root.labelFontSize
         borderColor: lineEditBorderColor
         backgroundColor: lineEditBackgroundColor
         fontColor: lineEditFontColor
         fontBold: lineEditFontBold
+        fontSize: lineEditFontSize
+        onEditingFinished: root.editingFinished()
+        onTextChanged: root.textChanged()
     }
 
     LineEdit {
@@ -87,10 +97,15 @@ GridLayout {
         placeholderFontSize: root.placeholderFontSize
         placeholderColor: root.placeholderColor
         placeholderOpacity: root.placeholderOpacity
-        onEditingFinished: root.editingFinished()
+        labelFontSize: root.labelFontSize
         borderColor: lineEditBorderColor
         backgroundColor: lineEditBackgroundColor
         fontColor: lineEditFontColor
         fontBold: lineEditFontBold
+        fontSize: lineEditFontSize
+        validator: IntValidator{bottom: 1; top: 65535;}
+
+        onEditingFinished: root.editingFinished()
+        onTextChanged: root.textChanged()
     }
 }

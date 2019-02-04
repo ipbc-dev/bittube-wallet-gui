@@ -48,7 +48,7 @@ Rectangle {
     property string title
     property int mouseX: 0
     property bool containsMouse: false
-    property alias basicButtonVisible: goToBasicVersionButton.visible
+    property bool basicButtonVisible: false
     property bool customDecorations: persistentSettings.customDecorations
     property bool showWhatIsButton: true
     property bool showMinimizeButton: false
@@ -56,6 +56,10 @@ Rectangle {
     property bool showCloseButton: true
     property bool showMoneroLogo: false
     property bool small: false
+    property alias titleBarGradientImageOpacity: titleBarGradientImage.opacity
+    property bool orange: false
+    property string buttonHoverColor: "#262626"
+    property string buttonHoverColorOrange: "#44FFFFFF"
 
     signal closeClicked
     signal maximizeClicked
@@ -69,10 +73,19 @@ Rectangle {
         z: parent.z + 1
 
         Image {
-           anchors.fill: titleBar
+           id: titleBarGradientImage
+           visible: !titleBar.orange
+           anchors.fill: parent
            height: titleBar.height
            width: titleBar.width
            source: "../images/titlebarGradient.jpg"
+        }
+
+        Rectangle {
+            visible: titleBar.orange
+            width: parent.width
+            height: parent.height
+            color: "#ff6600"
         }
     }
 
@@ -81,16 +94,27 @@ Rectangle {
         width: 125
         height: parent.height
         anchors.centerIn: parent
-        visible: customDecorations && showMoneroLogo
+        visible: customDecorations
         z: parent.z + 1
 
         Image {
+            visible: !isMobile && showMoneroLogo && !titleBar.orange
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.topMargin: 11
             width: 125
             height: 28
             source: "../images/titlebarLogo.png"
+        }
+
+        Image {
+            visible: !isMobile && showMoneroLogo && titleBar.orange
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.topMargin: 11
+            width: 132
+            height: 22
+            source: "../images/moneroLogo_white.png"
         }
     }
 
@@ -113,7 +137,7 @@ Rectangle {
         color:  "transparent"
         height: titleBar.height
         width: height
-        visible: isMobile
+        visible: !titleBar.orange && titleBar.basicButtonVisible
         z: parent.z + 2
 
         Image {
@@ -225,6 +249,7 @@ Rectangle {
 
     // window borders
     Rectangle {
+        visible: !titleBar.orange
         anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.left: parent.left
@@ -234,10 +259,10 @@ Rectangle {
     }
 
     Rectangle {
+        visible: titleBar.small && !titleBar.orange
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.left: parent.left
-        visible: titleBar.small
         height: 1
         color: "#d2d2d2"
         z: parent.z + 1

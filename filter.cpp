@@ -39,6 +39,10 @@ filter::filter(QObject *parent) :
 }
 
 bool filter::eventFilter(QObject *obj, QEvent *ev) {
+    if(ev->type() == QEvent::KeyPress || ev->type() == QEvent::MouseButtonRelease){
+        emit userActivity();
+    }
+
     switch(ev->type()) {
     case QEvent::KeyPress: {
         QKeyEvent *ke = static_cast<QKeyEvent*>(ev);

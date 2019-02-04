@@ -34,18 +34,18 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import moneroComponents.Clipboard 1.0
 import "../version.js" as Version
-import "../components"
+import "../components" as MoneroComponents
 import "." 1.0
 
 
 Rectangle {
-    property bool viewOnly: false
     id: page
+    property bool viewOnly: false
+    property int keysHeight: mainLayout.height + 100 * scaleRatio // Ensure sufficient height for QR code, even in minimum width window case.
 
     color: "transparent"
 
     Clipboard { id: clipboard }
-
     ColumnLayout {
         id: mainLayout
 
@@ -53,7 +53,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.right: parent.right
 
-        anchors.margins: (isMobile)? 17 : 20
+        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
         anchors.topMargin: 40 * scaleRatio
 
         spacing: 30 * scaleRatio
@@ -104,39 +104,45 @@ Rectangle {
                 }
             }
         }
-        
+
         //! Manage wallet
         ColumnLayout {
             Layout.fillWidth: true
 
-            Label {
+            MoneroComponents.Label {
                 Layout.fillWidth: true
                 fontSize: 22 * scaleRatio
                 Layout.topMargin: 10 * scaleRatio
                 text: qsTr("Mnemonic seed") + translationManager.emptyString
             }
+
             Rectangle {
                 Layout.fillWidth: true
-                height: 2
-                color: Style.dividerColor
-                opacity: Style.dividerOpacity
+                height: 2 * scaleRatio
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.bottomMargin: 10 * scaleRatio
             }
 
-            LineEditMulti{
+            MoneroComponents.WarningBox {
+                text: qsTr("WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.") + translationManager.emptyString
+            }
+
+            MoneroComponents.LineEditMulti {
                 id: seedText
                 spacing: 0
                 copyButton: true
                 addressValidation: false
                 readOnly: true
-                wrapAnywhere: false
+                wrapMode: Text.WordWrap
+                fontColor: "white"
             }
         }
 
         ColumnLayout {
             Layout.fillWidth: true
 
-            Label {
+            MoneroComponents.Label {
                 Layout.fillWidth: true
                 fontSize: 22 * scaleRatio
                 Layout.topMargin: 10 * scaleRatio
@@ -145,38 +151,51 @@ Rectangle {
             Rectangle {
                 Layout.fillWidth: true
                 height: 2
-                color: Style.dividerColor
-                opacity: Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.bottomMargin: 10 * scaleRatio
             }
-            TextEdit {
-                id: keysText
-                wrapMode: TextEdit.Wrap
-                Layout.fillWidth: true;
-                font.pixelSize: 14 * scaleRatio
-                textFormat: TextEdit.RichText
+            MoneroComponents.LineEdit {
+                Layout.fillWidth: true
+                id: secretViewKey
                 readOnly: true
-                color: Style.defaultFontColor
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        appWindow.showStatusMessage(qsTr("Double tap to copy"),3)
-                    }
-                    onDoubleClicked: {
-                        parent.selectAll()
-                        parent.copy()
-                        parent.deselect()
-                        console.log("copied to clipboard");
-                        appWindow.showStatusMessage(qsTr("Keys copied to clipboard"),3)
-                    }
-                }
+                copyButton: true
+                labelText: qsTr("Secret view key") + translationManager.emptyString
+                fontSize: 16 * scaleRatio
+            }
+            MoneroComponents.LineEdit {
+                Layout.fillWidth: true
+                Layout.topMargin: 25 * scaleRatio
+                id: publicViewKey
+                readOnly: true
+                copyButton: true
+                labelText: qsTr("Public view key") + translationManager.emptyString
+                fontSize: 16 * scaleRatio
+            }
+            MoneroComponents.LineEdit {
+                Layout.fillWidth: true
+                Layout.topMargin: 25 * scaleRatio
+                id: secretSpendKey
+                readOnly: true
+                copyButton: true
+                labelText: qsTr("Secret spend key") + translationManager.emptyString
+                fontSize: 16 * scaleRatio
+            }
+            MoneroComponents.LineEdit {
+                Layout.fillWidth: true
+                Layout.topMargin: 25 * scaleRatio
+                id: publicSpendKey
+                readOnly: true
+                copyButton: true
+                labelText: qsTr("Public spend key") + translationManager.emptyString
+                fontSize: 16 * scaleRatio
             }
         }
 
         ColumnLayout {
             Layout.fillWidth: true
 
-            Label {
+            MoneroComponents.Label {
                 Layout.fillWidth: true
                 fontSize: 22 * scaleRatio
                 Layout.topMargin: 10 * scaleRatio
@@ -185,28 +204,30 @@ Rectangle {
             Rectangle {
                 Layout.fillWidth: true
                 height: 2
-                color: Style.dividerColor
-                opacity: Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.bottomMargin: 10 * scaleRatio
             }
 
-            RowLayout {
-                StandardButton {
-                    enabled: !fullWalletQRCode.visible
+            ColumnLayout {
+                MoneroComponents.RadioButton {
                     id: showFullQr
-                    small: true
+                    enabled: !this.checked
+                    checked: fullWalletQRCode.visible
                     text: qsTr("Spendable Wallet") + translationManager.emptyString
                     onClicked: {
                         viewOnlyQRCode.visible = false
+                        showViewOnlyQr.checked = false
                     }
                 }
-                StandardButton {
-                    enabled: fullWalletQRCode.visible
+                MoneroComponents.RadioButton {
+                    enabled: !this.checked
                     id: showViewOnlyQr
-                    small: true
+                    checked: viewOnlyQRCode.visible
                     text: qsTr("View Only Wallet") + translationManager.emptyString
                     onClicked: {
                         viewOnlyQRCode.visible = true
+                        showFullQr.checked = false
                     }
                 }
                 Layout.bottomMargin: 30 * scaleRatio
@@ -234,7 +255,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.bold: true
                 font.pixelSize: 16 * scaleRatio
-                color: Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 text: (viewOnlyQRCode.visible) ? qsTr("View Only Wallet") + translationManager.emptyString : qsTr("Spendable Wallet") + translationManager.emptyString
                 horizontalAlignment: Text.AlignHCenter
             }
@@ -245,22 +266,23 @@ Rectangle {
     function onPageCompleted() {
         console.log("keys page loaded");
 
-        keysText.text = "<b>" + qsTr("Secret view key") + ":</b> " + currentWallet.secretViewKey
-        keysText.text += "<br><br><b>" + qsTr("Public view key") + ":</b> " + currentWallet.publicViewKey
-        keysText.text += (!currentWallet.viewOnly) ? "<br><br><b>" + qsTr("Secret spend key") + ":</b> " + currentWallet.secretSpendKey : ""
-        keysText.text += "<br><br><b>" + qsTr("Public spend key") + ":</b> " + currentWallet.publicSpendKey
+        secretViewKey.text = currentWallet.secretViewKey
+        publicViewKey.text = currentWallet.publicViewKey
+        secretSpendKey.text = (!currentWallet.viewOnly) ? currentWallet.secretSpendKey : ""
+        publicSpendKey.text = currentWallet.publicSpendKey
 
         seedText.text = currentWallet.seed
 
         if(typeof currentWallet != "undefined") {
-            viewOnlyQRCode.source = "image://qrcode/monero:" + currentWallet.address+"?secret_view_key="+currentWallet.secretViewKey+"&restore_height="+currentWallet.restoreHeight
-            fullWalletQRCode.source = viewOnlyQRCode.source +"&secret_spend_key="+currentWallet.secretSpendKey
+            viewOnlyQRCode.source = "image://qrcode/monero_wallet:" + currentWallet.address(0, 0) + "?view_key="+currentWallet.secretViewKey+"&height="+currentWallet.walletCreationHeight
+            fullWalletQRCode.source = viewOnlyQRCode.source +"&spend_key="+currentWallet.secretSpendKey
 
             if(currentWallet.viewOnly) {
                 viewOnlyQRCode.visible = true
                 showFullQr.visible = false
                 showViewOnlyQr.visible = false
-                seedText.text = qsTr("(View Only Wallet -  No mnemonic seed available)") + translationManager.emptyString
+                seedText.text = qsTr("(View Only Wallet - No mnemonic seed available)") + translationManager.emptyString
+                secretSpendKey.text = qsTr("(View Only Wallet - No secret spend key available)") + translationManager.emptyString
             }
         }
     }

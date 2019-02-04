@@ -51,6 +51,15 @@ Rectangle {
         return true
     }
 
+    function validUnsigned(s) {
+        if (s.length == 0)
+            return false
+        for (var i = 0; i < s.length; ++i)
+            if ("0123456789".indexOf(s[i]) == -1)
+                return false
+        return true
+    }
+
     function validRing(str, relative) {
         var outs = str.split(" ");
         if (outs.length == 0)
@@ -71,7 +80,7 @@ Rectangle {
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: (isMobile)? 17 : 20
+        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
         anchors.topMargin: 40 * scaleRatio
   
         anchors.left: parent.left
@@ -108,9 +117,9 @@ Rectangle {
             Layout.fillWidth: true
             textFormat: Text.RichText
             text: "<style type='text/css'>a {text-decoration: none; color: #86af49; font-size: 14px;}</style>" +
-                  qsTr("Blackballed outputs") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
+                  qsTr("Outputs marked as spent") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
             onLinkActivated: {
-                sharedRingDBDialog.title  = qsTr("Blackballed outputs") + translationManager.emptyString;
+                sharedRingDBDialog.title  = qsTr("Outputs marked as spent") + translationManager.emptyString;
                 sharedRingDBDialog.text = qsTr(
                     "In order to obscure which inputs in a BitTube transaction are being spent, a third party should not be able " +
                     "to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection " +
@@ -145,7 +154,7 @@ Rectangle {
 
             FileDialog {
                 id: loadBlackballFileDialog
-                title: qsTr("Please choose a file to load blackballed outputs from") + translationManager.emptyString;
+                title: qsTr("Please choose a file from which to load outputs to mark as spent") + translationManager.emptyString;
                 folder: "file://"
                 nameFilters: [ "*"]
 
@@ -163,7 +172,7 @@ Rectangle {
                     fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Path to file") + "..." + translationManager.emptyString
                     labelFontSize: 14 * scaleRatio
-                    labelText: qsTr("Filename with outputs to blackball") + ":" + translationManager.emptyString
+                    labelText: qsTr("Filename with outputs to mark as spent") + ":" + translationManager.emptyString
                     copyButton: true
                     readOnly: false
                 }
@@ -186,7 +195,6 @@ Rectangle {
 
                 StandardButton {
                     id: loadBlackballFileButton
-                    anchors.right: parent.right
                     text: qsTr("Load") + translationManager.emptyString
                     small: true
                     enabled: !!appWindow.currentWallet && loadBlackballFileLine.text !== ""
@@ -200,15 +208,24 @@ Rectangle {
 
             RowLayout {
                 LineEdit {
-                    id: blackballOutputLine
+                    id: blackballOutputAmountLine
                     fontSize: mainLayout.lineEditFontSize
                     labelFontSize: 14 * scaleRatio
-                    labelText: qsTr("Or manually blackball/unblackball a single output:") + translationManager.emptyString
-                    placeholderText: qsTr("Paste output public key") + "..." + translationManager.emptyString
+                    labelText: qsTr("Or manually mark a single output as spent/unspent:") + translationManager.emptyString
+                    placeholderText: qsTr("Paste output amount") + "..." + translationManager.emptyString
                     readOnly: false
-                    copyButton: true
-                    width: mainLayout.editWidth
-                    Layout.fillWidth: true
+                    width: mainLayout.editWidth / 2
+                    validator: IntValidator { bottom: 0 }
+                }
+                LineEdit {
+                    id: blackballOutputOffsetLine
+                    fontSize: mainLayout.lineEditFontSize
+                    labelFontSize: 14 * scaleRatio
+                    labelText: " "
+                    placeholderText: qsTr("Paste output offset") + "..." + translationManager.emptyString
+                    readOnly: false
+                    width: mainLayout.editWidth / 2
+                    validator: IntValidator { bottom: 0 }
                 }
             }
 
@@ -218,19 +235,18 @@ Rectangle {
 
                 StandardButton {
                     id: blackballButton
-                    text: qsTr("Blackball") + translationManager.emptyString
+                    text: qsTr("Mark as spent") + translationManager.emptyString
                     small: true
-                    enabled: !!appWindow.currentWallet && validHex32(blackballOutputLine.text)
-                    onClicked: appWindow.currentWallet.blackballOutput(blackballOutputLine.text)
+                    enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
+                    onClicked: appWindow.currentWallet.blackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
                 }
 
                 StandardButton {
                     id: unblackballButton
-                    anchors.right: parent.right
-                    text: qsTr("Unblackball") + translationManager.emptyString
+                    text: qsTr("Mark as unspent") + translationManager.emptyString
                     small: true
-                    enabled: !!appWindow.currentWallet && validHex32(blackballOutputLine.text)
-                    onClicked: appWindow.currentWallet.unblackballOutput(blackballOutputLine.text)
+                    enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
+                    onClicked: appWindow.currentWallet.unblackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
                 }
             }
         }
@@ -398,9 +414,8 @@ Rectangle {
 
         RowLayout {
             id: segregationHeightRow
-            anchors.topMargin: 17
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.topMargin: 17 * scaleRatio
+            Layout.fillWidth: true
 
             LineEdit {
                 id: segregationHeightLine

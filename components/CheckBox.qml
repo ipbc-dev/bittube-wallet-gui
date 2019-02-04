@@ -32,17 +32,20 @@ import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
 
-RowLayout {
+Item {
     id: checkBox
     property alias text: label.text
     property string checkedIcon: "../images/checkedIcon-black.png"
     property string uncheckedIcon
     property bool checked: false
     property alias background: backgroundRect.color
+    property bool border: true
     property int fontSize: 14 * scaleRatio
     property alias fontColor: label.color
+    property bool iconOnTheLeft: true
     signal clicked()
     height: 25 * scaleRatio
+    width: checkBoxLayout.width
 
     function toggle(){
         checkBox.checked = !checkBox.checked
@@ -50,42 +53,38 @@ RowLayout {
     }
 
     RowLayout {
-        Layout.fillWidth: true
-        Rectangle {
-            anchors.left: parent.left
-            width: 25 * scaleRatio
-            height: checkBox.height - 1
-            radius: 3
-            y: 0
-            color: "transparent"
-            border.color:
-                if(checkBox.checked){
-                    return MoneroComponents.Style.inputBorderColorActive;
-                } else {
-                    return MoneroComponents.Style.inputBorderColorInActive;
-                }
-        }
+        id: checkBoxLayout
+        layoutDirection: iconOnTheLeft ? Qt.LeftToRight : Qt.RightToLeft
+        spacing: (!isMobile ? 10 : 8) * scaleRatio
 
-        Rectangle {
-            id: backgroundRect
-            anchors.left: parent.left
-            width: 25 * scaleRatio
-            height: checkBox.height - 1
-            y: 1
-            color: "transparent"
+        Item {
+            id: checkMark
+            height: checkBox.height
+            width: checkBox.height
+
+            Rectangle {
+                id: backgroundRect
+                anchors.fill: parent
+                radius: 3
+                color: "transparent"
+                border.color:
+                    if(checkBox.checked){
+                        return MoneroComponents.Style.inputBorderColorActive;
+                    } else {
+                        return MoneroComponents.Style.inputBorderColorInActive;
+                    }
+                visible: checkBox.border
+            }
 
             Image {
                 anchors.centerIn: parent
-                source: checkBox.checkedIcon
-                visible: checkBox.checked
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    toggle()
+                source: {
+                    if (checkBox.checked || checkBox.uncheckedIcon == "") {
+                        return checkBox.checkedIcon;
+                    }
+                    return checkBox.uncheckedIcon;
                 }
+                visible: checkBox.checked || checkBox.uncheckedIcon != ""
             }
         }
 
@@ -94,17 +93,16 @@ RowLayout {
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: checkBox.fontSize
             color: MoneroComponents.Style.defaultFontColor
+            textFormat: Text.RichText
             wrapMode: Text.Wrap
-            Layout.fillWidth: true
-            anchors.left: backgroundRect.right
-            anchors.leftMargin: !isMobile ? 10 : 8
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    toggle()
-                }
-            }
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: {
+            toggle()
         }
     }
 }

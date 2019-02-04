@@ -29,6 +29,7 @@
 
 import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
+import "../js/TxUtils.js" as TxUtils
 
 import "../components" as MoneroComponents
 
@@ -36,6 +37,7 @@ ListView {
     id: listView
     clip: true
     boundsBehavior: ListView.StopAtBounds
+    property bool selectAndSend: false
 
     footer: Rectangle {
         height: 127
@@ -59,6 +61,11 @@ ListView {
         color: "transparent"
         z: listView.count - index
         function collapseDropdown() { dropdown.expanded = false }
+        function doSend() {
+            console.log("Sending to: ", address +" "+ paymentId);
+            middlePanel.sendTo(address, paymentId, description);
+            leftPanel.selectItem(middlePanel.state)
+        }
 
         Text {
             id: descriptionText
@@ -91,7 +98,13 @@ ListView {
             font.family: "Arial"
             font.pixelSize: 16
             color: MoneroComponents.Style.defaultFontColor
-            text: address
+            text: {
+                if(isMobile){
+                    TxUtils.addressTruncate(address, 6);
+                } else {
+                    return TxUtils.addressTruncate(address, 10);
+                }
+            }
             readOnly: true
         }
 
@@ -120,7 +133,13 @@ ListView {
             font.family: "Arial"
             font.pixelSize: 13
             color: "#545454"
-            text: paymentId
+            text: {
+                if(isMobile){
+                    TxUtils.addressTruncate(paymentId, 6);
+                } else {
+                    return TxUtils.addressTruncate(paymentId, 10);
+                }
+            }
         }
 
         ListModel {
@@ -138,6 +157,7 @@ ListView {
             anchors.verticalCenter: parent.verticalCenter
             anchors.rightMargin: 5
             dataModel: dropModel
+            visible: !listView.selectAndSend
             z: 1
             onExpandedChanged: {
                 if(expanded) {
@@ -153,9 +173,7 @@ ListView {
                     appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3)
                 }
                 else if(option === 1){
-                   console.log("Sending to: ", address +" "+ paymentId);
-                   middlePanel.sendTo(address, paymentId, description);
-                   leftPanel.selectItem(middlePanel.state)
+                    doSend()
                 } else if(option === 2){
                     console.log("Delete: ", rowId);
                     currentWallet.addressBookModel.deleteRow(rowId);
@@ -169,6 +187,15 @@ ListView {
             anchors.bottom: parent.bottom
             height: 1
             color: "#404040"
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            visible: listView.selectAndSend
+            onClicked: {
+                doSend();
+            }
         }
     }
 }

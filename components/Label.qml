@@ -36,7 +36,7 @@ Item {
     id: item
     property alias text: label.text
     property alias color: label.color
-    property alias textFormat: label.textFormat
+    property int textFormat: Text.PlainText
     property string tipText: ""
     property int fontSize: 16 * scaleRatio
     property bool fontBold: false
@@ -45,6 +45,8 @@ Item {
     property alias wrapMode: label.wrapMode
     property alias horizontalAlignment: label.horizontalAlignment
     property alias hoveredLink: label.hoveredLink
+    property alias elide: label.elide
+    property alias textWidth: label.width
     signal linkActivated()
     height: label.height * scaleRatio
     width: label.width * scaleRatio
@@ -66,5 +68,6 @@ Item {
         font.bold: fontBold
         color: fontColor
         onLinkActivated: item.linkActivated()
+        textFormat: parent.textFormat
     }
 }

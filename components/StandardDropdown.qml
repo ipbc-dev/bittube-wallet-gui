@@ -33,6 +33,7 @@ import "../components" as MoneroComponents
 
 Item {
     id: dropdown
+    property int itemTopMargin: 0
     property alias dataModel: repeater.model
     property string shadowPressedColor: MoneroComponents.Style.dropdownContentSelectedFontColor
     property string shadowReleasedColor: MoneroComponents.Style.dropdownContentSelectedFontColor
@@ -69,7 +70,7 @@ Item {
 
     // Workaroud for suspected memory leak in 5.8 causing malloc crash on app exit
     function update() {
-        firstColText.text = column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column1) + translationManager.emptyString : ""
+        firstColText.text = columnid.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(columnid.currentIndex).column1) + translationManager.emptyString : ""
     }
 
     Item {
@@ -77,6 +78,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
+        anchors.topMargin: parent.itemTopMargin
         height: dropdown.dropdownHeight
 
         Rectangle {
@@ -128,7 +130,7 @@ Item {
         anchors.right: parent.right
         anchors.top: head.bottom
         clip: true
-        height: dropdown.expanded ? column.height : 0
+        height: dropdown.expanded ? columnid.height : 0
         color: dropdown.pressedColor
         //radius: 4
 
@@ -151,7 +153,7 @@ Item {
         }
 
         Column {
-            id: column
+            id: columnid
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
@@ -179,7 +181,7 @@ Item {
                     anchors.right: parent.right
                     height: (dropdown.dropdownHeight * 0.75) * scaleRatio
                     //radius: index === repeater.count - 1 ? 4 : 0
-                    color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
+                    color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
                     Text {
                         id: col1Text
@@ -191,7 +193,7 @@ Item {
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.bold: true
                         font.pixelSize: fontItemSize
-                        color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? MoneroComponents.Style.dropdownContentSelectedFontColor : MoneroComponents.Style.dropdownContentFontColor
+                        color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? MoneroComponents.Style.dropdownContentSelectedFontColor : MoneroComponents.Style.dropdownContentFontColor
                         text: qsTr(column1) + translationManager.emptyString
                     }
 
@@ -228,7 +230,7 @@ Item {
 
                         onClicked: {
                             dropdown.expanded = false
-                            column.currentIndex = index
+                            columnid.currentIndex = index
                             changed();
                             dropdown.update()
                         }

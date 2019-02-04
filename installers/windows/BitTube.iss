@@ -19,6 +19,23 @@ WizardSmallImageFile=WizardSmallImage.bmp
 WizardImageFile=WelcomeImage.bmp
 DisableWelcomePage=no
 LicenseFile=LICENSE
+AppPublisher=The Monero Developer Community
+AppPublisherURL=https://getmonero.org
+
+UsedUserAreasWarning=no
+; The above directive silences the following compiler warning:
+;    Warning: The [Setup] section directive "PrivilegesRequired" is set to "admin" but per-user areas (HKCU,userdocs)
+;    are used by the script. Regardless of the version of Windows, if the installation is administrative then you should
+;    be careful about making any per-user area changes: such changes may not achieve what you are intending.
+; Background info:
+; This installer indeed asks for admin rights so the Monero files can be copied to a place where they have at least
+; a minimum of protection against changes, e.g. by malware, plus it handles things for the currently logged-in user
+; in the registry (GUI wallet per-user options) and for some of the icons. For reasons too complicated to fully explain
+; here this does not work as intended if the installing user does not have admin rights and has to provide the password
+; of a user that does for installing: The settings of the admin user instead of those of the installing user are changed.
+; Short of ripping out that per-user functionality the issue has no suitable solution. Fortunately, this will probably
+; play a role in only in few cases as the first standard user in a Windows installation does have admin rights.
+; So, for the time being, this installer simply disregards this problem.
 
 
 [Languages]
@@ -60,6 +77,7 @@ Source: "bittube-wallet-gui.log"; DestDir: "{app}"; Flags: onlyifdoesntexist; Pe
 
 ; BitTube CLI wallet
 Source: "bin\bittube-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\bittube-gen-trusted-multisig.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; BitTube wallet RPC interface implementation
 Source: "bin\bittube-wallet-rpc.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -73,6 +91,11 @@ Source: "bittube-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 ; BitTube blockchain utilities
 Source: "bin\bittube-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\bittube-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\bittube-blockchain-mark-spent-outputs.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\bittube-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\bittube-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\bittube-blockchain-ancestry.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\bittube-blockchain-depth.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; was present in 0.10.3.1, not present anymore in 0.11.1.0 and after
 ; Source: "bin\bittube-utils-deserialize.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -97,7 +120,7 @@ Source: "bin\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs ignorever
 ; Qt Windows platform plugins	
 Source: "bin\platforms\*"; DestDir: "{app}\platforms"; Flags: recursesubdirs ignoreversion
 Source: "bin\platforminputcontexts\*"; DestDir: "{app}\platforminputcontexts"; Flags: recursesubdirs ignoreversion
-Source: "bin\styles\*"; DestDir: "{app}\styles"; Flags: recursesubdirs ignoreversion
+; No more "styles" subdirectory in 0.12.3.0
 
 ; Qt support for SVG icons	
 Source: "bin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recursesubdirs ignoreversion
@@ -116,7 +139,8 @@ Source: "bin\playlistformats\*"; DestDir: "{app}\playlistformats"; Flags: recurs
 ; Qt graphical effects as part of the core runtime, effects like blurring and blending
 Source: "bin\QtGraphicalEffects\*"; DestDir: "{app}\QtGraphicalEffects"; Flags: recursesubdirs ignoreversion
 
-; No more Qt "private" directory in 0.12.0.0
+; Qt "private" directory with "effects"
+Source: "bin\private\*"; DestDir: "{app}\private"; Flags: recursesubdirs ignoreversion
 
 ; Qt QML files
 Source: "bin\QtQml\*"; DestDir: "{app}\QtQml"; Flags: recursesubdirs ignoreversion
@@ -124,6 +148,10 @@ Source: "bin\QtQml\*"; DestDir: "{app}\QtQml"; Flags: recursesubdirs ignoreversi
 ; Qt Quick files
 Source: "bin\QtQuick\*"; DestDir: "{app}\QtQuick"; Flags: recursesubdirs ignoreversion
 Source: "bin\QtQuick.2\*"; DestDir: "{app}\QtQuick.2"; Flags: recursesubdirs ignoreversion
+
+; Qt Quick Controls 2 modules of the Qt Toolkit
+Source: "bin\Material\*"; DestDir: "{app}\Material"; Flags: recursesubdirs ignoreversion
+Source: "bin\Universal\*"; DestDir: "{app}\Universal"; Flags: recursesubdirs ignoreversion
 
 ; Qt Quick 2D Renderer fallback for systems / environments with "low-level graphics" i.e. without 3D support
 Source: "bin\scenegraph\*"; DestDir: "{app}\scenegraph"; Flags: recursesubdirs ignoreversion
@@ -167,12 +195,13 @@ Source: "bin\libiconv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; ICU, International Components for Unicode
 ; After changes for supporting UTF-8 path and file names by using Boost Locale, all those 5
-; ICU libraries are needed in 0.12.0.0
-Source: "bin\libicudt58.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuin58.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuio58.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicutu58.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuuc58.dll"; DestDir: "{app}"; Flags: ignoreversion
+; ICU libraries are needed starting from 0.12.0.0
+; Use wildcards instead of specific version number like 61 because that seems to change frequently
+Source: "bin\libicudt??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuin??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuio??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicutu??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuuc??.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Library for native language support, part of GNU gettext
 Source: "bin\libintl-8.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -194,7 +223,8 @@ Source: "bin\liblzma-5.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\libmng-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; PCRE, Perl Compatible Regular Expressions
-; "libpcre2-16-0.dll" is new for 0.12.0.0; unclear whether "libpcre16-0.dll" is still needed
+; "libpcre2-16-0.dll" is new for 0.12.0.0
+; Uclear whether "libpcre16-0.dll" is still needed; some versions of "Qt5Core.dll" seem to reference it, some not
 Source: "bin\libpcre-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\libpcre16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\libpcre2-16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -215,8 +245,10 @@ Source: "bin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Stack protection
-; New for 0.12.0.0
 Source: "bin\libssp-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+
+; HIDAPI, library for communicating with USB and Bluetooth devices, for hardware wallets
+Source: "bin\libhidapi-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 
 [Tasks]
@@ -237,7 +269,7 @@ var
 
 procedure InitializeWizard;
 var s: String;
-    width: Integer;
+    blockChainDir: String;
 begin
   // Large image for the "Welcome" page, with page reconfigured
   WizardForm.WelcomeLabel1.Visible := false;
@@ -261,11 +293,17 @@ begin
     False, '');
   BlockChainDirPage.Add('');
 
-  BlockChainDirPage.Values[0] := GetPreviousData('BlockChainDir', '');
-  if BlockChainDirPage.Values[0] = '' then begin
-    // Unfortunately 'TInputDirWizardDirPage' does not allow empty field
-    BlockChainDirPage.Values[0] := blockChainDefaultDir;
+  // Evaluate proposal for the blockchain location
+  // In case of an update take the blockchain location from the actual setting in the registry
+  RegQueryStringValue(HKEY_CURRENT_USER, 'Software\monero-project\monero-core', 'blockchainDataDir', blockChainDir);
+  if blockChainDir = '' then begin
+    blockChainDir := GetPreviousData('BlockChainDir', '');
   end;
+  if blockChainDir = '' then begin
+    // Unfortunately 'TInputDirWizardDirPage' does not allow empty field, so "propose" Monero default location
+    blockChainDir := blockChainDefaultDir;
+  end;
+  BlockChainDirPage.Values[0] := blockChainDir;
 end;
 
 procedure RegisterPreviousData(PreviousDataKey: Integer);
@@ -281,6 +319,17 @@ begin
   s := BlockChainDirPage.Values[0];
   Result := s;
   // No quotes for folder name with blanks as this is never used as part of a command line
+end;
+
+function BlockChainDirOrEmpty(Param: String) : String;
+VAR s: String;
+begin
+  s := BlockChainDir('');
+  if s = blockChainDefaultDir then begin
+    // No need to add the default dir as setting
+    s := '';
+  end;
+  Result := s;
 end;
 
 function UpdateReadyMemo(Space, NewLine, MemoUserInfoInfo, MemoDirInfo, MemoTypeInfo,
@@ -320,6 +369,21 @@ begin
   if s <> '' then begin
     s := '--data-dir ' + s;
   end;
+  Result := s;
+end;
+
+function WalletFlags(Param: String): String;
+// Flags to add to the shortcut to the GUI wallet
+// Use "--log-file" to force log file alongside the installed GUI exe which would not get
+// created there because of an unsolved issue in the 0.13.0.4 wallet code
+var s: String;
+begin
+  s := ExpandConstant('{app}\monero-wallet-gui.log');
+  if Pos(' ', s) > 0 then begin
+    // Quotes needed for filename with blanks
+    s := '"' + s + '"';
+  end;
+  s := '--log-file ' + s;
   Result := s;
 end;
 
@@ -375,7 +439,7 @@ Name: "{group}\Utilities\x (Try GUI Wallet Low Graphics Mode)"; Filename: "{app}
 Name: "{group}\Utilities\x (Try Kill Daemon)"; Filename: "Taskkill.exe"; Parameters: "/IM bittubed.exe /T /F"
 
 ; Desktop icons, optional with the help of the "Task" section
-Name: "{userdesktop}\GUI Wallet"; Filename: "{app}\bittube-wallet-gui.exe"; Tasks: desktopicon
+Name: "{commondesktop}\GUI Wallet"; Filename: "{app}\bittube-wallet-gui.exe"; Parameters: {code:WalletFlags}; Tasks: desktopicon
 
 
 [Registry]

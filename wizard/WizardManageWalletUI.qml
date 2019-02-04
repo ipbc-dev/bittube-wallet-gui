@@ -31,7 +31,7 @@ import QtQuick 2.2
 import moneroComponents.TranslationManager 1.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
-import "../components"
+import "../components" as MoneroComponents
 import 'utils.js' as Utils
 
 // Reusable component for mnaging wallet (account name, path, private key)
@@ -45,6 +45,7 @@ ColumnLayout {
     property alias wordsTextItem : memoTextItem
     property alias restoreHeight : restoreHeightItem.text
     property alias restoreHeightVisible: restoreHeightItem.visible
+    property alias subaddressLookahead : subaddressLookaheadItem.text
     property alias walletName : accountName.text
     property alias progressDotsModel : progressDots.model
     property alias recoverFromKeysAddress: addressLine.text;
@@ -54,11 +55,15 @@ ColumnLayout {
     property bool recoverMode: false
     // Recover form seed or keys
     property bool recoverFromSeedMode: true
+    // Recover form hardware device
+    property bool recoverFromDevice: false
+    property var deviceName: deviceNameModel.get(deviceNameDropdown.currentIndex).column2
+    property alias deviceNameDropdown: deviceNameDropdown
     property int rowSpacing: 10
 
     function checkFields(){
-        var addressOK = walletManager.addressValid(addressLine.text, persistentSettings.nettype)
-        var viewKeyOK = walletManager.keyValid(viewKeyLine.text, addressLine.text, true, persistentSettings.nettype)
+        var addressOK = (viewKeyLine.text.length > 0 || spendKeyLine.text.length > 0)? walletManager.addressValid(addressLine.text, persistentSettings.nettype) : false
+        var viewKeyOK = (viewKeyLine.text.length > 0)? walletManager.keyValid(viewKeyLine.text, addressLine.text, true, persistentSettings.nettype) : true
         // Spendkey is optional
         var spendKeyOK = (spendKeyLine.text.length > 0)? walletManager.keyValid(spendKeyLine.text, addressLine.text, false, persistentSettings.nettype) : true
 
@@ -153,7 +158,7 @@ ColumnLayout {
     ColumnLayout {
         Layout.bottomMargin: rowSpacing
 
-        Label {
+        MoneroComponents.Label {
             Layout.topMargin: 20 * scaleRatio
             fontFamily: "Arial"
             fontColor: "#555555"
@@ -162,7 +167,7 @@ ColumnLayout {
                    + translationManager.emptyString
         }
 
-        LineEdit {
+        MoneroComponents.LineEdit {
             id: accountName
             Layout.fillWidth: true
             Layout.maximumWidth: 600 * scaleRatio
@@ -174,13 +179,20 @@ ColumnLayout {
             fontColor: "black"
             fontBold: false
         }
+
+        MoneroComponents.WarningBox {
+            color: "#DBDBDB"
+            textColor: "#4A4646"
+            visible: !recoverFromDevice && !recoverMode
+            text: qsTr("WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.") + translationManager.emptyString
+        }
     }
 
     GridLayout{
         columns: (isMobile)? 2 : 4
         visible: recoverMode
 
-        StandardButton {
+        MoneroComponents.StandardButton {
             id: recoverFromSeedButton
             text: qsTr("Restore from seed") + translationManager.emptyString
             enabled: recoverFromKeys.visible
@@ -190,7 +202,7 @@ ColumnLayout {
             }
         }
 
-        StandardButton {
+        MoneroComponents.StandardButton {
             id: recoverFromKeysButton
             text: qsTr("Restore from keys") + translationManager.emptyString
             enabled: recoverFromSeed.visible
@@ -200,10 +212,10 @@ ColumnLayout {
             }
         }
 
-        StandardButton {
+        MoneroComponents.StandardButton {
             id: qrfinderButton
             text: qsTr("From QR Code") + translationManager.emptyString
-            visible : true //appWindow.qrScannerEnabled
+            visible : appWindow.qrScannerEnabled
             enabled : visible
             onClicked: {
                 cameraUi.state = "Capture"
@@ -216,7 +228,7 @@ ColumnLayout {
     // Recover from seed
     RowLayout {
         id: recoverFromSeed
-        visible: !recoverMode || ( recoverMode && recoverFromSeedMode)
+        visible: !recoverFromDevice && (!recoverMode || ( recoverMode && recoverFromSeedMode))
         WizardMemoTextInput {
             id : memoTextItem
             Layout.fillWidth: true
@@ -232,14 +244,14 @@ ColumnLayout {
         id: recoverFromKeys
         visible: recoverMode && !recoverFromSeedMode
         columns: 1
-        LineEdit {
+        MoneroComponents.LineEdit {
             Layout.fillWidth: true
             id: addressLine
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
             placeholderFontBold: true
             placeholderFontFamily: "Arial"
-            placeholderColor: Style.legacy_placeholderFontColor
+            placeholderColor: MoneroComponents.Style.legacy_placeholderFontColor
             placeholderText: qsTr("Account address (public)") + translationManager.emptyString
             placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
@@ -248,14 +260,14 @@ ColumnLayout {
             fontColor: "black"
             fontBold: false
         }
-        LineEdit {
+        MoneroComponents.LineEdit {
             Layout.fillWidth: true
             id: viewKeyLine
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
             placeholderFontBold: true
             placeholderFontFamily: "Arial"
-            placeholderColor: Style.legacy_placeholderFontColor
+            placeholderColor: MoneroComponents.Style.legacy_placeholderFontColor
             placeholderText: qsTr("View key (private)") + translationManager.emptyString
             placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
@@ -265,14 +277,14 @@ ColumnLayout {
             fontBold: false
 
         }
-        LineEdit {
+        MoneroComponents.LineEdit {
             Layout.fillWidth: true
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
             id: spendKeyLine
             placeholderFontBold: true
             placeholderFontFamily: "Arial"
-            placeholderColor: Style.legacy_placeholderFontColor
+            placeholderColor: MoneroComponents.Style.legacy_placeholderFontColor
             placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
             placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
@@ -285,14 +297,14 @@ ColumnLayout {
     
     // Restore Height
     RowLayout {
-        LineEdit {
+        MoneroComponents.LineEdit {
             id: restoreHeightItem
             Layout.fillWidth: true
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
             placeholderFontBold: true
             placeholderFontFamily: "Arial"
-            placeholderColor: Style.legacy_placeholderFontColor
+            placeholderColor: MoneroComponents.Style.legacy_placeholderFontColor
             placeholderText: qsTr("Restore height (optional)") + translationManager.emptyString
             placeholderOpacity: 1.0
             validator: IntValidator {
@@ -304,10 +316,57 @@ ColumnLayout {
             fontBold: false
         }
     }
+    
+    // Subaddress lookahead
+    RowLayout {
+        visible: recoverFromDevice
+        MoneroComponents.LineEdit {
+            id: subaddressLookaheadItem
+            Layout.fillWidth: true
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
+            placeholderFontBold: true
+            placeholderFontFamily: "Arial"
+            placeholderColor: MoneroComponents.Style.legacy_placeholderFontColor
+            placeholderText: qsTr("Subaddress lookahead (optional): <major>:<minor>") + translationManager.emptyString
+            placeholderOpacity: 1.0
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
+        }
+    }
+
+    // Device name
+    ColumnLayout {
+        visible: recoverFromDevice
+        MoneroComponents.Label {
+            Layout.topMargin: 20 * scaleRatio
+            fontFamily: "Arial"
+            fontColor: "#555555"
+            fontSize: 14 * scaleRatio
+            text:  qsTr("Device name") + translationManager.emptyString
+        }
+        ListModel {
+            id: deviceNameModel
+            ListElement { column1: qsTr("Ledger") ; column2: "Ledger"; }
+//            ListElement { column1: qsTr("Trezor") ; column2: "Trezor"; }
+        }
+        MoneroComponents.StandardDropdown {
+            id: deviceNameDropdown
+            dataModel: deviceNameModel
+            Layout.fillWidth: true
+            Layout.topMargin: 6
+            colorHeaderBackground: "black"
+            releasedColor: "#363636"
+            pressedColor: "#202020"
+        }
+    }
 
     // Wallet store location
     ColumnLayout {
-        Label {
+        z: deviceNameDropdown.z - 1
+        MoneroComponents.Label {
             Layout.fillWidth: true
             Layout.topMargin: 20 * scaleRatio
             fontSize: 14
@@ -316,7 +375,7 @@ ColumnLayout {
             text: qsTr("Your wallet is stored in") + translationManager.emptyString + ": " + fileUrlInput.text;
         }
 
-        LineEdit {
+        MoneroComponents.LineEdit {
             Layout.fillWidth: true
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio

@@ -22,7 +22,7 @@ this version of the script only works with exactly the GUI wallet
 for BitTube release *Titanium Tube* that you find on
 [the releases](https://github.com/ipbc-dev/bittube-wallet-gui/releases).
 
-But of course it will be easy to modify the script for future
+It should however be easy to modify the script for future
 versions of the GUI wallet.
 
 ## License ##

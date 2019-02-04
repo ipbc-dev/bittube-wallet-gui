@@ -32,7 +32,7 @@ import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
 
-RowLayout {
+Item {
     id: radioButton
     property alias text: label.text
     property bool checked: false
@@ -40,6 +40,7 @@ RowLayout {
     property alias fontColor: label.color
     signal clicked()
     height: 26 * scaleRatio
+    width: layout.width
     // legacy properties
     property var checkedColor: MoneroComponents.Style.radiobuttonCheckedColor
     property var borderColor: MoneroComponents.Style.radiobuttonBorderColor
@@ -50,15 +51,14 @@ RowLayout {
     }
 
     RowLayout {
-        Layout.fillWidth: true
+        id: layout
+
         Rectangle {
             id: button
-            anchors.left: parent.left
-            y: 0
             color: "transparent"
             border.color: borderColor
-            width: radioButton.height
             height: radioButton.height
+            width: radioButton.height
             radius: radioButton.height
 
             Rectangle {
@@ -71,32 +71,23 @@ RowLayout {
                 radius: 10
                 opacity: 0.8
             }
-
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    toggle()
-                }
-            }
         }
 
         Text {
             id: label
-            anchors.left: button.right
-            anchors.leftMargin: !isMobile ? 10 : 8
+            Layout.leftMargin: (!isMobile ? 10 : 8) * scaleRatio
             color: MoneroComponents.Style.defaultFontColor
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: radioButton.fontSize
             wrapMode: Text.Wrap
+        }
+    }
 
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    toggle()
-                }
-            }
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: {
+            toggle()
         }
     }
 }

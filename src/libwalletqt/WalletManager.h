@@ -1,6 +1,7 @@
 #ifndef WALLETMANAGER_H
 #define WALLETMANAGER_H
 
+#include <QVariant>
 #include <QObject>
 #include <QUrl>
 #include <wallet/api/wallet2_api.h>
@@ -36,7 +37,7 @@ public:
     static WalletManager * instance();
     // wizard: createWallet path;
     Q_INVOKABLE Wallet * createWallet(const QString &path, const QString &password,
-                                      const QString &language, NetworkType::Type nettype = NetworkType::MAINNET);
+                                      const QString &language, NetworkType::Type nettype = NetworkType::MAINNET, quint64 kdfRounds = 1);
 
     /*!
      * \brief openWallet - opens wallet by given path
@@ -45,17 +46,17 @@ public:
      * \param nettype    - type of network the wallet is running on
      * \return wallet object pointer
      */
-    Q_INVOKABLE Wallet * openWallet(const QString &path, const QString &password, NetworkType::Type nettype = NetworkType::MAINNET);
+    Q_INVOKABLE Wallet * openWallet(const QString &path, const QString &password, NetworkType::Type nettype = NetworkType::MAINNET, quint64 kdfRounds = 1);
 
     /*!
      * \brief openWalletAsync - asynchronous version of "openWallet". Returns immediately. "walletOpened" signal
      *                          emitted when wallet opened;
      */
-    Q_INVOKABLE void openWalletAsync(const QString &path, const QString &password, NetworkType::Type nettype = NetworkType::MAINNET);
+    Q_INVOKABLE void openWalletAsync(const QString &path, const QString &password, NetworkType::Type nettype = NetworkType::MAINNET, quint64 kdfRounds = 1);
 
     // wizard: recoveryWallet path; hint: internally it recorvers wallet and set password = ""
     Q_INVOKABLE Wallet * recoveryWallet(const QString &path, const QString &memo,
-                                       NetworkType::Type nettype = NetworkType::MAINNET, quint64 restoreHeight = 0);
+                                       NetworkType::Type nettype = NetworkType::MAINNET, quint64 restoreHeight = 0, quint64 kdfRounds = 1);
 
     Q_INVOKABLE Wallet * createWalletFromKeys(const QString &path,
                                               const QString &language,
@@ -63,8 +64,15 @@ public:
                                               const QString &address,
                                               const QString &viewkey,
                                               const QString &spendkey = "",
-                                              quint64 restoreHeight = 0);
+                                              quint64 restoreHeight = 0,
+                                              quint64 kdfRounds = 1);
 
+    Q_INVOKABLE Wallet * createWalletFromDevice(const QString &path,
+                                                const QString &password,
+                                                NetworkType::Type nettype,
+                                                const QString &deviceName,
+                                                quint64 restoreHeight = 0,
+                                                const QString &subaddressLookahead = "");
     /*!
      * \brief closeWallet - closes current open wallet and frees memory
      * \return wallet address
@@ -140,7 +148,8 @@ public:
 #endif
 
     Q_INVOKABLE QString resolveOpenAlias(const QString &address) const;
-    Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
+    Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error) const;
+    Q_INVOKABLE QVariantMap parse_uri_to_object(const QString &uri) const;
     Q_INVOKABLE bool saveQrCode(const QString &, const QString &) const;
     Q_INVOKABLE void checkUpdatesAsync(const QString &software, const QString &subdir, const QString &current) const;
     Q_INVOKABLE QString checkUpdates(const QString &software, const QString &subdir, const QString &current) const;
