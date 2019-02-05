@@ -107,7 +107,7 @@ Rectangle{
                     anchors.left: localNodeIcon.right
                     anchors.leftMargin: 14 * scaleRatio
                     anchors.top: parent.top
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
@@ -207,7 +207,7 @@ Rectangle{
                     anchors.left: remoteNodeIcon.right
                     anchors.leftMargin: 14 * scaleRatio
                     anchors.top: parent.top
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
