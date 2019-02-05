@@ -956,7 +956,7 @@ ApplicationWindow {
     visible: true
 //    width: screenWidth //rightPanelExpanded ? 1269 : 1269 - 300
 //    height: 900 //300//maxWindowHeight;
-    color: "#FFFFFF"
+    color: "#fefefe"
     flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
     onWidthChanged: x -= 0
 

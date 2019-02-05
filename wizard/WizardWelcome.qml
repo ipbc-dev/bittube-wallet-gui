@@ -33,9 +33,7 @@ import QtQuick.Layouts 1.1
 import QtQml 2.2
 import "../components" as MoneroComponents
 
-
 ColumnLayout {
-//    anchors.fill:parent
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
@@ -84,7 +82,6 @@ ColumnLayout {
             text: qsTr("Please choose a language and regional format.") + translationManager.emptyString
         }
     }
-
 
     // Flags model
     XmlListModel {
@@ -168,7 +165,4 @@ ColumnLayout {
             }
         }
     }
-
-
-    
 }

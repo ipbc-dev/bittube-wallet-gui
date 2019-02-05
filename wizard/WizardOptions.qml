@@ -66,6 +66,7 @@ ColumnLayout {
         Layout.leftMargin: wizardLeftMargin
         Layout.rightMargin: wizardRightMargin
         Layout.bottomMargin: (!isMobile) ? 40 * scaleRatio : 20
+        
         spacing: 30 * scaleRatio
 
         Text {
@@ -108,6 +109,7 @@ ColumnLayout {
             flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
             rowSpacing: 20 * scaleRatio
             columnSpacing: 10 * scaleRatio
+            anchors.top: parent.top
 
             Rectangle {
                 Layout.preferredHeight: page.buttonSize
@@ -155,6 +157,7 @@ ColumnLayout {
             flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
             rowSpacing: 20 * scaleRatio
             columnSpacing: 10 * scaleRatio
+            anchors.top: parent.top
 
             Rectangle {
                 Layout.preferredHeight: page.buttonSize
@@ -202,6 +205,7 @@ ColumnLayout {
             flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
             rowSpacing: 20 * scaleRatio
             columnSpacing: 10 * scaleRatio
+            anchors.top: parent.top
 
             Rectangle {
                 Layout.preferredHeight: page.buttonSize
@@ -248,6 +252,7 @@ ColumnLayout {
             flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
             rowSpacing: 20 * scaleRatio
             columnSpacing: 10 * scaleRatio
+            anchors.top: parent.top
 
             Rectangle {
                 Layout.preferredHeight: page.buttonSize

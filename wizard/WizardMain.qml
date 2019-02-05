@@ -120,8 +120,6 @@ ColumnLayout {
         }
     }
 
-
-
     function openCreateWalletPage() {
         wizardRestarted();
         print ("show create wallet page");
@@ -429,8 +427,4 @@ ColumnLayout {
            rootItem.state = "normal"
        }
    }
-
-
-
-
 }
