@@ -98,7 +98,7 @@ Rectangle {
             Layout.preferredHeight: (instructionsText.height + 26) * scaleRatio
             Layout.fillWidth: true
             radius: 2 * scaleRatio
-            border.color: Qt.rgba(255, 255, 255, 0.25)
+            border.color: MoneroComponents.Style.defaultFontColor
             border.width: 1 * scaleRatio
             color: "transparent"
 

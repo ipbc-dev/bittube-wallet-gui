@@ -73,7 +73,7 @@ Rectangle{
                 Layout.fillHeight: true
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                color: "white"
+                color: MoneroComponents.Style.dividerColor
                 width: 2
             }
 
@@ -173,7 +173,7 @@ Rectangle{
                 Layout.fillHeight: true
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                color: "white"
+                color: MoneroComponents.Style.dividerColor
                 width: 2
             }
 
@@ -284,9 +284,9 @@ Rectangle{
                 Layout.minimumWidth: 100 * scaleRatio
 
                 lineEditBackgroundColor: "transparent"
-                lineEditFontColor: "white"
+                lineEditFontColor: MoneroComponents.Style.defaultFontColor
                 lineEditFontBold: false
-                lineEditBorderColor: Qt.rgba(255, 255, 255, 0.35)
+                lineEditBorderColor: MoneroComponents.Style.defaultFontColor
                 labelFontSize: 14 * scaleRatio
                 placeholderFontSize: 15 * scaleRatio
 
@@ -422,7 +422,7 @@ Rectangle{
                         Layout.bottomMargin: 20 * scaleRatio
     
                         lineEditBackgroundColor: "transparent"
-                        lineEditFontColor: "white"
+                        lineEditFontColor: MoneroComponents.Style.defaultFontColor
                         lineEditBorderColor: MoneroComponents.Style.inputBorderColorActive
                         placeholderFontSize: 15 * scaleRatio
                         labelFontSize: 14 * scaleRatio

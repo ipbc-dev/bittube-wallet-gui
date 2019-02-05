@@ -73,7 +73,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20 * scaleRatio
                     Layout.topMargin: 8 * scaleRatio
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
@@ -141,7 +141,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20 * scaleRatio
                     Layout.topMargin: 8 * scaleRatio
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
@@ -206,7 +206,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20 * scaleRatio
                     Layout.topMargin: 8 * scaleRatio
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
@@ -271,7 +271,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20 * scaleRatio
                     Layout.topMargin: 8 * scaleRatio
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
@@ -348,7 +348,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20 * scaleRatio
                     Layout.topMargin: 8 * scaleRatio
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio

@@ -172,7 +172,7 @@ Rectangle {
                     }
                     function logMessage(msg){
                         msg = msg.trim();
-                        var color = "white";
+                        var color = "#BBBBBB";
                         if(msg.toLowerCase().indexOf('error') >= 0){
                             color = "red";
                         } else if (msg.toLowerCase().indexOf('warning') >= 0){
@@ -196,7 +196,7 @@ Rectangle {
                             timeZoneName: undefined
                         });
 
-                        var _timestamp = log_color("[" + timestamp + "]", "#FFFFFF");
+                        var _timestamp = log_color("[" + timestamp + "]", "#BBBBBB");
                         var _msg = log_color(msg, color);
                         consoleArea.append(_timestamp + " " + _msg);
 
