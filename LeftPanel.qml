@@ -334,7 +334,7 @@ Rectangle {
                 color: "#313131"
                 height: 1
             }
-
+/*
             // ------------- Account tab ---------------
             MoneroComponents.MenuButton {
                 id: accountButton
@@ -358,7 +358,7 @@ Rectangle {
                 color: "#d2d2d2"
                 height: 1
             }
-
+*/
             // ------------- Transfer tab ---------------
             MoneroComponents.MenuButton {
                 id: transferButton

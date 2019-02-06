@@ -197,8 +197,7 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: idLabel
-                                // color: index === appWindow.current_subaddress_account_table_index ? MoneroComponents.Style.defaultFontColor : "#757575"
-                                color: MoneroComponents.Style.defaultFontColor
+                                color: index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.defaultFontColor : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6 * scaleRatio
@@ -228,7 +227,8 @@ Rectangle {
                                 anchors.leftMargin: (mainLayout.width < 510 ? -70 : -125) * scaleRatio
                                 fontSize: 14 * scaleRatio
                                 fontBold: true
-                                text: TxUtils.addressTruncate(address, mainLayout.width < 510 ? 3 : 6)
+                                // text: TxUtils.addressTruncate(address, mainLayout.width < 510 ? 3 : 6)
+                                text: address
                             }
 
                             MoneroComponents.Label {

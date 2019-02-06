@@ -246,6 +246,7 @@ ColumnLayout {
             }
         }
 
+/*
         GridLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
@@ -293,8 +294,8 @@ ColumnLayout {
                 text: qsTr("Create a new wallet from hardware device") + translationManager.emptyString
             }
         }
+*/
     }
-
     ColumnLayout {
         Layout.leftMargin: wizardLeftMargin
         Layout.rightMargin: wizardRightMargin

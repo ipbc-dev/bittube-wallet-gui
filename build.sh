@@ -67,14 +67,14 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BITTUBE_DIR=bittube
 BITTUBED_EXEC=bittubed
 
-MAKE='make'
+MAKE='make -j3'
 if [[ $platform == *bsd* ]]; then
     MAKE='gmake'
 fi
 
 # build libwallet
 export BUILD_TREZOR
-./get_libwallet_api.sh $BUILD_TYPE
+# ./get_libwallet_api.sh $BUILD_TYPE
  
 # build zxcvbn
 if [ "$DISABLE_PASS_STRENGTH_METER" != true ]; then
