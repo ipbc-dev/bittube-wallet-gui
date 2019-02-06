@@ -351,7 +351,7 @@ macx {
         -lboost_serialization \
         -lhidapi \
         -lboost_thread-mt \
-        -lboost_system \
+        -lboost_system-mt \
         -lboost_date_time \
         -lboost_filesystem \
         -lboost_regex \
@@ -360,6 +360,7 @@ macx {
         -lssl \
         -lsodium \
         -lcrypto \
+        -licudata.63 \
         -ldl $$TREZOR_LINKER
 
     QMAKE_LFLAGS += -pie
