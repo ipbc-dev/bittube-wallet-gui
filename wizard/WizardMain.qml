@@ -55,6 +55,7 @@ ColumnLayout {
         "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, daemonSettingsPage, finishPage ],
         "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage, daemonSettingsPage, finishPage ],
         "create_view_only_wallet" : [ createViewOnlyWalletPage, passwordPage ],
+        "create_wallet_from_device" : [welcomePage, optionsPage, createWalletFromDevicePage, passwordPage, daemonSettingsPage, finishPage ],
 
     }
     property string currentPath: "create_wallet"
@@ -119,8 +120,6 @@ ColumnLayout {
         }
     }
 
-
-
     function openCreateWalletPage() {
         wizardRestarted();
         print ("show create wallet page");
@@ -161,6 +160,16 @@ ColumnLayout {
         createViewOnlyWalletPage.opacity = 1
         nextButton.visible = true
         rootItem.state = "wizard";
+    }
+
+    function openCreateWalletFromDevicePage() {
+        wizardRestarted();
+        print ("show create wallet from device page");
+        currentPath = "create_wallet_from_device"
+        pages = paths[currentPath]
+        wizard.nextButton.visible = true
+        // goto next page
+        switchPage(true);
     }
 
     function createWalletPath(folder_path,account_name){
@@ -233,7 +242,8 @@ ColumnLayout {
         appWindow.persistentSettings.auto_donations_enabled = false //settings.auto_donations_enabled
         appWindow.persistentSettings.auto_donations_amount = false //settings.auto_donations_amount
         appWindow.persistentSettings.restore_height = (isNaN(settings.restore_height))? 0 : settings.restore_height
-        appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering      
+        appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering
+        appWindow.persistentSettings.is_recovering_from_device = (settings.is_recovering_from_device === undefined)? false : settings.is_recovering_from_device
     }
 
     // reading settings from persistent storage
@@ -264,6 +274,7 @@ ColumnLayout {
         onCreateWalletClicked: wizard.openCreateWalletPage()
         onRecoveryWalletClicked: wizard.openRecoveryWalletPage()
         onOpenWalletClicked: wizard.openOpenWalletPage();
+        onCreateWalletFromDeviceClicked: wizard.openCreateWalletFromDevicePage()
     }
 
     WizardCreateWallet {
@@ -280,6 +291,12 @@ ColumnLayout {
 
     WizardRecoveryWallet {
         id: recoveryWalletPage
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
+    }
+
+    WizardCreateWalletFromDevice {
+        id: createWalletFromDevicePage
         Layout.bottomMargin: wizardBottomMargin
         Layout.topMargin: wizardTopMargin
     }
@@ -310,20 +327,21 @@ ColumnLayout {
 
     Rectangle {
         id: prevButton
-        anchors.verticalCenter: wizard.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: isMobile ?  20 :  50
-        anchors.bottomMargin: isMobile ?  20 * scaleRatio :  50
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+        Layout.leftMargin: isMobile ?  20 :  50
+        Layout.bottomMargin: isMobile ?  20 * scaleRatio :  50
         visible: parent.currentPage > 0
 
         width: 50 * scaleRatio; height: 50 * scaleRatio
         radius: 25
-        color: prevArea.containsMouse ? "#a1d257" : "#86af49"
+        color: prevArea.containsMouse ? Style.navButtonHoverColor : Style.navButtonColor
 
         Image {
             anchors.centerIn: parent
             anchors.horizontalCenterOffset: -3
-            source: "qrc:///images/prevPage.png"
+            source: "qrc:///images/nextPage.png"
+            transformOrigin: Item.Center
+            rotation: 180
         }
 
         MouseArea {
@@ -336,14 +354,13 @@ ColumnLayout {
 
     Rectangle {
         id: nextButton
-        anchors.verticalCenter: wizard.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: isMobile ?  20 * scaleRatio :  50
-        anchors.bottomMargin: isMobile ?  20 * scaleRatio :  50
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+        Layout.rightMargin: isMobile ?  20 * scaleRatio :  50
+        Layout.bottomMargin: isMobile ?  20 * scaleRatio :  50
         visible: currentPage > 1 && currentPage < pages.length - 1
         width: 50 * scaleRatio; height: 50 * scaleRatio
         radius: 25
-        color: enabled ? nextArea.containsMouse ? "#a1d257" : "#86af49" : "#DBDBDB"
+        color: prevArea.containsMouse ? Style.navButtonHoverColor : Style.navButtonColor
 
 
         Image {
@@ -362,9 +379,8 @@ ColumnLayout {
 
     StandardButton {
         id: sendButton
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins:  (isMobile) ? 20 * scaleRatio : 50 * scaleRatio
+        Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+        Layout.margins:  (isMobile) ? 20 * scaleRatio : 50 * scaleRatio
         text: qsTr("USE BITTUBE") + translationManager.emptyString
         visible: parent.paths[currentPath][currentPage] === finishPage
         onClicked: {
@@ -375,9 +391,8 @@ ColumnLayout {
 
     StandardButton {
        id: createViewOnlyWalletButton
-       anchors.right: parent.right
-       anchors.bottom: parent.bottom
-       anchors.margins: (isMobile) ? 20 * scaleRatio : 50
+       Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+       Layout.margins: (isMobile) ? 20 * scaleRatio : 50
        text: qsTr("Create wallet") + translationManager.emptyString
        visible: currentPath === "create_view_only_wallet" &&  parent.paths[currentPath][currentPage] === passwordPage
        enabled: passwordPage.passwordsMatch
@@ -403,9 +418,8 @@ ColumnLayout {
 
    StandardButton {
        id: abortViewOnlyButton
-       anchors.right: createViewOnlyWalletButton.left
-       anchors.bottom: parent.bottom
-       anchors.margins:  (isMobile) ? 20 * scaleRatio : 50
+       Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+       Layout.margins:  (isMobile) ? 20 * scaleRatio : 50
        text: qsTr("Abort") + translationManager.emptyString
        visible: currentPath === "create_view_only_wallet" &&  parent.paths[currentPath][currentPage] === passwordPage
        onClicked: {
@@ -413,8 +427,4 @@ ColumnLayout {
            rootItem.state = "normal"
        }
    }
-
-
-
-
 }

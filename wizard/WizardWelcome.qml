@@ -31,11 +31,9 @@ import QtQuick 2.2
 import QtQuick.XmlListModel 2.0
 import QtQuick.Layouts 1.1
 import QtQml 2.2
-
-
+import "../components" as MoneroComponents
 
 ColumnLayout {
-//    anchors.fill:parent
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
@@ -85,7 +83,6 @@ ColumnLayout {
         }
     }
 
-
     // Flags model
     XmlListModel {
         id: languagesModel
@@ -112,7 +109,7 @@ ColumnLayout {
     }
 
     ColumnLayout{
-        // Flags view
+    // Flags view
         GridView {
             property int margin: (isMobile) ? 0 : Math.floor(appWindow.width/12);
 
@@ -132,12 +129,9 @@ ColumnLayout {
             delegate: ColumnLayout {
                 id: flagDelegate
                 width: gridView.cellWidth
-//                height: gridView.cellHeight
-//                Layout.alignment: Qt.AlignHCenter
                 Rectangle {
                     id: flagRect
                     width: 40 * scaleRatio; height: 40 * scaleRatio
-//                    anchors.centerIn: parent
                     radius: 30 * scaleRatio
                     Layout.alignment: Qt.AlignHCenter
                     color: gridView.currentIndex === index ? "#DBDBDB" : "#FFFFFF"
@@ -150,12 +144,9 @@ ColumnLayout {
                 Text {
                     font.family: "Arial"
                     font.pixelSize: 18 * scaleRatio
-//                    anchors.horizontalCenter: parent.horizontalCenter
                     font.bold: gridView.currentIndex === index
-//                    elide: Text.ElideRight
                     color: "#3F3F3F"
                     text: display_name
-//                    horizontalAlignment: Text.AlignHCenter
                     Layout.alignment: Qt.AlignHCenter
                 }
                 MouseArea {
@@ -171,14 +162,7 @@ ColumnLayout {
                         }
                     }
                 }
-            } // delegate
-
+            }
+        }
     }
-
-
-
-
-    }
-
-
 }

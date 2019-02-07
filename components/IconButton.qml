@@ -36,7 +36,6 @@ Item {
 
     signal clicked(var mouse)
 
-
     id: button
     width: parent.height
     height: parent.height
@@ -48,13 +47,13 @@ Item {
         id: buttonImage
         source: ""
         x : (parent.width - width) / 2
-        y : (parent.height - height)  /2
+        y : (parent.height - height) / 2
         z: 100
     }
 
     MouseArea {
         id: buttonArea
-        anchors.fill: parent
+        anchors.fill: buttonImage
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
 
@@ -62,14 +61,21 @@ Item {
             buttonImage.x = buttonImage.x + 2
             buttonImage.y = buttonImage.y + 2
         }
+
         onReleased: {
-            buttonImage.x = buttonImage.x - 2
-            buttonImage.y = buttonImage.y - 2
+            buttonImage.x = (parent.width - width) / 2
+            buttonImage.y = (parent.height - height) / 2
+        }
+
+        onExited: {
+            if (pressed) {
+                buttonImage.x = (parent.width - width) / 2
+                buttonImage.y = (parent.height - height) / 2
+            }
         }
 
         onClicked: {
             parent.clicked(mouse)
         }
     }
-
 }

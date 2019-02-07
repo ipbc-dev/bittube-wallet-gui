@@ -66,7 +66,7 @@ Item {
     }
 
     ColumnLayout {
-        z: bg.z + 1
+        z: parent.z + 1
         id: mainLayout
         spacing: 10
         anchors { fill: parent; margins: 35 }
@@ -80,7 +80,6 @@ Item {
 
             Label {
                 id: label
-                anchors.left: parent.left
                 Layout.fillWidth: true
 
                 font.pixelSize: 16 * scaleRatio
@@ -94,7 +93,6 @@ Item {
                 focus: true
                 Layout.topMargin: 6
                 Layout.fillWidth: true
-                anchors.left: parent.left
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
                 font.family: MoneroComponents.Style.fontLight.name
@@ -104,6 +102,8 @@ Item {
                 leftPadding: 10
                 topPadding: 10
                 color: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.dimmedFontColor
+                selectedTextColor: MoneroComponents.Style.defaultFontColor
 
                 background: Rectangle {
                     radius: 2

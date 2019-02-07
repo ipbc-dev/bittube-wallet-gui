@@ -30,7 +30,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
-import "../components"
+import "../components" as MoneroComponents
 import moneroComponents.Wallet 1.0
 
 Rectangle {
@@ -57,13 +57,13 @@ Rectangle {
             anchors.top: parent.top
             spacing: 20
 
-            Label {
+            MoneroComponents.Label {
                 id: soloTitleLabel
                 fontSize: 24
                 text: qsTr("BitTube Miner") + translationManager.emptyString
             }
 
-            // Label {
+            // MoneroComponents.Label {
             //     id: soloLocalDaemonsLabel
             //     fontSize: 18
             //     color: "#D02020"
@@ -71,7 +71,7 @@ Rectangle {
             //     visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
             // }
             
-            Label {
+            MoneroComponents.Label {
                 id: soloSyncedLabel
                 fontSize: 18
                 color: "#D02020"
@@ -85,9 +85,9 @@ Rectangle {
             //     text: qsTr("Mining with your computer helps strengthen the BitTube network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.<br> <br>Mining also gives you a small chance to earn some TUBE. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
             //     wrapMode: Text.Wrap
             //     Layout.fillWidth: true
-            //     font.family: Style.fontRegular.name
+            //     font.family: MoneroComponents.Style.fontRegular.name
             //     font.pixelSize: 14 * scaleRatio
-            //     color: Style.defaultFontColor
+            //     color: MoneroComponents.Style.defaultFontColor
             // }
 
             RowLayout {
@@ -97,9 +97,9 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
 
-                Label {
+                MoneroComponents.Label {
                     id: minerCpuCoresLabel
-                    color: Style.defaultFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("CPU Cores") + translationManager.emptyString
                     fontSize: 16
                     Layout.preferredWidth: 120
@@ -110,7 +110,7 @@ Rectangle {
                     // CPU Cores get added dynamically
                 }
 
-                StandardDropdown {
+                MoneroComponents.StandardDropdown {
                     id: minerCpuCoresDropdown
                     anchors.topMargin: 2 * scaleRatio
                     fontHeaderSize: 14 * scaleRatio
@@ -127,9 +127,9 @@ Rectangle {
                     anchors.top: minerCpuCoresLabel.top
                     color: "transparent"
 
-                    Label {
+                    MoneroComponents.Label {
                         id: totalHashSec10SecLabel
-                        color: Style.defaultFontColor
+                        color: MoneroComponents.Style.defaultFontColor
                         text: ""
                         fontSize: 18
                     }
@@ -138,7 +138,7 @@ Rectangle {
 
             RowLayout {
                 id: minerGpuActive
-                CheckBox {
+                MoneroComponents.CheckBox {
                     id: minerGpuActiveCheckbox
                     onClicked: {
                         persistentSettings.allow_gpu_mining = checked;
@@ -169,15 +169,15 @@ Rectangle {
 
             RowLayout {
                 id: miningPool
-                Label {
+                MoneroComponents.Label {
                     id: miningPoolAddressLabel
-                    color: Style.defaultFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("Mining Pool") + translationManager.emptyString
                     fontSize: 16
                     Layout.preferredWidth: 120
                 }
 
-                LineEdit {
+                MoneroComponents.LineEdit {
                     id: miningPoolAddressLine
                     // Layout.preferredWidth:  200
                     Layout.fillWidth: true
@@ -186,7 +186,7 @@ Rectangle {
                     // validator: IntValidator { bottom: 1 }
                 }
 
-                LineEdit {
+                MoneroComponents.LineEdit {
                     id: miningPoolPortLine
                     Layout.preferredWidth:  100
                     text: ""
@@ -199,7 +199,7 @@ Rectangle {
                 // Disable this option until stable
                 visible: false
                 Layout.leftMargin: 125
-                CheckBox {
+                MoneroComponents.CheckBox {
                     id: ignoreBattery
                     enabled: startSoloMinerButton.enabled
                     checked: !persistentSettings.miningIgnoreBattery
@@ -211,7 +211,7 @@ Rectangle {
             RowLayout {
                 Layout.leftMargin: 125
 
-                StandardButton {
+                MoneroComponents.StandardButton {
                     visible: true
                     //enabled: !walletManager.isMining()
                     id: startSoloMinerButton
@@ -263,7 +263,7 @@ Rectangle {
                     }
                 }
 
-                StandardButton {
+                MoneroComponents.StandardButton {
                     visible: true
                     id: stopSoloMinerButton
                     width: 110
@@ -281,7 +281,7 @@ Rectangle {
             // show stats "checkbox"
             RowLayout {
                 // anchors.top: miningStatsTable.bottom
-                CheckBox2 {
+                MoneroComponents.CheckBox2 {
                     id: showStatsCheckbox
                     checked: persistentSettings.miningShowStats
                     onClicked: {
@@ -297,15 +297,15 @@ Rectangle {
                 visible: persistentSettings.miningShowStats
                 Layout.fillWidth: true
                 height: 1
-                color: Style.dividerColor
-                opacity: Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 // Layout.bottomMargin: 20
             }
 
             RowLayout {
-                StandardButton {
+                MoneroComponents.StandardButton {
                     id: minerResultsErrorLogButton
-                    width: 110
+                    width: 200
                     small: true
                     visible: persistentSettings.miningShowStats
                     text: qsTr("Results Error Log") + translationManager.emptyString
@@ -314,9 +314,9 @@ Rectangle {
                     }
                 }
                 
-                StandardButton {
+                MoneroComponents.StandardButton {
                     id: minerConnectionErrorLogButton
-                    width: 110
+                    width: 200
                     small: true
                     visible: persistentSettings.miningShowStats
                     text: qsTr("Connection Error Log") + translationManager.emptyString
@@ -343,9 +343,9 @@ Rectangle {
                     id: miningStatsHashrateReportLabelContainer
                     color: "transparent"
                     
-                    Label {
+                    MoneroComponents.Label {
                         id: miningStatsHashrateReportLabel
-                        color: Style.defaultFontColor
+                        color: MoneroComponents.Style.defaultFontColor
                         text: qsTr("Hashrate Report") + translationManager.emptyString
                         fontSize: 18
                         fontBold: true
@@ -383,7 +383,7 @@ Rectangle {
                                 width: parent.width
                                 // Layout.fillWidth: true
 
-                                Label {
+                                MoneroComponents.Label {
                                     id: threadIDHeaderLabel
                                     color: "#404040"
                                     anchors.verticalCenter: parent.verticalCenter
@@ -394,7 +394,7 @@ Rectangle {
                                     text: qsTr("Thread ID") + translationManager.emptyString
                                 }
 
-                                Label {
+                                MoneroComponents.Label {
                                     id: tenSecondHashRateHeaderLabel
                                     color: "#404040"
                                     anchors.verticalCenter: parent.verticalCenter
@@ -406,7 +406,7 @@ Rectangle {
                                     text: qsTr("10s") + translationManager.emptyString
                                 }
 
-                                Label {
+                                MoneroComponents.Label {
                                     id: sixtySecondHashRateHeaderLabel
                                     color: "#404040"
                                     anchors.verticalCenter: parent.verticalCenter
@@ -418,7 +418,7 @@ Rectangle {
                                     text: qsTr("60s") + translationManager.emptyString
                                 }
 
-                                Label {
+                                MoneroComponents.Label {
                                     id: fifteenMinuteHashRateHeaderLabel
                                     color: "#404040"
                                     anchors.verticalCenter: parent.verticalCenter
@@ -444,12 +444,12 @@ Rectangle {
                                 anchors.left: parent.left
                                 anchors.top: parent.top
                                 height: 1
-                                color: Style.dividerColor
-                                opacity: Style.dividerOpacity
+                                color: MoneroComponents.Style.dividerColor
+                                opacity: MoneroComponents.Style.dividerOpacity
                                 visible: true
                             }
 
-                            Label {
+                            MoneroComponents.Label {
                                 id: threadIDLabel
                                 color: "#404040"
                                 anchors.verticalCenter: parent.verticalCenter
@@ -460,7 +460,7 @@ Rectangle {
                                 text: index
                             }
 
-                            Label {
+                            MoneroComponents.Label {
                                 id: tenSecondHashRateLabel
                                 color: "#404040"
                                 anchors.verticalCenter: parent.verticalCenter
@@ -472,7 +472,7 @@ Rectangle {
                                 text: tenSecondHashRate
                             }
 
-                            Label {
+                            MoneroComponents.Label {
                                 id: sixtySecondHashRateLabel
                                 color: "#404040"
                                 anchors.verticalCenter: parent.verticalCenter
@@ -484,7 +484,7 @@ Rectangle {
                                 text: sixtySecondHashRate
                             }
 
-                            Label {
+                            MoneroComponents.Label {
                                 id: fifteenMinuteHashRateLabel
                                 color: "#404040"
                                 anchors.verticalCenter: parent.verticalCenter
@@ -524,9 +524,9 @@ Rectangle {
                         Layout.bottomMargin: 20
                         color: "transparent"
 
-                        Label {
+                        MoneroComponents.Label {
                             id: miningInfoTableReportLabel
-                            color: Style.defaultFontColor
+                            color: MoneroComponents.Style.defaultFontColor
                             text: qsTr("Results Report") + translationManager.emptyString
                             fontSize: 18
                             // Layout.preferredWidth: 120
@@ -580,12 +580,12 @@ Rectangle {
                                     anchors.left: parent.left
                                     anchors.top: parent.bottom
                                     height: 1
-                                    color: Style.dividerColor
-                                    opacity: Style.dividerOpacity
+                                    color: MoneroComponents.Style.dividerColor
+                                    opacity: MoneroComponents.Style.dividerOpacity
                                     visible: label != "Pool-side hashes"    //dont display last divider
                                 }
 
-                                Label {
+                                MoneroComponents.Label {
                                     id: difficultyLabel
                                     color: "#404040"
                                     anchors.verticalCenter: parent.verticalCenter
@@ -595,7 +595,7 @@ Rectangle {
                                     text: label
                                 }
 
-                                Label {
+                                MoneroComponents.Label {
                                     id: difficultyValue
                                     color: "#404040"
                                     anchors.verticalCenter: parent.verticalCenter
@@ -628,9 +628,9 @@ Rectangle {
                         Layout.bottomMargin: 20
                         color: "transparent"
 
-                        Label {
+                        MoneroComponents.Label {
                             id: topResultStatsReportLabel
-                            color: Style.defaultFontColor
+                            color: MoneroComponents.Style.defaultFontColor
                             text: qsTr("Top 10 best results found") + translationManager.emptyString
                             fontSize: 18
                             fontBold: true
@@ -702,12 +702,12 @@ Rectangle {
                                             anchors.left: parent.left
                                             anchors.top: parent.bottom
                                             height: 1
-                                            color: Style.dividerColor
-                                            opacity: Style.dividerOpacity
+                                            color: MoneroComponents.Style.dividerColor
+                                            opacity: MoneroComponents.Style.dividerOpacity
                                             visible: true
                                         }
 
-                                        Label {
+                                        MoneroComponents.Label {
                                             id: difficultyLabel
                                             color: "#404040"
                                             anchors.verticalCenter: parent.verticalCenter
@@ -717,7 +717,7 @@ Rectangle {
                                             text: label
                                         }
 
-                                        Label {
+                                        MoneroComponents.Label {
                                             id: difficultyValue
                                             color: "#404040"
                                             anchors.verticalCenter: parent.verticalCenter
@@ -790,12 +790,12 @@ Rectangle {
                                             anchors.left: parent.left
                                             anchors.top: parent.bottom
                                             height: 1
-                                            color: Style.dividerColor
-                                            opacity: Style.dividerOpacity
+                                            color: MoneroComponents.Style.dividerColor
+                                            opacity: MoneroComponents.Style.dividerOpacity
                                             visible: true
                                         }
 
-                                        Label {
+                                        MoneroComponents.Label {
                                             id: difficultyLabel
                                             color: "#404040"
                                             anchors.verticalCenter: parent.verticalCenter
@@ -805,7 +805,7 @@ Rectangle {
                                             text: label
                                         }
 
-                                        Label {
+                                        MoneroComponents.Label {
                                             id: difficultyValue
                                             color: "#404040"
                                             anchors.verticalCenter: parent.verticalCenter
@@ -836,9 +836,9 @@ Rectangle {
                     Layout.bottomMargin: 20
                     color: "transparent"
 
-                    Label {
+                    MoneroComponents.Label {
                         id: connectionReportTableLabel
-                        color: Style.defaultFontColor
+                        color: MoneroComponents.Style.defaultFontColor
                         text: qsTr("Connection Report") + translationManager.emptyString
                         fontSize: 18
                         fontBold: true
@@ -886,12 +886,12 @@ Rectangle {
                                 anchors.left: parent.left
                                 anchors.top: parent.bottom
                                 height: 1
-                                color: Style.dividerColor
-                                opacity: Style.dividerOpacity
+                                color: MoneroComponents.Style.dividerColor
+                                opacity: MoneroComponents.Style.dividerOpacity
                                 visible: label != "Pool-side hashes"    //dont display last divider
                             }
 
-                            Label {
+                            MoneroComponents.Label {
                                 id: connectionLabel
                                 color: "#404040"
                                 anchors.verticalCenter: parent.verticalCenter
@@ -901,7 +901,7 @@ Rectangle {
                                 text: label
                             }
 
-                            Label {
+                            MoneroComponents.Label {
                                 id: connectionValue
                                 color: "#404040"
                                 anchors.verticalCenter: parent.verticalCenter
@@ -918,7 +918,7 @@ Rectangle {
             // Text {
             //     id: statusText
             //     text: qsTr("Status: not mining")
-            //     color: Style.defaultFontColor
+            //     color: MoneroComponents.Style.defaultFontColor
             //     textFormat: Text.RichText
             //     wrapMode: Text.Wrap
             // }
@@ -1154,7 +1154,7 @@ Rectangle {
         }
     }
 
-    StandardDialog {
+    MoneroComponents.StandardDialog {
         id: errorPopup
         cancelVisible: false
     }

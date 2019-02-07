@@ -131,7 +131,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.right: parent.right
 
-        spacing: 0
+        spacing: 10 * scaleRatio
 
         GridLayout {
             property int column_width: {
@@ -148,6 +148,15 @@ Rectangle {
             RowLayout {
                 visible: !isMobile
                 Layout.preferredWidth: parent.column_width
+
+                StandardButton {
+                    visible: !isIOS
+                    small: true
+                    text: qsTr("Export") + translationManager.emptyString
+                    onClicked: {
+                        writeCSVFileDialog.open();
+                    }
+                }
             }
 
             RowLayout {
@@ -155,7 +164,7 @@ Rectangle {
                 LineEdit {
                     id: searchLine
                     fontSize: 14 * scaleRatio
-                    inputHeight: 28 * scaleRatio
+                    inputHeight: 36 * scaleRatio
                     borderDisabled: true
                     Layout.fillWidth: true
                     backgroundColor: "#ffffff"
@@ -369,6 +378,43 @@ Rectangle {
         }
     }
 
+    FileDialog {
+        id: writeCSVFileDialog
+        title: "Please choose a folder"
+        selectFolder: true
+        onRejected: {
+            console.log("csv write canceled")
+        }
+        onAccepted: {
+            var dataDir = walletManager.urlToLocalPath(writeCSVFileDialog.fileUrl);
+            var written = currentWallet.history.writeCSV(currentWallet.currentSubaddressAccount, dataDir);
+
+            if(written !== ""){
+                informationPopup.title = qsTr("Success") + translationManager.emptyString;
+                var text = qsTr("CSV file written to: %1").arg(written) + "\n\n"
+                text += qsTr("Tip: Use your favorite spreadsheet software to sort on blockheight.") + "\n\n" + translationManager.emptyString;
+                informationPopup.text = text;
+                informationPopup.icon = StandardIcon.Information;
+            } else {
+                informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text = qsTr("Error exporting transaction data.") + "\n\n" + translationManager.emptyString;
+                informationPopup.icon = StandardIcon.Critical;
+            }
+            informationPopup.onCloseCallback = null;
+            informationPopup.open();
+        }
+        Component.onCompleted: {
+            var _folder = 'file://' + moneroAccountsDir;
+            try {
+                _folder = 'file://' + desktopFolder;
+            }
+            catch(err) {}
+            finally {
+                writeCSVFileDialog.folder = _folder;
+            }
+        }
+    }
+
     function onPageCompleted() {
         if(currentWallet != null && typeof currentWallet.history !== "undefined" ) {
             currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
@@ -379,5 +425,9 @@ Rectangle {
         priorityDropdown.dataModel = priorityModelV5;
         priorityDropdown.currentIndex = 0;
         priorityDropdown.update();
+    }
+
+    function update() {
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
     }
 }

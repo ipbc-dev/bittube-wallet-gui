@@ -46,19 +46,16 @@ Rectangle {
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40 * scaleRatio
+        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
+        anchors.topMargin: 40 * scaleRatio
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
         spacing: 20 * scaleRatio
 
         // solo
         ColumnLayout {
             id: soloBox
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
             spacing: 20 * scaleRatio
 
             Label {
@@ -115,8 +112,7 @@ Rectangle {
             }
 
             StandardButton {
-                anchors.left: parent.left
-                anchors.topMargin: 17 * scaleRatio
+                Layout.topMargin: 17 * scaleRatio
                 width: 60 * scaleRatio
                 small: true
                 text: qsTr("Generate") + translationManager.emptyString
@@ -205,8 +201,7 @@ Rectangle {
             }
 
             StandardButton {
-                anchors.left: parent.left
-                anchors.topMargin: 17 * scaleRatio
+                Layout.topMargin: 17 * scaleRatio
                 width: 60
                 small: true
                 text: qsTr("Check") + translationManager.emptyString
