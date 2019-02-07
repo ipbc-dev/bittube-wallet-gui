@@ -348,10 +348,12 @@ macx {
         -L/usr/local/lib \
         -L/usr/local/opt/openssl/lib \
         -L/usr/local/opt/boost/lib \
+        -L/usr/local/opt/icu4c/lib \
         -lboost_serialization \
         -lhidapi \
         -lboost_thread-mt \
         -lboost_system-mt \
+        -lboost_system \
         -lboost_date_time \
         -lboost_filesystem \
         -lboost_regex \
