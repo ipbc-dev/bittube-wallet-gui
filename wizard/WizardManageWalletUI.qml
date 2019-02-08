@@ -181,6 +181,8 @@ ColumnLayout {
         }
 
         MoneroComponents.WarningBox {
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             color: "#DBDBDB"
             textColor: "#4A4646"
             visible: !recoverFromDevice && !recoverMode
