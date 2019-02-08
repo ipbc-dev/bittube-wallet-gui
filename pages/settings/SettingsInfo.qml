@@ -85,12 +85,12 @@ Rectangle {
             MoneroComponents.TextBlock {
                 id: guiMoneroVersion
                 font.pixelSize: 14 * scaleRatio
-                text: qsTr("Embedded Monero version: ") + translationManager.emptyString
+                text: qsTr("Embedded BitTube version: ") + translationManager.emptyString
             }
 
             MoneroComponents.TextBlock {
                 font.pixelSize: 14 * scaleRatio
-                text: Version.GUI_MONERO_VERSION + translationManager.emptyString
+                text: Version.GUI_BITTUBE_VERSION + translationManager.emptyString
             }
 
             Rectangle {
@@ -248,7 +248,7 @@ Rectangle {
             onClicked: {
                 var data = "";
                 data += "GUI version: " + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")";
-                data += "\nEmbedded Monero version: " + Version.GUI_MONERO_VERSION;
+                data += "\nEmbedded BitTube version: " + Version.GUI_BITTUBE_VERSION;
                 data += "\nWallet path: ";
 
                 var wallet_path = walletPath();
