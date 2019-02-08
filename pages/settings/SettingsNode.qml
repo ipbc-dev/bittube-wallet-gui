@@ -230,7 +230,7 @@ Rectangle{
                     textMargin: 0
                     leftPadding: 0
                     topPadding: 0
-                    text: qsTr("Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.") + translationManager.emptyString
+                    text: qsTr("Uses a third-party server to connect to the BitTube network. Less secure, but easier on your computer.") + translationManager.emptyString
                     width: parent.width - (remoteNodeIcon.width + remoteNodeIcon.anchors.leftMargin + anchors.leftMargin)
                     readOnly: true
 
@@ -276,7 +276,7 @@ Rectangle{
             MoneroComponents.WarningBox {
                 Layout.topMargin: 26 * scaleRatio
                 Layout.bottomMargin: 6 * scaleRatio
-                text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
+                text: qsTr("To find a remote node, type 'BitTube remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
             }
 
             MoneroComponents.RemoteNodeEdit {
