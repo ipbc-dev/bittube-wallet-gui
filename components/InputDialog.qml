@@ -85,7 +85,7 @@ Item {
                 font.pixelSize: 16 * scaleRatio
                 font.family: MoneroComponents.Style.fontLight.name
 
-                color: MoneroComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.white
             }
 
             TextField {
@@ -109,7 +109,7 @@ Item {
                     radius: 2
                     border.color: Qt.rgba(255, 255, 255, 0.35)
                     border.width: 1
-                    color: "black"
+                    color: MoneroComponents.Style.white
                 }
 
                 Keys.onReturnPressed: {
