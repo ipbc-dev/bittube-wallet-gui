@@ -79,5 +79,6 @@ QtObject {
     //wizard
     property string navButtonColor:                         "#00abff"
     property string navButtonHoverColor:                    "#57c8ff"
+    property string navButtonDisabledColor:                 "#DBDBDB"
 
 }

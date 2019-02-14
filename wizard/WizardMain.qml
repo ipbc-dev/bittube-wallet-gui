@@ -360,7 +360,7 @@ ColumnLayout {
         visible: currentPage > 1 && currentPage < pages.length - 1
         width: 50 * scaleRatio; height: 50 * scaleRatio
         radius: 25
-        color: prevArea.containsMouse ? Style.navButtonHoverColor : Style.navButtonColor
+        color: enabled ? nextArea.containsMouse ? Style.navButtonHoverColor : Style.navButtonColor : Style.navButtonDisabledColor
 
 
         Image {
