@@ -66,7 +66,7 @@ function isValidOpenAliasAddress(address) {
 }
 
 function makeQRCodeString(addr, amount) {
-    var XMR_URI_SCHEME = "monero:"
+    var XMR_URI_SCHEME = "bittube:"
     var XMR_AMOUNT = "tx_amount"
     var qrCodeString =""
     qrCodeString += (XMR_URI_SCHEME + addr)
