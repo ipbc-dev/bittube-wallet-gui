@@ -64,7 +64,7 @@ fi
 source ./utils.sh
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-MONERO_DIR=bittube
+BITTUBE_DIR=bittube
 MONEROD_EXEC=bittubed
 
 MAKE='make'
@@ -101,10 +101,10 @@ fi
 # force version update
 get_tag
 echo "var GUI_VERSION = \"$TAGNAME\"" > version.js
-pushd "$MONERO_DIR"
+pushd "$BITTUBE_DIR"
 get_tag
 popd
-echo "var GUI_MONERO_VERSION = \"$TAGNAME\"" >> version.js
+echo "var GUI_BITTUBE_VERSION = \"$TAGNAME\"" >> version.js
 
 cd build
 if ! QMAKE=$(find_command qmake qmake-qt5); then
@@ -116,7 +116,7 @@ $MAKE || exit
 
 # Copy bittubed to bin folder
 if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
-cp ../$MONERO_DIR/bin/$MONEROD_EXEC $BIN_PATH
+cp ../$BITTUBE_DIR/bin/$MONEROD_EXEC $BIN_PATH
 fi
 
 # make deploy
