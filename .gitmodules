@@ -1,4 +1,3 @@
-[submodule "monero"]
-	path = monero
-	url = https://github.com/monero-project/monero
-	ignore = all
+[submodule "bittube"]
+	path = bittube
+	url = https://github.com/ilie1988/bittube
