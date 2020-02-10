@@ -48,7 +48,7 @@ import "js/Windows.js" as Windows
 
 ApplicationWindow {
     id: appWindow
-    title: "Monero" + (walletName ? " - " + walletName : "")
+    title: "Bittube" + (walletName ? " - " + walletName : "")
     minimumWidth: 750
     minimumHeight: 450
 
@@ -2061,11 +2061,11 @@ ApplicationWindow {
     function getDefaultDaemonRpcPort(networkType) {
         switch (networkType) {
             case NetworkType.STAGENET:
-                return 38081;
+                return 44182;
             case NetworkType.TESTNET:
-                return 28081;
+                return 34182;
             default:
-                return 18081;
+                return 24182;
         }
     }
 
