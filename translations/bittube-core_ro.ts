@@ -64,8 +64,8 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="100"/>
-        <source>This makes it easier to send or receive Bittube and reduces errors when typing in addresses manually.</source>
-        <translation>Aceasta face mai ușor trimiterea și primirea de Bittube și reduce erorile atunci când scrii adresele manual.</translation>
+        <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
+        <translation>Aceasta face mai ușor trimiterea și primirea de Monero și reduce erorile atunci când scrii adresele manual.</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
@@ -495,13 +495,13 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="62"/>
-        <source>WARNING: Do not reuse your Bittube keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>ATENȚIE: Nu reutilizați cheile Bittube în alte rețele. Făcând asta, vă va dăuna confidențialitatea.</translation>
+        <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation>ATENȚIE: Nu reutilizați cheile Monero în alte rețele. Făcând asta, vă va dăuna confidențialitatea.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
-        <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Bittube. Please write down your seed manually.</source>
-        <translation>ATENȚIE: Copiatul seminței în memorie vă poate expune la aplicații rău intenționate, care pot să vă înregistreze sămânța și să vă fure Bittube. Vă rugăm să scrieți sămânța de mână.</translation>
+        <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.</source>
+        <translation>ATENȚIE: Copiatul seminței în memorie vă poate expune la aplicații rău intenționate, care pot să vă înregistreze sămânța și să vă fure Monero. Vă rugăm să scrieți sămânța de mână.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
@@ -904,12 +904,12 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="71"/>
-        <source>Mining with your computer helps strengthen the Bittube network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
+        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
 
-Mining also gives you a small chance to earn some Bittube. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Minând cu calculatorul dumneavoastră ajutați la întărirea rețelei Bittube. Cu cât mai mulți oameni minează, cu atât e mai greu ca rețeaua să fie atacată și orice ajutor e binevenit.
+Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation>Minând cu calculatorul dumneavoastră ajutați la întărirea rețelei Monero. Cu cât mai mulți oameni minează, cu atât e mai greu ca rețeaua să fie atacată și orice ajutor e binevenit.
 
-De asemenea, minând aveți o mică ocazie să câștigați niște Bittube. Computerul dumneavoastră va căuta niște soluții la blocuri. Dacă găsiți un bloc, veți primi recompensa asociată. Baftă!</translation>
+De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Computerul dumneavoastră va căuta niște soluții la blocuri. Dacă găsiți un bloc, veți primi recompensa asociată. Baftă!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="83"/>
@@ -1264,8 +1264,8 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Bittube. Comp
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="100"/>
-        <source>Embedded Bittube version: </source>
-        <translation>Versiune Bittube încorporat: </translation>
+        <source>Embedded Monero version: </source>
+        <translation>Versiune Monero încorporat: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="130"/>
@@ -1474,13 +1474,13 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="230"/>
-        <source>Uses a third-party server to connect to the Bittube network. Less secure, but easier on your computer.</source>
-        <translation>Utilizează un server terțiar pentru a se conecta la rețeaua Bittube. Mai puțin securizat, dar mai ușor de folosit pe calculatorul tău.</translation>
+        <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
+        <translation>Utilizează un server terțiar pentru a se conecta la rețeaua Monero. Mai puțin securizat, dar mai ușor de folosit pe calculatorul tău.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="274"/>
-        <source>To find a remote node, type &apos;Bittube remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>Pentru a găsi un nod la distanță, tastați &apos;Bittube remote node&apos; în motorul de căutare favorit. Vă rugăm să fiți siguri că nodul este rulat de o terța parte de încredere.</translation>
+        <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <translation>Pentru a găsi un nod la distanță, tastați &apos;Monero remote node&apos; în motorul de căutare favorit. Vă rugăm să fiți siguri că nodul este rulat de o terța parte de încredere.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="282"/>
@@ -1697,8 +1697,8 @@ Puteți schimba parola în setările portofelului.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="104"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Bittube wallets as well as wallets from Bittube clones which reuse the Bittube keys.</source>
-        <translation>Această pagina vă permite să interacționați cu baza de date ce conține inelele distribuite. Această bază de date este menită să fie folosită de portofelul Bittube și de alte portofele ale clonelor Bittube ce refolosesc cheile Bittube.</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
+        <translation>Această pagina vă permite să interacționați cu baza de date ce conține inelele distribuite. Această bază de date este menită să fie folosită de portofelul Monero și de alte portofele ale clonelor Monero ce refolosesc cheile Monero.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="117"/>
@@ -1714,8 +1714,8 @@ Puteți schimba parola în setările portofelului.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Bittube transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Bittube uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Bittube project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Bittube clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Pentru a ascunde ce inputuri sunt folosite intr-o tranzacție Bittube, o terță parte nu ar trebui să știe ce inputuri într-un inel au fost deja folosite. Dacă ar putea să facă asta, ar slăbi protecția semnăturilor de inel. Dacă toate inputurile cu excepția unuia sunt deja știute să fie folosite, atunci inputul ce va fi folosit devine vizibil, anulând efectul semnăturilor de inel, unul dintre cele trei straturi principale de protecție a confidențialității ce este folosit de Bittube.&lt;br&gt;Pentru a ajuta tranzacțiile să evite aceste inputuri, o listă a acestora ce sunt conuscute poate fi folosită pentru a evita utilizarea lor in noi tranzacții. O asemenea lista este întreținută de proiectul Bittube și este disponibila la adresa getbittube.org, și puteți importa această lista aici.&lt;br&gt;Sau, puteți scana blockchain (și blockchain al clonelor Bittube) inșivă folosind unealta bittube-blockchain-mark-spent-outputs pentru a crea o listă de rezultate cunoscute folosite.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Pentru a ascunde ce inputuri sunt folosite intr-o tranzacție Monero, o terță parte nu ar trebui să știe ce inputuri într-un inel au fost deja folosite. Dacă ar putea să facă asta, ar slăbi protecția semnăturilor de inel. Dacă toate inputurile cu excepția unuia sunt deja știute să fie folosite, atunci inputul ce va fi folosit devine vizibil, anulând efectul semnăturilor de inel, unul dintre cele trei straturi principale de protecție a confidențialității ce este folosit de Monero.&lt;br&gt;Pentru a ajuta tranzacțiile să evite aceste inputuri, o listă a acestora ce sunt conuscute poate fi folosită pentru a evita utilizarea lor in noi tranzacții. O asemenea lista este întreținută de proiectul Monero și este disponibila la adresa getmonero.org, și puteți importa această lista aici.&lt;br&gt;Sau, puteți scana blockchain (și blockchain al clonelor Monero) inșivă folosind unealta monero-blockchain-mark-spent-outputs pentru a crea o listă de rezultate cunoscute folosite.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -1785,13 +1785,13 @@ Puteți schimba parola în setările portofelului.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="257"/>
-        <source>In order to avoid nullifying the protection afforded by Bittube&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Bittube clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Bittube and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Bittube clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Bittube safely.&lt;br&gt;If you do not use a key-reusing Bittube clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>Pentru a nu anula protecția oferită de semnăturile de tip ring ale Bittube, o tranzacție nu ar trebui refolosită cu diferite ring-uri pe diferite blockchain-uri. De obicei această operație nu ar trebui să fie un motiv de îngrijorare, dar poate deveni unul când o clonă Bittube permite să folosiți un output existent. în acest caz, trebuie să fiți sigur că output-urile existente folosesc același ring în ambele rețele.&lt;br&gt;</translation>
+        <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation>Pentru a nu anula protecția oferită de semnăturile de tip ring ale Monero, o tranzacție nu ar trebui refolosită cu diferite ring-uri pe diferite blockchain-uri. De obicei această operație nu ar trebui să fie un motiv de îngrijorare, dar poate deveni unul când o clonă Monero permite să folosiți un output existent. în acest caz, trebuie să fiți sigur că output-urile existente folosesc același ring în ambele rețele.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
-        <source>This records rings used by outputs spent on Bittube on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>Aceste inele înregistrate sunt folosite pentru outputurile cheltuite in Bittube pe un lanț de chei refolosite, deci același inel poate fi refolosit pentru a evita probleme de confidențialitate.</translation>
+        <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <translation>Aceste inele înregistrate sunt folosite pentru outputurile cheltuite in Monero pe un lanț de chei refolosite, deci același inel poate fi refolosit pentru a evita probleme de confidențialitate.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="290"/>
@@ -1975,8 +1975,8 @@ Puteți schimba parola în setările portofelului.</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="342"/>
-        <source>Enter the Bittube Address (example: 44AFFq5kSiGBoZ...)</source>
-        <translation>Introdu adresa Bittube (de exemplu: 44AFFq5kSiGBoZ...)</translation>
+        <source>Enter the Monero Address (example: 44AFFq5kSiGBoZ...)</source>
+        <translation>Introdu adresa Monero (de exemplu: 44AFFq5kSiGBoZ...)</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="352"/>
@@ -2111,7 +2111,7 @@ Puteți schimba parola în setările portofelului.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="161"/>
-        <source>Spendable funds: %1 TUBE. Please wait ~%2 minutes for your whole balance to become spendable.</source>
+        <source>Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2187,8 +2187,8 @@ Puteți schimba parola în setările portofelului.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="641"/>
-        <source>Bittube sent successfully</source>
-        <translation>Bittube trimiți cu succes</translation>
+        <source>Monero sent successfully</source>
+        <translation>Monero trimiți cu succes</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="488"/>
@@ -2703,8 +2703,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="60"/>
-        <source>To be able to communicate with the Bittube network your wallet needs to be connected to a Bittube node. For best privacy it&apos;s recommended to run your own node.</source>
-        <translation>Pentru a comunica cu rețeaua Bittube, portofelul trebuie să fie conectat la un nod de rețea. Pentru cea mai bună intimitate este recomandat să rulați propriul nod.</translation>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
+        <translation>Pentru a comunica cu rețeaua Monero, portofelul trebuie să fie conectat la un nod de rețea. Pentru cea mai bună intimitate este recomandat să rulați propriul nod.</translation>
     </message>
 </context>
 <context>
@@ -2754,8 +2754,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="115"/>
-        <source>Additionally, you may specify a bootstrap node to use Bittube immediately.</source>
-        <translation>În plus, puteți specifica un nod de tip bootstrap pentru a folosi Bittube imediat.</translation>
+        <source>Additionally, you may specify a bootstrap node to use Monero immediately.</source>
+        <translation>În plus, puteți specifica un nod de tip bootstrap pentru a folosi Monero imediat.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="163"/>
@@ -2767,8 +2767,8 @@ your input may be required.</source>
     <name>WizardHome</name>
     <message>
         <location filename="../wizard/WizardHome.qml" line="61"/>
-        <source>Welcome to Bittube.</source>
-        <translation>Bine ați venit la Bittube.</translation>
+        <source>Welcome to Monero.</source>
+        <translation>Bine ați venit la Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
@@ -2777,8 +2777,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="67"/>
-        <source>Choose this option if this is your first time using Bittube.</source>
-        <translation>Alegeți această opțiune dacă este prima dată când folosiți Bittube.</translation>
+        <source>Choose this option if this is your first time using Monero.</source>
+        <translation>Alegeți această opțiune dacă este prima dată când folosiți Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="87"/>
@@ -2787,8 +2787,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="88"/>
-        <source>Connect your hardware wallet to create a new Bittube wallet.</source>
-        <translation>Conectați dispozitivul hardware pentru a crea un portofel nou Bittube.</translation>
+        <source>Connect your hardware wallet to create a new Monero wallet.</source>
+        <translation>Conectați dispozitivul hardware pentru a crea un portofel nou Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="107"/>
@@ -2845,8 +2845,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="94"/>
-        <source>Change the language of the Bittube GUI.</source>
-        <translation>Schimbă limba interfeței Bittube.</translation>
+        <source>Change the language of the Monero GUI.</source>
+        <translation>Schimbă limba interfeței Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="183"/>
@@ -2886,7 +2886,7 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
-        <source>Temporary use of remote nodes is useful in order to use Bittube immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
+        <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2909,8 +2909,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="72"/>
-        <source>This mode is ideal for managing small amounts of Bittube. You have access to basic features for making and managing transactions. It will automatically connect to the Bittube network so you can start using Bittube immediately.</source>
-        <translation>Acest mod este ideal pentru gestionarea cantităților mici de Bittube. Aveți acces la caracteristicile de bază pentru efectuarea și gestionarea tranzacțiilor. Se va conecta automat la rețeaua Bittube, astfel încât să puteți începe să utilizați Bittube imediat.</translation>
+        <source>This mode is ideal for managing small amounts of Monero. You have access to basic features for making and managing transactions. It will automatically connect to the Monero network so you can start using Monero immediately.</source>
+        <translation>Acest mod este ideal pentru gestionarea cantităților mici de Monero. Aveți acces la caracteristicile de bază pentru efectuarea și gestionarea tranzacțiilor. Se va conecta automat la rețeaua Monero, astfel încât să puteți începe să utilizați Monero imediat.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="85"/>
@@ -3100,10 +3100,10 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="68"/>
-        <source>To be able to communicate with the Bittube network your wallet needs to be connected to a Bittube node. For best privacy it&apos;s recommended to run your own node.
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.
 
 If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Pentru a putea comunica cu rețeaua Bittube, portofelul trebuie să fie conectat la un nod Bittube. Pentru cea mai bună confidențialitate, este recomandat să rulați propriul nod.
+        <translation>Pentru a putea comunica cu rețeaua Monero, portofelul trebuie să fie conectat la un nod Monero. Pentru cea mai bună confidențialitate, este recomandat să rulați propriul nod.
 
 Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectare la un nod de la distanță.</translation>
     </message>
@@ -3375,8 +3375,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="974"/>
-        <source>Bittube sent successfully: %1 transaction(s) </source>
-        <translation>Bittube trimiți cu succes: %1 tranzacție</translation>
+        <source>Monero sent successfully: %1 transaction(s) </source>
+        <translation>Monero trimiți cu succes: %1 tranzacție</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1014"/>
@@ -3479,12 +3479,12 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1998"/>
-        <source>New version of Bittube v%1 is available.&lt;br&gt;&lt;br&gt;Download:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256 Hash:&lt;br&gt;%3</source>
+        <source>New version of Monero v%1 is available.&lt;br&gt;&lt;br&gt;Download:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256 Hash:&lt;br&gt;%3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.qml" line="2000"/>
-        <source>New version of Bittube v%1 is available. Check out getbittube.org</source>
+        <source>New version of Monero v%1 is available. Check out getmonero.org</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3494,8 +3494,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1057"/>
-        <source>This address received %1 bittube, with %2 confirmation(s).</source>
-        <translation>Această adresă a primit %1 bittube, având %2 confirmări.</translation>
+        <source>This address received %1 monero, with %2 confirmation(s).</source>
+        <translation>Această adresă a primit %1 monero, având %2 confirmări.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="853"/>
@@ -3525,8 +3525,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1054"/>
-        <source>This address received %1 bittube, but the transaction is not yet mined</source>
-        <translation>Această adresă a primit %1 bittube, dar tranzacția nu a fost încă minată</translation>
+        <source>This address received %1 monero, but the transaction is not yet mined</source>
+        <translation>Această adresă a primit %1 monero, dar tranzacția nu a fost încă minată</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1061"/>
