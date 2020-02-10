@@ -34,7 +34,7 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.2
 import QtQuick.Dialogs 1.2
-import moneroComponents.Wallet 1.0
+import bittubeComponents.Wallet 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Windows.js" as Windows
@@ -306,7 +306,7 @@ Rectangle {
     FileDialog {
         id: fileDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + moneroAccountsDir
+        folder: "file://" + bittubeAccountsDir
         nameFilters: [ "Wallet files (*.keys)"]
         sidebarVisible: false
 
@@ -350,8 +350,8 @@ Rectangle {
             wizardController.walletOptionsName);
 
         if(isIOS) {
-            console.log("saving in ios: " + moneroAccountsDir + new_wallet_filename)
-            wizardController.m_wallet.store(moneroAccountsDir + new_wallet_filename);
+            console.log("saving in ios: " + bittubeAccountsDir + new_wallet_filename)
+            wizardController.m_wallet.store(bittubeAccountsDir + new_wallet_filename);
         } else {
             console.log("saving in wizard: " + new_wallet_filename)
             wizardController.m_wallet.store(new_wallet_filename);
@@ -526,7 +526,7 @@ Rectangle {
             persistentSettings.wallet_path = fn;
 
         if(isIOS)
-            persistentSettings.wallet_path = persistentSettings.wallet_path.replace(moneroAccountsDir, "");
+            persistentSettings.wallet_path = persistentSettings.wallet_path.replace(bittubeAccountsDir, "");
 
         appWindow.openWallet();
     }

@@ -29,9 +29,9 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
-import moneroComponents.Wallet 1.0
-import moneroComponents.NetworkType 1.0
-import moneroComponents.Clipboard 1.0
+import bittubeComponents.Wallet 1.0
+import bittubeComponents.NetworkType 1.0
+import bittubeComponents.Clipboard 1.0
 import FontAwesome 1.0
 
 import "components" as MoneroComponents
@@ -103,7 +103,7 @@ Rectangle {
         end: Qt.point(height, width)
     }
 
-    // card with monero logo
+    // card with bittube logo
     Column {
         visible: true
         z: 2

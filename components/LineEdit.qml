@@ -195,7 +195,7 @@ Item {
             anchors.topMargin: 8
             anchors.left: parent.left
             anchors.leftMargin: 12
-            source: "qrc:///images/moneroIcon-28x28.png"
+            source: "qrc:///images/bittubeIcon-28x28.png"
             visible: false
         }
 

@@ -36,7 +36,7 @@ import "../../js/Utils.js" as Utils
 import "../../components" as MoneroComponents
 import "../../pages"
 import "."
-import moneroComponents.Clipboard 1.0
+import bittubeComponents.Clipboard 1.0
 
 Rectangle {
     Layout.fillWidth: true

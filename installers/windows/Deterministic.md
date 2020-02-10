@@ -19,7 +19,7 @@ The version of Inno Setup **is** important however: People wanting to reproducib
 
 Also important are the **timestamps** of the source files because they go into the installer file, to be restored at install time.
 
-You would think timestamp preservation is no problem when unpacking the zip archive with the files for the Windows GUI wallet from getmonero.org, but if you use the zip folder unpack functionality of the Windows 7 GUI, the files get the current date, **not** the file recorded in the zip file. (The Windows 10 GUI seems better here, and also the 7zip app.)
+You would think timestamp preservation is no problem when unpacking the zip archive with the files for the Windows GUI wallet from getbittube.org, but if you use the zip folder unpack functionality of the Windows 7 GUI, the files get the current date, **not** the file recorded in the zip file. (The Windows 10 GUI seems better here, and also the 7zip app.)
 
 In any case, after unpacking, check the file dates in the `bin` directory where the installer script looks for them with the dates of the files in the zip file: They must be identical.
 

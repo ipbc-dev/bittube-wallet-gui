@@ -43,7 +43,7 @@
 #include "qt/MoneroSettings.h"
 
 /*!
-    \qmlmodule moneroSettings 1.0
+    \qmlmodule bittubeSettings 1.0
     \title Monero Settings QML Component
     \ingroup qmlmodules
     \brief Provides persistent platform-independent application settings.
@@ -57,7 +57,7 @@
 
     To use this module, import the module with the following line:
     \code
-    import moneroComponents.Settings 1.0
+    import bittubeComponents.Settings 1.0
     \endcode
 
     Usage:

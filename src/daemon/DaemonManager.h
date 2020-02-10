@@ -80,7 +80,7 @@ private:
     static QStringList m_clArgs;
     QProcess *m_daemon;
     bool initialized = false;
-    QString m_monerod;
+    QString m_bittubed;
     bool m_has_daemon = true;
     bool m_app_exit = false;
     bool m_noSync = false;
