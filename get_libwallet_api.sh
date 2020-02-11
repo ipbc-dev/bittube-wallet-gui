@@ -1,5 +1,5 @@
 #!/bin/bash
-BITTUBE_URL=https://github.com/ilie1988/bittube
+BITTUBE_URL=https://github.com/ipbc-dev/bittube
 BITTUBE_BRANCH=master
 
 pushd $(pwd)
@@ -17,7 +17,7 @@ if [ ! -d $BITTUBE_DIR/src ]; then
 fi
 git submodule update --remote
 git -C $BITTUBE_DIR fetch
-git -C $BITTUBE_DIR checkout v0.15.0.1
+git -C $BITTUBE_DIR checkout master
 
 # get bittube core tag
 pushd $BITTUBE_DIR
