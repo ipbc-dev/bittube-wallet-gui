@@ -701,7 +701,7 @@ Rectangle {
                                     font.pixelSize: 15
                                     text: {
                                         if(!isout && confirmationsRequired === 60) return qsTr("Yes") + translationManager.emptyString;
-                                        if(fee !== "") return fee + " XMR";
+                                        if(fee !== "") return fee + " TUBE";
                                         return "-";
                                     }
 
@@ -928,7 +928,7 @@ Rectangle {
                                     anchors.leftMargin: 16
                                     width: 28
                                     height: 28
-                                    source: "qrc:///images/miningxmr.png"
+                                    source: "qrc:///images/miningtube.png"
                                 }
 
                                 MoneroComponents.StandardButton {
@@ -1501,7 +1501,7 @@ Rectangle {
                 "i": i,
                 "isout": isout,
                 "amount": Number(amount),
-                "displayAmount": displayAmount + " XMR",
+                "displayAmount": displayAmount + " TUBE",
                 "hash": hash,
                 "paymentId": paymentId,
                 "address": address,

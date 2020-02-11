@@ -242,7 +242,7 @@ fi
 # set CPU core count
 # thanks to SO: http://stackoverflow.com/a/20283965/4118915
 if test -z "$CPU_CORE_COUNT"; then
-  CPU_CORE_COUNT=3
+  CPU_CORE_COUNT=4
 fi
 
 # Build libwallet_merged
