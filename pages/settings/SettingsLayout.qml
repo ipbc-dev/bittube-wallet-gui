@@ -69,6 +69,15 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
+            id: showPidCheckBox
+            checked: persistentSettings.showPid
+            onClicked: {
+                persistentSettings.showPid = !persistentSettings.showPid
+            }
+            text: qsTr("Enable transfer with payment ID (OBSOLETE)") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
             id: themeCheckbox
             checked: !MoneroComponents.Style.blackTheme
             text: qsTr("Light theme") + translationManager.emptyString
