@@ -59,7 +59,7 @@ Rectangle {
         Layout.fillWidth: true
 
         MoneroComponents.WarningBox {
-            text: qsTr("WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.") + translationManager.emptyString;
+            text: qsTr("WARNING: Do not reuse your Bittube keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.") + translationManager.emptyString;
         }
 
         //! Manage wallet
@@ -82,7 +82,7 @@ Rectangle {
             }
 
             MoneroComponents.WarningBox {
-                text: qsTr("WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.") + translationManager.emptyString
+                text: qsTr("WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Bittube. Please write down your seed manually.") + translationManager.emptyString
             }
 
             MoneroComponents.LineEditMulti {
