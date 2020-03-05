@@ -69,7 +69,7 @@ Rectangle {
                 Layout.fillWidth: true
 
                 MoneroComponents.TextPlain {
-                    text: qsTr("This mode is ideal for managing small amounts of Bittube. You have access to basic features for making and managing transactions. It will automatically connect to the Bittube network so you can start using Bittube immediately.") + translationManager.emptyString
+                    text: qsTr("This mode is ideal for managing small amounts of BitTube. You have access to basic features for making and managing transactions. It will automatically connect to the BitTube network so you can start using BitTube immediately.") + translationManager.emptyString
                     themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
                     themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
                     wrapMode: Text.Wrap

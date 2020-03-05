@@ -48,7 +48,7 @@ import "js/Windows.js" as Windows
 
 ApplicationWindow {
     id: appWindow
-    title: "Bittube" + (walletName ? " - " + walletName : "")
+    title: "BitTube" + (walletName ? " - " + walletName : "")
     minimumWidth: 750
     minimumHeight: 450
 
@@ -1989,9 +1989,9 @@ ApplicationWindow {
             var user_url = parts[2]
             var msg = ""
             if (isMac || isWindows || isLinux) {
-                msg = qsTr("New version of Bittube v%1 is available.<br><br>Download:<br>%2<br><br>SHA256 Hash:<br>%3").arg(version).arg(user_url).arg(hash) + translationManager.emptyString
+                msg = qsTr("New version of BitTube v%1 is available.<br><br>Download:<br>%2<br><br>SHA256 Hash:<br>%3").arg(version).arg(user_url).arg(hash) + translationManager.emptyString
             } else {
-                msg = qsTr("New version of Bittube v%1 is available. Check out getbittube.org").arg(version) + translationManager.emptyString
+                msg = qsTr("New version of BitTube v%1 is available. Check out getbittube.org").arg(version) + translationManager.emptyString
             }
             notifier.show(msg)
         } else {

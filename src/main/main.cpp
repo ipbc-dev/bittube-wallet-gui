@@ -202,9 +202,9 @@ int main(int argc, char *argv[])
     #endif
 
     if(isTails && TailsOS::usePersistence){
-        bittubeAccountsDir = QDir::homePath() + "/Persistent/Bittube/wallets";
+        bittubeAccountsDir = QDir::homePath() + "/Persistent/BitTube/wallets";
     } else if (!bittubeAccountsRootDir.empty()) {
-        bittubeAccountsDir = bittubeAccountsRootDir.at(0) + "/Bittube/wallets";
+        bittubeAccountsDir = bittubeAccountsRootDir.at(0) + "/BitTube/wallets";
     } else {
         qCritical() << "Error: accounts root directory could not be set";
         return 1;

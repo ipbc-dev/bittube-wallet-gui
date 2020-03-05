@@ -91,7 +91,7 @@ Rectangle {
             visible: parent.subtitle !== ""
 
             color: MoneroComponents.Style.dimmedFontColor
-            text: qsTr("Change the language of the Bittube GUI.") + translationManager.emptyString
+            text: qsTr("Change the language of the BitTube GUI.") + translationManager.emptyString
 
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: {

@@ -64,8 +64,8 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="100"/>
-        <source>This makes it easier to send or receive Bittube and reduces errors when typing in addresses manually.</source>
-        <translation>Al hacer esto es mas fácil enviar y recibir Bittube, reduciendo errores al escribir manualmente la dirección.</translation>
+        <source>This makes it easier to send or receive BitTube and reduces errors when typing in addresses manually.</source>
+        <translation>Al hacer esto es mas fácil enviar y recibir BitTube, reduciendo errores al escribir manualmente la dirección.</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
@@ -496,13 +496,13 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="62"/>
-        <source>WARNING: Do not reuse your Bittube keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>AVERTENCIA: No reuses tus llaves en otra bifurcación the Bittube, A NO SER que esta bifurcación tenga incorporado las mitigaciones para el reuso de las llaves. Hacerlo perjudicará tu privacidad.</translation>
+        <source>WARNING: Do not reuse your BitTube keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation>AVERTENCIA: No reuses tus llaves en otra bifurcación the BitTube, A NO SER que esta bifurcación tenga incorporado las mitigaciones para el reuso de las llaves. Hacerlo perjudicará tu privacidad.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
-        <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Bittube. Please write down your seed manually.</source>
-        <translation>ADVERTENCIA: Copiar la semilla al portapapeles, puede exponerlo a software malicioso que podría registrar su semilla y robarle sus Bittube. Escriba su semilla manualmente.</translation>
+        <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your BitTube. Please write down your seed manually.</source>
+        <translation>ADVERTENCIA: Copiar la semilla al portapapeles, puede exponerlo a software malicioso que podría registrar su semilla y robarle sus BitTube. Escriba su semilla manualmente.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
@@ -906,9 +906,9 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="71"/>
-        <source>Mining with your computer helps strengthen the Bittube network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
+        <source>Mining with your computer helps strengthen the BitTube network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
 
-Mining also gives you a small chance to earn some Bittube. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+Mining also gives you a small chance to earn some BitTube. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1264,8 +1264,8 @@ Mining also gives you a small chance to earn some Bittube. Your computer will cr
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="100"/>
-        <source>Embedded Bittube version: </source>
-        <translation>Versión embedida de Bittube: </translation>
+        <source>Embedded BitTube version: </source>
+        <translation>Versión embedida de BitTube: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="130"/>
@@ -1473,14 +1473,14 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="230"/>
-        <source>Uses a third-party server to connect to the Bittube network. Less secure, but easier on your computer.</source>
+        <source>Uses a third-party server to connect to the BitTube network. Less secure, but easier on your computer.</source>
         <translatorcomment>Easier is &quot;fácil&quot; but it sounds different using the literal translation, so &quot;sencillo&quot; it&apos;s a good synonym to use here.</translatorcomment>
-        <translation>Utiliza un servidor de un tercero para conectarse a la red de Bittube. Es menos seguro, pero más sencillo para tu computadora.</translation>
+        <translation>Utiliza un servidor de un tercero para conectarse a la red de BitTube. Es menos seguro, pero más sencillo para tu computadora.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="274"/>
-        <source>To find a remote node, type &apos;Bittube remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>Para encontrar un nodo remoto, escribe &apos;nodo remoto Bittube&apos; en tu motor de búsqueda favorito. Por favor asegúrate de que el nodo se ejecute por un tercero confiable.</translation>
+        <source>To find a remote node, type &apos;BitTube remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <translation>Para encontrar un nodo remoto, escribe &apos;nodo remoto BitTube&apos; en tu motor de búsqueda favorito. Por favor asegúrate de que el nodo se ejecute por un tercero confiable.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="282"/>
@@ -1697,8 +1697,8 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="104"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Bittube wallets as well as wallets from Bittube clones which reuse the Bittube keys.</source>
-        <translation>Esta página permite interactuar con la base de datos de las firmas circulares compartidas. Esta base de datos es para uso de los monederos de Bittube como también por los monederos de los clones de Bittube que han reusado las claves.</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by BitTube wallets as well as wallets from BitTube clones which reuse the BitTube keys.</source>
+        <translation>Esta página permite interactuar con la base de datos de las firmas circulares compartidas. Esta base de datos es para uso de los monederos de BitTube como también por los monederos de los clones de BitTube que han reusado las claves.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="117"/>
@@ -1715,8 +1715,8 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Bittube transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Bittube uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Bittube project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Bittube clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Para poder ofuscar qué entradas han sido gastadas en las transacciones de Bittube, un tercero no debería poder determinar de las firmas circulares cuales han sido gastadas en esas entradas. Hacerlo debilitaría la protección que proporcionan las firmas. Si solo una de las entradas pudiera ser determinada en el gasto, entonces esa entrada se vuelve evidente, anulando el efecto de las firmas. Las firmas circulares son una de las capas principales que usa Bittube para proteger la privacidad.&lt;br&gt;Para evitar que las transacciones usen estas entradas, puede ser usada una lista de entradas gastadas para evitar usarlas en nuevas transacciones. Esa lista es mantenida por el proyecto Bittube y está disponible en la página web getbittube.org y la puedes importar desde aquí.&lt;br&gt;De lo contrario, puede escanear la cadena de bloques (y las cadenas de bloques de los clones de Bittube que reusan las claves) usted mismo usando la herramienta de Bittube de salidas excluidas para crear una lista conocida de las salidas gastadas.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a BitTube transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection BitTube uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the BitTube project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing BitTube clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Para poder ofuscar qué entradas han sido gastadas en las transacciones de BitTube, un tercero no debería poder determinar de las firmas circulares cuales han sido gastadas en esas entradas. Hacerlo debilitaría la protección que proporcionan las firmas. Si solo una de las entradas pudiera ser determinada en el gasto, entonces esa entrada se vuelve evidente, anulando el efecto de las firmas. Las firmas circulares son una de las capas principales que usa BitTube para proteger la privacidad.&lt;br&gt;Para evitar que las transacciones usen estas entradas, puede ser usada una lista de entradas gastadas para evitar usarlas en nuevas transacciones. Esa lista es mantenida por el proyecto BitTube y está disponible en la página web getbittube.org y la puedes importar desde aquí.&lt;br&gt;De lo contrario, puede escanear la cadena de bloques (y las cadenas de bloques de los clones de BitTube que reusan las claves) usted mismo usando la herramienta de BitTube de salidas excluidas para crear una lista conocida de las salidas gastadas.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -1788,13 +1788,13 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="257"/>
-        <source>In order to avoid nullifying the protection afforded by Bittube&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Bittube clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Bittube and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Bittube clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Bittube safely.&lt;br&gt;If you do not use a key-reusing Bittube clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>Para evitar anular la protección que brindan las firmas de circulo que ofrece Bittube, un output no debe gastarse en diferentes blockchains con diferentes firmas. Aunque esto normalmente no es una preocupación, puede convertirse en una cuando un clon de Bittube, que reusa las llaves, permite gastar ese output nuevamente. Si este es el caso, debes asegurar ese output use las mismas firmas de circulo en ambas cadenas.&lt;br&gt;Esto será realizado por Bittube y cualquier aplicación de reuso de llaves que no este activamente tratando de estropear tu privacidad.&lt;br&gt;Si estas usando un clon de Bittube que reuse las llaves y este clon no incluya esta protección, puedes asegurar la protección de las transacciones si gastas primero en el clon. Luego agrega manualmente la firma de anillo en esta página, que te permitirá gastar tus Bittube de manera segura.&lt;br&gt;Si no utilizas un clon de Bittube con estas características, entonces no debes hacer nada, ya que esto se hará de manera automática.&lt;br&gt;</translation>
+        <source>In order to avoid nullifying the protection afforded by BitTube&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing BitTube clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by BitTube and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing BitTube clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your BitTube safely.&lt;br&gt;If you do not use a key-reusing BitTube clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation>Para evitar anular la protección que brindan las firmas de circulo que ofrece BitTube, un output no debe gastarse en diferentes blockchains con diferentes firmas. Aunque esto normalmente no es una preocupación, puede convertirse en una cuando un clon de BitTube, que reusa las llaves, permite gastar ese output nuevamente. Si este es el caso, debes asegurar ese output use las mismas firmas de circulo en ambas cadenas.&lt;br&gt;Esto será realizado por BitTube y cualquier aplicación de reuso de llaves que no este activamente tratando de estropear tu privacidad.&lt;br&gt;Si estas usando un clon de BitTube que reuse las llaves y este clon no incluya esta protección, puedes asegurar la protección de las transacciones si gastas primero en el clon. Luego agrega manualmente la firma de anillo en esta página, que te permitirá gastar tus BitTube de manera segura.&lt;br&gt;Si no utilizas un clon de BitTube con estas características, entonces no debes hacer nada, ya que esto se hará de manera automática.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
-        <source>This records rings used by outputs spent on Bittube on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>Esto registra las firmas salientes en cadenas que reusan las claves de Bittube, de manera que la misma firma pueda ser reusada para evitar inconvenientes de privacidad.</translation>
+        <source>This records rings used by outputs spent on BitTube on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <translation>Esto registra las firmas salientes en cadenas que reusan las claves de BitTube, de manera que la misma firma pueda ser reusada para evitar inconvenientes de privacidad.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="290"/>
@@ -1979,8 +1979,8 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="342"/>
-        <source>Enter the Bittube Address (example: 44AFFq5kSiGBoZ...)</source>
-        <translation>Introduzca la dirección Bittube (ejemplo: 44AAFFq5kSiGBoZ...)</translation>
+        <source>Enter the BitTube Address (example: 44AFFq5kSiGBoZ...)</source>
+        <translation>Introduzca la dirección BitTube (ejemplo: 44AAFFq5kSiGBoZ...)</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="352"/>
@@ -2328,8 +2328,8 @@ Tamaño de la firma circular: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="641"/>
-        <source>Bittube sent successfully</source>
-        <translation>Bittube enviado con exito</translation>
+        <source>BitTube sent successfully</source>
+        <translation>BitTube enviado con exito</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="724"/>
@@ -2708,8 +2708,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="60"/>
-        <source>To be able to communicate with the Bittube network your wallet needs to be connected to a Bittube node. For best privacy it&apos;s recommended to run your own node.</source>
-        <translation>Para comunicarse con la red de Bittube tu monedero debe estar conectado a un nodo. Para una mejor privacidad se recomienda ejecutar tu propio nodo.</translation>
+        <source>To be able to communicate with the BitTube network your wallet needs to be connected to a BitTube node. For best privacy it&apos;s recommended to run your own node.</source>
+        <translation>Para comunicarse con la red de BitTube tu monedero debe estar conectado a un nodo. Para una mejor privacidad se recomienda ejecutar tu propio nodo.</translation>
     </message>
 </context>
 <context>
@@ -2759,8 +2759,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="115"/>
-        <source>Additionally, you may specify a bootstrap node to use Bittube immediately.</source>
-        <translation>Adicionalmente puedes especificar el nodo bootstrap para utilizar Bittube de manera inmediata.</translation>
+        <source>Additionally, you may specify a bootstrap node to use BitTube immediately.</source>
+        <translation>Adicionalmente puedes especificar el nodo bootstrap para utilizar BitTube de manera inmediata.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="163"/>
@@ -2772,8 +2772,8 @@ your input may be required.</source>
     <name>WizardHome</name>
     <message>
         <location filename="../wizard/WizardHome.qml" line="61"/>
-        <source>Welcome to Bittube.</source>
-        <translation>Bienvenidos a Bittube</translation>
+        <source>Welcome to BitTube.</source>
+        <translation>Bienvenidos a BitTube</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
@@ -2782,8 +2782,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="67"/>
-        <source>Choose this option if this is your first time using Bittube.</source>
-        <translation>Escoge esta opción si es la primera vez que utilizas Bittube.</translation>
+        <source>Choose this option if this is your first time using BitTube.</source>
+        <translation>Escoge esta opción si es la primera vez que utilizas BitTube.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="87"/>
@@ -2792,8 +2792,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="88"/>
-        <source>Connect your hardware wallet to create a new Bittube wallet.</source>
-        <translation>Conecta tu dispositivo hardware para crear un nuevo monedero de Bittube.</translation>
+        <source>Connect your hardware wallet to create a new BitTube wallet.</source>
+        <translation>Conecta tu dispositivo hardware para crear un nuevo monedero de BitTube.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="107"/>
@@ -2850,8 +2850,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="94"/>
-        <source>Change the language of the Bittube GUI.</source>
-        <translation>Cambia el lenguaje del GUI de Bittube.</translation>
+        <source>Change the language of the BitTube GUI.</source>
+        <translation>Cambia el lenguaje del GUI de BitTube.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="183"/>
@@ -2891,7 +2891,7 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
-        <source>Temporary use of remote nodes is useful in order to use Bittube immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
+        <source>Temporary use of remote nodes is useful in order to use BitTube immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2914,8 +2914,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="72"/>
-        <source>This mode is ideal for managing small amounts of Bittube. You have access to basic features for making and managing transactions. It will automatically connect to the Bittube network so you can start using Bittube immediately.</source>
-        <translation>Este modo es ideal para manejar pequeñas cantidades de Bittube. Tienes acceso a herramientas básicas para hacer y administrar transacciones. Se conectará automáticamente a la red de Bittube para que puedas utilizar Bittube inmediatamente.</translation>
+        <source>This mode is ideal for managing small amounts of BitTube. You have access to basic features for making and managing transactions. It will automatically connect to the BitTube network so you can start using BitTube immediately.</source>
+        <translation>Este modo es ideal para manejar pequeñas cantidades de BitTube. Tienes acceso a herramientas básicas para hacer y administrar transacciones. Se conectará automáticamente a la red de BitTube para que puedas utilizar BitTube inmediatamente.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="85"/>
@@ -3105,10 +3105,10 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="68"/>
-        <source>To be able to communicate with the Bittube network your wallet needs to be connected to a Bittube node. For best privacy it&apos;s recommended to run your own node.
+        <source>To be able to communicate with the BitTube network your wallet needs to be connected to a BitTube node. For best privacy it&apos;s recommended to run your own node.
 
 If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Para comunicarse con la red de Bittube tu monedero debe estar conectado a un nodo. Para una mejor privacidad se recomienda ejecutar tu propio nodo.
+        <translation>Para comunicarse con la red de BitTube tu monedero debe estar conectado a un nodo. Para una mejor privacidad se recomienda ejecutar tu propio nodo.
 
 Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectarse a nodo remoto.</translation>
     </message>
@@ -3428,8 +3428,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="974"/>
-        <source>Bittube sent successfully: %1 transaction(s) </source>
-        <translation>Bittube enviado con exito: %1 transacción(es)</translation>
+        <source>BitTube sent successfully: %1 transaction(s) </source>
+        <translation>BitTube enviado con exito: %1 transacción(es)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1017"/>
@@ -3480,12 +3480,12 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1998"/>
-        <source>New version of Bittube v%1 is available.&lt;br&gt;&lt;br&gt;Download:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256 Hash:&lt;br&gt;%3</source>
+        <source>New version of BitTube v%1 is available.&lt;br&gt;&lt;br&gt;Download:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256 Hash:&lt;br&gt;%3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.qml" line="2000"/>
-        <source>New version of Bittube v%1 is available. Check out getbittube.org</source>
+        <source>New version of BitTube v%1 is available. Check out getbittube.org</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
