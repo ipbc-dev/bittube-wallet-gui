@@ -303,10 +303,6 @@ Rectangle {
                     setDescription(parsed.tx_description);
                   }
               }
-              onTextChanged: {
-                  // @TODO: remove after pid removal hardfork
-                  warningLongPidTransfer = !persistentSettings.showPid && isLongPidService(text)
-              }
               inlineButton.text: FontAwesome.qrcode
               inlineButton.fontPixelSize: 22
               inlineButton.fontFamily: FontAwesome.fontFamily
