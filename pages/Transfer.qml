@@ -82,7 +82,7 @@ Rectangle {
     property bool showAdvanced: false
     // @TODO: remove after pid removal hardfork
     property bool warningLongPidTransfer: false
-    property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
+    property bool warningLongPidDescription: false
 
     Clipboard { id: clipboard }
 
@@ -364,12 +364,6 @@ Rectangle {
                   oa_message(qsTr("No address found"))
               }
           }
-      }
-
-      MoneroComponents.WarningBox {
-          text: qsTr("Description field contents match long payment ID format. \
-          Please don't paste long payment ID into description field, your funds might be lost.") + translationManager.emptyString;
-          visible: warningLongPidDescription
       }
 
       ColumnLayout {
