@@ -302,7 +302,10 @@ Rectangle {
                     amountLine.text = parsed.amount;
                     setDescription(parsed.tx_description);
                   }
-                  warningLongPidTransfer = isLongPidService(text);
+              }
+              onTextChanged: {
+                  // @TODO: remove after pid removal hardfork
+                  warningLongPidTransfer = !persistentSettings.showPid && isLongPidService(text)
               }
               inlineButton.text: FontAwesome.qrcode
               inlineButton.fontPixelSize: 22
@@ -399,7 +402,7 @@ Rectangle {
           }
 
           ColumnLayout {
-              visible: paymentIdCheckbox.checked
+              visible: appWindow.persistentSettings.showPid || paymentIdCheckbox.checked
               // @TODO: remove after pid removal hardfork
               CheckBox {
                   id: paymentIdCheckbox
@@ -434,10 +437,8 @@ Rectangle {
       MoneroComponents.WarningBox {
           // @TODO: remove after pid removal hardfork
           id: paymentIdWarningBox
-          text: qsTr("Long payment IDs are obsolete. \
-          Long payment IDs were not encrypted on the blockchain and would harm your privacy. \
-          If the party you're sending to still requires a long payment ID, please notify them.") + translationManager.emptyString;
-          visible: warningLongPidTransfer || paymentIdCheckbox.checked
+          text: qsTr("You can enable transfers with payment ID on the settings page.") + translationManager.emptyString;
+          visible: !persistentSettings.showPid && (warningLongPidTransfer || warningLongPidDescription)
       }
 
       MoneroComponents.WarningBox {
