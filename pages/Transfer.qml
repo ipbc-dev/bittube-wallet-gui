@@ -82,7 +82,7 @@ Rectangle {
     property bool showAdvanced: false
     // @TODO: remove after pid removal hardfork
     property bool warningLongPidTransfer: false
-    property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
+    property bool warningLongPidDescription: false
 
     Clipboard { id: clipboard }
 
