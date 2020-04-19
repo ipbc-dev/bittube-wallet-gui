@@ -21,7 +21,7 @@
   <string>bittube-wallet-gui</string>
   
   <key>CFBundleName</key>
-  <string>Monero GUI</string>
+  <string>BitTube GUI</string>
 
   <key>CFBundleIdentifier</key>
   <string>org.bittube-project.bittube-wallet-gui</string>
