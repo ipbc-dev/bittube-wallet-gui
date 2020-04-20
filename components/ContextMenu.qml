@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 import FontAwesome 1.0
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 MouseArea {
     signal paste()
@@ -19,10 +19,10 @@ MouseArea {
         id: contextMenu
 
         background: Rectangle {
-            border.color: MoneroComponents.Style.buttonBackgroundColorDisabledHover
+            border.color: BittubeComponents.Style.buttonBackgroundColorDisabledHover
             border.width: 1
             radius: 2
-            color: MoneroComponents.Style.buttonBackgroundColorDisabled
+            color: BittubeComponents.Style.buttonBackgroundColorDisabled
         }
 
         padding: 1
@@ -30,7 +30,7 @@ MouseArea {
         x: root.mouseX
         y: root.mouseY
 
-        MoneroComponents.ContextMenuItem {
+        BittubeComponents.ContextMenuItem {
             enabled: root.parent.canPaste === true
             glyphIcon: FontAwesome.paste
             onTriggered: root.paste()

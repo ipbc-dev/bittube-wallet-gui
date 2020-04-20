@@ -35,7 +35,7 @@ import bittubeComponents.Wallet 1.0
 import bittubeComponents.NetworkType 1.0
 import FontAwesome 1.0
 import "../components"
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 import "." 1.0
 import "../js/TxUtils.js" as TxUtils
 
@@ -160,7 +160,7 @@ Rectangle {
       RowLayout {
           visible: root.warningContent !== ""
 
-          MoneroComponents.WarningBox {
+          BittubeComponents.WarningBox {
               text: warningContent
               onLinkActivated: {
                   appWindow.startDaemon(appWindow.persistentSettings.daemonFlags);
@@ -171,7 +171,7 @@ Rectangle {
       RowLayout {
           visible: leftPanel.minutesToUnlock !== ""
 
-          MoneroComponents.WarningBox {
+          BittubeComponents.WarningBox {
               text: qsTr("Spendable funds: %1 TUBE. Please wait ~%2 minutes for your whole balance to become spendable.").arg(leftPanel.balanceUnlockedString).arg(leftPanel.minutesToUnlock)
           }
       }
@@ -306,8 +306,8 @@ Rectangle {
               inlineButton.text: FontAwesome.qrcode
               inlineButton.fontPixelSize: 22
               inlineButton.fontFamily: FontAwesome.fontFamily
-              inlineButton.textColor: MoneroComponents.Style.defaultFontColor
-              inlineButton.buttonColor: MoneroComponents.Style.orange
+              inlineButton.textColor: BittubeComponents.Style.defaultFontColor
+              inlineButton.buttonColor: BittubeComponents.Style.orange
               inlineButton.onClicked: {
                   cameraUi.state = "Capture"
                   cameraUi.qrcode_decoded.connect(updateFromQrCode)
@@ -424,14 +424,14 @@ Rectangle {
           }
       }
 
-      MoneroComponents.WarningBox {
+      BittubeComponents.WarningBox {
           // @TODO: remove after pid removal hardfork
           id: paymentIdWarningBox
           text: qsTr("You can enable transfers with payment ID on the settings page.") + translationManager.emptyString;
           visible: !persistentSettings.showPid && (warningLongPidTransfer || warningLongPidDescription)
       }
 
-      MoneroComponents.WarningBox {
+      BittubeComponents.WarningBox {
           id: sendButtonWarningBox
           text: root.sendButtonWarning
           visible: root.sendButtonWarning !== ""

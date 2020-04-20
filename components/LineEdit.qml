@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtGraphicalEffects 1.0
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 Item {
     id: item
@@ -38,10 +38,10 @@ Item {
 
     property alias placeholderText: placeholderLabel.text
     property bool placeholderCenter: false
-    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
+    property string placeholderFontFamily: BittubeComponents.Style.fontRegular.name
     property bool placeholderFontBold: false
     property int placeholderFontSize: 18
-    property string placeholderColor: MoneroComponents.Style.defaultFontColor
+    property string placeholderColor: BittubeComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
 
     property alias acceptableInput: input.acceptableInput
@@ -59,11 +59,11 @@ Item {
     property bool borderDisabled: false
     property string borderColor: {
         if(error && input.text !== ""){
-            return MoneroComponents.Style.inputBorderColorInvalid;
+            return BittubeComponents.Style.inputBorderColorInvalid;
         } else if(input.activeFocus){
-            return MoneroComponents.Style.inputBorderColorActive;
+            return BittubeComponents.Style.inputBorderColorActive;
         } else {
-            return MoneroComponents.Style.inputBorderColorInActive;
+            return BittubeComponents.Style.inputBorderColorInActive;
         }
     }
 
@@ -109,15 +109,15 @@ Item {
         }
     }
 
-    MoneroComponents.TextPlain {
+    BittubeComponents.TextPlain {
         id: inputLabel
         anchors.top: parent.top
         anchors.left: parent.left
-        font.family: MoneroComponents.Style.fontRegular.name
+        font.family: BittubeComponents.Style.fontRegular.name
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
         textFormat: Text.RichText
-        color: MoneroComponents.Style.defaultFontColor
+        color: BittubeComponents.Style.defaultFontColor
         onLinkActivated: item.labelLinkActivated()
 
         MouseArea {
@@ -127,7 +127,7 @@ Item {
         }
     }
 
-    MoneroComponents.LabelButton {
+    BittubeComponents.LabelButton {
         id: copyButtonId
         text: qsTr("Copy") + translationManager.emptyString
         anchors.right: parent.right
@@ -149,7 +149,7 @@ Item {
         width: parent.width
         clip: true
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             id: placeholderLabel
             visible: input.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
@@ -199,7 +199,7 @@ Item {
             visible: false
         }
 
-        MoneroComponents.Input {
+        BittubeComponents.Input {
             id: input
             anchors.fill: parent
             anchors.leftMargin: inlineIcon.visible ? 44 : 0
@@ -212,7 +212,7 @@ Item {
             bottomPadding: 10
         }
 
-        MoneroComponents.InlineButton {
+        BittubeComponents.InlineButton {
             id: inlineButtonId
             visible: item.inlineButtonText ? true : false
             anchors.right: parent.right

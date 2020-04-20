@@ -28,7 +28,7 @@
 
 import "../js/Wizard.js" as Wizard
 import "../components"
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.2
@@ -44,9 +44,9 @@ ColumnLayout {
     Text {
         text: title
         Layout.fillWidth: true
-        font.family: MoneroComponents.Style.fontRegular.name
-        color: MoneroComponents.Style.defaultFontColor
-        opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+        font.family: BittubeComponents.Style.fontRegular.name
+        color: BittubeComponents.Style.defaultFontColor
+        opacity: BittubeComponents.Style.blackTheme ? 1.0 : 0.8
         font.pixelSize: {
             if(wizardController.layoutScale === 2 ){
                 return 34;
@@ -66,10 +66,10 @@ ColumnLayout {
         Layout.alignment: Qt.AlignCenter
         visible: parent.subtitle !== ""
 
-        color: MoneroComponents.Style.dimmedFontColor
+        color: BittubeComponents.Style.dimmedFontColor
         text: subtitle
 
-        font.family: MoneroComponents.Style.fontRegular.name
+        font.family: BittubeComponents.Style.fontRegular.name
         font.pixelSize: {
             if(wizardController.layoutScale === 2 ){
                 return 16;

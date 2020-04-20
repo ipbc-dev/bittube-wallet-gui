@@ -39,7 +39,7 @@ import bittubeComponents.NetworkType 1.0
 import bittubeComponents.Settings 1.0
 
 import "components"
-import "components" as MoneroComponents
+import "components" as BittubeComponents
 import "components/effects" as MoneroEffects
 import "pages/merchant" as MoneroMerchant
 import "wizard"
@@ -1123,7 +1123,7 @@ ApplicationWindow {
     visible: true
     width: screenWidth > 980 ? 980 : 800
     height: screenHeight > maxWindowHeight ? maxWindowHeight : 700
-    color: MoneroComponents.Style.appWindowBackgroundColor
+    color: BittubeComponents.Style.appWindowBackgroundColor
     flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
     onWidthChanged: x -= 0
 
@@ -1379,7 +1379,7 @@ ApplicationWindow {
         property string fiatPriceCurrency: "xmrusd"
 
         Component.onCompleted: {
-            MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
+            BittubeComponents.Style.blackTheme = persistentSettings.blackTheme
         }
     }
 
@@ -1718,7 +1718,7 @@ ApplicationWindow {
                 anchors.centerIn: parent
                 visible: persistentSettings.customDecorations
                 image: "qrc:///images/resize.png"
-                color: MoneroComponents.Style.defaultFontColor
+                color: BittubeComponents.Style.defaultFontColor
                 width: 12
                 height: 12
                 opacity: (parent.containsMouse || parent.pressed) ? 0.5 : 1.0
@@ -1789,7 +1789,7 @@ ApplicationWindow {
                 source: "qrc:///images/tip.png"
             }
 
-            MoneroComponents.TextPlain {
+            BittubeComponents.TextPlain {
                 id: content
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: 6
@@ -1895,14 +1895,14 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         width: statusMessageText.contentWidth + 20
         anchors.horizontalCenter: parent.horizontalCenter
-        color: MoneroComponents.Style.blackTheme ? "black" : "white"
+        color: BittubeComponents.Style.blackTheme ? "black" : "white"
         height: 40
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             id: statusMessageText
             anchors.fill: parent
             anchors.margins: 10
             font.pixelSize: 14
-            color: MoneroComponents.Style.defaultFontColor
+            color: BittubeComponents.Style.defaultFontColor
             themeTransition: false
         }
     }
@@ -2098,7 +2098,7 @@ ApplicationWindow {
         visible: blur.visible
         anchors.fill: parent
         anchors.topMargin: titleBar.height
-        color: MoneroComponents.Style.blackTheme ? "black" : "white"
+        color: BittubeComponents.Style.blackTheme ? "black" : "white"
         opacity: isOpenGL ? 0.3 : inputDialog.visible || splash.visible ? 0.7 : 1.0
 
         MoneroEffects.ColorTransition {
@@ -2110,71 +2110,71 @@ ApplicationWindow {
 
     // borders on white theme + linux
     Rectangle {
-        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        visible: isLinux && !BittubeComponents.Style.blackTheme && middlePanel.state !== "Merchant"
         z: parent.z + 1
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: 1
-        color: MoneroComponents.Style.appWindowBorderColor
+        color: BittubeComponents.Style.appWindowBorderColor
 
         MoneroEffects.ColorTransition {
             targetObj: parent
-            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+            blackColor: BittubeComponents.Style._b_appWindowBorderColor
+            whiteColor: BittubeComponents.Style._w_appWindowBorderColor
         }
     }
 
     Rectangle {
-        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        visible: isLinux && !BittubeComponents.Style.blackTheme && middlePanel.state !== "Merchant"
         z: parent.z + 1
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: 1
-        color: MoneroComponents.Style.appWindowBorderColor
+        color: BittubeComponents.Style.appWindowBorderColor
 
         MoneroEffects.ColorTransition {
             targetObj: parent
-            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+            blackColor: BittubeComponents.Style._b_appWindowBorderColor
+            whiteColor: BittubeComponents.Style._w_appWindowBorderColor
         }
     }
 
     Rectangle {
-        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        visible: isLinux && !BittubeComponents.Style.blackTheme && middlePanel.state !== "Merchant"
         z: parent.z + 1
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.left: parent.left
         height: 1
-        color: MoneroComponents.Style.appWindowBorderColor
+        color: BittubeComponents.Style.appWindowBorderColor
 
         MoneroEffects.ColorTransition {
             targetObj: parent
-            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+            blackColor: BittubeComponents.Style._b_appWindowBorderColor
+            whiteColor: BittubeComponents.Style._w_appWindowBorderColor
         }
     }
 
     Rectangle {
-        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        visible: isLinux && !BittubeComponents.Style.blackTheme && middlePanel.state !== "Merchant"
         z: parent.z + 1
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         height: 1
-        color: MoneroComponents.Style.appWindowBorderColor
+        color: BittubeComponents.Style.appWindowBorderColor
 
         MoneroEffects.ColorTransition {
             targetObj: parent
-            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+            blackColor: BittubeComponents.Style._b_appWindowBorderColor
+            whiteColor: BittubeComponents.Style._w_appWindowBorderColor
         }
     }
 
 // @TODO: QML type 'Drawer' has issues with buildbot; debug after Qt 5.9 migration
-//    MoneroComponents.LanguageSidebar {
+//    BittubeComponents.LanguageSidebar {
 //        id: languageSidebar
 //    }
 }

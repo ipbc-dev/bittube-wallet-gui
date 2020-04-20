@@ -33,7 +33,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 Window {
     id: root
@@ -89,7 +89,7 @@ Window {
                 }
             }
 
-            MoneroComponents.TextPlain {
+            BittubeComponents.TextPlain {
                 text: qsTr("Starting local node in %1 seconds").arg(countDown) + translationManager.emptyString;
                 font.pixelSize: 18
                 Layout.alignment: Qt.AlignHCenter
@@ -106,7 +106,7 @@ Window {
             spacing: 60
             Layout.alignment: Qt.AlignHCenter
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: okButton
                 visible:false
                 fontSize: 14
@@ -120,7 +120,7 @@ Window {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: cancelButton
                 fontSize: 14
                 text: qsTr("Use custom settings") + translationManager.emptyString

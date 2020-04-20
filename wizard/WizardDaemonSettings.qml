@@ -32,7 +32,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 ColumnLayout {
     Layout.fillWidth: true
@@ -46,7 +46,7 @@ ColumnLayout {
         persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
     }
 
-    MoneroComponents.RadioButton {
+    BittubeComponents.RadioButton {
         id: localNode
         Layout.fillWidth: true
         text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
@@ -67,7 +67,7 @@ ColumnLayout {
         Layout.topMargin: 8
         Layout.fillWidth: true
 
-        MoneroComponents.LineEdit {
+        BittubeComponents.LineEdit {
             id: blockchainFolder
             Layout.fillWidth: true
 
@@ -95,8 +95,8 @@ ColumnLayout {
                 text: qsTr("Bootstrap node") + translationManager.emptyString
                 Layout.topMargin: 10
                 Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
-                color: MoneroComponents.Style.defaultFontColor
+                font.family: BittubeComponents.Style.fontRegular.name
+                color: BittubeComponents.Style.defaultFontColor
                 font.pixelSize: {
                     if(wizardController.layoutScale === 2 ){
                         return 22;
@@ -116,8 +116,8 @@ ColumnLayout {
                 Layout.topMargin: 4
                 Layout.fillWidth: true
 
-                font.family: MoneroComponents.Style.fontRegular.name
-                color: MoneroComponents.Style.dimmedFontColor
+                font.family: BittubeComponents.Style.fontRegular.name
+                color: BittubeComponents.Style.dimmedFontColor
 
                 font.pixelSize: {
                     if(wizardController.layoutScale === 2 ){
@@ -138,7 +138,7 @@ ColumnLayout {
             spacing: 8
             Layout.fillWidth: true
 
-            MoneroComponents.RemoteNodeEdit {
+            BittubeComponents.RemoteNodeEdit {
                 id: bootstrapNodeEdit
                 Layout.minimumWidth: 300
                 //labelText: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
@@ -156,7 +156,7 @@ ColumnLayout {
         }
     }
 
-    MoneroComponents.RadioButton {
+    BittubeComponents.RadioButton {
         id: remoteNode
         Layout.fillWidth: true
         Layout.topMargin: 8
@@ -176,7 +176,7 @@ ColumnLayout {
         Layout.topMargin: 8
         Layout.fillWidth: true
 
-        MoneroComponents.RemoteNodeEdit {
+        BittubeComponents.RemoteNodeEdit {
             id: remoteNodeEdit
             Layout.fillWidth: true
 

@@ -32,7 +32,7 @@ import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 Rectangle {
     id: wizardRestoreWallet1
@@ -118,7 +118,7 @@ Rectangle {
                 spacing: 30
                 Layout.fillWidth: true
 
-                MoneroComponents.RadioButton {
+                BittubeComponents.RadioButton {
                     id: seedRadioButton
                     text: qsTr("Restore from seed") + translationManager.emptyString
                     fontSize: 16
@@ -131,7 +131,7 @@ Rectangle {
                     }
                 }
 
-                MoneroComponents.RadioButton {
+                BittubeComponents.RadioButton {
                     id: keysRadioButton
                     text: qsTr("Restore from keys") + translationManager.emptyString
                     fontSize: 16
@@ -144,7 +144,7 @@ Rectangle {
                     }
                 }
 
-                MoneroComponents.RadioButton {
+                BittubeComponents.RadioButton {
                     id: qrRadioButton
                     text: qsTr("Restore from QR Code") + translationManager.emptyString
                     fontSize: 16
@@ -177,49 +177,49 @@ Rectangle {
                     border.width: 1
                     border.color: {
                         if(seedInput.text !== "" && seedInput.error){
-                            return MoneroComponents.Style.inputBorderColorInvalid;
+                            return BittubeComponents.Style.inputBorderColorInvalid;
                         } else if(seedInput.activeFocus){
-                            return MoneroComponents.Style.inputBorderColorActive;
+                            return BittubeComponents.Style.inputBorderColorActive;
                         } else {
-                            return MoneroComponents.Style.inputBorderColorInActive;
+                            return BittubeComponents.Style.inputBorderColorInActive;
                         }
                     }
 
-                    MoneroComponents.InputMulti {
+                    BittubeComponents.InputMulti {
                         id: seedInput
                         property bool error: false
                         width: parent.width
                         height: 100
 
-                        color: MoneroComponents.Style.defaultFontColor
+                        color: BittubeComponents.Style.defaultFontColor
                         textMargin: 2
                         text: ""
 
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: BittubeComponents.Style.fontRegular.name
                         font.pixelSize: 16
-                        selectionColor: MoneroComponents.Style.textSelectionColor
-                        selectedTextColor: MoneroComponents.Style.textSelectedColor
+                        selectionColor: BittubeComponents.Style.textSelectionColor
+                        selectedTextColor: BittubeComponents.Style.textSelectedColor
                         wrapMode: TextInput.Wrap
 
                         selectByMouse: true
 
-                        MoneroComponents.TextPlain {
+                        BittubeComponents.TextPlain {
                             id: memoTextPlaceholder
                             opacity: 0.35
                             anchors.fill:parent
                             font.pixelSize: 16
                             anchors.margins: 8
                             anchors.leftMargin: 10
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: BittubeComponents.Style.fontRegular.name
                             text: qsTr("Enter your 25 (or 24) word mnemonic seed") + translationManager.emptyString
-                            color: MoneroComponents.Style.defaultFontColor
+                            color: BittubeComponents.Style.defaultFontColor
                             visible: !seedInput.text
                         }
                     }
                 }
             }
 
-            MoneroComponents.LineEdit {
+            BittubeComponents.LineEdit {
                 id: addressLine
                 visible: wizardController.walletRestoreMode === 'keys'
                 Layout.fillWidth: true
@@ -231,7 +231,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.LineEdit {
+            BittubeComponents.LineEdit {
                 id: viewKeyLine
                 visible: wizardController.walletRestoreMode === 'keys'
                 Layout.fillWidth: true
@@ -243,7 +243,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.LineEdit {
+            BittubeComponents.LineEdit {
                 id: spendKeyLine
                 visible: wizardController.walletRestoreMode === 'keys'
                 Layout.fillWidth: true
@@ -256,7 +256,7 @@ Rectangle {
             }
 
             GridLayout{
-                MoneroComponents.LineEdit {
+                BittubeComponents.LineEdit {
                     id: restoreHeight
                     Layout.fillWidth: true
                     labelText: qsTr("Wallet creation date as `YYYY-MM-DD` or restore height") + translationManager.emptyString

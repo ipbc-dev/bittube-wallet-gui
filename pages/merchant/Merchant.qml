@@ -16,7 +16,7 @@ import bittubeComponents.SubaddressModel 1.0
 import "../../js/Windows.js" as Windows
 import "../../js/TxUtils.js" as TxUtils
 import "../../js/Utils.js" as Utils
-import "../../components" as MoneroComponents
+import "../../components" as BittubeComponents
 import "../../pages"
 import "."
 
@@ -121,7 +121,7 @@ Item {
                                 Layout.preferredWidth: 10
                             }
 
-                            MoneroComponents.TextPlain {
+                            BittubeComponents.TextPlain {
                                 font.pixelSize: 16
                                 font.bold: true
                                 color: "#767676"
@@ -259,7 +259,7 @@ Item {
                 width: (parent.width - qrImg.width) - (50)
                 height: 32
 
-                MoneroComponents.TextPlain {
+                BittubeComponents.TextPlain {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pixelSize: 12
@@ -287,7 +287,7 @@ Item {
                 width: 220
                 height: 32
 
-                MoneroComponents.TextPlain {
+                BittubeComponents.TextPlain {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pixelSize: 12
@@ -333,7 +333,7 @@ Item {
                                 Layout.preferredWidth: 10
                             }
 
-                            MoneroComponents.TextPlain {
+                            BittubeComponents.TextPlain {
                                 font.pixelSize: 14
                                 font.bold: true
                                 color: "#767676"
@@ -354,7 +354,7 @@ Item {
 //                            Layout.fillHeight: true
 //                            color: "transparent"
 
-//                            MoneroComponents.TextPlain {
+//                            BittubeComponents.TextPlain {
 //                                anchors.verticalCenter: parent.verticalCenter
 //                                anchors.right: parent.right
 //                                anchors.rightMargin: 20
@@ -388,7 +388,7 @@ Item {
                         color: "#d9d9d9"
                     }
 
-                    MoneroComponents.TextPlain {
+                    BittubeComponents.TextPlain {
                         property string _color: "#767676"
                         Layout.fillWidth: true
                         Layout.margins: 20
@@ -408,7 +408,7 @@ Item {
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
                             onEntered: {
-                                parent.color = MoneroComponents.Style.orange
+                                parent.color = BittubeComponents.Style.orange
                             }
                             onExited: {
                                 parent.color = parent._color
@@ -445,7 +445,7 @@ Item {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
-                    MoneroComponents.TextPlain {
+                    BittubeComponents.TextPlain {
                         font.pixelSize: 14
                         font.bold: false
                         color: "white"
@@ -458,7 +458,7 @@ Item {
                         width: 220
                         source: "qrc:///images/merchant/input_box.png"
 
-                        MoneroComponents.Input {
+                        BittubeComponents.Input {
                             id: amountToReceive
                             topPadding: 0
                             leftPadding: 10
@@ -496,7 +496,7 @@ Item {
                         width: 220
                     }
 
-                    MoneroComponents.TextPlain {
+                    BittubeComponents.TextPlain {
                         // @TODO: When we have TUBE/USD rate avi. in the future.
                         visible: false
                         font.pixelSize: 14
@@ -536,7 +536,7 @@ Item {
                     }
                 }
 
-                MoneroComponents.TextPlain {
+                BittubeComponents.TextPlain {
                     id: content
                     font.pixelSize: 14
                     font.bold: false
@@ -565,12 +565,12 @@ Item {
         width: 400
         radius: 5
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 14
             font.bold: true
-            color: MoneroComponents.Style.bittubeGrey
+            color: BittubeComponents.Style.bittubeGrey
             text: qsTr("The merchant page requires a larger window") + translationManager.emptyString
             themeTransition: false
         }

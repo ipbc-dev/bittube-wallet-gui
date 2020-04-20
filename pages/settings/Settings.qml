@@ -33,7 +33,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import "../../js/Windows.js" as Windows
 import "../../js/Utils.js" as Utils
-import "../../components" as MoneroComponents
+import "../../components" as BittubeComponents
 import "../../pages"
 import "."
 import bittubeComponents.Clipboard 1.0
