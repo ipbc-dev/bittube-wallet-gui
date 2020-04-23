@@ -585,7 +585,7 @@ Item {
             return
         }
 
-        if (appWindow.disconnected) {
+        if (appWindow.currentWallet.connected() == Wallet.ConnectionStatus_Disconnected) {
             root.trackingError = qsTr("WARNING: no connection to daemon");
             trackingModel.clear();
             return

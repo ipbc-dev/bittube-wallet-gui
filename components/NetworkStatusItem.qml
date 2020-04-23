@@ -39,25 +39,23 @@ Rectangle {
     property var connected: Wallet.ConnectionStatus_Disconnected
 
     function getConnectionStatusString(status) {
-        switch (status) {
-            case Wallet.ConnectionStatus_Connected:
-                if (!appWindow.daemonSynced)
-                    return qsTr("Synchronizing");
-                if (persistentSettings.useRemoteNode)
-                    return qsTr("Remote node");
-                return appWindow.isMining ? qsTr("Connected") + " + " + qsTr("Mining"): qsTr("Connected");
-            case Wallet.ConnectionStatus_WrongVersion:
-                return qsTr("Wrong version");
-            case Wallet.ConnectionStatus_Disconnected:
-                if (appWindow.walletMode <= 1) {
-                    return qsTr("Searching node") + translationManager.emptyString;
-                }
-                return qsTr("Disconnected");
-            case Wallet.ConnectionStatus_Connecting:
-                return qsTr("Connecting");
-            default:
-                return qsTr("Invalid connection status");
+        if (status == Wallet.ConnectionStatus_Connected) {
+            if(!appWindow.daemonSynced)
+                return qsTr("Synchronizing")
+            if(persistentSettings.useRemoteNode)
+                return qsTr("Remote node")
+            return appWindow.isMining ? qsTr("Connected") + " + " + qsTr("Mining"): qsTr("Connected")
         }
+        if (status == Wallet.ConnectionStatus_WrongVersion)
+            return qsTr("Wrong version")
+        if (status == Wallet.ConnectionStatus_Disconnected){
+            if(appWindow.walletMode <= 1){
+                return qsTr("Searching node") + translationManager.emptyString;
+            }
+            return qsTr("Disconnected")
+        }
+
+        return qsTr("Invalid connection status")
     }
 
     RowLayout {
@@ -161,7 +159,7 @@ Rectangle {
                 opacity: iconItem.opacity * (refreshMouseArea.visible ? 1 : 0.5)
                 text: FontAwesome.random
                 visible: (
-                    !appWindow.disconnected &&
+                    item.connected != Wallet.ConnectionStatus_Disconnected &&
                     !persistentSettings.useRemoteNode &&
                     persistentSettings.bootstrapNodeAddress == "auto"
                 )

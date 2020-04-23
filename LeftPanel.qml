@@ -656,7 +656,7 @@ Rectangle {
             anchors.bottom: daemonProgressBar.top
             height: 48
             syncType: qsTr("Wallet") + translationManager.emptyString
-            visible: !appWindow.disconnected
+            visible: networkStatus.connected
         }
 
         BittubeComponents.ProgressBar {
@@ -665,7 +665,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.bottom: networkStatus.top
             syncType: qsTr("Daemon") + translationManager.emptyString
-            visible: !appWindow.disconnected
+            visible: networkStatus.connected
             height: 62
         }
         

@@ -60,7 +60,6 @@ class SubaddressAccountModel;
 class Wallet : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool disconnected READ disconnected NOTIFY disconnectedChanged)
     Q_PROPERTY(QString seed READ getSeed)
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
@@ -101,8 +100,7 @@ public:
     enum ConnectionStatus {
         ConnectionStatus_Connected       = Monero::Wallet::ConnectionStatus_Connected,
         ConnectionStatus_Disconnected    = Monero::Wallet::ConnectionStatus_Disconnected,
-        ConnectionStatus_WrongVersion    = Monero::Wallet::ConnectionStatus_WrongVersion,
-        ConnectionStatus_Connecting
+        ConnectionStatus_WrongVersion    = Monero::Wallet::ConnectionStatus_WrongVersion
     };
 
     Q_ENUM(ConnectionStatus)
@@ -370,7 +368,6 @@ signals:
 
     void connectionStatusChanged(int status) const;
     void currentSubaddressAccountChanged() const;
-    void disconnectedChanged() const;
 
 private:
     Wallet(QObject * parent = nullptr);
@@ -389,9 +386,6 @@ private:
 
     //! initializes wallet
     bool init(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight);
-
-    bool disconnected() const;
-    void setConnectionStatus(ConnectionStatus value);
 
 private:
     friend class WalletManager;
@@ -415,7 +409,6 @@ private:
     mutable ConnectionStatus m_connectionStatus;
     int     m_connectionStatusTtl;
     mutable QTime   m_connectionStatusTime;
-    bool m_disconnected;
     mutable bool    m_initialized;
     uint32_t m_currentSubaddressAccount;
     Subaddress * m_subaddress;
