@@ -31,11 +31,11 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Rectangle {
     id: root
-    color: BittubeComponents.Style.blackTheme ? "white" : "transparent"
+    color: MoneroComponents.Style.blackTheme ? "white" : "transparent"
     visible: false
     z: 11
     property alias messageText: messageTitle.text
@@ -70,7 +70,7 @@ Rectangle {
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         }
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: messageTitle
             text: "Please wait..."
             font {
@@ -84,7 +84,7 @@ Rectangle {
         }
 
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: heightProgress
             font {
                 pixelSize: 18

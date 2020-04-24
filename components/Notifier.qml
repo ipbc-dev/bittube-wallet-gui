@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 1.4
 import bittubeComponents.Wallet 1.0
-import "." as BittubeComponents
+import "." as MoneroComponents
 
 Item {
     id: item
@@ -52,7 +52,7 @@ Item {
             backgroundVisible: false
             textFormat: TextEdit.AutoText
             anchors.fill: parent
-            font.family: BittubeComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 12
             textMargin: 20
             textColor: "white"

@@ -34,7 +34,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 import FontAwesome 1.0
 
-import "." as BittubeComponents
+import "." as MoneroComponents
 import "effects/" as MoneroEffects
 import "../js/Utils.js" as Utils
 
@@ -146,9 +146,9 @@ Item {
                 Layout.fillWidth: true
 
                 font.pixelSize: 16
-                font.family: BittubeComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
 
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
             }
 
             Label {
@@ -158,17 +158,17 @@ Item {
                 wrapMode: Text.Wrap
 
                 font.pixelSize: 14
-                font.family: BittubeComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
 
-                color: BittubeComponents.Style.warningColor
+                color: MoneroComponents.Style.warningColor
             }
 
             Label {
                 id: errorTextLabel
                 visible: root.errorText || text !== ""
-                color: BittubeComponents.Style.errorColor
+                color: MoneroComponents.Style.errorColor
                 font.pixelSize: 16
-                font.family: BittubeComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
             }
@@ -176,21 +176,21 @@ Item {
             Label {
                 id: capsLockTextLabel
                 visible: false
-                color: BittubeComponents.Style.errorColor
+                color: MoneroComponents.Style.errorColor
                 font.pixelSize: 16
-                font.family: BittubeComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
                 text: qsTr("CAPSLOCKS IS ON.") + translationManager.emptyString;
             }
 
-            BittubeComponents.Input {
+            MoneroComponents.Input {
                 id: passwordInput1
                 Layout.topMargin: 6
                 Layout.fillWidth: true
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: BittubeComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
                 font.pixelSize: 24
                 echoMode: TextInput.Password
                 KeyNavigation.tab: {
@@ -204,15 +204,15 @@ Item {
                 bottomPadding: 10
                 leftPadding: 10
                 topPadding: 10
-                color: BittubeComponents.Style.defaultFontColor
-                selectionColor: BittubeComponents.Style.textSelectionColor
-                selectedTextColor: BittubeComponents.Style.textSelectedColor
+                color: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.textSelectionColor
+                selectedTextColor: MoneroComponents.Style.textSelectedColor
                 onTextChanged: capsLockTextLabel.visible = oshelper.isCapsLock();
 
                 background: Rectangle {
                     radius: 2
-                    color: BittubeComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
-                    border.color: BittubeComponents.Style.inputBorderColorInActive
+                    color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
+                    border.color: MoneroComponents.Style.inputBorderColorInActive
                     border.width: 1
 
                     MoneroEffects.ColorTransition {
@@ -221,7 +221,7 @@ Item {
                         whiteColor: "#A9FFFFFF"
                     }
 
-                    BittubeComponents.Label {
+                    MoneroComponents.Label {
                         fontSize: 20
                         text: isHidden ? FontAwesome.eye : FontAwesome.eyeSlash
                         opacity: 0.7
@@ -290,19 +290,19 @@ Item {
                 Layout.fillWidth: true
 
                 font.pixelSize: 16
-                font.family: BittubeComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
 
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
             }
 
-            BittubeComponents.Input {
+            MoneroComponents.Input {
                 id: passwordInput2
                 visible: !passwordDialogMode
                 Layout.topMargin: 6
                 Layout.fillWidth: true
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: BittubeComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
                 font.pixelSize: 24
                 echoMode: TextInput.Password
                 KeyNavigation.tab: okButton
@@ -310,18 +310,18 @@ Item {
                 bottomPadding: 10
                 leftPadding: 10
                 topPadding: 10
-                color: BittubeComponents.Style.defaultFontColor
-                selectionColor: BittubeComponents.Style.textSelectionColor
-                selectedTextColor: BittubeComponents.Style.textSelectedColor
+                color: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.textSelectionColor
+                selectedTextColor: MoneroComponents.Style.textSelectedColor
                 onTextChanged: capsLockTextLabel.visible = oshelper.isCapsLock();
 
                 background: Rectangle {
                     radius: 2
-                    border.color: BittubeComponents.Style.inputBorderColorInActive
+                    border.color: MoneroComponents.Style.inputBorderColorInActive
                     border.width: 1
-                    color: BittubeComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
+                    color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
 
-                    BittubeComponents.Label {
+                    MoneroComponents.Label {
                         fontSize: 20
                         text: isHidden ? FontAwesome.eye : FontAwesome.eyeSlash
                         opacity: 0.7
@@ -389,7 +389,7 @@ Item {
                 Layout.topMargin: 16
                 Layout.alignment: Qt.AlignRight
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: cancelButton
                     small: true
                     text: qsTr("Cancel") + translationManager.emptyString
@@ -406,7 +406,7 @@ Item {
                     }
                 }
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: okButton
                     small: true
                     text: qsTr("Ok") + translationManager.emptyString

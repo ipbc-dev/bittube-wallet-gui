@@ -33,7 +33,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Item {
     id: root
@@ -79,33 +79,33 @@ Item {
                 Layout.fillWidth: true
 
                 font.pixelSize: 16
-                font.family: BittubeComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
 
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
             }
 
-            BittubeComponents.Input {
+            MoneroComponents.Input {
                 id : input
                 focus: true
                 Layout.topMargin: 6
                 Layout.fillWidth: true
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: BittubeComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
                 font.pixelSize: 24
                 KeyNavigation.tab: okButton
                 bottomPadding: 10
                 leftPadding: 10
                 topPadding: 10
-                color: BittubeComponents.Style.defaultFontColor
-                selectionColor: BittubeComponents.Style.textSelectionColor
-                selectedTextColor: BittubeComponents.Style.textSelectedColor
+                color: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.textSelectionColor
+                selectedTextColor: MoneroComponents.Style.textSelectedColor
 
                 background: Rectangle {
                     radius: 2
-                    border.color: BittubeComponents.Style.inputBorderColorActive
+                    border.color: MoneroComponents.Style.inputBorderColorActive
                     border.width: 1
-                    color: BittubeComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
+                    color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
                 }
 
                 Keys.enabled: root.visible
@@ -127,7 +127,7 @@ Item {
                 Layout.topMargin: 16
                 Layout.alignment: Qt.AlignRight
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: cancelButton
                     small: true
                     width: 120
@@ -139,7 +139,7 @@ Item {
                         root.rejected()
                     }
                 }
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: okButton
                     small: true
                     width: 120

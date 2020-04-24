@@ -32,7 +32,7 @@ import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.2
 
 import FontAwesome 1.0
-import "." as BittubeComponents
+import "." as MoneroComponents
 import "effects/" as MoneroEffects
 
 Rectangle {
@@ -75,13 +75,13 @@ Rectangle {
     MoneroEffects.GradientBackground {
         anchors.fill: parent
         duration: 300
-        fallBackColor: BittubeComponents.Style.middlePanelBackgroundColor
-        initialStartColor: BittubeComponents.Style.titleBarBackgroundGradientStart
-        initialStopColor: BittubeComponents.Style.titleBarBackgroundGradientStop
-        blackColorStart: BittubeComponents.Style._b_titleBarBackgroundGradientStart
-        blackColorStop: BittubeComponents.Style._b_titleBarBackgroundGradientStop
-        whiteColorStart: BittubeComponents.Style._w_titleBarBackgroundGradientStart
-        whiteColorStop: BittubeComponents.Style._w_titleBarBackgroundGradientStop
+        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
+        initialStartColor: MoneroComponents.Style.titleBarBackgroundGradientStart
+        initialStopColor: MoneroComponents.Style.titleBarBackgroundGradientStop
+        blackColorStart: MoneroComponents.Style._b_titleBarBackgroundGradientStart
+        blackColorStop: MoneroComponents.Style._b_titleBarBackgroundGradientStop
+        whiteColorStart: MoneroComponents.Style._w_titleBarBackgroundGradientStart
+        whiteColorStop: MoneroComponents.Style._w_titleBarBackgroundGradientStop
         start: Qt.point(width, 0)
         end: Qt.point(0, 0)
     }
@@ -103,7 +103,7 @@ Rectangle {
                 text: FontAwesome.signOutAlt
                 font.family: FontAwesome.fontFamilySolid
                 font.pixelSize: 16
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 font.styleName: "Solid"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -114,7 +114,7 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = BittubeComponents.Style.titleBarButtonHoverColor
+                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
                 onExited: parent.color = "transparent"
                 onClicked: root.closeWalletClicked(leftPanel.visible)
             }
@@ -131,7 +131,7 @@ Rectangle {
                 text: FontAwesome.globe
                 font.family: FontAwesome.fontFamilySolid
                 font.pixelSize: 16
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 font.styleName: "Solid"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -142,7 +142,7 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = BittubeComponents.Style.titleBarButtonHoverColor
+                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
                 onExited: parent.color = "transparent"
                 onClicked: root.languageClicked()
             }
@@ -156,10 +156,10 @@ Rectangle {
 
             Text {
                 text: FontAwesome.moonO
-                font.family: BittubeComponents.Style.blackTheme ? FontAwesome.fontFamilySolid : FontAwesome.fontFamily
-                font.styleName: BittubeComponents.Style.blackTheme ? "Solid" : "Regular"
+                font.family: MoneroComponents.Style.blackTheme ? FontAwesome.fontFamilySolid : FontAwesome.fontFamily
+                font.styleName: MoneroComponents.Style.blackTheme ? "Solid" : "Regular"
                 font.pixelSize: 15
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 opacity: 0.75
@@ -169,11 +169,11 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = BittubeComponents.Style.titleBarButtonHoverColor
+                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
                 onExited: parent.color = "transparent"
                 onClicked: {
-                    BittubeComponents.Style.blackTheme = !BittubeComponents.Style.blackTheme;
-                    persistentSettings.blackTheme = BittubeComponents.Style.blackTheme;
+                    MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
+                    persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;
                 }
             }
         }
@@ -201,16 +201,16 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
 
-                source: BittubeComponents.Style.titleBarLogoSource
+                source: MoneroComponents.Style.titleBarLogoSource
                 visible: {
                     if(!isOpenGL) return true;
-                    if(!BittubeComponents.Style.blackTheme) return true;
+                    if(!MoneroComponents.Style.blackTheme) return true;
                     return false;
                 }
             }
 
             Colorize {
-                visible: isOpenGL && BittubeComponents.Style.blackTheme
+                visible: isOpenGL && MoneroComponents.Style.blackTheme
                 anchors.fill: imgLogo
                 source: imgLogo
                 saturation: 0.0
@@ -222,7 +222,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height
 
-            BittubeComponents.TextPlain {
+            MoneroComponents.TextPlain {
                 font.pixelSize: 20
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -246,11 +246,11 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: 3
                 width: 15
-                image: BittubeComponents.Style.titleBarMinimizeSource
-                color: BittubeComponents.Style.defaultFontColor
+                image: MoneroComponents.Style.titleBarMinimizeSource
+                color: MoneroComponents.Style.defaultFontColor
                 fontAwesomeFallbackIcon: FontAwesome.minus
                 fontAwesomeFallbackSize: 18
-                fontAwesomeFallbackOpacity: BittubeComponents.Style.blackTheme ? 0.8 : 0.6
+                fontAwesomeFallbackOpacity: MoneroComponents.Style.blackTheme ? 0.8 : 0.6
                 opacity: 0.75
             }
 
@@ -258,7 +258,7 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = BittubeComponents.Style.titleBarButtonHoverColor
+                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
                 onExited: parent.color = "transparent"
                 onClicked: root.minimizeClicked();
             }
@@ -275,7 +275,7 @@ Rectangle {
             Image {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: BittubeComponents.Style.titleBarFullscreenSource
+                source: MoneroComponents.Style.titleBarFullscreenSource
                 sourceSize.width: 16
                 sourceSize.height: 16
                 smooth: true
@@ -289,7 +289,7 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = BittubeComponents.Style.titleBarButtonHoverColor
+                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
                 onExited: parent.color = "transparent"
                 onClicked: root.maximizeClicked();
             }
@@ -307,11 +307,11 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: 16
                 width: 16
-                image: BittubeComponents.Style.titleBarCloseSource
-                color: BittubeComponents.Style.defaultFontColor
+                image: MoneroComponents.Style.titleBarCloseSource
+                color: MoneroComponents.Style.defaultFontColor
                 fontAwesomeFallbackIcon: FontAwesome.timesRectangle
                 fontAwesomeFallbackSize: 18
-                fontAwesomeFallbackOpacity: BittubeComponents.Style.blackTheme ? 0.8 : 0.6
+                fontAwesomeFallbackOpacity: MoneroComponents.Style.blackTheme ? 0.8 : 0.6
                 opacity: 0.75
             }
 
@@ -319,7 +319,7 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = BittubeComponents.Style.titleBarButtonHoverColor
+                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
                 onExited: parent.color = "transparent"
                 onClicked: root.closeClicked();
             }
@@ -331,13 +331,13 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        height: BittubeComponents.Style.blackTheme ? 1 : 1
-        color: BittubeComponents.Style.titleBarBackgroundBorderColor
+        height: MoneroComponents.Style.blackTheme ? 1 : 1
+        color: MoneroComponents.Style.titleBarBackgroundBorderColor
 
         MoneroEffects.ColorTransition {
             targetObj: parent
-            blackColor: BittubeComponents.Style._b_titleBarBackgroundBorderColor
-            whiteColor: BittubeComponents.Style._w_titleBarBackgroundBorderColor
+            blackColor: MoneroComponents.Style._b_titleBarBackgroundBorderColor
+            whiteColor: MoneroComponents.Style._w_titleBarBackgroundBorderColor
         }
     }
 

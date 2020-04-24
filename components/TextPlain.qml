@@ -1,6 +1,6 @@
 import QtQuick 2.9
 
-import "." as BittubeComponents
+import "." as MoneroComponents
 import "effects/" as MoneroEffects
 
 Text {
@@ -12,7 +12,7 @@ Text {
     property bool themeTransition: true
     property string themeTransitionBlackColor: ""
     property string themeTransitionWhiteColor: ""
-    font.family: BittubeComponents.Style.fontMedium.name
+    font.family: MoneroComponents.Style.fontMedium.name
     font.bold: false
     font.pixelSize: 14
     textFormat: Text.PlainText
@@ -22,7 +22,7 @@ Text {
         themeTransition: root.themeTransition
         targetObj: root
         duration: 750
-        blackColor: root.themeTransitionBlackColor !== "" ? root.themeTransitionBlackColor : BittubeComponents.Style._b_defaultFontColor
-        whiteColor: root.themeTransitionWhiteColor !== "" ? root.themeTransitionWhiteColor : BittubeComponents.Style._w_defaultFontColor
+        blackColor: root.themeTransitionBlackColor !== "" ? root.themeTransitionBlackColor : MoneroComponents.Style._b_defaultFontColor
+        whiteColor: root.themeTransitionWhiteColor !== "" ? root.themeTransitionWhiteColor : MoneroComponents.Style._w_defaultFontColor
     }
 }

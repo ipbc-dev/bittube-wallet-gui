@@ -31,7 +31,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Rectangle {
     id: wizardModeRemoteNodeWarning
@@ -68,39 +68,39 @@ Rectangle {
                 Layout.topMargin: 10
                 Layout.fillWidth: true
 
-                BittubeComponents.TextPlain {
+                MoneroComponents.TextPlain {
                     text: qsTr("This mode is ideal for managing small amounts of BitTube. You have access to basic features for making and managing transactions. It will automatically connect to the BitTube network so you can start using BitTube immediately.") + translationManager.emptyString
-                    themeTransitionBlackColor: BittubeComponents.Style._b_lightGreyFontColor
-                    themeTransitionWhiteColor: BittubeComponents.Style._w_lightGreyFontColor
+                    themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
+                    themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
                     wrapMode: Text.Wrap
                     Layout.topMargin: 14
                     Layout.fillWidth: true
 
-                    font.family: BittubeComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16
-                    color: BittubeComponents.Style.lightGreyFontColor
+                    color: MoneroComponents.Style.lightGreyFontColor
                 }
 
-                BittubeComponents.TextPlain {
+                MoneroComponents.TextPlain {
                     text: qsTr("Remote nodes are useful if you are not able/don't want to download the whole blockchain, but be advised that malicious remote nodes could compromise some privacy. They could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
-                    themeTransitionBlackColor: BittubeComponents.Style._b_lightGreyFontColor
-                    themeTransitionWhiteColor: BittubeComponents.Style._w_lightGreyFontColor
+                    themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
+                    themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
                     wrapMode: Text.Wrap
                     Layout.topMargin: 8
                     Layout.fillWidth: true
 
-                    font.family: BittubeComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16
-                    color: BittubeComponents.Style.lightGreyFontColor
+                    color: MoneroComponents.Style.lightGreyFontColor
                 }
 
-                BittubeComponents.WarningBox {
+                MoneroComponents.WarningBox {
                     Layout.topMargin: 14
                     Layout.bottomMargin: 6
                     text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use a full node instead</b>.") + translationManager.emptyString
                 }
 
-                BittubeComponents.CheckBox {
+                MoneroComponents.CheckBox {
                     id: understoodCheckbox
                     Layout.topMargin: 20
                     fontSize: 16

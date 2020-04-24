@@ -32,7 +32,7 @@ import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 ColumnLayout {
     property alias header: key.text
@@ -50,7 +50,7 @@ ColumnLayout {
             Layout.preferredHeight: 20
             color: "transparent"
 
-            BittubeComponents.TextBlock {
+            MoneroComponents.TextBlock {
                 id: key
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
@@ -64,7 +64,7 @@ ColumnLayout {
             Layout.preferredHeight: 20
             color: "transparent"
 
-            BittubeComponents.TextBlock {
+            MoneroComponents.TextBlock {
                 id: val
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
@@ -79,7 +79,7 @@ ColumnLayout {
         Layout.topMargin: 2
         Layout.bottomMargin: 2
         Layout.fillWidth: true
-        color: BittubeComponents.Style.dividerColor
-        opacity: BittubeComponents.Style.dividerOpacity
+        color: MoneroComponents.Style.dividerColor
+        opacity: MoneroComponents.Style.dividerOpacity
     }
 }

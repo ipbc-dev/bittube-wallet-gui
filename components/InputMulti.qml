@@ -30,26 +30,26 @@ import QtQuick.Controls 2.0
 import QtQuick 2.9
 
 import "../js/TxUtils.js" as TxUtils
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 TextArea {
     property int fontSize: 18
     property bool fontBold: false
-    property string fontColor: BittubeComponents.Style.defaultFontColor
+    property string fontColor: MoneroComponents.Style.defaultFontColor
 
     property bool mouseSelection: true
     property bool error: false
     property bool addressValidation: false
 
     id: textArea
-    font.family: BittubeComponents.Style.fontRegular.name
+    font.family: MoneroComponents.Style.fontRegular.name
     color: fontColor
     font.pixelSize: fontSize
     font.bold: fontBold
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: mouseSelection
-    selectionColor: BittubeComponents.Style.textSelectionColor
-    selectedTextColor: BittubeComponents.Style.textSelectedColor
+    selectionColor: MoneroComponents.Style.textSelectionColor
+    selectedTextColor: MoneroComponents.Style.textSelectedColor
 
     property int minimumHeight: 100
     height: contentHeight > minimumHeight ? contentHeight : minimumHeight
@@ -69,7 +69,7 @@ TextArea {
         }
     }
 
-    BittubeComponents.ContextMenu {
+    MoneroComponents.ContextMenu {
         cursorShape: Qt.IBeamCursor
         onPaste: {
             textArea.clear();

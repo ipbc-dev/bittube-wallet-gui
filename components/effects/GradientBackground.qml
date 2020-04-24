@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtGraphicalEffects 1.0
 
-import "../" as BittubeComponents
+import "../" as MoneroComponents
 
 Item {
     id: root
@@ -76,7 +76,7 @@ Item {
         states: [
             State {
                 name: "black";
-                when: isOpenGL && BittubeComponents.Style.blackTheme
+                when: isOpenGL && MoneroComponents.Style.blackTheme
                 PropertyChanges {
                     target: gradientStart
                     color: root.blackColorStart
@@ -87,7 +87,7 @@ Item {
                 }
             }, State {
                 name: "white";
-                when: isOpenGL && !BittubeComponents.Style.blackTheme
+                when: isOpenGL && !MoneroComponents.Style.blackTheme
                 PropertyChanges {
                     target: gradientStart
                     color: root.whiteColorStart

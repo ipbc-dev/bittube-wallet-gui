@@ -33,7 +33,7 @@ import bittubeComponents.NetworkType 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 ColumnLayout {
     Layout.fillWidth: true

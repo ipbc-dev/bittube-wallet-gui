@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 import bittubeComponents.Wallet 1.0
 
 Rectangle {
@@ -48,35 +48,35 @@ Rectangle {
         anchors.right: parent.right
         spacing: 20
 
-        BittubeComponents.Label {
+        MoneroComponents.Label {
             id: soloTitleLabel
             fontSize: 24
             text: qsTr("Solo mining") + translationManager.emptyString
         }
 
-        BittubeComponents.WarningBox {
+        MoneroComponents.WarningBox {
             Layout.bottomMargin: 8
             text: qsTr("Mining is only available on local daemons.") + translationManager.emptyString
             visible: persistentSettings.useRemoteNode
         }
 
-        BittubeComponents.WarningBox {
+        MoneroComponents.WarningBox {
             Layout.bottomMargin: 8
             text: qsTr("Your daemon must be synchronized before you can start mining") + translationManager.emptyString
             visible: !persistentSettings.useRemoteNode && !appWindow.daemonSynced
         }
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: soloMainLabel
             text: qsTr("Mining with your computer helps strengthen the BitTube network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.\n\nMining also gives you a small chance to earn some BitTube. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true
-            font.family: BittubeComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 14
-            color: BittubeComponents.Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
         }
 
-        BittubeComponents.WarningBox {
+        MoneroComponents.WarningBox {
             id: warningLabel
             Layout.topMargin: 8
             Layout.bottomMargin: 8
@@ -93,9 +93,9 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.alignment : Qt.AlignTop | Qt.AlignLeft
 
-                BittubeComponents.Label {
+                MoneroComponents.Label {
                     id: soloMinerThreadsLabel
-                    color: BittubeComponents.Style.defaultFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("CPU threads") + translationManager.emptyString
                     fontSize: 16
                     wrapMode: Text.WordWrap
@@ -106,24 +106,24 @@ Rectangle {
                 Layout.fillWidth: true
                 spacing: 16
 
-                BittubeComponents.LineEdit {
+                MoneroComponents.LineEdit {
                     id: soloMinerThreadsLine
                     Layout.minimumWidth: 200
                     text: "1"
                     validator: IntValidator { bottom: 1; top: idealThreadCount }
                 }
 
-                BittubeComponents.TextPlain {
+                MoneroComponents.TextPlain {
                     id: numAvailableThreadsText
                     text: qsTr("Max # of CPU threads available for mining: ") + idealThreadCount + translationManager.emptyString
                     wrapMode: Text.WordWrap
-                    font.family: BittubeComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14
-                    color: BittubeComponents.Style.defaultFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                 }
 
                 RowLayout {
-                    BittubeComponents.StandardButton {
+                    MoneroComponents.StandardButton {
                         id: autoRecommendedThreadsButton
                         small: true
                         text: qsTr("Use recommended # of threads") + translationManager.emptyString
@@ -134,7 +134,7 @@ Rectangle {
                         }
                     }
 
-                    BittubeComponents.StandardButton {
+                    MoneroComponents.StandardButton {
                         id: autoSetMaxThreadsButton
                         small: true
                         text: qsTr("Use all threads") + translationManager.emptyString
@@ -147,7 +147,7 @@ Rectangle {
                 }
 
                 RowLayout {
-                    BittubeComponents.CheckBox {
+                    MoneroComponents.CheckBox {
                         id: backgroundMining
                         enabled: startSoloMinerButton.enabled
                         checked: persistentSettings.allow_background_mining
@@ -159,7 +159,7 @@ Rectangle {
                 RowLayout {
                     // Disable this option until stable
                     visible: false
-                    BittubeComponents.CheckBox {
+                    MoneroComponents.CheckBox {
                         id: ignoreBattery
                         enabled: startSoloMinerButton.enabled
                         checked: !persistentSettings.miningIgnoreBattery
@@ -172,9 +172,9 @@ Rectangle {
             ColumnLayout {
                 Layout.alignment : Qt.AlignTop | Qt.AlignLeft
 
-                BittubeComponents.Label {
+                MoneroComponents.Label {
                     id: manageSoloMinerLabel
-                    color: BittubeComponents.Style.defaultFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("Manage miner") + translationManager.emptyString
                     fontSize: 16
                     wrapMode: Text.Wrap
@@ -187,7 +187,7 @@ Rectangle {
                 spacing: 16
 
                 RowLayout {
-                    BittubeComponents.StandardButton {
+                    MoneroComponents.StandardButton {
                         visible: true
                         id: startSoloMinerButton
                         small: true
@@ -207,7 +207,7 @@ Rectangle {
                         }
                     }
 
-                    BittubeComponents.StandardButton {
+                    MoneroComponents.StandardButton {
                         visible: true
                         id: stopSoloMinerButton
                         small: true
@@ -224,9 +224,9 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.alignment : Qt.AlignTop | Qt.AlignLeft
 
-                BittubeComponents.Label {
+                MoneroComponents.Label {
                     id: statusLabel
-                    color: BittubeComponents.Style.defaultFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("Status") + translationManager.emptyString
                     fontSize: 16
                 }
@@ -236,7 +236,7 @@ Rectangle {
                 Layout.fillWidth: true
                 spacing: 16
 
-                BittubeComponents.LineEditMulti {
+                MoneroComponents.LineEditMulti {
                     id: statusText
                     Layout.minimumWidth: 300
                     text: qsTr("Not mining") + translationManager.emptyString
@@ -270,7 +270,7 @@ Rectangle {
         walletManager.miningStatusAsync();
     }
 
-    BittubeComponents.StandardDialog {
+    MoneroComponents.StandardDialog {
         id: errorPopup
         cancelVisible: false
     }

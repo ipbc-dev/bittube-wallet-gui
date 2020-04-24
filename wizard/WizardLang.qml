@@ -33,7 +33,7 @@ import QtQuick.XmlListModel 2.0
 import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
 
 Rectangle {
@@ -50,13 +50,13 @@ Rectangle {
 
     MoneroEffects.GradientBackground {
         anchors.fill: parent
-        fallBackColor: BittubeComponents.Style.middlePanelBackgroundColor
-        initialStartColor: BittubeComponents.Style.wizardBackgroundGradientStart
-        initialStopColor: BittubeComponents.Style.middlePanelBackgroundGradientStop
-        blackColorStart: BittubeComponents.Style._b_wizardBackgroundGradientStart
-        blackColorStop: BittubeComponents.Style._b_middlePanelBackgroundGradientStop
-        whiteColorStart: BittubeComponents.Style._w_wizardBackgroundGradientStart
-        whiteColorStop: BittubeComponents.Style._w_middlePanelBackgroundGradientStop
+        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
+        initialStartColor: MoneroComponents.Style.wizardBackgroundGradientStart
+        initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
+        blackColorStart: MoneroComponents.Style._b_wizardBackgroundGradientStart
+        blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
+        whiteColorStart: MoneroComponents.Style._w_wizardBackgroundGradientStart
+        whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
         start: Qt.point(0, 0)
         end: Qt.point(height, width)
     }
@@ -70,8 +70,8 @@ Rectangle {
         Text {
             text: qsTr("Language settings") + translationManager.emptyString
             Layout.fillWidth: true
-            font.family: BittubeComponents.Style.fontRegular.name
-            color: BittubeComponents.Style.defaultFontColor
+            font.family: MoneroComponents.Style.fontRegular.name
+            color: MoneroComponents.Style.defaultFontColor
             font.pixelSize: {
                 if(langScreen.layoutScale === 2 ){
                     return 34;
@@ -90,10 +90,10 @@ Rectangle {
             Layout.fillWidth: true
             visible: parent.subtitle !== ""
 
-            color: BittubeComponents.Style.dimmedFontColor
+            color: MoneroComponents.Style.dimmedFontColor
             text: qsTr("Change the language of the BitTube GUI.") + translationManager.emptyString
 
-            font.family: BittubeComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: {
                 if(langScreen.layoutScale === 2 ){
                     return 16;
@@ -154,11 +154,11 @@ Rectangle {
                         height: parent.height
                         width: langText.width + 22
 
-                        BittubeComponents.TextPlain {
+                        MoneroComponents.TextPlain {
                             id: langText
                             font.bold: true
                             font.pixelSize: 14
-                            color: BittubeComponents.Style.defaultFontColor
+                            color: MoneroComponents.Style.defaultFontColor
                             text: display_name
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
@@ -200,7 +200,7 @@ Rectangle {
             Layout.topMargin: 32
             spacing: 20
 
-            BittubeComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 small: true
                 text: qsTr("Close") + translationManager.emptyString
 

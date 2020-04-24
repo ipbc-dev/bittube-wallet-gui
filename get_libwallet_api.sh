@@ -17,7 +17,7 @@ if [ ! -d $BITTUBE_DIR/src ]; then
 fi
 git submodule update --remote
 git -C $BITTUBE_DIR fetch
-git -C $BITTUBE_DIR checkout master
+#git -C $BITTUBE_DIR checkout master
 
 # get bittube core tag
 pushd $BITTUBE_DIR
@@ -242,7 +242,7 @@ fi
 # set CPU core count
 # thanks to SO: http://stackoverflow.com/a/20283965/4118915
 if test -z "$CPU_CORE_COUNT"; then
-  CPU_CORE_COUNT=2
+  CPU_CORE_COUNT=1
 fi
 
 # Build libwallet_merged

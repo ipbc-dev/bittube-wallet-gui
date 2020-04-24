@@ -33,7 +33,7 @@ import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.2
 
-import "." as BittubeComponents
+import "." as MoneroComponents
 import "effects/" as MoneroEffects
 
 Item {
@@ -41,7 +41,7 @@ Item {
     readonly property alias expanded: popup.visible
     property date currentDate
     property bool showCurrentDate: true
-    property color backgroundColor : BittubeComponents.Style.appWindowBorderColor
+    property color backgroundColor : MoneroComponents.Style.appWindowBorderColor
     property color errorColor : "red"
     property bool error: false
     property alias inputLabel: inputLabel
@@ -58,16 +58,16 @@ Item {
         height: 22
         width: parent.width
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: inputLabel
             anchors.top: parent.top
             anchors.topMargin: 2
             anchors.left: parent.left
-            font.family: BittubeComponents.Style.fontLight.name
+            font.family: MoneroComponents.Style.fontLight.name
             font.pixelSize: 14
             font.bold: false
             textFormat: Text.RichText
-            color: BittubeComponents.Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
             themeTransition: false
 
             MouseArea {
@@ -104,7 +104,7 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 2
             anchors.right: parent.right
-            property string headerFontColor: BittubeComponents.Style.blackTheme ? "#e6e6e6" : "#333333"
+            property string headerFontColor: MoneroComponents.Style.blackTheme ? "#e6e6e6" : "#333333"
             spacing: 0
 
             function setDate(date) {
@@ -126,10 +126,10 @@ Item {
                 id: dayInput
                 readOnly: true
                 Layout.preferredWidth: childrenRect.width + 40
-                font.family: BittubeComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 14
                 color: datePicker.error ? errorColor : parent.headerFontColor
-                selectionColor: BittubeComponents.Style.dimmedFontColor
+                selectionColor: MoneroComponents.Style.dimmedFontColor
                 selectByMouse: true
                 horizontalAlignment: TextInput.AlignHCenter
                 maximumLength: 2
@@ -150,10 +150,10 @@ Item {
                 }
             }
 
-            BittubeComponents.TextPlain {
-                font.family: BittubeComponents.Style.fontRegular.name
+            MoneroComponents.TextPlain {
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : BittubeComponents.Style.defaultFontColor
+                color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
                 text: "-"
                 themeTransition: false
             }
@@ -162,10 +162,10 @@ Item {
                 id: monthInput
                 readOnly: true
                 Layout.preferredWidth: childrenRect.width + 40
-                font.family: BittubeComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 14
                 color: datePicker.error ? errorColor : parent.headerFontColor
-                selectionColor: BittubeComponents.Style.dimmedFontColor
+                selectionColor: MoneroComponents.Style.dimmedFontColor
                 selectByMouse: true
                 horizontalAlignment: TextInput.AlignHCenter
                 maximumLength: 2
@@ -185,10 +185,10 @@ Item {
                 }
             }
 
-            BittubeComponents.TextPlain {
-                font.family: BittubeComponents.Style.fontRegular.name
+            MoneroComponents.TextPlain {
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : BittubeComponents.Style.defaultFontColor
+                color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
                 text: "-"
                 themeTransition: false
             }
@@ -196,10 +196,10 @@ Item {
             TextInput {
                 id: yearInput
                 Layout.preferredWidth: childrenRect.width + 60
-                font.family: BittubeComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 14
                 color: datePicker.error ? errorColor : parent.headerFontColor
-                selectionColor: BittubeComponents.Style.dimmedFontColor
+                selectionColor: MoneroComponents.Style.dimmedFontColor
                 selectByMouse: true
                 horizontalAlignment: TextInput.AlignHCenter
                 maximumLength: 4
@@ -233,7 +233,7 @@ Item {
                 ColorOverlay {
                     source: button
                     anchors.fill: button
-                    color: BittubeComponents.Style.defaultFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     rotation: datePicker.expanded ? 180 : 0
                     opacity: 1
                 }
@@ -259,9 +259,9 @@ Item {
             x: head.x
             y: head.y + head.height + 10
 
-            color: BittubeComponents.Style.middlePanelBackgroundColor
+            color: MoneroComponents.Style.middlePanelBackgroundColor
             border.width: 1
-            border.color: BittubeComponents.Style.appWindowBorderColor
+            border.color: MoneroComponents.Style.appWindowBorderColor
             height: datePicker.expanded ? calendar.height + 2 : 0
             clip: true
 
@@ -279,7 +279,7 @@ Item {
                 anchors.leftMargin: 1
                 anchors.rightMargin: 1
                 anchors.top: parent.top
-                color: BittubeComponents.Style.appWindowBorderColor
+                color: MoneroComponents.Style.appWindowBorderColor
                 height: 1
             }
 
@@ -295,7 +295,7 @@ Item {
 
                 style: CalendarStyle {
                     gridVisible: false
-                    background: Rectangle { color: BittubeComponents.Style.middlePanelBackgroundColor }
+                    background: Rectangle { color: MoneroComponents.Style.middlePanelBackgroundColor }
                     dayDelegate: Item {
                         z: parent.z + 1
                         implicitHeight: implicitWidth
@@ -307,15 +307,15 @@ Item {
                             radius: parent.implicitHeight / 2
                             color: {
                                 if(dayArea.pressed && styleData.visibleMonth)
-                                    return BittubeComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
+                                    return MoneroComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
                                 return "transparent";
                             }
                         }
 
-                        BittubeComponents.TextPlain {
+                        MoneroComponents.TextPlain {
                             id: dayText
                             anchors.centerIn: parent
-                            font.family: BittubeComponents.Style.fontMonoRegular.name
+                            font.family: MoneroComponents.Style.fontMonoRegular.name
                             font.pixelSize: {
                                 if(!styleData.visibleMonth) return 12
                                 return 14
@@ -327,10 +327,10 @@ Item {
                             text: styleData.date.getDate()
                             themeTransition: false
                             color: {
-                                if(!styleData.visibleMonth) return BittubeComponents.Style.lightGreyFontColor
-                                if(dayArea.pressed) return BittubeComponents.Style.defaultFontColor
-                                if(styleData.today) return BittubeComponents.Style.orange
-                                return BittubeComponents.Style.defaultFontColor
+                                if(!styleData.visibleMonth) return MoneroComponents.Style.lightGreyFontColor
+                                if(dayArea.pressed) return MoneroComponents.Style.defaultFontColor
+                                if(styleData.today) return MoneroComponents.Style.orange
+                                return MoneroComponents.Style.defaultFontColor
                             }
                         }
 
@@ -338,7 +338,7 @@ Item {
                             id: dayArea
                             anchors.fill: parent
                             hoverEnabled: true
-                            onEntered: dayRect.color = BittubeComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
+                            onEntered: dayRect.color = MoneroComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
                             onExited: dayRect.color = "transparent"
                             cursorShape: Qt.PointingHandCursor
                             onClicked: {
@@ -361,12 +361,12 @@ Item {
                         implicitHeight: 20
                         implicitWidth: calendar.width / 7
 
-                        BittubeComponents.TextPlain {
+                        MoneroComponents.TextPlain {
                             anchors.centerIn: parent
                             elide: Text.ElideRight
-                            font.family: BittubeComponents.Style.fontMonoRegular.name
+                            font.family: MoneroComponents.Style.fontMonoRegular.name
                             font.pixelSize: 12
-                            color: BittubeComponents.Style.lightGreyFontColor
+                            color: MoneroComponents.Style.lightGreyFontColor
                             themeTransition: false
                             text: {
                                 var locale = Qt.locale()
@@ -376,15 +376,15 @@ Item {
                     }
 
                     navigationBar: Rectangle {
-                        color: BittubeComponents.Style.middlePanelBackgroundColor
+                        color: MoneroComponents.Style.middlePanelBackgroundColor
                         implicitWidth: calendar.width
                         implicitHeight: 30
 
-                        BittubeComponents.TextPlain {
+                        MoneroComponents.TextPlain {
                             anchors.centerIn: parent
-                            font.family: BittubeComponents.Style.fontMonoRegular.name
+                            font.family: MoneroComponents.Style.fontMonoRegular.name
                             font.pixelSize: 14
-                            color: BittubeComponents.Style.dimmedFontColor
+                            color: MoneroComponents.Style.dimmedFontColor
                             themeTransition: false
                             text: styleData.title
                         }
@@ -407,7 +407,7 @@ Item {
                             ColorOverlay {
                                 source: prevMonthIcon
                                 anchors.fill: prevMonthIcon
-                                color: BittubeComponents.Style.defaultFontColor
+                                color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
                             }
 
@@ -436,7 +436,7 @@ Item {
                             ColorOverlay {
                                 source: nextMonthIcon
                                 anchors.fill: nextMonthIcon
-                                color: BittubeComponents.Style.defaultFontColor
+                                color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 rotation: 180
                             }

@@ -32,7 +32,7 @@ import QtGraphicalEffects 1.0
 import FontAwesome 1.0
 
 import "." 1.0
-import "." as BittubeComponents
+import "." as MoneroComponents
 import "effects/" as MoneroEffects
 
 RowLayout {
@@ -58,7 +58,7 @@ RowLayout {
             width: (label.width + indicatorRect.width + checkBox.textMargin)
             color: "transparent"
 
-            BittubeComponents.TextPlain {
+            MoneroComponents.TextPlain {
                 id: label
                 font.family: Style.fontLight.name
                 font.pixelSize: checkBox.fontSize
@@ -83,8 +83,8 @@ RowLayout {
                     width: 12
                     height: 8
                     image: "qrc:///images/whiteDropIndicator.png"
-                    color: BittubeComponents.Style.defaultFontColor
-                    opacity: BittubeComponents.Style.blackTheme ? 1 : 0.75
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1 : 0.75
                     fontAwesomeFallbackIcon: FontAwesome.arrowDown
                     fontAwesomeFallbackSize: 14
 

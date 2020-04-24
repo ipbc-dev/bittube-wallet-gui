@@ -34,7 +34,7 @@ import QtQuick.Dialogs 1.2
 
 import bittubeComponents.Clipboard 1.0
 import bittubeComponents.WalletManager 1.0
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Rectangle {
     property alias signHeight: mainLayout.height
@@ -97,41 +97,41 @@ Rectangle {
 
         spacing: 20
 
-        BittubeComponents.Label {
+        MoneroComponents.Label {
             fontSize: 24
             text: qsTr("Sign/verify") + translationManager.emptyString
         }
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             text: qsTr("This page lets you sign/verify a message (or file contents) with your address.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true
-            font.family: BittubeComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 14
-            color: BittubeComponents.Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
         }
 
         ColumnLayout {
             id: modeRow
             Layout.fillWidth: true
 
-            BittubeComponents.TextPlain {
+            MoneroComponents.TextPlain {
                 id: modeText
                 Layout.fillWidth: true
                 Layout.topMargin: 12
                 text: qsTr("Mode") + translationManager.emptyString
                 wrapMode: Text.Wrap
-                font.family: BittubeComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 20
                 textFormat: Text.RichText
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
             }
 
             ColumnLayout {
                 id: modeButtonsColumn
                 Layout.topMargin: 10
 
-                BittubeComponents.RadioButton {
+                MoneroComponents.RadioButton {
                     id: handleMessageButton
                     text: qsTr("Message") + translationManager.emptyString
                     fontSize: 16
@@ -144,7 +144,7 @@ Rectangle {
                     }
                 }
 
-                BittubeComponents.RadioButton {
+                MoneroComponents.RadioButton {
                     id: handleFileButton
                     text: qsTr("File") + translationManager.emptyString
                     fontSize: 16
@@ -163,7 +163,7 @@ Rectangle {
             id: signSection
             spacing: 10
 
-            BittubeComponents.LabelSubheader {
+            MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
                 Layout.topMargin: 12
                 Layout.bottomMargin: 24
@@ -177,7 +177,7 @@ Rectangle {
                 spacing: 10
                 visible: messageMode
 
-                BittubeComponents.LineEditMulti{
+                MoneroComponents.LineEditMulti{
                     id: signMessageLine
                     Layout.fillWidth: true
                     labelFontSize: 14
@@ -195,7 +195,7 @@ Rectangle {
                 Layout.fillWidth: true
                 visible: fileMode
 
-                BittubeComponents.LineEditMulti {
+                MoneroComponents.LineEditMulti {
                     id: signFileLine
                     labelFontSize: 14
                     labelText: qsTr("File") + translationManager.emptyString
@@ -208,7 +208,7 @@ Rectangle {
                     text: ''
                 }
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: loadFileToSignButton
                     Layout.alignment: Qt.AlignBottom
                     small: false
@@ -223,7 +223,7 @@ Rectangle {
             ColumnLayout {
                 id: signSignatureRow
 
-                BittubeComponents.LineEditMulti {
+                MoneroComponents.LineEditMulti {
                     id: signSignatureLine
                     labelFontSize: 14
                     labelText: qsTr("Signature") + translationManager.emptyString
@@ -240,7 +240,7 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignRight
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: clearSignButton
                     text: qsTr("Clear") + translationManager.emptyString
                     enabled: signMessageLine.text !== '' || signFileLine.text !== ''
@@ -252,7 +252,7 @@ Rectangle {
                     }
                 }
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: signMessageButton
                     visible: messageMode
                     text: qsTr("Sign Message") + translationManager.emptyString
@@ -264,7 +264,7 @@ Rectangle {
                     }
                 }
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: signFileButton
                     visible: fileMode
                     small: true
@@ -283,14 +283,14 @@ Rectangle {
             id: verifySection
             spacing: 16
 
-            BittubeComponents.LabelSubheader {
+            MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
                 Layout.bottomMargin: 24
                 textFormat: Text.RichText
                 text: fileMode ? qsTr("Verify file") + translationManager.emptyString : qsTr("Verify message") + translationManager.emptyString
             }
 
-            BittubeComponents.LineEditMulti {
+            MoneroComponents.LineEditMulti {
                 id: verifyMessageLine
                 visible: messageMode
                 Layout.fillWidth: true
@@ -308,7 +308,7 @@ Rectangle {
                 Layout.fillWidth: true
                 visible: fileMode
 
-                BittubeComponents.LineEditMulti {
+                MoneroComponents.LineEditMulti {
                     id: verifyFileLine
                     labelFontSize: 14
                     labelText: qsTr("File") + translationManager.emptyString
@@ -320,7 +320,7 @@ Rectangle {
                     text: ''
                 }
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: loadFileToVerifyButton
                     Layout.alignment: Qt.AlignBottom
                     small: false
@@ -332,7 +332,7 @@ Rectangle {
                 }
             }
 
-            BittubeComponents.LineEditMulti {
+            MoneroComponents.LineEditMulti {
                 id: verifyAddressLine
                 Layout.fillWidth: true
                 labelFontSize: 14
@@ -344,7 +344,7 @@ Rectangle {
                 text: ''
             }
 
-            BittubeComponents.LineEditMulti {
+            MoneroComponents.LineEditMulti {
                 id: verifySignatureLine
                 labelFontSize: 14
                 labelText: qsTr("Signature") + translationManager.emptyString
@@ -360,7 +360,7 @@ Rectangle {
                 Layout.topMargin: 12
                 Layout.alignment: Qt.AlignRight
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: clearVerifyButton
                     text: qsTr("Clear") + translationManager.emptyString
                     enabled: verifyMessageLine.text !== '' || verifyFileLine.text !== '' || verifyAddressLine.text !== '' || verifySignatureLine.text  !== ''
@@ -373,7 +373,7 @@ Rectangle {
                     }
                 }
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: verifyFileButton
                     visible: fileMode
                     small: true
@@ -385,7 +385,7 @@ Rectangle {
                     }
                 }
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: verifyMessageButton
                     visible: messageMode
                     small: true

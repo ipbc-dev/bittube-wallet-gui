@@ -30,7 +30,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import FontAwesome 1.0
 
-import "." as BittubeComponents
+import "." as MoneroComponents
 import "effects/" as MoneroEffects
 
 Item {
@@ -77,9 +77,9 @@ Item {
                 color: "transparent"
                 border.color:
                     if(checkBox.checked){
-                        return BittubeComponents.Style.inputBorderColorActive;
+                        return MoneroComponents.Style.inputBorderColorActive;
                     } else {
-                        return BittubeComponents.Style.inputBorderColorInActive;
+                        return MoneroComponents.Style.inputBorderColorInActive;
                     }
             }
 
@@ -89,7 +89,7 @@ Item {
                 anchors.centerIn: parent
                 width: checkBox.imgWidth
                 height: checkBox.imgHeight
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 fontAwesomeFallbackIcon: checkBox.fontAwesomeIcons ? getIcon() : FontAwesome.plus
                 fontAwesomeFallbackSize: 14
                 image: checkBox.fontAwesomeIcons ? "" : getIcon()
@@ -102,11 +102,11 @@ Item {
             }
         }
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: label
-            font.family: BittubeComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: checkBox.fontSize
-            color: BittubeComponents.Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
             textFormat: Text.RichText
             wrapMode: Text.NoWrap
         }

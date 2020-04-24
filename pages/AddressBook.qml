@@ -31,7 +31,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
 
 import "../js/TxUtils.js" as TxUtils
@@ -70,8 +70,8 @@ Rectangle {
             Text {
                 id: titleLabel
                 Layout.fillWidth: true
-                color: BittubeComponents.Style.defaultFontColor
-                font.family: BittubeComponents.Style.fontRegular.name
+                color: MoneroComponents.Style.defaultFontColor
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 32
                 horizontalAlignment: TextInput.AlignLeft
                 wrapMode: Text.WordWrap;
@@ -90,8 +90,8 @@ Rectangle {
 
             Text {
                 Layout.fillWidth: true
-                color: BittubeComponents.Style.dimmedFontColor
-                font.family: BittubeComponents.Style.fontRegular.name
+                color: MoneroComponents.Style.dimmedFontColor
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 16
                 horizontalAlignment: TextInput.AlignLeft
                 wrapMode: Text.WordWrap;
@@ -108,7 +108,7 @@ Rectangle {
                 }
             }
 
-            BittubeComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 id: addFirstEntryButton
                 Layout.topMargin: 20
                 text: qsTr("Add an address") + translationManager.emptyString
@@ -123,7 +123,7 @@ Rectangle {
             visible: addressBookListView.count >= 1
             spacing: 0
 
-            BittubeComponents.Label {
+            MoneroComponents.Label {
                 Layout.bottomMargin: 20
                 fontSize: 32
                 text: qsTr("Address book") + translationManager.emptyString
@@ -157,7 +157,7 @@ Rectangle {
                         }
 
                         Rectangle {
-                            color: BittubeComponents.Style.appWindowBorderColor
+                            color: MoneroComponents.Style.appWindowBorderColor
                             anchors.right: parent.right
                             anchors.left: parent.left
                             anchors.top: parent.top
@@ -165,8 +165,8 @@ Rectangle {
 
                             MoneroEffects.ColorTransition {
                                 targetObj: parent
-                                blackColor: BittubeComponents.Style._b_appWindowBorderColor
-                                whiteColor: BittubeComponents.Style._w_appWindowBorderColor
+                                blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                                whiteColor: MoneroComponents.Style._w_appWindowBorderColor
                             }
                         }
 
@@ -176,9 +176,9 @@ Rectangle {
                             anchors.rightMargin: 110
                             color: "transparent"
 
-                            BittubeComponents.Label {
+                            MoneroComponents.Label {
                                 id: descriptionLabel
-                                color: BittubeComponents.Style.defaultFontColor
+                                color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6
@@ -188,15 +188,15 @@ Rectangle {
                                 textWidth: addressLabel.x - descriptionLabel.x - 1
                             }
 
-                            BittubeComponents.Label {
+                            MoneroComponents.Label {
                                 id: addressLabel
-                                color: BittubeComponents.Style.defaultFontColor
+                                color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
                                 anchors.leftMargin: -addressLabel.width - 5
 
                                 fontSize: 16
-                                fontFamily: BittubeComponents.Style.fontMonoRegular.name;
+                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
                                 text: TxUtils.addressTruncatePretty(address, mainLayout.width < 540 ? 1 : (mainLayout.width < 700 ? 2 : 3));
                             }
 
@@ -217,10 +217,10 @@ Rectangle {
                             height: 21
                             spacing: 10
 
-                            BittubeComponents.IconButton {
+                            MoneroComponents.IconButton {
                                 id: sendToButton
                                 image: "qrc:///images/arrow-right-in-circle-outline-medium-white.svg"
-                                color: BittubeComponents.Style.defaultFontColor
+                                color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 Layout.preferredWidth: 20
                                 Layout.preferredHeight: 20
@@ -229,10 +229,10 @@ Rectangle {
                                 }
                             }
 
-                            BittubeComponents.IconButton {
+                            MoneroComponents.IconButton {
                                 id: renameButton
                                 image: "qrc:///images/edit.svg"
-                                color: BittubeComponents.Style.defaultFontColor
+                                color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 Layout.preferredWidth: 23
                                 Layout.preferredHeight: 21
@@ -243,12 +243,12 @@ Rectangle {
                                 }
                             }
 
-                            BittubeComponents.IconButton {
+                            MoneroComponents.IconButton {
                                 id: copyButton
                                 image: "qrc:///images/copy.svg"
                                 Layout.preferredWidth: 16
                                 Layout.preferredHeight: 21
-                                color: BittubeComponents.Style.defaultFontColor
+                                color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
 
                                 onClicked: {
@@ -264,18 +264,18 @@ Rectangle {
 
             Rectangle {
                 id: border2
-                color: BittubeComponents.Style.appWindowBorderColor
+                color: MoneroComponents.Style.appWindowBorderColor
                 Layout.fillWidth: true
                 height: 1
 
                 MoneroEffects.ColorTransition {
                     targetObj: border2
-                    blackColor: BittubeComponents.Style._b_appWindowBorderColor
-                    whiteColor: BittubeComponents.Style._w_appWindowBorderColor
+                    blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                    whiteColor: MoneroComponents.Style._w_appWindowBorderColor
                 }
             }
 
-            BittubeComponents.CheckBox {
+            MoneroComponents.CheckBox {
                 id: addNewEntryCheckbox
                 border: false
                 uncheckedIcon: FontAwesome.plusCircle
@@ -297,13 +297,13 @@ Rectangle {
             visible: false
             spacing: 0
 
-            BittubeComponents.Label {
+            MoneroComponents.Label {
                 fontSize: 32
                 wrapMode: Text.WordWrap
                 text: (root.editEntry ? qsTr("Edit an address") : qsTr("Add an address")) + translationManager.emptyString
             }
 
-            BittubeComponents.LineEditMulti {
+            MoneroComponents.LineEditMulti {
                 id: addressLine
                 Layout.topMargin: 20
                 labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
@@ -333,8 +333,8 @@ Rectangle {
                 inlineButton.text: FontAwesome.qrcode
                 inlineButton.fontPixelSize: 22
                 inlineButton.fontFamily: FontAwesome.fontFamily
-                inlineButton.textColor: BittubeComponents.Style.defaultFontColor
-                inlineButton.buttonColor: BittubeComponents.Style.orange
+                inlineButton.textColor: MoneroComponents.Style.defaultFontColor
+                inlineButton.buttonColor: MoneroComponents.Style.orange
                 inlineButton.onClicked: {
                     cameraUi.state = "Capture"
                     cameraUi.qrcode_decoded.connect(root.updateFromQrCode)
@@ -342,7 +342,7 @@ Rectangle {
                 inlineButtonVisible : appWindow.qrScannerEnabled && !addressLine.text
             }
 
-            BittubeComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 id: resolveButton
                 Layout.topMargin: 10
                 text: qsTr("Resolve") + translationManager.emptyString
@@ -381,7 +381,7 @@ Rectangle {
                 }
             }
 
-            BittubeComponents.LineEditMulti {
+            MoneroComponents.LineEditMulti {
                 id: descriptionLine
                 Layout.topMargin: 20
                 labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
@@ -390,7 +390,7 @@ Rectangle {
             }
             RowLayout {
                 Layout.topMargin: 20
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     id: addButton
                     text: (root.editEntry ? qsTr("Save") : qsTr("Add")) + translationManager.emptyString
                     enabled: root.checkInformation(addressLine.text, appWindow.persistentSettings.nettype)
@@ -422,7 +422,7 @@ Rectangle {
                     Layout.leftMargin: 20
                     font.pixelSize: 16
                     font.bold: false
-                    color: BittubeComponents.Style.defaultFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("Cancel") + translationManager.emptyString
 
                     MouseArea {
@@ -439,7 +439,7 @@ Rectangle {
                     Layout.leftMargin: 20
                     font.pixelSize: 16
                     font.bold: false
-                    color: BittubeComponents.Style.defaultFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("Delete") + translationManager.emptyString
 
                     MouseArea {
@@ -507,7 +507,7 @@ Rectangle {
       oaPopup.open()
     }
 
-    BittubeComponents.StandardDialog {
+    MoneroComponents.StandardDialog {
         // dynamically change onclose handler
         property var onCloseCallback
         id: oaPopup

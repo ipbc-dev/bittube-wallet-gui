@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtGraphicalEffects 1.0
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 import "effects/" as MoneroEffects
 
 Rectangle {
@@ -72,8 +72,8 @@ Rectangle {
         start: Qt.point(width, 0)
         end: Qt.point(0, 0)
         gradient: Gradient {
-            GradientStop { position: 0.0; color: BittubeComponents.Style.menuButtonGradientStart }
-            GradientStop { position: 1.0; color: BittubeComponents.Style.menuButtonGradientStop }
+            GradientStop { position: 0.0; color: MoneroComponents.Style.menuButtonGradientStart }
+            GradientStop { position: 1.0; color: MoneroComponents.Style.menuButtonGradientStop }
         }
     }
 
@@ -81,7 +81,7 @@ Rectangle {
     Rectangle {
         visible: !isOpenGL && button.checked
         anchors.fill: parent
-        color: BittubeComponents.Style.menuButtonFallbackBackgroundColor
+        color: MoneroComponents.Style.menuButtonFallbackBackgroundColor
     }
 
     // button decorations that are subject to leftMargin offsets
@@ -90,14 +90,14 @@ Rectangle {
         anchors.leftMargin: 20
         height: parent.height
         width: 2
-        color: button.checked ? BittubeComponents.Style.buttonBackgroundColor : "transparent"
+        color: button.checked ? MoneroComponents.Style.buttonBackgroundColor : "transparent"
 
         // button text
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: label
-            color: BittubeComponents.Style.menuButtonTextColor
-            themeTransitionBlackColor: BittubeComponents.Style._b_menuButtonTextColor
-            themeTransitionWhiteColor: BittubeComponents.Style._w_menuButtonTextColor
+            color: MoneroComponents.Style.menuButtonTextColor
+            themeTransitionBlackColor: MoneroComponents.Style._b_menuButtonTextColor
+            themeTransitionWhiteColor: MoneroComponents.Style._w_menuButtonTextColor
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.right
             anchors.leftMargin: button.getOffset() + 8
@@ -114,19 +114,19 @@ Rectangle {
         anchors.rightMargin: 20
         height: 14
         width: 8
-        image: BittubeComponents.Style.menuButtonImageRightSource
-        color: button.checked ? BittubeComponents.Style.menuButtonImageRightColorActive : BittubeComponents.Style.menuButtonImageRightColor
+        image: MoneroComponents.Style.menuButtonImageRightSource
+        color: button.checked ? MoneroComponents.Style.menuButtonImageRightColorActive : MoneroComponents.Style.menuButtonImageRightColor
         opacity: button.checked ? 0.8 : 0.25
     }
 
-    BittubeComponents.TextPlain {
+    MoneroComponents.TextPlain {
         id: symbolText
         anchors.right: parent.right
         anchors.rightMargin: 44
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12
         font.bold: true
-        color: BittubeComponents.Style.menuButtonTextColor
+        color: MoneroComponents.Style.menuButtonTextColor
         visible: appWindow.ctrlPressed
         themeTransition: false
     }

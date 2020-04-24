@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Item {
     id: radioButton
@@ -41,8 +41,8 @@ Item {
     height: 26
     width: layout.width
     // legacy properties
-    property var checkedColor: BittubeComponents.Style.blackTheme ? "white" : "#666666"
-    property var borderColor: checked ? BittubeComponents.Style.inputBorderColorActive : BittubeComponents.Style.inputBorderColorInActive
+    property var checkedColor: MoneroComponents.Style.blackTheme ? "white" : "#666666"
+    property var borderColor: checked ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
 
     function toggle(){
         radioButton.checked = !radioButton.checked
@@ -72,11 +72,11 @@ Item {
             }
         }
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: label
             Layout.leftMargin: 10
-            color: BittubeComponents.Style.defaultFontColor
-            font.family: BittubeComponents.Style.fontRegular.name
+            color: MoneroComponents.Style.defaultFontColor
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: radioButton.fontSize
             wrapMode: Text.Wrap
         }

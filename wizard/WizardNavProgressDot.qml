@@ -30,14 +30,14 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Rectangle {
     property bool active: false
     Layout.preferredWidth: 30
     Layout.fillHeight: true
-    property string activeColor: BittubeComponents.Style.defaultFontColor
-    property string inactiveColor: BittubeComponents.Style.progressBarBackgroundColor
+    property string activeColor: MoneroComponents.Style.defaultFontColor
+    property string inactiveColor: MoneroComponents.Style.progressBarBackgroundColor
     color: "transparent"
 
     Rectangle {

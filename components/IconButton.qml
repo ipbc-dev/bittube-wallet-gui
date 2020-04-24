@@ -27,13 +27,13 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 import "../components/effects" as MoneroEffects
 
 MoneroEffects.ImageMask {
     id: button
     z: 666
-    color: BittubeComponents.Style.defaultFontColor
+    color: MoneroComponents.Style.defaultFontColor
     image: ""
 
     signal clicked(var mouse)

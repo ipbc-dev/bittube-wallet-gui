@@ -32,7 +32,7 @@ import QtQuick.Controls 2.0
 import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 ColumnLayout {
     id: root
@@ -86,7 +86,7 @@ ColumnLayout {
         subtitle: qsTr("This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.").arg(!wizardController.walletOptionsIsRecoveringFromDevice ? qsTr("25 word mnemonic seed") : qsTr("hardware wallet"))+ translationManager.emptyString
     }
 
-    BittubeComponents.WarningBox {
+    MoneroComponents.WarningBox {
         text: qsTr("<b>Enter a strong password</b> (Using letters, numbers, and/or symbols).") + translationManager.emptyString
     }
 
@@ -99,10 +99,10 @@ ColumnLayout {
             id: progressText
             Layout.topMargin: 6
             Layout.bottomMargin: 6
-            font.family: BittubeComponents.Style.fontMedium.name
+            font.family: MoneroComponents.Style.fontMedium.name
             font.pixelSize: 14
             font.bold: false
-            color: BittubeComponents.Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
             height: 18
             passwordCharacter: "*"
         }
@@ -113,7 +113,7 @@ ColumnLayout {
             Layout.preferredHeight: 8
 
             radius: 8
-            color: BittubeComponents.Style.progressBarBackgroundColor
+            color: MoneroComponents.Style.progressBarBackgroundColor
 
             Rectangle {
                 id: fillRect
@@ -124,11 +124,11 @@ ColumnLayout {
                 property int maxWidth: bar.width
                 width: (maxWidth * root.passwordFill) / 100
                 radius: 8
-                color: BittubeComponents.Style.orange
+                color: MoneroComponents.Style.orange
             }
 
             Rectangle {
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.leftMargin: 8
@@ -145,12 +145,12 @@ ColumnLayout {
             Layout.fillWidth: true
 
             font.pixelSize: 14
-            font.family: BittubeComponents.Style.fontLight.name
+            font.family: MoneroComponents.Style.fontLight.name
 
-            color: BittubeComponents.Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
         }
 
-        BittubeComponents.Input {
+        MoneroComponents.Input {
             id: passwordInput
 
             Layout.topMargin: 6
@@ -165,21 +165,21 @@ ColumnLayout {
             echoMode: TextInput.Password
             KeyNavigation.tab: passwordInputConfirm
 
-            font.family: BittubeComponents.Style.fontLight.name
+            font.family: MoneroComponents.Style.fontLight.name
             font.pixelSize: 15
-            color: BittubeComponents.Style.defaultFontColor
-            selectionColor: BittubeComponents.Style.textSelectionColor
-            selectedTextColor: BittubeComponents.Style.textSelectedColor
+            color: MoneroComponents.Style.defaultFontColor
+            selectionColor: MoneroComponents.Style.textSelectionColor
+            selectedTextColor: MoneroComponents.Style.textSelectedColor
 
             text: walletOptionsPassword
 
             background: Rectangle {
                 radius: 4
-                border.color: BittubeComponents.Style.inputBorderColorActive
+                border.color: MoneroComponents.Style.inputBorderColorActive
                 border.width: 1
                 color: "transparent"
 
-                BittubeComponents.Label {
+                MoneroComponents.Label {
                     fontSize: 18
                     text: FontAwesome.lock
                     opacity: 0.5
@@ -203,12 +203,12 @@ ColumnLayout {
             Layout.fillWidth: true
 
             font.pixelSize: 14
-            font.family: BittubeComponents.Style.fontLight.name
+            font.family: MoneroComponents.Style.fontLight.name
 
-            color: BittubeComponents.Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
         }
 
-        BittubeComponents.Input {
+        MoneroComponents.Input {
             id : passwordInputConfirm
             
             Layout.topMargin: 6
@@ -223,21 +223,21 @@ ColumnLayout {
             echoMode: TextInput.Password
             KeyNavigation.tab: passwordInputConfirm
 
-            font.family: BittubeComponents.Style.fontLight.name
+            font.family: MoneroComponents.Style.fontLight.name
             font.pixelSize: 15
-            color: BittubeComponents.Style.defaultFontColor
-            selectionColor: BittubeComponents.Style.textSelectionColor
-            selectedTextColor: BittubeComponents.Style.textSelectedColor
+            color: MoneroComponents.Style.defaultFontColor
+            selectionColor: MoneroComponents.Style.textSelectionColor
+            selectedTextColor: MoneroComponents.Style.textSelectedColor
 
             text: walletOptionsPassword
 
             background: Rectangle {
                 radius: 4
-                border.color: BittubeComponents.Style.inputBorderColorActive
+                border.color: MoneroComponents.Style.inputBorderColorActive
                 border.width: 1
                 color: "transparent"
 
-                BittubeComponents.Label {
+                MoneroComponents.Label {
                     fontSize: 18
                     text: FontAwesome.lock
                     opacity: 0.5

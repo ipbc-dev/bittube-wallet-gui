@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 import QtQuick 2.9
 import QtQuick.XmlListModel 2.0
@@ -79,12 +79,12 @@ Drawer {
                 width: sideBar.width
                 height: 32
 
-                BittubeComponents.TextPlain {
+                MoneroComponents.TextPlain {
                     anchors.left: parent.left
                     anchors.leftMargin: 16
                     font.bold: true
                     font.pixelSize: 14
-                    color: BittubeComponents.Style.defaultFontColor
+                    color: MoneroComponents.Style.defaultFontColor
                     text: display_name
                     anchors.verticalCenter: parent.verticalCenter
                 }
@@ -93,8 +93,8 @@ Drawer {
                     anchors.bottom: parent.bottom
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    color: BittubeComponents.Style.dividerColor
-                    opacity: BittubeComponents.Style.dividerOpacity
+                    color: MoneroComponents.Style.dividerColor
+                    opacity: MoneroComponents.Style.dividerOpacity
                     height: 1
                 }
 

@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
 import "../../js/Utils.js" as Utils
-import "../../components" as BittubeComponents
+import "../../components" as MoneroComponents
 
 ListView {
     id: trackingListView
@@ -37,7 +37,7 @@ ListView {
         color: "#767676"
         textFormat: Text.RichText
         text: parent.message
-        selectionColor: BittubeComponents.Style.textSelectionColor
+        selectionColor: MoneroComponents.Style.textSelectionColor
         selectByMouse: true
         readOnly: true
         onFocusChanged: {if(focus === false) deselect() }
@@ -77,7 +77,7 @@ ListView {
                         font.bold: false
                         color: "#707070"
                         text: time_date + " (" + Utils.ago(time_epoch) + ") "
-                        selectionColor: BittubeComponents.Style.textSelectionColor
+                        selectionColor: MoneroComponents.Style.textSelectionColor
                         selectByMouse: true
                         readOnly: true
                         onFocusChanged: {if(focus === false) deselect() }
@@ -126,7 +126,7 @@ ListView {
                         font.bold: true
                         color: hide_amount ? "#707070" : "#009F1E"
                         text: hide_amount ? '-' : '+' + amount
-                        selectionColor: BittubeComponents.Style.textSelectionColor
+                        selectionColor: MoneroComponents.Style.textSelectionColor
                         selectByMouse: true
                         readOnly: true
                         onFocusChanged: {if(focus === false) deselect() }
@@ -173,7 +173,7 @@ ListView {
                                 }
                             }
                         }
-                        selectionColor: BittubeComponents.Style.textSelectionColor
+                        selectionColor: MoneroComponents.Style.textSelectionColor
                         selectByMouse: true
                         readOnly: true
                         onFocusChanged: {if(focus === false) deselect() }

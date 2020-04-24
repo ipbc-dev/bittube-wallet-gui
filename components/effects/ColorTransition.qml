@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtGraphicalEffects 1.0
 
-import "../" as BittubeComponents
+import "../" as MoneroComponents
 
 Item {
     id: root
@@ -42,11 +42,11 @@ Item {
     states: [
         State {
             name: "black";
-            when: BittubeComponents.Style.blackTheme && root.themeTransition
+            when: MoneroComponents.Style.blackTheme && root.themeTransition
             PropertyChanges { target: root.targetObj; color: root.blackColor}
         }, State {
             name: "white";
-            when: !BittubeComponents.Style.blackTheme && root.themeTransition
+            when: !MoneroComponents.Style.blackTheme && root.themeTransition
             PropertyChanges { target: root.targetObj; color: root.whiteColor}
         }
     ]

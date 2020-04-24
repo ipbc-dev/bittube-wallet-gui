@@ -1,15 +1,15 @@
 import QtQuick 2.9
 
-import "." as BittubeComponents
+import "." as MoneroComponents
 import "effects/" as MoneroEffects
 
 Rectangle {
-    color: BittubeComponents.Style.appWindowBorderColor
+    color: MoneroComponents.Style.appWindowBorderColor
     height: 1
 
     MoneroEffects.ColorTransition {
         targetObj: parent
-        blackColor: BittubeComponents.Style._b_appWindowBorderColor
-        whiteColor: BittubeComponents.Style._w_appWindowBorderColor
+        blackColor: MoneroComponents.Style._b_appWindowBorderColor
+        whiteColor: MoneroComponents.Style._w_appWindowBorderColor
     }
 }

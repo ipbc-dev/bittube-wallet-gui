@@ -32,7 +32,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 
 import "../../js/Utils.js" as Utils
-import "../../components" as BittubeComponents
+import "../../components" as MoneroComponents
 
 Rectangle {
     color: "transparent"
@@ -49,7 +49,7 @@ Rectangle {
         anchors.topMargin: 0
         spacing: 8
 
-        BittubeComponents.SettingsListItem {
+        MoneroComponents.SettingsListItem {
             buttonText: qsTr("Close wallet") + translationManager.emptyString
             description: qsTr("Logs out of this wallet.") + translationManager.emptyString
             title: qsTr("Close this wallet") + translationManager.emptyString
@@ -57,7 +57,7 @@ Rectangle {
             onClicked: appWindow.showWizard()
         }
 
-        BittubeComponents.SettingsListItem {
+        MoneroComponents.SettingsListItem {
             buttonText: qsTr("Create wallet") + translationManager.emptyString
             description: qsTr("Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.") + translationManager.emptyString
             title: qsTr("Create a view-only wallet") + translationManager.emptyString
@@ -79,7 +79,7 @@ Rectangle {
             }
         }
 
-        BittubeComponents.SettingsListItem {
+        MoneroComponents.SettingsListItem {
             buttonText: qsTr("Show seed") + translationManager.emptyString
             description: qsTr("Store this information safely to recover your wallet in the future.") + translationManager.emptyString
             title: qsTr("Show seed & keys") + translationManager.emptyString
@@ -89,7 +89,7 @@ Rectangle {
             }
         }
 
-        BittubeComponents.SettingsListItem {
+        MoneroComponents.SettingsListItem {
             buttonText: qsTr("Rescan") + translationManager.emptyString
             description: qsTr("Use this feature if you think the shown balance is not accurate.") + translationManager.emptyString
             title: qsTr("Rescan wallet balance") + translationManager.emptyString
@@ -113,7 +113,7 @@ Rectangle {
             }
         }
 
-        BittubeComponents.SettingsListItem {
+        MoneroComponents.SettingsListItem {
             buttonText: qsTr("Change password") + translationManager.emptyString
             description: qsTr("Change the password of your wallet.") + translationManager.emptyString
             title: qsTr("Change wallet password") + translationManager.emptyString

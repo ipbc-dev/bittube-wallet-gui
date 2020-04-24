@@ -32,7 +32,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 import bittubeComponents.NetworkType 1.0
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Rectangle {
     id: wizardHome
@@ -79,8 +79,8 @@ Rectangle {
                 Layout.topMargin: 3
                 Layout.bottomMargin: 3
                 Layout.fillWidth: true
-                color: BittubeComponents.Style.dividerColor
-                opacity: BittubeComponents.Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
             }
 
             WizardMenuItem {
@@ -99,8 +99,8 @@ Rectangle {
                 Layout.topMargin: 3
                 Layout.bottomMargin: 3
                 Layout.fillWidth: true
-                color: BittubeComponents.Style.dividerColor
-                opacity: BittubeComponents.Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
             }
 
             WizardMenuItem {
@@ -118,8 +118,8 @@ Rectangle {
                 Layout.topMargin: 3
                 Layout.bottomMargin: 3
                 Layout.fillWidth: true
-                color: BittubeComponents.Style.dividerColor
-                opacity: BittubeComponents.Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
             }
 
             WizardMenuItem {
@@ -138,7 +138,7 @@ Rectangle {
                 Layout.topMargin: 16
                 spacing: 20
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     small: true
                     text: qsTr("Change wallet mode") + translationManager.emptyString
 
@@ -148,7 +148,7 @@ Rectangle {
                     }                    
                 }
 
-                BittubeComponents.StandardButton {
+                MoneroComponents.StandardButton {
                     small: true
                     text: qsTr("Change language") + translationManager.emptyString
 
@@ -158,7 +158,7 @@ Rectangle {
                 }
             }
 
-            BittubeComponents.CheckBox2 {
+            MoneroComponents.CheckBox2 {
                 id: showAdvancedCheckbox
                 Layout.topMargin: 30
                 Layout.fillWidth: true
@@ -184,12 +184,12 @@ Rectangle {
                 ColumnLayout {
                     Layout.topMargin: 4
 
-                    BittubeComponents.Label {
+                    MoneroComponents.Label {
                         text: qsTr("Change Network:") + translationManager.emptyString
                         fontSize: 14
                     }
 
-                    BittubeComponents.StandardDropdown {
+                    MoneroComponents.StandardDropdown {
                         id: networkTypeDropdown
                         dataModel: networkTypeModel
                         Layout.fillWidth: true
@@ -210,7 +210,7 @@ Rectangle {
                     }
                 }
 
-                BittubeComponents.LineEdit {
+                MoneroComponents.LineEdit {
                     id: kdfRoundsText
                     Layout.fillWidth: true
 

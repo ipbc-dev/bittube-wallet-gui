@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import "../js/Wizard.js" as Wizard
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.2

@@ -32,7 +32,7 @@ import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.0
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 RowLayout {
     id: rowlayout
@@ -50,14 +50,14 @@ RowLayout {
 
         Image {
             id: icon
-            visible: !isOpenGL || BittubeComponents.Style.blackTheme
+            visible: !isOpenGL || MoneroComponents.Style.blackTheme
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             source: ""
         }
 
         DropShadow {
-            visible: isOpenGL && !BittubeComponents.Style.blackTheme
+            visible: isOpenGL && !MoneroComponents.Style.blackTheme
             anchors.fill: icon
             horizontalOffset: 3
             verticalOffset: 3
@@ -82,15 +82,15 @@ RowLayout {
         Layout.fillWidth: true
         spacing: 0
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: header
             Layout.fillWidth: true
             leftPadding: parent.leftPadding
             topPadding: 0
-            color: BittubeComponents.Style.defaultFontColor
-            opacity: BittubeComponents.Style.blackTheme ? 1.0 : 0.8
+            color: MoneroComponents.Style.defaultFontColor
+            opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
             font.bold: true
-            font.family: BittubeComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: {
                 if(wizardController.layoutScale === 2 ){
                     return 22;
@@ -108,11 +108,11 @@ RowLayout {
             }
         }
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: body
             Layout.fillWidth: true
-            color: BittubeComponents.Style.dimmedFontColor
-            font.family: BittubeComponents.Style.fontRegular.name
+            color: MoneroComponents.Style.dimmedFontColor
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: {
                 if(wizardController.layoutScale === 2 ){
                     return 16;

@@ -31,7 +31,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
 import "../components"
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
 import "../version.js" as Version
 
@@ -62,10 +62,10 @@ Rectangle {
             opacity: 0
             Layout.preferredWidth: parent.width / 1.3
             Layout.alignment: Qt.AlignCenter
-            color: BittubeComponents.Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
             text: "Welcome - Wilkommen - Bonvenon - Bienvenido - Bienvenue - Välkommen - Selamat datang - Benvenuto - 歡迎 - Welkom - Bem Vindo - добро пожаловать"
 
-            font.family: BittubeComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.bold: true
             font.pixelSize: 18
             horizontalAlignment: TextInput.AlignHCenter
@@ -152,7 +152,7 @@ Rectangle {
             Layout.fillWidth: true
             columnSpacing: 20
 
-            BittubeComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 id: idChangeLang
                 Layout.minimumWidth: 150
                 text: qsTr("Language") + translationManager.emptyString
@@ -162,7 +162,7 @@ Rectangle {
                 }
             }
 
-            BittubeComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 id: btnContinue
                 Layout.minimumWidth: 150
                 text: qsTr("Continue") + translationManager.emptyString
@@ -185,14 +185,14 @@ Rectangle {
             }
         }
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: versionText
             opacity: 0
             Layout.alignment: Qt.AlignCenter
             font.bold: true
             font.pixelSize: 12
-            font.family: BittubeComponents.Style.fontRegular.name
-            color: BittubeComponents.Style.defaultFontColor
+            font.family: MoneroComponents.Style.fontRegular.name
+            color: MoneroComponents.Style.defaultFontColor
             text: Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")"
 
             Behavior on opacity {

@@ -31,7 +31,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Rectangle {
     id: wizardCreateWallet4

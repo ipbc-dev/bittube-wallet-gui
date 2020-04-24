@@ -33,7 +33,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import "../../js/Windows.js" as Windows
 import "../../js/Utils.js" as Utils
-import "../../components" as BittubeComponents
+import "../../components" as MoneroComponents
 import "../../pages"
 import "."
 import bittubeComponents.Clipboard 1.0
@@ -53,12 +53,12 @@ Rectangle {
             id: grid
             Layout.alignment: Qt.AlignHCenter
             columnSpacing: 0
-            property string fontColorActive: BittubeComponents.Style.blackTheme ? "white" : "white"
-            property string fontColorInActive: BittubeComponents.Style.blackTheme ? "white" : BittubeComponents.Style.dimmedFontColor
+            property string fontColorActive: MoneroComponents.Style.blackTheme ? "white" : "white"
+            property string fontColorInActive: MoneroComponents.Style.blackTheme ? "white" : MoneroComponents.Style.dimmedFontColor
             property int fontSize: 15
             property bool fontBold: true
-            property var fontFamily: BittubeComponents.Style.fontRegular.name
-            property string borderColor: BittubeComponents.Style.blackTheme ? "#808080" : "#B9B9B9"
+            property var fontFamily: MoneroComponents.Style.fontRegular.name
+            property string borderColor: MoneroComponents.Style.blackTheme ? "#808080" : "#B9B9B9"
             property int textMargin: {
                 // left-right margins for a given cell
                 if(appWindow.width < 890){
@@ -131,7 +131,7 @@ Rectangle {
                     height: 30
                     Layout.fillWidth: true
 
-                    BittubeComponents.TextPlain {
+                    MoneroComponents.TextPlain {
                         id: navWalletText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -183,7 +183,7 @@ Rectangle {
                     height: 30
                     Layout.fillWidth: true
 
-                    BittubeComponents.TextPlain {
+                    MoneroComponents.TextPlain {
                         id: navUIText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -236,7 +236,7 @@ Rectangle {
                     height: 30
                     Layout.fillWidth: true
 
-                    BittubeComponents.TextPlain {
+                    MoneroComponents.TextPlain {
                         id: navNodeText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -290,7 +290,7 @@ Rectangle {
                     height: 30
                     Layout.fillWidth: true
 
-                    BittubeComponents.TextPlain {
+                    MoneroComponents.TextPlain {
                         id: navLogText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -343,7 +343,7 @@ Rectangle {
                     height: 30
                     Layout.fillWidth: true
 
-                    BittubeComponents.TextPlain {
+                    MoneroComponents.TextPlain {
                         id: navInfoText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter

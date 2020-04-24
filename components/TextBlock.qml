@@ -1,11 +1,11 @@
 import QtQuick 2.9
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 TextEdit {
-    color: BittubeComponents.Style.defaultFontColor
-    font.family: BittubeComponents.Style.fontRegular.name
-    selectionColor: BittubeComponents.Style.textSelectionColor
+    color: MoneroComponents.Style.defaultFontColor
+    font.family: MoneroComponents.Style.fontRegular.name
+    selectionColor: MoneroComponents.Style.textSelectionColor
     wrapMode: Text.Wrap
     readOnly: true
     selectByMouse: true

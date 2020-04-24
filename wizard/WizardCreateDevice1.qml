@@ -35,7 +35,7 @@ import bittubeComponents.Wallet 1.0
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils
 import "../components"
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Rectangle {
     id: wizardCreateDevice1
@@ -88,7 +88,7 @@ Rectangle {
                 Layout.topMargin: 10
                 Layout.fillWidth: true
 
-                BittubeComponents.RadioButton {
+                MoneroComponents.RadioButton {
                     id: newDeviceWallet
                     text: qsTr("Create a new wallet from device.") + translationManager.emptyString
                     fontSize: 16
@@ -100,7 +100,7 @@ Rectangle {
                     }
                 }
 
-                BittubeComponents.RadioButton {
+                MoneroComponents.RadioButton {
                     id: restoreDeviceWallet
                     Layout.topMargin: 10
                     text: qsTr("Restore a wallet from device. Use this if you used your hardware wallet before.") + translationManager.emptyString
@@ -118,7 +118,7 @@ Rectangle {
                 Layout.fillWidth: true
                 spacing: 20
 
-                BittubeComponents.LineEdit {
+                MoneroComponents.LineEdit {
                     id: restoreHeight
                     visible: !newDeviceWallet.checked
                     Layout.fillWidth: true
@@ -132,7 +132,7 @@ Rectangle {
                     text: "0"
                 }
 
-                BittubeComponents.StandardDropdown {
+                MoneroComponents.StandardDropdown {
                     id: deviceNameDropdown
                     dataModel: deviceNameModel
                     Layout.fillWidth: true
@@ -146,7 +146,7 @@ Rectangle {
                     text: qsTr("Advanced options") + translationManager.emptyString
                 }
 
-                BittubeComponents.LineEdit {
+                MoneroComponents.LineEdit {
                     id: lookahead
                     Layout.fillWidth: true
                     visible: showAdvancedCheckbox.checked
@@ -163,8 +163,8 @@ Rectangle {
                 text: qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;
                 visible: errorMsg.text !== ""
                 Layout.fillWidth: true
-                font.family: BittubeComponents.Style.fontRegular.name
-                color: BittubeComponents.Style.errorColor
+                font.family: MoneroComponents.Style.fontRegular.name
+                color: MoneroComponents.Style.errorColor
                 font.pixelSize: 16
 
                 wrapMode: Text.WordWrap

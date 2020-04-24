@@ -33,7 +33,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import bittubeComponents.Clipboard 1.0
 import "../version.js" as Version
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 import "." 1.0
 
 
@@ -58,7 +58,7 @@ Rectangle {
         spacing: 30
         Layout.fillWidth: true
 
-        BittubeComponents.WarningBox {
+        MoneroComponents.WarningBox {
             text: qsTr("WARNING: Do not reuse your BitTube keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.") + translationManager.emptyString;
         }
 
@@ -66,7 +66,7 @@ Rectangle {
         ColumnLayout {
             Layout.fillWidth: true
 
-            BittubeComponents.Label {
+            MoneroComponents.Label {
                 Layout.fillWidth: true
                 fontSize: 22
                 Layout.topMargin: 10
@@ -76,30 +76,30 @@ Rectangle {
             Rectangle {
                 Layout.fillWidth: true
                 height: 2
-                color: BittubeComponents.Style.dividerColor
-                opacity: BittubeComponents.Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.bottomMargin: 10
             }
 
-            BittubeComponents.WarningBox {
+            MoneroComponents.WarningBox {
                 text: qsTr("WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your BitTube. Please write down your seed manually.") + translationManager.emptyString
             }
 
-            BittubeComponents.LineEditMulti {
+            MoneroComponents.LineEditMulti {
                 id: seedText
                 spacing: 0
                 copyButton: true
                 addressValidation: false
                 readOnly: true
                 wrapMode: Text.WordWrap
-                fontColor: BittubeComponents.Style.defaultFontColor
+                fontColor: MoneroComponents.Style.defaultFontColor
             }
         }
 
         ColumnLayout {
             Layout.fillWidth: true
 
-            BittubeComponents.Label {
+            MoneroComponents.Label {
                 Layout.fillWidth: true
                 fontSize: 22
                 Layout.topMargin: 10
@@ -109,12 +109,12 @@ Rectangle {
             Rectangle {
                 Layout.fillWidth: true
                 height: 2
-                color: BittubeComponents.Style.dividerColor
-                opacity: BittubeComponents.Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.bottomMargin: 10
             }
 
-            BittubeComponents.LineEdit {
+            MoneroComponents.LineEdit {
                 Layout.fillWidth: true
                 id: walletCreationHeight
                 readOnly: true
@@ -127,7 +127,7 @@ Rectangle {
         ColumnLayout {
             Layout.fillWidth: true
 
-            BittubeComponents.Label {
+            MoneroComponents.Label {
                 Layout.fillWidth: true
                 fontSize: 22
                 Layout.topMargin: 10
@@ -136,11 +136,11 @@ Rectangle {
             Rectangle {
                 Layout.fillWidth: true
                 height: 2
-                color: BittubeComponents.Style.dividerColor
-                opacity: BittubeComponents.Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.bottomMargin: 10
             }
-            BittubeComponents.LineEditMulti {
+            MoneroComponents.LineEditMulti {
                 Layout.fillWidth: true
                 id: primaryAddress
                 readOnly: true
@@ -149,7 +149,7 @@ Rectangle {
                 labelText: qsTr("Primary address") + translationManager.emptyString
                 fontSize: 16
             }           
-            BittubeComponents.LineEdit {
+            MoneroComponents.LineEdit {
                 Layout.fillWidth: true
                 Layout.topMargin: 25
                 id: secretViewKey
@@ -158,7 +158,7 @@ Rectangle {
                 labelText: qsTr("Secret view key") + translationManager.emptyString
                 fontSize: 16
             }
-            BittubeComponents.LineEdit {
+            MoneroComponents.LineEdit {
                 Layout.fillWidth: true
                 Layout.topMargin: 25
                 id: publicViewKey
@@ -167,7 +167,7 @@ Rectangle {
                 labelText: qsTr("Public view key") + translationManager.emptyString
                 fontSize: 16
             }
-            BittubeComponents.LineEdit {
+            MoneroComponents.LineEdit {
                 Layout.fillWidth: true
                 Layout.topMargin: 25
                 id: secretSpendKey
@@ -176,7 +176,7 @@ Rectangle {
                 labelText: qsTr("Secret spend key") + translationManager.emptyString
                 fontSize: 16
             }
-            BittubeComponents.LineEdit {
+            MoneroComponents.LineEdit {
                 Layout.fillWidth: true
                 Layout.topMargin: 25
                 id: publicSpendKey
@@ -190,7 +190,7 @@ Rectangle {
         ColumnLayout {
             Layout.fillWidth: true
 
-            BittubeComponents.Label {
+            MoneroComponents.Label {
                 Layout.fillWidth: true
                 fontSize: 22
                 Layout.topMargin: 10
@@ -199,13 +199,13 @@ Rectangle {
             Rectangle {
                 Layout.fillWidth: true
                 height: 2
-                color: BittubeComponents.Style.dividerColor
-                opacity: BittubeComponents.Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.bottomMargin: 10
             }
 
             ColumnLayout {
-                BittubeComponents.RadioButton {
+                MoneroComponents.RadioButton {
                     id: showFullQr
                     enabled: !this.checked
                     checked: fullWalletQRCode.visible
@@ -215,7 +215,7 @@ Rectangle {
                         showViewOnlyQr.checked = false
                     }
                 }
-                BittubeComponents.RadioButton {
+                MoneroComponents.RadioButton {
                     enabled: !this.checked
                     id: showViewOnlyQr
                     checked: viewOnlyQRCode.visible
@@ -246,16 +246,16 @@ Rectangle {
                 fillMode: Image.PreserveAspectFit
             }
 
-            BittubeComponents.TextPlain {
+            MoneroComponents.TextPlain {
                 Layout.fillWidth: true
                 font.bold: true
                 font.pixelSize: 16
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 text: (viewOnlyQRCode.visible) ? qsTr("View Only Wallet") + translationManager.emptyString : qsTr("Spendable Wallet") + translationManager.emptyString
                 horizontalAlignment: Text.AlignHCenter
             }
             
-            BittubeComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 small: true
                 text: qsTr("Done") + translationManager.emptyString
                 onClicked: {

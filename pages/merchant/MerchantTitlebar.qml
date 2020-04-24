@@ -32,7 +32,7 @@ import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.2
 
 import FontAwesome 1.0
-import "../../components/" as BittubeComponents
+import "../../components/" as MoneroComponents
 import "../../components/effects/" as MoneroEffects
 
 Rectangle {
@@ -102,7 +102,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: 3
                 width: 15
-                image: BittubeComponents.Style.titleBarMinimizeSource
+                image: MoneroComponents.Style.titleBarMinimizeSource
                 color: "white"
                 opacity: 0.75
             }
@@ -128,7 +128,7 @@ Rectangle {
             Image {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: BittubeComponents.Style._b_titleBarFullscreenSource
+                source: MoneroComponents.Style._b_titleBarFullscreenSource
                 sourceSize.width: 16
                 sourceSize.height: 16
                 smooth: true
@@ -160,7 +160,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: 16
                 width: 16
-                image: BittubeComponents.Style._b_titleBarCloseSource
+                image: MoneroComponents.Style._b_titleBarCloseSource
                 color: "white"
                 opacity: 0.75
             }

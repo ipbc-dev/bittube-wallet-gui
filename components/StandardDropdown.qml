@@ -30,7 +30,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
 
 Item {
@@ -39,15 +39,15 @@ Item {
     property alias dataModel: repeater.model
     property string shadowPressedColor
     property string shadowReleasedColor
-    property string pressedColor: BittubeComponents.Style.appWindowBorderColor
-    property string releasedColor: BittubeComponents.Style.titleBarButtonHoverColor
-    property string textColor: BittubeComponents.Style.defaultFontColor
+    property string pressedColor: MoneroComponents.Style.appWindowBorderColor
+    property string releasedColor: MoneroComponents.Style.titleBarButtonHoverColor
+    property string textColor: MoneroComponents.Style.defaultFontColor
     property alias currentIndex: columnid.currentIndex
     readonly property alias expanded: popup.visible
     property int dropdownHeight: 42
     property int fontHeaderSize: 16
     property int fontItemSize: 14
-    property string colorBorder: BittubeComponents.Style.inputBorderColorInActive
+    property string colorBorder: MoneroComponents.Style.inputBorderColorInActive
     property string colorHeaderBackground: "transparent"
     property bool headerBorder: true
     property bool headerFontBold: false
@@ -79,13 +79,13 @@ Item {
             anchors.fill: parent
         }
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: firstColText
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 12
             elide: Text.ElideRight
-            font.family: BittubeComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.bold: dropdown.headerFontBold
             font.pixelSize: dropdown.fontHeaderSize
             color: dropdown.textColor
@@ -108,7 +108,7 @@ Item {
             ColorOverlay {
                 source: dropdownIcon
                 anchors.fill: dropdownIcon
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 rotation: dropdown.expanded ? 180  : 0
                 opacity: 1
             }
@@ -165,26 +165,26 @@ Item {
                         //radius: index === repeater.count - 1 ? 4 : 0
                         color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
-                        BittubeComponents.TextPlain {
+                        MoneroComponents.TextPlain {
                             id: col1Text
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
                             anchors.right: col2Text.left
                             anchors.leftMargin: 12
                             anchors.rightMargin: 0
-                            font.family: BittubeComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegular.name
                             font.bold: true
                             font.pixelSize: fontItemSize
                             color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? "#00ABFF" : "#FFFFFF"
                             text: qsTr(column1) + translationManager.emptyString
                         }
 
-                        BittubeComponents.TextPlain {
+                        MoneroComponents.TextPlain {
                             id: col2Text
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
                             anchors.rightMargin: 45
-                            font.family: BittubeComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegular.name
                             font.pixelSize: 14
                             color: "#FFFFFF"
                             text: ""

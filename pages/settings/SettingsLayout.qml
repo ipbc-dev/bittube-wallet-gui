@@ -33,7 +33,7 @@ import QtQuick.Dialogs 1.2
 
 import "../../js/Utils.js" as Utils
 import "../../js/Windows.js" as Windows
-import "../../components" as BittubeComponents
+import "../../components" as MoneroComponents
 
 Rectangle {
     color: "transparent"
@@ -51,14 +51,14 @@ Rectangle {
         anchors.topMargin: 0
         spacing: 6
 
-        BittubeComponents.CheckBox {
+        MoneroComponents.CheckBox {
             id: customDecorationsCheckBox
             checked: persistentSettings.customDecorations
             onClicked: Windows.setCustomWindowDecorations(checked)
             text: qsTr("Custom decorations") + translationManager.emptyString
         }
 
-        BittubeComponents.CheckBox {
+        MoneroComponents.CheckBox {
             id: hideBalanceCheckBox
             checked: persistentSettings.hideBalance
             onClicked: {
@@ -68,7 +68,7 @@ Rectangle {
             text: qsTr("Hide balance") + translationManager.emptyString
         }
 
-        BittubeComponents.CheckBox {
+        MoneroComponents.CheckBox {
             id: showPidCheckBox
             checked: persistentSettings.showPid
             onClicked: {
@@ -77,18 +77,18 @@ Rectangle {
             text: qsTr("Enable transfer with payment ID (OBSOLETE)") + translationManager.emptyString
         }
 
-        BittubeComponents.CheckBox {
+        MoneroComponents.CheckBox {
             id: themeCheckbox
-            checked: !BittubeComponents.Style.blackTheme
+            checked: !MoneroComponents.Style.blackTheme
             text: qsTr("Light theme") + translationManager.emptyString
             toggleOnClick: false
             onClicked: {
-                BittubeComponents.Style.blackTheme = !BittubeComponents.Style.blackTheme;
-                persistentSettings.blackTheme = BittubeComponents.Style.blackTheme;
+                MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
+                persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;
             }
         }
 
-        BittubeComponents.CheckBox {
+        MoneroComponents.CheckBox {
             id: userInActivityCheckbox
             checked: persistentSettings.lockOnUserInActivity
             onClicked: persistentSettings.lockOnUserInActivity = !persistentSettings.lockOnUserInActivity
@@ -103,7 +103,7 @@ Rectangle {
             spacing: 0
 
             Text {
-                color: BittubeComponents.Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 font.pixelSize: 14
                 Layout.fillWidth: true
                 text: {
@@ -131,12 +131,12 @@ Rectangle {
                     width: parent.availableWidth
                     height: implicitHeight
                     radius: 2
-                    color: BittubeComponents.Style.progressBarBackgroundColor
+                    color: MoneroComponents.Style.progressBarBackgroundColor
 
                     Rectangle {
                         width: parent.visualPosition * parent.width
                         height: parent.height
-                        color: BittubeComponents.Style.green
+                        color: MoneroComponents.Style.green
                         radius: 2
                     }
                 }
@@ -148,7 +148,7 @@ Rectangle {
                     implicitHeight: 18
                     radius: 8
                     color: parent.pressed ? "#f0f0f0" : "#f6f6f6"
-                    border.color: BittubeComponents.Style.grey
+                    border.color: MoneroComponents.Style.grey
                 }
 
                 onMoved: persistentSettings.lockOnUserInActivityInterval = userInactivitySlider.value;
@@ -163,7 +163,7 @@ Rectangle {
 
         //! Manage pricing
         RowLayout {
-            BittubeComponents.CheckBox {
+            MoneroComponents.CheckBox {
                 id: enableConvertCurrency
                 text: qsTr("Enable displaying balance in other currencies") + translationManager.emptyString
                 checked: persistentSettings.fiatPriceEnabled
@@ -188,13 +188,13 @@ Rectangle {
                 spacing: 10
                 Layout.fillWidth: true
 
-                BittubeComponents.Label {
+                MoneroComponents.Label {
                     Layout.fillWidth: true
                     fontSize: 14
                     text: qsTr("Price source") + translationManager.emptyString
                 }
 
-                BittubeComponents.StandardDropdown {
+                MoneroComponents.StandardDropdown {
                     id: fiatPriceProviderDropDown
                     Layout.fillWidth: true
                     dataModel: fiatPriceProvidersModel
@@ -212,13 +212,13 @@ Rectangle {
                 spacing: 10
                 Layout.fillWidth: true
 
-                BittubeComponents.Label {
+                MoneroComponents.Label {
                     Layout.fillWidth: true
                     fontSize: 14
                     text: qsTr("Currency") + translationManager.emptyString
                 }
 
-                BittubeComponents.StandardDropdown {
+                MoneroComponents.StandardDropdown {
                     id: fiatPriceCurrencyDropdown
                     Layout.fillWidth: true
                     dataModel: fiatPriceCurrencyModel
@@ -242,11 +242,11 @@ Rectangle {
             Layout.topMargin: 5
             Layout.leftMargin: 36
 
-            BittubeComponents.WarningBox {
+            MoneroComponents.WarningBox {
                 text: qsTr("Enabling price conversion exposes your IP address to the selected price source.") + translationManager.emptyString;
             }
 
-            BittubeComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 Layout.topMargin: 10
                 Layout.bottomMargin: 10
                 small: true
@@ -261,7 +261,7 @@ Rectangle {
             }
         }
 
-        BittubeComponents.StandardButton {
+        MoneroComponents.StandardButton {
             visible: !persistentSettings.customDecorations
             Layout.topMargin: 10
             small: true

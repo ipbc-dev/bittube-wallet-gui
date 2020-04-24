@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Window 2.1
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Window {
     property alias text: content.text
@@ -60,7 +60,7 @@ Window {
             source: "qrc:///images/tip.png"
         }
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: content
             anchors.horizontalCenter: parent.horizontalCenter
             y: 6

@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 ColumnLayout {
     property alias buttonText: button.text
@@ -18,8 +18,8 @@ ColumnLayout {
         Layout.preferredHeight: 1
         Layout.fillWidth: true
         Layout.bottomMargin: 8
-        color: BittubeComponents.Style.dividerColor
-        opacity: BittubeComponents.Style.dividerOpacity
+        color: MoneroComponents.Style.dividerColor
+        opacity: MoneroComponents.Style.dividerOpacity
     }
 
     RowLayout {
@@ -31,29 +31,29 @@ ColumnLayout {
             Layout.alignment: Qt.AlignVCenter
             spacing: 0
 
-            BittubeComponents.TextPlain {
+            MoneroComponents.TextPlain {
                 id: title
                 Layout.fillWidth: true
                 Layout.preferredHeight: 20
                 Layout.topMargin: 8
-                color: BittubeComponents.Style.defaultFontColor
-                opacity: BittubeComponents.Style.blackTheme ? 1.0 : 0.8
+                color: MoneroComponents.Style.defaultFontColor
+                opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                 font.bold: true
-                font.family: BittubeComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 16
             }
 
-            BittubeComponents.TextPlainArea {
+            MoneroComponents.TextPlainArea {
                 id: description
-                color: BittubeComponents.Style.dimmedFontColor
-                colorBlackTheme: BittubeComponents.Style._b_dimmedFontColor
-                colorWhiteTheme: BittubeComponents.Style._w_dimmedFontColor
+                color: MoneroComponents.Style.dimmedFontColor
+                colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
+                colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
                 Layout.fillWidth: true
                 horizontalAlignment: TextInput.AlignLeft
             }
         }
 
-        BittubeComponents.StandardButton {
+        MoneroComponents.StandardButton {
             id: button
             small: true
             onClicked: {

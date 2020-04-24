@@ -28,7 +28,7 @@
 
 import QtQuick 2.9
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
 
 Label {
@@ -41,12 +41,12 @@ Label {
         anchors.left: parent.left
         anchors.right: parent.right
         height: 2
-        color: BittubeComponents.Style.appWindowBorderColor
+        color: MoneroComponents.Style.appWindowBorderColor
 
         MoneroEffects.ColorTransition {
             targetObj: parent
-            blackColor: BittubeComponents.Style._b_appWindowBorderColor
-            whiteColor: BittubeComponents.Style._w_appWindowBorderColor
+            blackColor: MoneroComponents.Style._b_appWindowBorderColor
+            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
         }
     }
 }

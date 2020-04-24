@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import bittubeComponents.Wallet 1.0
 
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Rectangle {
     id: item
@@ -61,27 +61,27 @@ Rectangle {
         anchors.rightMargin: 15
         anchors.fill: parent
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: progressText
             anchors.top: parent.top
             anchors.topMargin: 6
-            font.family: BittubeComponents.Style.fontMedium.name
+            font.family: MoneroComponents.Style.fontMedium.name
             font.pixelSize: 13
-            font.bold: BittubeComponents.Style.progressBarProgressTextBold
-            color: BittubeComponents.Style.defaultFontColor
+            font.bold: MoneroComponents.Style.progressBarProgressTextBold
+            color: MoneroComponents.Style.defaultFontColor
             text: qsTr("Synchronizing %1").arg(syncType) + translationManager.emptyString
             height: 18
         }
 
-        BittubeComponents.TextPlain {
+        MoneroComponents.TextPlain {
             id: progressTextValue
             anchors.top: parent.top
             anchors.topMargin: 6
             anchors.right: parent.right
-            font.family: BittubeComponents.Style.fontMedium.name
+            font.family: MoneroComponents.Style.fontMedium.name
             font.pixelSize: 13
-            font.bold: BittubeComponents.Style.progressBarProgressTextBold
-            color: BittubeComponents.Style.defaultFontColor
+            font.bold: MoneroComponents.Style.progressBarProgressTextBold
+            color: MoneroComponents.Style.defaultFontColor
             height:18
         }
 
@@ -93,17 +93,17 @@ Rectangle {
             anchors.topMargin: 4
             height: 8
             radius: 8
-            color: BittubeComponents.Style.progressBarBackgroundColor
+            color: MoneroComponents.Style.progressBarBackgroundColor
 
             states: [
                 State {
                     name: "black";
-                    when: BittubeComponents.Style.blackTheme
-                    PropertyChanges { target: bar; color: BittubeComponents.Style._b_progressBarBackgroundColor}
+                    when: MoneroComponents.Style.blackTheme
+                    PropertyChanges { target: bar; color: MoneroComponents.Style._b_progressBarBackgroundColor}
                 }, State {
                     name: "white";
-                    when: !BittubeComponents.Style.blackTheme
-                    PropertyChanges { target: bar; color: BittubeComponents.Style._w_progressBarBackgroundColor}
+                    when: !MoneroComponents.Style.blackTheme
+                    PropertyChanges { target: bar; color: MoneroComponents.Style._w_progressBarBackgroundColor}
                 }
             ]
 

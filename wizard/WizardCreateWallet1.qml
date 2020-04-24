@@ -33,7 +33,7 @@ import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils
-import "../components" as BittubeComponents
+import "../components" as MoneroComponents
 
 Rectangle {
     id: wizardCreateWallet1
@@ -74,7 +74,7 @@ Rectangle {
                 Layout.topMargin: 10
                 Layout.fillWidth: true
 
-                BittubeComponents.LineEditMulti {
+                MoneroComponents.LineEditMulti {
                     id: seed
 
                     spacing: 0
@@ -98,13 +98,13 @@ Rectangle {
                     text: wizardController.walletOptionsSeed
                 }
 
-                BittubeComponents.WarningBox {
+                MoneroComponents.WarningBox {
                     Rectangle {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         width: 1
-                        color: BittubeComponents.Style.inputBorderColorInActive
+                        color: MoneroComponents.Style.inputBorderColorInActive
                     }
 
                     Rectangle {
@@ -112,7 +112,7 @@ Rectangle {
                         anchors.left: parent.left
                         anchors.bottom: parent.bottom
                         height: 1
-                        color: BittubeComponents.Style.inputBorderColorInActive
+                        color: MoneroComponents.Style.inputBorderColorInActive
                     }
 
                     Rectangle {
@@ -120,11 +120,11 @@ Rectangle {
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         width: 1
-                        color: BittubeComponents.Style.inputBorderColorInActive
+                        color: MoneroComponents.Style.inputBorderColorInActive
                     }
 
                     radius: 0
-                    border.color: BittubeComponents.Style.inputBorderColorInActive
+                    border.color: MoneroComponents.Style.inputBorderColorInActive
                     border.width: 0
 
                     text: qsTr("This seed is <b>very</b> important to write down and keep secret. It is all you need to backup and restore your wallet.") + translationManager.emptyString
@@ -137,7 +137,7 @@ Rectangle {
                 Layout.topMargin: 10
                 Layout.fillWidth: true
 
-                BittubeComponents.LineEditMulti {
+                MoneroComponents.LineEditMulti {
                     id: restoreHeight
 
                     spacing: 0
@@ -156,13 +156,13 @@ Rectangle {
                     text: Utils.roundDownToNearestThousand(wizardController.m_wallet ? wizardController.m_wallet.walletCreationHeight : 0)
                 }
 
-                BittubeComponents.WarningBox {
+                MoneroComponents.WarningBox {
                     Rectangle {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         width: 1
-                        color: BittubeComponents.Style.inputBorderColorInActive
+                        color: MoneroComponents.Style.inputBorderColorInActive
                     }
 
                     Rectangle {
@@ -170,7 +170,7 @@ Rectangle {
                         anchors.left: parent.left
                         anchors.bottom: parent.bottom
                         height: 1
-                        color: BittubeComponents.Style.inputBorderColorInActive
+                        color: MoneroComponents.Style.inputBorderColorInActive
                     }
 
                     Rectangle {
@@ -178,11 +178,11 @@ Rectangle {
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         width: 1
-                        color: BittubeComponents.Style.inputBorderColorInActive
+                        color: MoneroComponents.Style.inputBorderColorInActive
                     }
 
                     radius: 0
-                    border.color: BittubeComponents.Style.inputBorderColorInActive
+                    border.color: MoneroComponents.Style.inputBorderColorInActive
                     border.width: 0
                     text: qsTr("Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.") + translationManager.emptyString
                 }
