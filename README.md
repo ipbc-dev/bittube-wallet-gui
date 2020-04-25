@@ -4,17 +4,13 @@ Copyright (c) 2014-2019, The Monero Project
 
 ## Development resources
 
-- Web: [getbittube.org](https://getbittube.org)
-- Mail: [dev@getbittube.org](mailto:dev@getbittube.org)
-- Github: [https://github.com/bittube-project/bittube-gui](https://github.com/bittube-project/bittube-gui)
+- Web: [bittube.app](https://bittube.app)
+- Mail: [dev@bittube.app](mailto:dev@bittube.app)
+- Github: [https://github.com/ipbc-dev/bittube-wallet-gui](https://github.com/ipbc-dev/bittube-wallet-gui)
 - IRC: [#bittube-dev on Freenode](irc://chat.freenode.net/#bittube-dev)
-- Translation platform (Weblate): [translate.getbittube.org](https://translate.getbittube.org)
-- UI Design: [BitTube-GUI on Figma](https://www.figma.com/file/DplJ2DDQfIKiuRvolHX2hN/BitTube-GUI)
+- Translation platform (Weblate): [translate.bittube.app](https://translate.bittube.app)
 
 ## Vulnerability response
-
-- Our [Vulnerability Response Process](https://github.com/bittube-project/meta/blob/master/VULNERABILITY_RESPONSE_PROCESS.md) encourages responsible disclosure
-- We are also available via [HackerOne](https://hackerone.com/bittube)
 
 ## Introduction
 
@@ -28,29 +24,18 @@ BitTube is a private, secure, untraceable, decentralised digital currency. You a
 
 ## About this project
 
-This is the GUI for the [core BitTube implementation](https://github.com/bittube-project/bittube). It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of BitTube that uses the protocol and network in a compatible manner.
+This is the GUI for the [core BitTube implementation](https://github.com/ipbc-dev/bittube). It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of BitTube that uses the protocol and network in a compatible manner.
 
 As with many development projects, the repository on Github is considered to be the "staging" area for the latest changes. Before changes are merged into that branch on the main repository, they are tested by individual developers in their own branches, submitted as a pull request, and then subsequently tested by contributors who focus on testing and code reviews. That having been said, the repository should be carefully considered before using it in a production environment, unless there is a patch in the repository for a particular show-stopping issue you are experiencing. It is generally a better idea to use a tagged release for stability.
 
 ## Supporting the project
 
-BitTube is a 100% community-sponsored endeavor. If you want to join our efforts, the easiest thing you can do is support the project financially. Both BitTube and Bitcoin donations can be made to **donate.getbittube.org** if using a client that supports the [OpenAlias](https://openalias.org) standard.
-
-The BitTube donation address is: `44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A` (viewkey: `f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501`)
-
-The Bitcoin donation address is: `1KTexdemPdxSBcG55heUuTjDRYqbC5ZL8H`
+BitTube is a 100% community-sponsored endeavor. If you want to join our efforts, the easiest thing you can do is support the project financially. Both BitTube and Bitcoin donations can be made to **donate.bittube.app** if using a client that supports the [OpenAlias](https://openalias.org) standard.
 
 GUI development funding and/or some supporting services are also graciously provided by sponsors:
 
-[<img width="80" src="https://static.getbittube.org/images/sponsors/mybittube.png"/>](https://mybittube.com)
-[<img width="150" src="https://static.getbittube.org/images/sponsors/kitware.png?1"/>](http://kitware.com)
-[<img width="100" src="https://static.getbittube.org/images/sponsors/dome9.png"/>](http://dome9.com)
-[<img width="150" src="https://static.getbittube.org/images/sponsors/araxis.png"/>](http://araxis.com)
-[<img width="150" src="https://static.getbittube.org/images/sponsors/jetbrains.png"/>](http://www.jetbrains.com/)
-[<img width="150" src="https://static.getbittube.org/images/sponsors/navicat.png"/>](http://www.navicat.com/)
-[<img width="150" src="https://static.getbittube.org/images/sponsors/symas.png"/>](http://www.symas.com/)
 
-There are also several mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post](https://bitcointalk.org/index.php?topic=583449.0).
+There are also several mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post]().
 
 ## License
 
@@ -58,7 +43,7 @@ See [LICENSE](LICENSE).
 
 ## Translations
 
-Do you speak a second language and would like to help translate the BitTube GUI? Check out Weblate, our localization platform, at [translate.getbittube.org](https://translate.getbittube.org/). Choose the language and suggest a translation for a string or review an existing one. The Localization Workgroup made [a guide with step-by-step instructions](https://github.com/bittube-ecosystem/bittube-translations/blob/master/weblate.md) for Weblate.
+Do you speak a second language and would like to help translate the BitTube GUI? Check out Weblate, our localization platform, at [translate.bittube.app](https://translate.bittube.app/). Choose the language and suggest a translation for a string or review an existing one. The Localization Workgroup made [a guide with step-by-step instructions](https://github.com/bittube-ecosystem/bittube-translations/blob/master/weblate.md) for Weblate.
 
 If you need help/support or any info you can contact the localization workgroup on the IRC channel #bittube-translations (relayed on matrix/riot and MatterMost) or by email at translate[at]getbittube[dot]org. For more info about the Localization workgroup: [github.com/bittube-ecosystem/bittube-translations](https://github.com/bittube-ecosystem/bittube-translations)
 
@@ -125,7 +110,7 @@ The following instructions will fetch Qt from your distribution's repositories i
 
 3. Clone repository
 
-    `git clone https://github.com/bittube-project/bittube-gui.git`
+    `git clone https://github.com/ipbc-dev/bittube-wallet-gui.git`
 
 4. Build
 
@@ -142,7 +127,7 @@ The executable can be found in the build/release/bin folder.
 
 2. Install [homebrew](http://brew.sh/)
 
-3. Install [bittube](https://github.com/bittube-project/bittube) dependencies:
+3. Install [bittube](https://github.com/ipbc-dev/bittube) dependencies:
 
   `brew install boost`
 
@@ -171,7 +156,7 @@ The executable can be found in the build/release/bin folder.
 
 6. Grab an up-to-date copy of the bittube-gui repository
 
-  `git clone https://github.com/bittube-project/bittube-gui.git`
+  `git clone https://github.com/ipbc-dev/bittube-wallet-gui.git`
 
 7. Go into the repository
 
@@ -216,7 +201,7 @@ The BitTube GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not of
       pacman -S mingw-w64-x86_64-zbar
       ```
 
-    You find more details about those dependencies in the [BitTube documentation](https://github.com/bittube-project/bittube). Note that that there is no more need to compile Boost from source; like everything else, you can install it now with a MSYS2 package.
+    You find more details about those dependencies in the [BitTube documentation](https://github.com/ipbc-dev/bittube). Note that that there is no more need to compile Boost from source; like everything else, you can install it now with a MSYS2 package.
 
 4. Install Qt5
 
@@ -235,7 +220,7 @@ The BitTube GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not of
 6. Clone repository
 
     ```
-    git clone https://github.com/bittube-project/bittube-gui.git
+    git clone https://github.com/ipbc-dev/bittube-wallet-gui.git
     ```
 
 7. Build
@@ -247,6 +232,6 @@ The BitTube GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not of
     make deploy
     ```
 
-    **Note:** The use of `source` above is a dirty workaround for a suspected bug in the current QT version 5.11.2-3 available in the MSYS2 packaging system, see https://github.com/bittube-project/bittube-gui/issues/1559 for more info.
+    **Note:** The use of `source` above is a dirty workaround for a suspected bug in the current QT version 5.11.2-3 available in the MSYS2 packaging system, see https://github.com/ipbc-dev/bittube-wallet-gui/issues/1559 for more info.
 
 The executable can be found in the `.\release\bin` directory.
