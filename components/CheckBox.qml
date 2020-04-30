@@ -30,7 +30,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import FontAwesome 1.0
 
-import "." as MoneroComponents
+import "." as BittubeComponents
 import "effects/" as MoneroEffects
 
 Item {
@@ -74,12 +74,12 @@ Item {
                 visible: checkBox.border
                 anchors.fill: parent
                 radius: 3
-                color: checkBox.enabled ? "transparent" : MoneroComponents.Style.inputBoxBackgroundDisabled
+                color: checkBox.enabled ? "transparent" : BittubeComponents.Style.inputBoxBackgroundDisabled
                 border.color:
                     if(checkBox.checked){
-                        return MoneroComponents.Style.inputBorderColorActive;
+                        return BittubeComponents.Style.inputBorderColorActive;
                     } else {
-                        return MoneroComponents.Style.inputBorderColorInActive;
+                        return BittubeComponents.Style.inputBorderColorInActive;
                     }
             }
 
@@ -89,7 +89,7 @@ Item {
                 anchors.centerIn: parent
                 width: checkBox.imgWidth
                 height: checkBox.imgHeight
-                color: MoneroComponents.Style.defaultFontColor
+                color: BittubeComponents.Style.defaultFontColor
                 fontAwesomeFallbackIcon: checkBox.fontAwesomeIcons ? getIcon() : FontAwesome.plus
                 fontAwesomeFallbackSize: 14
                 image: checkBox.fontAwesomeIcons ? "" : getIcon()
@@ -102,11 +102,11 @@ Item {
             }
         }
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             id: label
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: BittubeComponents.Style.fontRegular.name
             font.pixelSize: checkBox.fontSize
-            color: MoneroComponents.Style.defaultFontColor
+            color: BittubeComponents.Style.defaultFontColor
             textFormat: Text.RichText
             wrapMode: Text.NoWrap
         }

@@ -33,7 +33,7 @@ import QtQuick.Dialogs 1.2
 import FontAwesome 1.0
 
 import "../../js/Utils.js" as Utils
-import "../../components" as MoneroComponents
+import "../../components" as BittubeComponents
 
 Rectangle {
     color: "transparent"
@@ -50,7 +50,7 @@ Rectangle {
         anchors.topMargin: 0
         spacing: 0
 
-        MoneroComponents.SettingsListItem {
+        BittubeComponents.SettingsListItem {
             iconText: FontAwesome.signOutAlt
             description: qsTr("Logs out of this wallet.") + translationManager.emptyString
             title: qsTr("Close this wallet") + translationManager.emptyString
@@ -58,7 +58,7 @@ Rectangle {
             onClicked: appWindow.showWizard()
         }
 
-        MoneroComponents.SettingsListItem {
+        BittubeComponents.SettingsListItem {
             iconText: FontAwesome.eye
             description: qsTr("Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.") + translationManager.emptyString
             title: qsTr("Create a view-only wallet") + translationManager.emptyString
@@ -80,7 +80,7 @@ Rectangle {
             }
         }
 
-        MoneroComponents.SettingsListItem {
+        BittubeComponents.SettingsListItem {
             iconText: FontAwesome.key
             description: qsTr("Store this information safely to recover your wallet in the future.") + translationManager.emptyString
             title: qsTr("Show seed & keys") + translationManager.emptyString
@@ -90,7 +90,7 @@ Rectangle {
             }
         }
 
-        MoneroComponents.SettingsListItem {
+        BittubeComponents.SettingsListItem {
             iconText: FontAwesome.repeat
             description: qsTr("Use this feature if you think the shown balance is not accurate.") + translationManager.emptyString
             title: qsTr("Rescan wallet balance") + translationManager.emptyString
@@ -114,7 +114,7 @@ Rectangle {
             }
         }
 
-        MoneroComponents.SettingsListItem {
+        BittubeComponents.SettingsListItem {
             iconText: FontAwesome.ellipsisH
             description: qsTr("Change the password of your wallet.") + translationManager.emptyString
             title: qsTr("Change wallet password") + translationManager.emptyString
@@ -137,7 +137,7 @@ Rectangle {
             }
         }
 
-        MoneroComponents.SettingsListItem {
+        BittubeComponents.SettingsListItem {
             iconText: FontAwesome.cashRegister
             isLast: true
             description: qsTr("Receive Monero for your business, easily.") + translationManager.emptyString

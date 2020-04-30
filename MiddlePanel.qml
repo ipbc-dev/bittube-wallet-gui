@@ -38,7 +38,7 @@ import bittubeComponents.Wallet 1.0
 import "./pages"
 import "./pages/settings"
 import "./pages/merchant"
-import "./components" as MoneroComponents
+import "./components" as BittubeComponents
 import "./components/effects/" as MoneroEffects
 
 Rectangle {
@@ -72,20 +72,20 @@ Rectangle {
     Rectangle {
         // grey background on merchantView
         visible: currentView === merchantView
-        color: MoneroComponents.Style.bittubeGrey
+        color: BittubeComponents.Style.bittubeGrey
         anchors.fill: parent
     }
 
     MoneroEffects.GradientBackground {
         visible: currentView !== merchantView
         anchors.fill: parent
-        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
-        initialStartColor: MoneroComponents.Style.middlePanelBackgroundGradientStart
-        initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
-        blackColorStart: MoneroComponents.Style._b_middlePanelBackgroundGradientStart
-        blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
-        whiteColorStart: MoneroComponents.Style._w_middlePanelBackgroundGradientStart
-        whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
+        fallBackColor: BittubeComponents.Style.middlePanelBackgroundColor
+        initialStartColor: BittubeComponents.Style.middlePanelBackgroundGradientStart
+        initialStopColor: BittubeComponents.Style.middlePanelBackgroundGradientStop
+        blackColorStart: BittubeComponents.Style._b_middlePanelBackgroundGradientStart
+        blackColorStop: BittubeComponents.Style._b_middlePanelBackgroundGradientStop
+        whiteColorStart: BittubeComponents.Style._w_middlePanelBackgroundGradientStart
+        whiteColorStop: BittubeComponents.Style._w_middlePanelBackgroundGradientStop
         start: Qt.point(0, 0)
         end: Qt.point(height, width)
     }
@@ -243,12 +243,12 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         width: 1
-        color: MoneroComponents.Style.appWindowBorderColor
+        color: BittubeComponents.Style.appWindowBorderColor
 
         MoneroEffects.ColorTransition {
             targetObj: parent
-            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+            blackColor: BittubeComponents.Style._b_appWindowBorderColor
+            whiteColor: BittubeComponents.Style._w_appWindowBorderColor
         }
     }
 

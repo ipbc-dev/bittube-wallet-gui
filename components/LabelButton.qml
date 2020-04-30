@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 
 Rectangle {
@@ -37,22 +37,22 @@ Rectangle {
     property alias text: labelButtonText.text
 
     id: labelButton
-    color: MoneroComponents.Style.buttonBackgroundColorDisabled
+    color: BittubeComponents.Style.buttonBackgroundColorDisabled
     radius: 3
     height: 20
     width: labelButtonText.width + 14
     anchors.right: copyButton.left
     anchors.rightMargin: 6
 
-    MoneroComponents.TextPlain {
+    BittubeComponents.TextPlain {
         id: labelButtonText
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        font.family: MoneroComponents.Style.fontRegular.name
+        font.family: BittubeComponents.Style.fontRegular.name
         font.pixelSize: 12
         font.bold: true
         text: ""
-        color: MoneroComponents.Style.inlineButtonTextColor
+        color: BittubeComponents.Style.inlineButtonTextColor
     }
 
     MouseArea {
@@ -61,11 +61,11 @@ Rectangle {
         hoverEnabled: true
         onClicked: labelButton.clicked()
         onEntered: {
-            labelButton.color = MoneroComponents.Style.buttonBackgroundColorDisabledHover;
+            labelButton.color = BittubeComponents.Style.buttonBackgroundColorDisabledHover;
             labelButtonText.opacity = 0.8;
         }
         onExited: {
-            labelButton.color = MoneroComponents.Style.buttonBackgroundColorDisabled;
+            labelButton.color = BittubeComponents.Style.buttonBackgroundColorDisabled;
             labelButtonText.opacity = 1.0;
         }
     }

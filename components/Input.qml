@@ -29,24 +29,24 @@
 import QtQuick.Controls 2.0
 import QtQuick 2.9
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 TextField {
     id: textField
-    font.family: MoneroComponents.Style.fontRegular.name
+    font.family: BittubeComponents.Style.fontRegular.name
     font.pixelSize: 18
     font.bold: true
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
-    color: MoneroComponents.Style.defaultFontColor
-    selectionColor: MoneroComponents.Style.textSelectionColor
-    selectedTextColor: MoneroComponents.Style.textSelectedColor
+    color: BittubeComponents.Style.defaultFontColor
+    selectionColor: BittubeComponents.Style.textSelectionColor
+    selectedTextColor: BittubeComponents.Style.textSelectedColor
 
     background: Rectangle {
         color: "transparent"
     }
 
-    MoneroComponents.ContextMenu {
+    BittubeComponents.ContextMenu {
         cursorShape: Qt.IBeamCursor
         onPaste: {
             textField.clear();

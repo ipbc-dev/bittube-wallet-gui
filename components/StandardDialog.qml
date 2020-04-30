@@ -33,7 +33,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 import "effects/" as MoneroEffects
 
 Rectangle {
@@ -60,13 +60,13 @@ Rectangle {
     // background
     MoneroEffects.GradientBackground {
         anchors.fill: parent
-        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
-        initialStartColor: MoneroComponents.Style.middlePanelBackgroundGradientStart
-        initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
-        blackColorStart: MoneroComponents.Style._b_middlePanelBackgroundGradientStart
-        blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
-        whiteColorStart: MoneroComponents.Style._w_middlePanelBackgroundGradientStart
-        whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
+        fallBackColor: BittubeComponents.Style.middlePanelBackgroundColor
+        initialStartColor: BittubeComponents.Style.middlePanelBackgroundGradientStart
+        initialStopColor: BittubeComponents.Style.middlePanelBackgroundGradientStop
+        blackColorStart: BittubeComponents.Style._b_middlePanelBackgroundGradientStart
+        blackColorStop: BittubeComponents.Style._b_middlePanelBackgroundGradientStop
+        whiteColorStart: BittubeComponents.Style._w_middlePanelBackgroundGradientStart
+        whiteColorStop: BittubeComponents.Style._w_middlePanelBackgroundGradientStop
         start: Qt.point(0, 0)
         end: Qt.point(height, width)
     }
@@ -112,11 +112,11 @@ Rectangle {
             Layout.topMargin: 14
             Layout.fillWidth: true
 
-            MoneroComponents.Label {
+            BittubeComponents.Label {
                 id: dialogTitle
                 fontSize: 18
                 fontFamily: "Arial"
-                color: MoneroComponents.Style.defaultFontColor
+                color: BittubeComponents.Style.defaultFontColor
             }
         }
 
@@ -138,13 +138,13 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     renderType: Text.QtRendering
-                    font.family: MoneroComponents.Style.fontLight.name
+                    font.family: BittubeComponents.Style.fontLight.name
                     textFormat: TextEdit.AutoText
                     readOnly: true
                     font.pixelSize: 14
                     selectByMouse: false
                     wrapMode: TextEdit.Wrap
-                    color: MoneroComponents.Style.defaultFontColor
+                    color: BittubeComponents.Style.defaultFontColor
 
                     MouseArea {
                         anchors.fill: parent
@@ -169,7 +169,7 @@ Rectangle {
             spacing: 60
             Layout.alignment: Qt.AlignHCenter
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: cancelButton
                 text: qsTr("Cancel") + translationManager.emptyString
                 onClicked: {
@@ -178,7 +178,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: okButton
                 text: qsTr("OK") + translationManager.emptyString
                 KeyNavigation.tab: cancelButton
@@ -203,8 +203,8 @@ Rectangle {
             anchors.centerIn: parent
             width: 16
             height: 16
-            image: MoneroComponents.Style.titleBarCloseSource
-            color: MoneroComponents.Style.defaultFontColor
+            image: BittubeComponents.Style.titleBarCloseSource
+            color: BittubeComponents.Style.defaultFontColor
             opacity: 0.75
         }
 
@@ -223,7 +223,7 @@ Rectangle {
     // window borders
     Rectangle{
         width: 1
-        color: MoneroComponents.Style.grey
+        color: BittubeComponents.Style.grey
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -231,7 +231,7 @@ Rectangle {
 
     Rectangle{
         width: 1
-        color: MoneroComponents.Style.grey
+        color: BittubeComponents.Style.grey
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -239,7 +239,7 @@ Rectangle {
 
     Rectangle{
         height: 1
-        color: MoneroComponents.Style.grey
+        color: BittubeComponents.Style.grey
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -247,7 +247,7 @@ Rectangle {
 
     Rectangle{
         height: 1
-        color: MoneroComponents.Style.grey
+        color: BittubeComponents.Style.grey
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.right: parent.right

@@ -4,15 +4,15 @@
 #define GuiVersion GetFileVersion("bin\bittube-wallet-gui.exe")
 
 [Setup]
-AppName=Monero GUI Wallet
+AppName=BitTube GUI Wallet
 ; For InnoSetup this is the property that uniquely identifies the application as such
 ; Thus it's important to keep this stable over releases
 ; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
 
 AppVersion={#GuiVersion}
 VersionInfoVersion={#GuiVersion}
-DefaultDirName={commonpf}\Monero GUI Wallet
-DefaultGroupName=Monero GUI Wallet
+DefaultDirName={commonpf}\BitTube GUI Wallet
+DefaultGroupName=BitTube GUI Wallet
 UninstallDisplayIcon={app}\bittube-wallet-gui.exe
 PrivilegesRequired=admin
 ArchitecturesInstallIn64BitMode=x64
@@ -72,7 +72,7 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 Source: {#file AddBackslash(SourcePath) + "ReadMe.htm"}; DestDir: "{app}"; DestName: "ReadMe.htm"; Flags: ignoreversion
 Source: "FinishImage.bmp"; Flags: dontcopy
 
-; Monero GUI wallet exe and guide
+; BitTube GUI wallet exe and guide
 Source: "bin\bittube-wallet-gui.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\bittube-gui-wallet-guide.pdf"; DestDir: "{app}"; Flags: ignoreversion
 
@@ -315,7 +315,7 @@ end;
 
 
 [Icons]
-; Icons in the "Monero GUI Wallet" program group
+; Icons in the "BitTube GUI Wallet" program group
 ; Windows will almost always display icons in alphabetical order, per level, so specify the text accordingly
 Name: "{group}\GUI Wallet"; Filename: "{app}\bittube-wallet-gui.exe";
 Name: "{group}\GUI Wallet Guide"; Filename: "{app}\bittube-gui-wallet-guide.pdf"; IconFilename: "{app}\bittube-wallet-gui.exe"

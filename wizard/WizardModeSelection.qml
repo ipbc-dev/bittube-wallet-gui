@@ -32,7 +32,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 Rectangle {
     id: wizardModeSelection1
@@ -90,8 +90,8 @@ Rectangle {
                 Layout.topMargin: 5
                 Layout.bottomMargin: 10
                 Layout.fillWidth: true
-                color: MoneroComponents.Style.dividerColor
-                opacity: MoneroComponents.Style.dividerOpacity
+                color: BittubeComponents.Style.dividerColor
+                opacity: BittubeComponents.Style.dividerOpacity
             }
 
             WizardMenuItem {
@@ -120,8 +120,8 @@ Rectangle {
                 Layout.topMargin: 5
                 Layout.bottomMargin: 10
                 Layout.fillWidth: true
-                color: MoneroComponents.Style.dividerColor
-                opacity: MoneroComponents.Style.dividerOpacity
+                color: BittubeComponents.Style.dividerColor
+                opacity: BittubeComponents.Style.dividerOpacity
             }
 
             WizardMenuItem {

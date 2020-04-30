@@ -73,10 +73,10 @@ QString getAccountName(){
 QString xdgMime(QApplication &app){
     return QString(
         "[Desktop Entry]\n"
-        "Name=Monero GUI\n"
+        "Name=BitTube GUI\n"
         "GenericName=Monero-GUI\n"
         "X-GNOME-FullName=Monero-GUI\n"
-        "Comment=Monero GUI\n"
+        "Comment=BitTube GUI\n"
         "Keywords=Monero;\n"
         "Exec=%1 %u\n"
         "Terminal=false\n"

@@ -32,7 +32,7 @@ import QtQuick.Layouts 1.1
 
 import bittubeComponents.Downloader 1.0
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 Popup {
     id: updateDialog
@@ -47,9 +47,9 @@ Popup {
     property string version: ""
 
     background: Rectangle {
-        border.color: MoneroComponents.Style.appWindowBorderColor
+        border.color: BittubeComponents.Style.appWindowBorderColor
         border.width: 1
-        color: MoneroComponents.Style.middlePanelBackgroundColor
+        color: BittubeComponents.Style.middlePanelBackgroundColor
     }
     closePolicy: Popup.NoAutoClose
     padding: 20
@@ -68,9 +68,9 @@ Popup {
         spacing: updateDialog.padding
 
         Text {
-            color: MoneroComponents.Style.defaultFontColor
+            color: BittubeComponents.Style.defaultFontColor
             font.bold: true
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: BittubeComponents.Style.fontRegular.name
             font.pixelSize: 18
             text: qsTr("New Monero version v%1 is available.").arg(updateDialog.version)
         }
@@ -78,7 +78,7 @@ Popup {
         Text {
             id: errorText
             color: "red"
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: BittubeComponents.Style.fontRegular.name
             font.pixelSize: 18
             text: updateDialog.error
             visible: text
@@ -86,8 +86,8 @@ Popup {
 
         Text {
             id: statusText
-            color: MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
+            color: BittubeComponents.Style.defaultFontColor
+            font.family: BittubeComponents.Style.fontRegular.name
             font.pixelSize: 18
             visible: !errorText.visible
 
@@ -110,13 +110,13 @@ Popup {
 
         Rectangle {
             id: progressBar
-            color: MoneroComponents.Style.lightGreyFontColor
+            color: BittubeComponents.Style.lightGreyFontColor
             height: 3
             Layout.fillWidth: true
             visible: updateDialog.valid || downloader.active
 
             Rectangle {
-                color: MoneroComponents.Style.buttonBackgroundColor
+                color: BittubeComponents.Style.buttonBackgroundColor
                 height: parent.height
                 width: parent.width * updateDialog.progress / 100
             }
@@ -126,7 +126,7 @@ Popup {
             Layout.alignment: Qt.AlignRight
             spacing: parent.spacing
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: cancelButton
                 fontBold: false
                 primary: !updateDialog.url
@@ -146,7 +146,7 @@ Popup {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: downloadButton
                 KeyNavigation.tab: cancelButton
                 fontBold: false
@@ -169,7 +169,7 @@ Popup {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: saveButton
                 KeyNavigation.tab: cancelButton
                 fontBold: false

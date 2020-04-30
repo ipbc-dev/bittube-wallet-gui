@@ -30,7 +30,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 
-import "." as MoneroComponents
+import "." as BittubeComponents
 import "./effects/" as MoneroEffects
 
 Item {
@@ -45,7 +45,7 @@ Item {
     property string pressedColor: "#FF4304"
     property string releasedColor: "#FF6C3C"
     property string icon: ""
-    property string textColor: MoneroComponents.Style.inlineButtonTextColor
+    property string textColor: BittubeComponents.Style.inlineButtonTextColor
     property int fontSize: small ? 14 : 16
     property int rectHeight: small ? 24 : 24
     property int rectHMargin: small ? 16 : 22
@@ -64,7 +64,7 @@ Item {
 
     Rectangle{
         id: rect
-        color: MoneroComponents.Style.buttonInlineBackgroundColor
+        color: BittubeComponents.Style.buttonInlineBackgroundColor
         height: 24
         width: inlineText.text ? (inlineText.width + 16) : inlineButton.icon ? (inlineImage.width + 16) : rect.height
         radius: 4
@@ -73,9 +73,9 @@ Item {
         anchors.right: parent.right
         anchors.rightMargin: 4
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             id: inlineText
-            font.family: MoneroComponents.Style.fontBold.name
+            font.family: BittubeComponents.Style.fontBold.name
             font.bold: true
             font.pixelSize: inlineButton.fontSize
             color: inlineButton.textColor
@@ -85,8 +85,8 @@ Item {
 
             MoneroEffects.ColorTransition {
                 targetObj: inlineText
-                blackColor: MoneroComponents.Style._b_inlineButtonTextColor
-                whiteColor: MoneroComponents.Style._w_inlineButtonTextColor
+                blackColor: BittubeComponents.Style._b_inlineButtonTextColor
+                whiteColor: BittubeComponents.Style._w_inlineButtonTextColor
             }
         }
 
@@ -115,7 +115,7 @@ Item {
     }
 
     DropShadow {
-        visible: !MoneroComponents.Style.blackTheme
+        visible: !BittubeComponents.Style.blackTheme
         anchors.fill: rect
         horizontalOffset: 2
         verticalOffset: 2

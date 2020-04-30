@@ -33,7 +33,7 @@ import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
 import "../components"
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 GridLayout {
     Layout.fillWidth: true
@@ -59,7 +59,7 @@ GridLayout {
         walletName.text = defaultAccountName;
     }
 
-    MoneroComponents.LineEdit {
+    BittubeComponents.LineEdit {
         id: walletName
         Layout.fillWidth: true
 
@@ -80,7 +80,7 @@ GridLayout {
         Component.onCompleted: walletName.error = !walletName.verify();
     }
 
-    MoneroComponents.LineEdit {
+    BittubeComponents.LineEdit {
         id: walletLocation
         Layout.fillWidth: true
 

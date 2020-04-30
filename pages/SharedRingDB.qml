@@ -32,7 +32,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 import bittubeComponents.Clipboard 1.0
 
 Rectangle {
@@ -94,23 +94,23 @@ Rectangle {
             standardButtons: StandardButton.Ok
         }
 
-        MoneroComponents.Label {
+        BittubeComponents.Label {
             id: signTitleLabel
             fontSize: 24
             text: qsTr("Shared RingDB") + translationManager.emptyString
         }
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             text: qsTr("This page allows you to interact with the shared ring database. " +
-                       "This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.") + translationManager.emptyString
+                       "This database is meant for use by BitTube wallets as well as wallets from BitTube clones which reuse the BitTube keys.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: BittubeComponents.Style.fontRegular.name
             font.pixelSize: 14
-            color: MoneroComponents.Style.defaultFontColor
+            color: BittubeComponents.Style.defaultFontColor
         }
 
-        MoneroComponents.LabelSubheader {
+        BittubeComponents.LabelSubheader {
             Layout.fillWidth: true
             textFormat: Text.RichText
             text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
@@ -118,15 +118,15 @@ Rectangle {
             onLinkActivated: {
                 sharedRingDBDialog.title  = qsTr("Outputs marked as spent") + translationManager.emptyString;
                 sharedRingDBDialog.text = qsTr(
-                    "In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able " +
+                    "In order to obscure which inputs in a BitTube transaction are being spent, a third party should not be able " +
                     "to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection " +
                     "afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being " +
                     "actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers " +
-                    "of privacy protection Monero uses.<br>" +
+                    "of privacy protection BitTube uses.<br>" +
                     "To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new " +
-                    "transactions. Such a list is maintained by the Monero project and is available on the getbittube.org website, " +
+                    "transactions. Such a list is maintained by the BitTube project and is available on the getbittube.org website, " +
                     "and you can import this list here.<br>" +
-                    "Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself " +
+                    "Alternatively, you can scan the blockchain (and the blockchain of key-reusing BitTube clones) yourself " +
                     "using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.<br>"
                 ) + translationManager.emptyString
                 sharedRingDBDialog.icon = StandardIcon.Information
@@ -134,15 +134,15 @@ Rectangle {
             }
         }
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             textFormat: Text.RichText
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: BittubeComponents.Style.fontRegular.name
             font.pixelSize: 14
             text: qsTr("This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. ") +
                   qsTr("You should only have to load a file when you want to refresh the list. Manual adding/removing is possible if needed.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true;
-            color: MoneroComponents.Style.defaultFontColor
+            color: BittubeComponents.Style.defaultFontColor
         }
 
         ColumnLayout {
@@ -160,7 +160,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.LineEdit {
+            BittubeComponents.LineEdit {
                 id: loadBlackballFileLine
                 Layout.fillWidth: true
                 fontSize: 16
@@ -176,7 +176,7 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.topMargin: 18
 
-                MoneroComponents.StandardButton {
+                BittubeComponents.StandardButton {
                     id: selectBlackballFileButton
                     text: qsTr("Browse") + translationManager.emptyString
                     enabled: true
@@ -186,7 +186,7 @@ Rectangle {
                     }
                 }
 
-                MoneroComponents.StandardButton {
+                BittubeComponents.StandardButton {
                     id: loadBlackballFileButton
                     text: qsTr("Load") + translationManager.emptyString
                     small: true
@@ -200,7 +200,7 @@ Rectangle {
             Layout.fillWidth: true
             columnSpacing: 20
 
-            MoneroComponents.LineEdit {
+            BittubeComponents.LineEdit {
                 id: blackballOutputAmountLine
                 Layout.fillWidth: true
                 fontSize: 16
@@ -212,7 +212,7 @@ Rectangle {
                 validator: IntValidator { bottom: 0 }
             }
 
-            MoneroComponents.LineEdit {
+            BittubeComponents.LineEdit {
                 id: blackballOutputOffsetLine
                 Layout.fillWidth: true
                 fontSize: 16
@@ -229,7 +229,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.topMargin: 18
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: blackballButton
                 text: qsTr("Mark as spent") + translationManager.emptyString
                 small: true
@@ -237,7 +237,7 @@ Rectangle {
                 onClicked: appWindow.currentWallet.blackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
             }
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: unblackballButton
                 text: qsTr("Mark as unspent") + translationManager.emptyString
                 small: true
@@ -246,7 +246,7 @@ Rectangle {
             }
         }
 
-        MoneroComponents.LabelSubheader {
+        BittubeComponents.LabelSubheader {
             Layout.fillWidth: true
             Layout.topMargin: 24
             textFormat: Text.RichText
@@ -255,16 +255,16 @@ Rectangle {
             onLinkActivated: {
                 sharedRingDBDialog.title  = qsTr("Rings") + translationManager.emptyString;
                 sharedRingDBDialog.text = qsTr(
-                    "In order to avoid nullifying the protection afforded by Monero's ring signatures, an output should not " +
+                    "In order to avoid nullifying the protection afforded by BitTube's ring signatures, an output should not " +
                     "be spent with different rings on different blockchains. While this is normally not a concern, it can become one " +
-                    "when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this " +
+                    "when a key-reusing BitTube clone allows you to spend existing outputs. In this case, you need to ensure this " +
                     "existing outputs uses the same ring on both chains.<br>" +
-                    "This will be done automatically by Monero and any key-reusing software which is not trying to actively strip " +
+                    "This will be done automatically by BitTube and any key-reusing software which is not trying to actively strip " +
                     "you of your privacy.<br>" +
-                    "If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still " +
+                    "If you are using a key-reusing BitTube clone too, and this clone does not include this protection, you can still " +
                     "ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, " +
-                    "which allows you to then spend your Monero safely.<br>" +
-                    "If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything " +
+                    "which allows you to then spend your BitTube safely.<br>" +
+                    "If you do not use a key-reusing BitTube clone without these safety features, then you do not need to do anything " +
                     "as it is all automated.<br>"
                 ) + translationManager.emptyString
                 sharedRingDBDialog.icon = StandardIcon.Information
@@ -272,17 +272,17 @@ Rectangle {
             }
         }
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             textFormat: Text.RichText
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: BittubeComponents.Style.fontRegular.name
             font.pixelSize: 14
-            text: qsTr("This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.") + translationManager.emptyString
+            text: qsTr("This records rings used by outputs spent on BitTube on a key reusing chain, so that the same ring may be reused to avoid privacy issues.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true;
-            color: MoneroComponents.Style.defaultFontColor
+            color: BittubeComponents.Style.defaultFontColor
         }
 
-        MoneroComponents.LineEdit {
+        BittubeComponents.LineEdit {
             id: keyImageLine
             Layout.fillWidth: true
             fontSize: 16
@@ -301,7 +301,7 @@ Rectangle {
 
             ColumnLayout {
                 RowLayout {
-                    MoneroComponents.LineEdit {
+                    BittubeComponents.LineEdit {
                         id: getRingLine
                         Layout.fillWidth: true
                         fontSize: 16
@@ -316,7 +316,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.topMargin: 18
 
-                    MoneroComponents.StandardButton {
+                    BittubeComponents.StandardButton {
                         id: getRingButton
                         text: qsTr("Get Ring") + translationManager.emptyString
                         small: true
@@ -336,7 +336,7 @@ Rectangle {
 
             ColumnLayout {
                 RowLayout {
-                    MoneroComponents.LineEdit {
+                    BittubeComponents.LineEdit {
                         id: setRingLine
                         Layout.fillWidth: true
                         fontSize: 16
@@ -352,7 +352,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.topMargin: 18
 
-                    MoneroComponents.StandardButton {
+                    BittubeComponents.StandardButton {
                         id: setRingButton
                         text: qsTr("Set Ring") + translationManager.emptyString
                         small: true
@@ -370,7 +370,7 @@ Rectangle {
             columnSpacing: 20
             columns: 2
 
-            MoneroComponents.CheckBox {
+            BittubeComponents.CheckBox {
                 id: segregatePreForkOutputs
                 checked: persistentSettings.segregatePreForkOutputs
                 text: qsTr("I intend to spend on key-reusing fork(s)") + translationManager.emptyString
@@ -382,7 +382,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.CheckBox {
+            BittubeComponents.CheckBox {
                 id: keyReuseMitigation2
                 checked: persistentSettings.keyReuseMitigation2
                 text: qsTr("I might want to spend on key-reusing fork(s)") + translationManager.emptyString
@@ -394,7 +394,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.CheckBox {
+            BittubeComponents.CheckBox {
                 id: setRingRelative
                 checked: true
                 text: qsTr("Relative") + translationManager.emptyString
@@ -408,7 +408,7 @@ Rectangle {
             columns: 2
             columnSpacing: 32
 
-            MoneroComponents.LineEdit {
+            BittubeComponents.LineEdit {
                 id: segregationHeightLine
                 property bool edited: false
                 Layout.fillWidth: true

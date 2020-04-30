@@ -34,7 +34,7 @@ import bittubeComponents.NetworkType 1.0
 import bittubeComponents.Clipboard 1.0
 import FontAwesome 1.0
 
-import "components" as MoneroComponents
+import "components" as BittubeComponents
 import "components/effects/" as MoneroEffects
 
 Rectangle {
@@ -89,13 +89,13 @@ Rectangle {
 
     MoneroEffects.GradientBackground {
         anchors.fill: parent
-        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
-        initialStartColor: MoneroComponents.Style.leftPanelBackgroundGradientStart
-        initialStopColor: MoneroComponents.Style.leftPanelBackgroundGradientStop
-        blackColorStart: MoneroComponents.Style._b_leftPanelBackgroundGradientStart
-        blackColorStop: MoneroComponents.Style._b_leftPanelBackgroundGradientStop
-        whiteColorStart: MoneroComponents.Style._w_leftPanelBackgroundGradientStart
-        whiteColorStop: MoneroComponents.Style._w_leftPanelBackgroundGradientStop
+        fallBackColor: BittubeComponents.Style.middlePanelBackgroundColor
+        initialStartColor: BittubeComponents.Style.leftPanelBackgroundGradientStart
+        initialStopColor: BittubeComponents.Style.leftPanelBackgroundGradientStop
+        blackColorStart: BittubeComponents.Style._b_leftPanelBackgroundGradientStart
+        blackColorStop: BittubeComponents.Style._b_leftPanelBackgroundGradientStop
+        whiteColorStart: BittubeComponents.Style._w_leftPanelBackgroundGradientStart
+        whiteColorStop: BittubeComponents.Style._w_leftPanelBackgroundGradientStop
         posStart: 0.6
         start: Qt.point(0, 0)
         end: Qt.point(height, width)
@@ -123,15 +123,15 @@ Rectangle {
 
                 Image {
                     id: card
-                    visible: !isOpenGL || MoneroComponents.Style.blackTheme
+                    visible: !isOpenGL || BittubeComponents.Style.blackTheme
                     width: 260
                     height: 135
                     fillMode: Image.PreserveAspectFit
-                    source: MoneroComponents.Style.blackTheme ? "qrc:///images/card-background-black.png" : "qrc:///images/card-background-white.png"
+                    source: BittubeComponents.Style.blackTheme ? "qrc:///images/card-background-black.png" : "qrc:///images/card-background-white.png"
                 }
 
                 DropShadow {
-                    visible: isOpenGL && !MoneroComponents.Style.blackTheme
+                    visible: isOpenGL && !BittubeComponents.Style.blackTheme
                     anchors.fill: card
                     horizontalOffset: 3
                     verticalOffset: 3
@@ -142,7 +142,7 @@ Rectangle {
                     cached: true
                 }
 
-                MoneroComponents.TextPlain {
+                BittubeComponents.TextPlain {
                     id: testnetLabel
                     visible: persistentSettings.nettype != NetworkType.MAINNET
                     text: (persistentSettings.nettype == NetworkType.TESTNET ? qsTr("Testnet") : qsTr("Stagenet")) + translationManager.emptyString
@@ -156,7 +156,7 @@ Rectangle {
                     themeTransition: false
                 }
 
-                MoneroComponents.TextPlain {
+                BittubeComponents.TextPlain {
                     id: viewOnlyLabel
                     visible: viewOnly
                     text: qsTr("View Only") + translationManager.emptyString
@@ -179,11 +179,11 @@ Rectangle {
                 height: 490
                 width: 50
 
-                MoneroComponents.Label {
+                BittubeComponents.Label {
                     fontSize: 12
                     id: accountIndex
                     text: qsTr("Account") + translationManager.emptyString + " #" + currentAccountIndex
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                    color: BittubeComponents.Style.blackTheme ? "white" : "black"
                     anchors.left: parent.left
                     anchors.leftMargin: 60
                     anchors.top: parent.top
@@ -198,11 +198,11 @@ Rectangle {
                     }
                 }
 
-                MoneroComponents.Label {
+                BittubeComponents.Label {
                     fontSize: 16
                     id: accountLabel
                     textWidth: 170
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                    color: BittubeComponents.Style.blackTheme ? "white" : "black"
                     anchors.left: parent.left
                     anchors.leftMargin: 60
                     anchors.top: parent.top
@@ -218,11 +218,11 @@ Rectangle {
                     }
                 }
 
-                MoneroComponents.Label {
+                BittubeComponents.Label {
                     fontSize: 16
                     visible: isSyncing
                     text: qsTr("Syncing...")
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                    color: BittubeComponents.Style.blackTheme ? "white" : "black"
                     anchors.left: parent.left
                     anchors.leftMargin: 20
                     anchors.bottom: currencyLabel.top
@@ -230,7 +230,7 @@ Rectangle {
                     themeTransition: false
                 }
 
-                MoneroComponents.TextPlain {
+                BittubeComponents.TextPlain {
                     id: currencyLabel
                     font.pixelSize: 16
                     text: {
@@ -240,7 +240,7 @@ Rectangle {
                             return "Tube"
                         }
                     }
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                    color: BittubeComponents.Style.blackTheme ? "white" : "black"
                     anchors.left: parent.left
                     anchors.leftMargin: 20
                     anchors.top: parent.top
@@ -256,13 +256,13 @@ Rectangle {
                     }
                 }
 
-                MoneroComponents.TextPlain {
+                BittubeComponents.TextPlain {
                     id: balancePart1
                     themeTransition: false
                     anchors.left: parent.left
                     anchors.leftMargin: 58
                     anchors.baseline: currencyLabel.baseline
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                    color: BittubeComponents.Style.blackTheme ? "white" : "black"
                     text: {
                         if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return balanceFiatString.split('.')[0] + "."
@@ -285,12 +285,12 @@ Rectangle {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onEntered: {
-                            balancePart1.color = MoneroComponents.Style.orange
-                            balancePart2.color = MoneroComponents.Style.orange
+                            balancePart1.color = BittubeComponents.Style.orange
+                            balancePart2.color = BittubeComponents.Style.orange
                         }
                         onExited: {
-                            balancePart1.color = Qt.binding(function() { return MoneroComponents.Style.blackTheme ? "white" : "black" })
-                            balancePart2.color = Qt.binding(function() { return MoneroComponents.Style.blackTheme ? "white" : "black" })
+                            balancePart1.color = Qt.binding(function() { return BittubeComponents.Style.blackTheme ? "white" : "black" })
+                            balancePart2.color = Qt.binding(function() { return BittubeComponents.Style.blackTheme ? "white" : "black" })
                         }
                         onClicked: {
                                 console.log("Copied to clipboard");
@@ -299,13 +299,13 @@ Rectangle {
                         }
                     }
                 }
-                MoneroComponents.TextPlain {
+                BittubeComponents.TextPlain {
                     id: balancePart2
                     themeTransition: false
                     anchors.left: balancePart1.right
                     anchors.leftMargin: 2
                     anchors.baseline: currencyLabel.baseline
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                    color: BittubeComponents.Style.blackTheme ? "white" : "black"
                     text: {
                         if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return balanceFiatString.split('.')[1]
@@ -360,14 +360,14 @@ Rectangle {
             property var previousButton: transferButton
 
             // top border
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 20
             }
 
             // ------------- Account tab ---------------
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: accountButton
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -380,7 +380,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: accountButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -388,7 +388,7 @@ Rectangle {
             }
 
             // ------------- Transfer tab ---------------
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: transferButton
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -401,7 +401,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: transferButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -410,7 +410,7 @@ Rectangle {
 
             // ------------- AddressBook tab ---------------
 
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: addressBookButton
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -424,7 +424,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: addressBookButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -432,7 +432,7 @@ Rectangle {
             }
 
             // ------------- Receive tab ---------------
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: receiveButton
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -445,7 +445,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: receiveButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -454,7 +454,7 @@ Rectangle {
 
             // ------------- History tab ---------------
 
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: historyButton
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -467,7 +467,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: historyButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -475,7 +475,7 @@ Rectangle {
             }
 
             // ------------- Advanced tab ---------------
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: advancedButton
                 visible: appWindow.walletMode >= 2
                 anchors.left: parent.left
@@ -488,7 +488,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: advancedButton.present && appWindow.walletMode >= 2
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -496,7 +496,7 @@ Rectangle {
             }
 
             // ------------- Mining tab ---------------
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: miningButton
                 visible: !isAndroid && !isIOS && appWindow.walletMode >= 2
                 anchors.left: parent.left
@@ -511,7 +511,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: miningButton.present && appWindow.walletMode >= 2
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -519,7 +519,7 @@ Rectangle {
             }
 
             // ------------- TxKey tab ---------------
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: txkeyButton
                 visible: appWindow.walletMode >= 2
                 anchors.left: parent.left
@@ -534,7 +534,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: txkeyButton.present && appWindow.walletMode >= 2
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -542,7 +542,7 @@ Rectangle {
             }
 
             // ------------- Shared RingDB tab ---------------
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: sharedringdbButton
                 visible: appWindow.walletMode >= 2
                 anchors.left: parent.left
@@ -557,7 +557,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: sharedringdbButton.present && appWindow.walletMode >= 2
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -565,7 +565,7 @@ Rectangle {
             }
 
             // ------------- Sign/verify tab ---------------
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: signButton
                 visible: appWindow.walletMode >= 2
                 anchors.left: parent.left
@@ -580,7 +580,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: signButton.present && appWindow.walletMode >= 2
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -588,7 +588,7 @@ Rectangle {
             }
 
             // ------------- Settings tab ---------------
-            MoneroComponents.MenuButton {
+            BittubeComponents.MenuButton {
                 id: settingsButton
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -601,7 +601,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.MenuButtonDivider {
+            BittubeComponents.MenuButtonDivider {
                 visible: settingsButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -623,7 +623,7 @@ Rectangle {
             color: "transparent"
         }
 
-        MoneroComponents.ProgressBar {
+        BittubeComponents.ProgressBar {
             id: progressBar
             anchors.left: parent.left
             anchors.right: parent.right
@@ -633,7 +633,7 @@ Rectangle {
             visible: !appWindow.disconnected
         }
 
-        MoneroComponents.ProgressBar {
+        BittubeComponents.ProgressBar {
             id: daemonProgressBar
             anchors.left: parent.left
             anchors.right: parent.right
@@ -643,7 +643,7 @@ Rectangle {
             height: 62
         }
         
-        MoneroComponents.NetworkStatusItem {
+        BittubeComponents.NetworkStatusItem {
             id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right

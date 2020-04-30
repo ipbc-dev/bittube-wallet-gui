@@ -31,7 +31,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 
 import "../../js/Utils.js" as Utils
-import "../../components" as MoneroComponents
+import "../../components" as BittubeComponents
 
 
 Rectangle {
@@ -56,15 +56,15 @@ Rectangle {
 //            Layout.preferredHeight: 1
 //            Layout.fillWidth: true
 //            Layout.bottomMargin: 8
-//            color: MoneroComponents.Style.dividerColor
-//            opacity: MoneroComponents.Style.dividerOpacity
+//            color: BittubeComponents.Style.dividerColor
+//            opacity: BittubeComponents.Style.dividerOpacity
 //        }
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             Layout.bottomMargin: 2
-            color: MoneroComponents.Style.defaultFontColor
+            color: BittubeComponents.Style.defaultFontColor
             font.pixelSize: 18
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: BittubeComponents.Style.fontRegular.name
             text: qsTr("Log level") + translationManager.emptyString
         }
 
@@ -84,7 +84,7 @@ Rectangle {
                  ListElement { column1: "custom"; }
             }
 
-            MoneroComponents.StandardDropdown {
+            BittubeComponents.StandardDropdown {
                 id: logLevelDropdown
                 dataModel: logLevel
                 itemTopMargin: 2
@@ -105,7 +105,7 @@ Rectangle {
                 z: parent.z + 1
             }
 
-            MoneroComponents.LineEdit {
+            BittubeComponents.LineEdit {
                 id: logCategories
                 visible: logLevelDropdown.currentIndex === 5
                 Layout.fillWidth: true
@@ -125,12 +125,12 @@ Rectangle {
             }
         }
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             Layout.topMargin: 10
             Layout.bottomMargin: 2
-            color: MoneroComponents.Style.defaultFontColor
+            color: BittubeComponents.Style.defaultFontColor
             font.pixelSize: 18
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: BittubeComponents.Style.fontRegular.name
             text: qsTr("Daemon log") + translationManager.emptyString
         }
 
@@ -142,7 +142,7 @@ Rectangle {
             Rectangle {
                 anchors.fill: parent
                 color: "transparent"
-                border.color: MoneroComponents.Style.inputBorderColorInActive
+                border.color: BittubeComponents.Style.inputBorderColorInActive
                 border.width: 1
                 radius: 4
             }
@@ -154,12 +154,12 @@ Rectangle {
 
                 TextArea.flickable: TextArea {
                     id : consoleArea
-                    color: MoneroComponents.Style.defaultFontColor
-                    selectionColor: MoneroComponents.Style.textSelectionColor
+                    color: BittubeComponents.Style.defaultFontColor
+                    selectionColor: BittubeComponents.Style.textSelectionColor
                     textFormat: TextEdit.RichText
                     selectByMouse: true
                     selectByKeyboard: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: BittubeComponents.Style.fontRegular.name
                     font.pixelSize: 14
                     wrapMode: TextEdit.Wrap
                     readOnly: true
@@ -169,11 +169,11 @@ Rectangle {
                     }
                     function logMessage(msg){
                         msg = msg.trim();
-                        var color = MoneroComponents.Style.defaultFontColor;
+                        var color = BittubeComponents.Style.defaultFontColor;
                         if(msg.toLowerCase().indexOf('error') >= 0){
-                            color = MoneroComponents.Style.errorColor;
+                            color = BittubeComponents.Style.errorColor;
                         } else if (msg.toLowerCase().indexOf('warning') >= 0){
-                            color = MoneroComponents.Style.warningColor;
+                            color = BittubeComponents.Style.warningColor;
                         }
 
                         // format multi-lines
@@ -193,7 +193,7 @@ Rectangle {
                             timeZoneName: undefined
                         });
 
-                        var _timestamp = log_color("[" + timestamp + "]", MoneroComponents.Style.defaultFontColor);
+                        var _timestamp = log_color("[" + timestamp + "]", BittubeComponents.Style.defaultFontColor);
                         var _msg = log_color(msg, color);
                         consoleArea.append(_timestamp + " " + _msg);
 
@@ -210,7 +210,7 @@ Rectangle {
             }
         }
 
-        MoneroComponents.LineEdit {
+        BittubeComponents.LineEdit {
             id: sendCommandText
             Layout.fillWidth: true
             fontBold: false

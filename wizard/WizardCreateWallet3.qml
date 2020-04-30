@@ -30,7 +30,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 Rectangle {
     id: wizardCreateWallet3
@@ -57,7 +57,7 @@ Rectangle {
 
             WizardHeader {
                 title: qsTr("Daemon settings") + translationManager.emptyString
-                subtitle: qsTr("To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it's recommended to run your own node.") + translationManager.emptyString
+                subtitle: qsTr("To be able to communicate with the BitTube network your wallet needs to be connected to a BitTube node. For best privacy it's recommended to run your own node.") + translationManager.emptyString
             }
 
             WizardDaemonSettings {

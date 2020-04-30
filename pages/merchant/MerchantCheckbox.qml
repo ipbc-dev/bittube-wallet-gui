@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 
-import "../../components" as MoneroComponents
+import "../../components" as BittubeComponents
 
 Item {
     id: root
@@ -44,7 +44,7 @@ Item {
                 source: checkbox
             }
         }
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             id: content
             font.pixelSize: 14
             font.bold: false

@@ -35,7 +35,7 @@ import bittubeComponents.Wallet 1.0
 import bittubeComponents.NetworkType 1.0
 import FontAwesome 1.0
 import "../components"
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 import "." 1.0
 import "../js/TxUtils.js" as TxUtils
 
@@ -146,7 +146,7 @@ Rectangle {
       RowLayout {
           visible: root.warningContent !== ""
 
-          MoneroComponents.WarningBox {
+          BittubeComponents.WarningBox {
               text: warningContent
               onLinkActivated: {
                   appWindow.startDaemon(appWindow.persistentSettings.daemonFlags);
@@ -157,7 +157,7 @@ Rectangle {
       RowLayout {
           visible: leftPanel.minutesToUnlock !== ""
 
-          MoneroComponents.WarningBox {
+          BittubeComponents.WarningBox {
               text: qsTr("Spendable funds: %1 Tube. Please wait ~%2 minutes for your whole balance to become spendable.").arg(leftPanel.balanceUnlockedString).arg(leftPanel.minutesToUnlock)
           }
       }
@@ -198,7 +198,7 @@ Rectangle {
               inlineButton.buttonHeight: 30
               inlineButton.fontPixelSize: 22
               inlineButton.fontFamily: FontAwesome.fontFamily
-              inlineButton.textColor: MoneroComponents.Style.defaultFontColor
+              inlineButton.textColor: BittubeComponents.Style.defaultFontColor
               inlineButton.onClicked: {
                   middlePanel.addressBookView.selectAndSend = true;
                   appWindow.showPageRequest("AddressBook");
@@ -209,7 +209,7 @@ Rectangle {
               inlineButton2.buttonHeight: 30
               inlineButton2.fontPixelSize: 22
               inlineButton2.fontFamily: FontAwesome.fontFamily
-              inlineButton2.textColor: MoneroComponents.Style.defaultFontColor
+              inlineButton2.textColor: BittubeComponents.Style.defaultFontColor
               inlineButton2.onClicked: {
                    cameraUi.state = "Capture"
                    cameraUi.qrcode_decoded.connect(updateFromQrCode)
@@ -354,7 +354,7 @@ Rectangle {
           z: parent.z + 1
       }
 
-      MoneroComponents.WarningBox {
+      BittubeComponents.WarningBox {
           text: qsTr("Description field contents match long payment ID format. \
           Please don't paste long payment ID into description field, your funds might be lost.") + translationManager.emptyString;
           visible: warningLongPidDescription
@@ -423,7 +423,7 @@ Rectangle {
           }
       }
 
-      MoneroComponents.WarningBox {
+      BittubeComponents.WarningBox {
           id: paymentIdWarningBox
           text: qsTr("Long payment IDs are obsolete. \
           Long payment IDs were not encrypted on the blockchain and would harm your privacy. \
@@ -431,7 +431,7 @@ Rectangle {
           visible: paymentIdCheckbox.checked || warningLongPidDescription
       }
 
-      MoneroComponents.WarningBox {
+      BittubeComponents.WarningBox {
           id: sendButtonWarningBox
           text: root.sendButtonWarning
           visible: root.sendButtonWarning !== ""

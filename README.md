@@ -1,4 +1,4 @@
-# Monero GUI
+# BitTube GUI
 
 Copyright (c) 2014-2019, The Monero Project
 
@@ -58,7 +58,7 @@ See [LICENSE](LICENSE).
 
 ## Translations
 
-Do you speak a second language and would like to help translate the Monero GUI? Check out Weblate, our localization platform, at [translate.getbittube.org](https://translate.getbittube.org/). Choose the language and suggest a translation for a string or review an existing one. The Localization Workgroup made [a guide with step-by-step instructions](https://github.com/bittube-ecosystem/bittube-translations/blob/master/weblate.md) for Weblate.
+Do you speak a second language and would like to help translate the BitTube GUI? Check out Weblate, our localization platform, at [translate.getbittube.org](https://translate.getbittube.org/). Choose the language and suggest a translation for a string or review an existing one. The Localization Workgroup made [a guide with step-by-step instructions](https://github.com/bittube-ecosystem/bittube-translations/blob/master/weblate.md) for Weblate.
 
 If you need help/support or any info you can contact the localization workgroup on the IRC channel #bittube-translations (relayed on matrix/riot and MatterMost) or by email at translate[at]getbittube[dot]org. For more info about the Localization workgroup: [github.com/bittube-ecosystem/bittube-translations](https://github.com/bittube-ecosystem/bittube-translations)
 
@@ -67,7 +67,7 @@ Status of the translations:
 <img src="https://translate.getbittube.org/widgets/bittube/-/gui-wallet/horizontal-auto.svg" alt="Translation status" />
 </a>
 
-## Installing the Monero GUI from a package
+## Installing the BitTube GUI from a package
 
 Packages are available for
 
@@ -77,7 +77,7 @@ Packages are available for
 
 Packaging for your favorite distribution would be a welcome contribution!
 
-## Compiling the Monero GUI from source
+## Compiling the BitTube GUI from source
 
 *Note*: Qt 5.9.7 is the minimum version required to build the GUI.
 
@@ -176,7 +176,7 @@ The executable can be found in the `build/release/bin` folder.
 
 ### On Windows:
 
-The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not officially supported anymore.
+The BitTube GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not officially supported anymore.
 
 1. Install [MSYS2](https://www.msys2.org/), follow the instructions on that page on how to update system and packages to the latest versions
 

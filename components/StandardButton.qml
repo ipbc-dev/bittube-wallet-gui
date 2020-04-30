@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 Item {
     id: button
@@ -37,10 +37,10 @@ Item {
     property string rightIcon: ""
     property string rightIconInactive: ""
     property color textColor: !button.enabled
-        ? MoneroComponents.Style.buttonTextColorDisabled
+        ? BittubeComponents.Style.buttonTextColorDisabled
         : primary
-        ? MoneroComponents.Style.buttonTextColor
-        : MoneroComponents.Style.buttonSecondaryTextColor;
+        ? BittubeComponents.Style.buttonTextColor
+        : BittubeComponents.Style.buttonSecondaryTextColor;
     property bool small: false
     property alias text: label.text
     property alias fontBold: label.font.bold
@@ -77,8 +77,8 @@ Item {
                 PropertyChanges {
                     target: buttonRect
                     color: primary
-                        ? MoneroComponents.Style.buttonBackgroundColorHover
-                        : MoneroComponents.Style.buttonSecondaryBackgroundColorHover
+                        ? BittubeComponents.Style.buttonBackgroundColorHover
+                        : BittubeComponents.Style.buttonSecondaryBackgroundColorHover
                 }
             },
             State {
@@ -87,8 +87,8 @@ Item {
                 PropertyChanges {
                     target: buttonRect
                     color: primary
-                        ? MoneroComponents.Style.buttonBackgroundColor
-                        : MoneroComponents.Style.buttonSecondaryBackgroundColor
+                        ? BittubeComponents.Style.buttonBackgroundColor
+                        : BittubeComponents.Style.buttonSecondaryBackgroundColor
                 }
             },
             State {
@@ -96,7 +96,7 @@ Item {
                 when: !button.enabled
                 PropertyChanges {
                     target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColorDisabled
+                    color: BittubeComponents.Style.buttonBackgroundColorDisabled
                 }
             }
         ]
@@ -113,16 +113,16 @@ Item {
         spacing: 11
         anchors.centerIn: parent
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             id: label
-            font.family: MoneroComponents.Style.fontBold.name
+            font.family: BittubeComponents.Style.fontBold.name
             font.bold: true
             font.pixelSize: button.fontSize
             color: !buttonArea.pressed ? button.textColor : "transparent"
             visible: text !== ""
             themeTransition: false
 
-            MoneroComponents.TextPlain {
+            BittubeComponents.TextPlain {
                 anchors.centerIn: parent
                 color: button.textColor
                 font.bold: label.font.bold

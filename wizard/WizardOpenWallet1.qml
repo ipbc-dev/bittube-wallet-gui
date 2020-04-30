@@ -36,7 +36,7 @@ import bittubeComponents.NetworkType 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../components"
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 import "../components/effects/" as MoneroEffects
 
 Rectangle {
@@ -75,10 +75,10 @@ Rectangle {
                 columnSpacing: 20
                 columns: 2
 
-                MoneroComponents.TextPlain {
+                BittubeComponents.TextPlain {
                     Layout.fillWidth: true
                     text: qsTr("Recently opened") + ":" + translationManager.emptyString
-                    font.family: MoneroComponents.Style.fontLight.name
+                    font.family: BittubeComponents.Style.fontLight.name
                     font.pixelSize: 16
                 }
 
@@ -139,13 +139,13 @@ Rectangle {
                             height: 1
                             width: parent.width
                             anchors.top: parent.top
-                            color: MoneroComponents.Style.appWindowBorderColor
+                            color: BittubeComponents.Style.appWindowBorderColor
                             visible: index <= 2  // top row
 
                             MoneroEffects.ColorTransition {
                                 targetObj: parent
-                                blackColor: MoneroComponents.Style._b_appWindowBorderColor
-                                whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                                blackColor: BittubeComponents.Style._b_appWindowBorderColor
+                                whiteColor: BittubeComponents.Style._w_appWindowBorderColor
                             }
                         }
 
@@ -169,13 +169,13 @@ Rectangle {
                                     source: "qrc:///images/open-wallet-from-file.png"
                                     visible: {
                                         if(!isOpenGL) return true;
-                                        if(MoneroComponents.Style.blackTheme) return true;
+                                        if(BittubeComponents.Style.blackTheme) return true;
                                         return false;
                                     }
                                 }
 
                                 Colorize {
-                                    visible: isOpenGL && !MoneroComponents.Style.blackTheme
+                                    visible: isOpenGL && !BittubeComponents.Style.blackTheme
                                     anchors.fill: icon
                                     source: icon
                                     lightness: 0.65 // +65%
@@ -205,8 +205,8 @@ Rectangle {
                                     Layout.preferredHeight: 26
                                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                                     Layout.fillWidth: true
-                                    font.family: MoneroComponents.Style.fontRegular.name
-                                    color: MoneroComponents.Style.defaultFontColor
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    color: BittubeComponents.Style.defaultFontColor
                                     font.pixelSize: 16
 
                                     wrapMode: Text.WordWrap
@@ -221,8 +221,8 @@ Rectangle {
                                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                                     Layout.fillWidth: true
                                     text: item.networkType
-                                    font.family: MoneroComponents.Style.fontRegular.name
-                                    color: MoneroComponents.Style.dimmedFontColor
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    color: BittubeComponents.Style.dimmedFontColor
                                     font.pixelSize: 14
 
                                     wrapMode: Text.WordWrap
@@ -241,13 +241,13 @@ Rectangle {
                         Rectangle {
                             height: 1
                             width: parent.width
-                            color: MoneroComponents.Style.appWindowBorderColor
+                            color: BittubeComponents.Style.appWindowBorderColor
                             anchors.bottom: parent.bottom
 
                             MoneroEffects.ColorTransition {
                                 targetObj: parent
-                                blackColor: MoneroComponents.Style._b_appWindowBorderColor
-                                whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                                blackColor: BittubeComponents.Style._b_appWindowBorderColor
+                                whiteColor: BittubeComponents.Style._w_appWindowBorderColor
                             }
                         }
 
@@ -257,7 +257,7 @@ Rectangle {
                             cursorShape: Qt.PointingHandCursor
 
                             onEntered: {
-                                parent.color = MoneroComponents.Style.titleBarButtonHoverColor;
+                                parent.color = BittubeComponents.Style.titleBarButtonHoverColor;
                             }
                             onExited: {
                                 parent.color = "transparent";

@@ -1,4 +1,4 @@
-# Monero GUI Wallet Windows Installer #
+# BitTube GUI Wallet Windows Installer #
 
 Copyright (c) 2017-2019, The Monero Project
 

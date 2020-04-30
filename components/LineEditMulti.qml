@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 ColumnLayout {
     id: item
@@ -48,31 +48,31 @@ ColumnLayout {
     property int inputRadius: 4
 
     property bool placeholderCenter: false
-    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
+    property string placeholderFontFamily: BittubeComponents.Style.fontRegular.name
     property bool placeholderFontBold: false
     property int placeholderFontSize: 18
-    property string placeholderColor: MoneroComponents.Style.defaultFontColor
+    property string placeholderColor: BittubeComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
 
     property bool borderDisabled: false
     property string borderColor: {
         if(input.error && input.text !== ""){
-            return MoneroComponents.Style.inputBorderColorInvalid;
+            return BittubeComponents.Style.inputBorderColorInvalid;
         } else if(input.activeFocus){
-            return MoneroComponents.Style.inputBorderColorActive;
+            return BittubeComponents.Style.inputBorderColorActive;
         } else {
-            return MoneroComponents.Style.inputBorderColorInActive;
+            return BittubeComponents.Style.inputBorderColorInActive;
         }
     }
 
     property bool error: false
 
-    property string labelFontColor: MoneroComponents.Style.defaultFontColor
+    property string labelFontColor: BittubeComponents.Style.defaultFontColor
     property bool labelFontBold: false
     property int labelFontSize: 16
     property bool labelButtonVisible: false
 
-    property string fontColor: MoneroComponents.Style.defaultFontColor
+    property string fontColor: BittubeComponents.Style.defaultFontColor
     property bool fontBold: false
     property int fontSize: 16
 
@@ -102,11 +102,11 @@ ColumnLayout {
         height: (inputLabel.height + 10)
         visible: showingHeader ? true : false
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             id: inputLabel
             anchors.top: parent.top
             anchors.left: parent.left
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: BittubeComponents.Style.fontRegular.name
             font.pixelSize: item.labelFontSize
             font.bold: labelFontBold
             textFormat: Text.RichText
@@ -124,13 +124,13 @@ ColumnLayout {
             anchors.right: parent.right
             spacing: 16
 
-            MoneroComponents.LabelButton {
+            BittubeComponents.LabelButton {
                 id: labelButton
                 onClicked: labelButtonClicked()
                 visible: labelButtonVisible
             }
 
-            MoneroComponents.LabelButton {
+            BittubeComponents.LabelButton {
                 id: copyButtonId
                 visible: copyButton && input.text !== ""
                 text: qsTr("Copy") + translationManager.emptyString
@@ -143,7 +143,7 @@ ColumnLayout {
                 }
             }
 
-            MoneroComponents.LabelButton {
+            BittubeComponents.LabelButton {
                 id: pasteButtonId
                 onClicked: {
                     input.clear();
@@ -155,7 +155,7 @@ ColumnLayout {
         }
     }
 
-    MoneroComponents.InputMulti {
+    BittubeComponents.InputMulti {
         id: input
         readOnly: false
         addressValidation: false
@@ -174,7 +174,7 @@ ColumnLayout {
         onEditingFinished: item.editingFinished()
         error: item.error
 
-        MoneroComponents.TextPlain {
+        BittubeComponents.TextPlain {
             id: placeholderLabel
             visible: input.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
@@ -198,14 +198,14 @@ ColumnLayout {
             visible: !item.borderDisabled
         }
 
-        MoneroComponents.InlineButton {
+        BittubeComponents.InlineButton {
             id: inlineButtonId
             visible: (inlineButtonId.text || inlineButtonId.icon) && inlineButtonVisible ? true : false
             anchors.right: parent.right
             anchors.rightMargin: 8
         }
         
-        MoneroComponents.InlineButton {
+        BittubeComponents.InlineButton {
             id: inlineButton2Id
             visible: (inlineButton2Id.text || inlineButton2Id.icon) && inlineButton2Visible ? true : false
             anchors.right: parent.right

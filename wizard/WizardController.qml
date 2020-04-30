@@ -39,7 +39,7 @@ import bittubeComponents.Wallet 1.0
 import "../js/Wizard.js" as Wizard
 import "../js/Windows.js" as Windows
 import "../js/Utils.js" as Utils
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 import "../components/effects/" as MoneroEffects
 import "../pages"
 
@@ -239,13 +239,13 @@ Rectangle {
 
         MoneroEffects.GradientBackground {
             anchors.fill: parent
-            fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
-            initialStartColor: MoneroComponents.Style.wizardBackgroundGradientStart
-            initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
-            blackColorStart: MoneroComponents.Style._b_wizardBackgroundGradientStart
-            blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
-            whiteColorStart: MoneroComponents.Style._w_wizardBackgroundGradientStart
-            whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
+            fallBackColor: BittubeComponents.Style.middlePanelBackgroundColor
+            initialStartColor: BittubeComponents.Style.wizardBackgroundGradientStart
+            initialStopColor: BittubeComponents.Style.middlePanelBackgroundGradientStop
+            blackColorStart: BittubeComponents.Style._b_wizardBackgroundGradientStart
+            blackColorStop: BittubeComponents.Style._b_middlePanelBackgroundGradientStop
+            whiteColorStart: BittubeComponents.Style._w_wizardBackgroundGradientStart
+            whiteColorStop: BittubeComponents.Style._w_middlePanelBackgroundGradientStop
             start: Qt.point(0, 0)
             end: Qt.point(height, width)
         }
