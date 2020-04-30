@@ -237,7 +237,7 @@ Rectangle {
                         if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return appWindow.fiatApiCurrencySymbol();
                         } else {
-                            return "XMR"
+                            return "Tube"
                         }
                     }
                     color: MoneroComponents.Style.blackTheme ? "white" : "black"
