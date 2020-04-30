@@ -1320,6 +1320,8 @@ ApplicationWindow {
             openWallet("wizard");
         }
 
+        checkUpdates();
+
         if(persistentSettings.fiatPriceEnabled){
             appWindow.fiatApiRefresh();
             appWindow.fiatTimerStart();
@@ -1994,10 +1996,7 @@ ApplicationWindow {
 
     Timer {
         id: updatesTimer
-        interval: 3600 * 1000
-        repeat: true
-        running: !disableCheckUpdatesFlag
-        triggeredOnStart: true
+        interval: 3600*1000; running: true; repeat: true
         onTriggered: checkUpdates()
     }
 
