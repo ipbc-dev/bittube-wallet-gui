@@ -213,7 +213,7 @@ begin
 
   // Evaluate proposal for the blockchain location
   // In case of an update take the blockchain location from the actual setting in the registry
-  RegQueryStringValue(HKEY_CURRENT_USER, 'Software\bittube-project\bittube-core', 'blockchainDataDir', blockChainDir);
+  RegQueryStringValue(HKEY_CURRENT_USER, 'Software\ipbc-dev\bittube-core', 'blockchainDataDir', blockChainDir);
   if blockChainDir = '' then begin
     blockChainDir := GetPreviousData('BlockChainDir', '');
   end;
@@ -350,9 +350,9 @@ Name: "{commondesktop}\GUI Wallet"; Filename: "{app}\bittube-wallet-gui.exe"; Ta
 ; Store any special flags for the daemon in the registry location where the GUI wallet will take it from
 ; So if the wallet is used to start the daemon instead of the separate icon the wallet will pass the correct flags
 ; Side effect, mostly positive: The uninstaller will clean the registry
-Root: HKCU; Subkey: "Software\bittube-project"; Flags: uninsdeletekeyifempty
-Root: HKCU; Subkey: "Software\bittube-project\bittube-core"; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\bittube-project\bittube-core"; ValueType: string; ValueName: "blockchainDataDir"; ValueData: {code:BlockChainDirOrEmpty};
+Root: HKCU; Subkey: "Software\ipbc-dev"; Flags: uninsdeletekeyifempty
+Root: HKCU; Subkey: "Software\ipbc-dev\bittube-core"; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\ipbc-dev\bittube-core"; ValueType: string; ValueName: "blockchainDataDir"; ValueData: {code:BlockChainDirOrEmpty};
 
 ; Configure a custom URI scheme: Links starting with "bittube:" will start the GUI wallet exe with the URI as command-line parameter
 ; Used to easily start payments; example URI: "bittube://<address>?tx_amount=5.0"

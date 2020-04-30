@@ -1,5 +1,5 @@
 #!/bin/bash
-MONERO_URL=https://github.com/bittube-project/bittube.git
+MONERO_URL=https://github.com/ipbc-dev/bittube.git
 MONERO_BRANCH=master
 
 pushd $(pwd)
@@ -17,7 +17,7 @@ if [ ! -d $MONERO_DIR/src ]; then
 fi
 git submodule update --remote
 git -C $MONERO_DIR fetch
-git -C $MONERO_DIR checkout origin/master
+git -C $MONERO_DIR checkout master
 
 # get bittube core tag
 pushd $MONERO_DIR
@@ -242,7 +242,7 @@ fi
 # set CPU core count
 # thanks to SO: http://stackoverflow.com/a/20283965/4118915
 if test -z "$CPU_CORE_COUNT"; then
-  CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+  CPU_CORE_COUNT=2
 fi
 
 # Build libwallet_merged

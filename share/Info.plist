@@ -27,7 +27,7 @@
   <string>Copyright © 2014-2020 The Monero Project</string>
 
   <key>CFBundleIdentifier</key>
-  <string>org.bittube-project.bittube-wallet-gui</string>
+  <string>org.ipbc-dev.bittube-wallet-gui</string>
 
   <key>CFBundleVersion</key>
   <string>@VERSION_LONG@</string>

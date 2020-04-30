@@ -181,7 +181,7 @@ int main(int argc, char *argv[])
 
     app.setApplicationName("bittube-core");
     app.setOrganizationDomain("getbittube.org");
-    app.setOrganizationName("bittube-project");
+    app.setOrganizationName("ipbc-dev");
 
     // Ask to enable Tails OS persistence mode, it affects:
     // - Log file location
