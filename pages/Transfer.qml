@@ -82,7 +82,7 @@ Rectangle {
     property bool showAdvanced: false
     // @TODO: remove after pid removal hardfork
     property bool warningLongPidTransfer: false
-    property bool warningLongPidDescription: false
+    property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
 
     Clipboard { id: clipboard }
 
@@ -438,9 +438,12 @@ Rectangle {
       }
 
       BittubeComponents.WarningBox {
+          // @TODO: remove after pid removal hardfork
           id: paymentIdWarningBox
-          text: qsTr("You can enable transfers with payment ID on the settings page.") + translationManager.emptyString;
-          visible: !persistentSettings.showPid && (warningLongPidTransfer || warningLongPidDescription)
+          text: qsTr("Long payment IDs are obsolete. \
+          Long payment IDs were not encrypted on the blockchain and would harm your privacy. \
+          If the party you're sending to still requires a long payment ID, please notify them.") + translationManager.emptyString;
+          visible: warningLongPidTransfer || paymentIdCheckbox.checked
       }
 
       BittubeComponents.WarningBox {
