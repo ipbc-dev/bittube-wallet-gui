@@ -27,7 +27,6 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import bittubeComponents.Clipboard 1.0
@@ -39,7 +38,6 @@ import "../components"
 import "../components" as MoneroComponents
 import "." 1.0
 import "../js/TxUtils.js" as TxUtils
-import "../js/Utils.js" as Utils
 
 
 Rectangle {
@@ -284,7 +282,7 @@ Rectangle {
                                    %1 <a href='#'>(%2)</a>".arg(qsTr("Amount")).arg(qsTr("Change account"))
                              + translationManager.emptyString
                   copyButton: !isNaN(amountLine.text) && persistentSettings.fiatPriceEnabled
-                  copyButtonText: "~%1 %2".arg(fiatApiConvertToFiat(amountLine.text)).arg(fiatApiCurrencySymbol())
+                  copyButtonText: fiatApiCurrencySymbol() + " ~" + fiatApiConvertToFiat(amountLine.text)
                   copyButtonEnabled: false
 
                   onLabelLinkActivated: {
@@ -315,61 +313,14 @@ Rectangle {
                       regExp: /^(\d{1,8})?([\.]\d{1,12})?$/
                   }
               }
-
-                MoneroComponents.TextPlain {
-                    id: feeLabel
-                    Layout.alignment: Qt.AlignRight
-                    Layout.topMargin: 12
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14
-                    color: MoneroComponents.Style.defaultFontColor
-                    property bool estimating: false
-                    property var estimatedFee: null
-                    property string estimatedFeeFiat: {
-                        if (!persistentSettings.fiatPriceEnabled || estimatedFee == null) {
-                            return "";
-                        }
-                        const fiatFee = fiatApiConvertToFiat(estimatedFee);
-                        return " (%1 %3)".arg(fiatFee < 0.01 ? "<0.01" : "~" + fiatFee).arg(fiatApiCurrencySymbol());
-                    }
-                    property var fee: {
-                        estimatedFee = null;
-                        estimating = sendButton.enabled;
-                        if (!sendButton.enabled) {
-                            return;
-                        }
-                        currentWallet.estimateTransactionFeeAsync(
-                            addressLine.text,
-                            walletManager.amountFromString(amountLine.text),
-                            priorityModelV5.get(priorityDropdown.currentIndex).priority,
-                            function (amount) {
-                                estimatedFee = Utils.removeTrailingZeros(amount);
-                                estimating = false;
-                            });
-                    }
-                    text: {
-                        if (!sendButton.enabled || estimatedFee == null) {
-                            return ""
-                        }
-                        return "%1: ~%2 XMR".arg(qsTr("Fee")).arg(estimatedFee) +
-                            estimatedFeeFiat +
-                            translationManager.emptyString;
-                    }
-
-                    BusyIndicator {
-                        anchors.right: parent.right
-                        running: feeLabel.estimating
-                        height: parent.height
-                    }
-                }
           }
 
           ColumnLayout {
               visible: appWindow.walletMode >= 2
-              Layout.alignment: Qt.AlignTop
+              Layout.fillWidth: true
               Label {
                   id: transactionPriority
-                  Layout.topMargin: 0
+                  Layout.topMargin: 12
                   text: qsTr("Transaction priority") + translationManager.emptyString
                   fontBold: false
                   fontSize: 16
@@ -393,12 +344,14 @@ Rectangle {
                }
 
               StandardDropdown {
-                  Layout.preferredWidth: 200
+                  Layout.fillWidth: true
                   id: priorityDropdown
                   Layout.topMargin: 5
                   currentIndex: 0
               }
           }
+          // Make sure dropdown is on top
+          z: parent.z + 1
       }
 
       MoneroComponents.WarningBox {
