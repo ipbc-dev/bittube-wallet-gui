@@ -36,6 +36,7 @@
 #include <QMutex>
 #include <QPointer>
 #include <QWaitCondition>
+#include <QMutex>
 #include "qt/FutureScheduler.h"
 #include "NetworkType.h"
 
@@ -191,12 +192,7 @@ signals:
     void walletPassphraseNeeded();
     void deviceButtonRequest(quint64 buttonCode);
     void deviceButtonPressed();
-    void checkUpdatesComplete(
-        const QString &version,
-        const QString &downloadUrl,
-        const QString &hash,
-        const QString &firstSigner,
-        const QString &secondSigner) const;
+    void checkUpdatesComplete(const QString &result) const;
     void miningStatus(bool isMining) const;
 
 public slots:
