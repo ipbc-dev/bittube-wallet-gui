@@ -69,6 +69,15 @@ Rectangle {
         }
 
         BittubeComponents.CheckBox {
+            id: showPidCheckBox
+            checked: persistentSettings.showPid
+            onClicked: {
+                persistentSettings.showPid = !persistentSettings.showPid
+            }
+            text: qsTr("Enable transfer with payment ID (OBSOLETE)") + translationManager.emptyString
+        }
+
+        BittubeComponents.CheckBox {
             id: themeCheckbox
             checked: !BittubeComponents.Style.blackTheme
             text: qsTr("Light theme") + translationManager.emptyString

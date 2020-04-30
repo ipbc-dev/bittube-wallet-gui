@@ -49,7 +49,7 @@ Rectangle {
     color: "transparent"
     property alias transferHeight1: pageRoot.height
     property alias transferHeight2: advancedLayout.height
-    property int mixin: 10  // (ring size 11)
+    property int mixin: 2  // (ring size 11)
     property string warningContent: ""
     property string sendButtonWarning: {
         // Currently opened wallet is not view-only
@@ -428,7 +428,6 @@ Rectangle {
                   id: paymentIdLine
                   fontBold: true
                   placeholderText: qsTr("64 hexadecimal characters") + translationManager.emptyString
-                  readOnly: true
                   Layout.fillWidth: true
                   wrapMode: Text.WrapAnywhere
                   addressValidation: false
@@ -440,10 +439,8 @@ Rectangle {
       BittubeComponents.WarningBox {
           // @TODO: remove after pid removal hardfork
           id: paymentIdWarningBox
-          text: qsTr("Long payment IDs are obsolete. \
-          Long payment IDs were not encrypted on the blockchain and would harm your privacy. \
-          If the party you're sending to still requires a long payment ID, please notify them.") + translationManager.emptyString;
-          visible: warningLongPidTransfer || paymentIdCheckbox.checked
+          text: qsTr("You can enable transfers with payment ID on the settings page.") + translationManager.emptyString;
+          visible: !persistentSettings.showPid && (warningLongPidTransfer || warningLongPidDescription)
       }
 
       BittubeComponents.WarningBox {
