@@ -65,66 +65,6 @@ Rectangle {
             WizardMenuItem {
                 opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
                 Layout.topMargin: 20
-                headerText: qsTr("Simple mode") + translationManager.emptyString
-                bodyText: {
-                    if(appWindow.persistentSettings.nettype == 0){
-                        return qsTr("Easy access to sending, receiving and basic functionality.") + translationManager.emptyString;
-                    } else {
-                        return "Available on mainnet.";
-                    }
-                }
-
-                imageIcon: "qrc:///images/remote-node.png"
-
-                onMenuClicked: {
-                    if(appWindow.persistentSettings.nettype == 0){
-                        appWindow.changeWalletMode(0);
-                        wizardController.wizardStackView.backTransition = false;
-                        wizardController.wizardState = 'wizardModeRemoteNodeWarning';
-                    }
-                }
-            }
-
-            Rectangle {
-                Layout.preferredHeight: 1
-                Layout.topMargin: 5
-                Layout.bottomMargin: 10
-                Layout.fillWidth: true
-                color: BittubeComponents.Style.dividerColor
-                opacity: BittubeComponents.Style.dividerOpacity
-            }
-
-            WizardMenuItem {
-                opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
-                headerText: qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString
-                bodyText: {
-                    if(appWindow.persistentSettings.nettype == 0){
-                        return qsTr("Easy access to sending, receiving and basic functionality. The blockchain is downloaded to your computer.") + translationManager.emptyString;
-                    } else {
-                        return "Available on mainnet.";
-                    }
-                }
-                imageIcon: "qrc:///images/local-node.png"
-
-                onMenuClicked: {
-                    if(appWindow.persistentSettings.nettype == 0){
-                        appWindow.changeWalletMode(1);
-                        wizardController.wizardStackView.backTransition = false;
-                        wizardController.wizardState = 'wizardModeBootstrap';
-                    }
-                }
-            }
-
-            Rectangle {
-                Layout.preferredHeight: 1
-                Layout.topMargin: 5
-                Layout.bottomMargin: 10
-                Layout.fillWidth: true
-                color: BittubeComponents.Style.dividerColor
-                opacity: BittubeComponents.Style.dividerOpacity
-            }
-
-            WizardMenuItem {
                 headerText: qsTr("Advanced mode") + translationManager.emptyString
                 bodyText: qsTr("Includes extra features like mining and message verification. The blockchain is downloaded to your computer.") + translationManager.emptyString
                 imageIcon: "qrc:///images/local-node-full.png"
