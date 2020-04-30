@@ -4,53 +4,38 @@ Copyright (c) 2014-2019, The Monero Project
 
 ## Development resources
 
-- Web: [getbittube.org](https://getbittube.org)
-- Mail: [dev@getbittube.org](mailto:dev@getbittube.org)
-- Github: [https://github.com/ipbc-dev/bittube-gui](https://github.com/ipbc-dev/bittube-gui)
+- Web: [bittube.app](https://bittube.app)
+- Mail: [dev@bittube.app](mailto:dev@bittube.app)
+- Github: [https://github.com/ipbc-dev/bittube-wallet-gui](https://github.com/ipbc-dev/bittube-wallet-gui)
 - IRC: [#bittube-dev on Freenode](irc://chat.freenode.net/#bittube-dev)
-- Translation platform (Weblate): [translate.getbittube.org](https://translate.getbittube.org)
-- UI Design: [Monero-GUI on Figma](https://www.figma.com/file/DplJ2DDQfIKiuRvolHX2hN/Monero-GUI)
+- Translation platform (Weblate): [translate.bittube.app](https://translate.bittube.app)
 
 ## Vulnerability response
 
-- Our [Vulnerability Response Process](https://github.com/ipbc-dev/meta/blob/master/VULNERABILITY_RESPONSE_PROCESS.md) encourages responsible disclosure
-- We are also available via [HackerOne](https://hackerone.com/bittube)
-
 ## Introduction
 
-Monero is a private, secure, untraceable, decentralised digital currency. You are your bank, you control your funds, and nobody can trace your transfers unless you allow them to do so.
+BitTube is a private, secure, untraceable, decentralised digital currency. You are your bank, you control your funds, and nobody can trace your transfers unless you allow them to do so.
 
-**Privacy:** Monero uses a cryptographically sound system to allow you to send and receive funds without your transactions being easily revealed on the blockchain (the ledger of transactions that everyone has). This ensures that your purchases, receipts, and all transfers remain absolutely private by default.
+**Privacy:** BitTube uses a cryptographically sound system to allow you to send and receive funds without your transactions being easily revealed on the blockchain (the ledger of transactions that everyone has). This ensures that your purchases, receipts, and all transfers remain absolutely private by default.
 
 **Security:** Using the power of a distributed peer-to-peer consensus network, every transaction on the network is cryptographically secured. Individual wallets have a 25 word mnemonic seed that is only displayed once, and can be written down to backup the wallet. Wallet files are encrypted with a passphrase to ensure they are useless if stolen.
 
-**Untraceability:** By taking advantage of ring signatures, a special property of a certain type of cryptography, Monero is able to ensure that transactions are not only untraceable, but have an optional measure of ambiguity that ensures that transactions cannot easily be tied back to an individual user or computer.
+**Untraceability:** By taking advantage of ring signatures, a special property of a certain type of cryptography, BitTube is able to ensure that transactions are not only untraceable, but have an optional measure of ambiguity that ensures that transactions cannot easily be tied back to an individual user or computer.
 
 ## About this project
 
-This is the GUI for the [core Monero implementation](https://github.com/ipbc-dev/bittube). It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of Monero that uses the protocol and network in a compatible manner.
+This is the GUI for the [core BitTube implementation](https://github.com/ipbc-dev/bittube). It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of BitTube that uses the protocol and network in a compatible manner.
 
 As with many development projects, the repository on Github is considered to be the "staging" area for the latest changes. Before changes are merged into that branch on the main repository, they are tested by individual developers in their own branches, submitted as a pull request, and then subsequently tested by contributors who focus on testing and code reviews. That having been said, the repository should be carefully considered before using it in a production environment, unless there is a patch in the repository for a particular show-stopping issue you are experiencing. It is generally a better idea to use a tagged release for stability.
 
 ## Supporting the project
 
-Monero is a 100% community-sponsored endeavor. If you want to join our efforts, the easiest thing you can do is support the project financially. Both Monero and Bitcoin donations can be made to **donate.getbittube.org** if using a client that supports the [OpenAlias](https://openalias.org) standard.
-
-The Monero donation address is: `44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A` (viewkey: `f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501`)
-
-The Bitcoin donation address is: `1KTexdemPdxSBcG55heUuTjDRYqbC5ZL8H`
+BitTube is a 100% community-sponsored endeavor. If you want to join our efforts, the easiest thing you can do is support the project financially. Both BitTube and Bitcoin donations can be made to **donate.bittube.app** if using a client that supports the [OpenAlias](https://openalias.org) standard.
 
 GUI development funding and/or some supporting services are also graciously provided by sponsors:
 
-[<img width="80" src="https://static.getbittube.org/images/sponsors/mybittube.png"/>](https://mybittube.com)
-[<img width="150" src="https://static.getbittube.org/images/sponsors/kitware.png?1"/>](http://kitware.com)
-[<img width="100" src="https://static.getbittube.org/images/sponsors/dome9.png"/>](http://dome9.com)
-[<img width="150" src="https://static.getbittube.org/images/sponsors/araxis.png"/>](http://araxis.com)
-[<img width="150" src="https://static.getbittube.org/images/sponsors/jetbrains.png"/>](http://www.jetbrains.com/)
-[<img width="150" src="https://static.getbittube.org/images/sponsors/navicat.png"/>](http://www.navicat.com/)
-[<img width="150" src="https://static.getbittube.org/images/sponsors/symas.png"/>](http://www.symas.com/)
 
-There are also several mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post](https://bitcointalk.org/index.php?topic=583449.0).
+There are also several mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post]().
 
 ## License
 
@@ -58,14 +43,9 @@ See [LICENSE](LICENSE).
 
 ## Translations
 
-Do you speak a second language and would like to help translate the BitTube GUI? Check out Weblate, our localization platform, at [translate.getbittube.org](https://translate.getbittube.org/). Choose the language and suggest a translation for a string or review an existing one. The Localization Workgroup made [a guide with step-by-step instructions](https://github.com/bittube-ecosystem/bittube-translations/blob/master/weblate.md) for Weblate.
+Do you speak a second language and would like to help translate the BitTube GUI? Check out Weblate, our localization platform, at [translate.bittube.app](https://translate.bittube.app/). Choose the language and suggest a translation for a string or review an existing one. The Localization Workgroup made [a guide with step-by-step instructions](https://github.com/bittube-ecosystem/bittube-translations/blob/master/weblate.md) for Weblate.
 
 If you need help/support or any info you can contact the localization workgroup on the IRC channel #bittube-translations (relayed on matrix/riot and MatterMost) or by email at translate[at]getbittube[dot]org. For more info about the Localization workgroup: [github.com/bittube-ecosystem/bittube-translations](https://github.com/bittube-ecosystem/bittube-translations)
-
-Status of the translations:  
-<a href="https://translate.getbittube.org/engage/bittube/?utm_source=widget">
-<img src="https://translate.getbittube.org/widgets/bittube/-/gui-wallet/horizontal-auto.svg" alt="Translation status" />
-</a>
 
 ## Installing the BitTube GUI from a package
 
@@ -85,19 +65,19 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 (Tested on Ubuntu 17.10 x64, Ubuntu 18.04 x64 and Gentoo x64)
 
-1. Install Monero dependencies
+1. Install BitTube dependencies
 
   - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
-	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev libprotobuf-dev protobuf-compiler libgcrypt20-dev`
+	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev`
 
   - For Gentoo
 
-	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc net-libs/zeromq sys-libs/libunwind dev-libs/libsodium dev-libs/hidapi dev-libs/libgcrypt`
+	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc net-libs/zeromq sys-libs/libunwind dev-libs/libsodium dev-libs/hidapi`
 
   - For Fedora
 
-	`sudo dnf install make automake cmake gcc-c++ boost-devel miniupnpc-devel graphviz doxygen unbound-devel libunwind-devel pkgconfig openssl-devel libcurl-devel hidapi-devel libusb-devel zeromq-devel libgcrypt-devel`
+	`sudo dnf install make automake cmake gcc-c++ boost-devel miniupnpc-devel graphviz doxygen unbound-devel libunwind-devel pkgconfig openssl-devel libcurl-devel hidapi-devel libusb-devel zeromq-devel`
 
 2. Install Qt:
 
@@ -130,7 +110,7 @@ The following instructions will fetch Qt from your distribution's repositories i
 
 3. Clone repository
 
-    `git clone https://github.com/ipbc-dev/bittube-gui.git`
+    `git clone https://github.com/ipbc-dev/bittube-wallet-gui.git`
 
 4. Build
 
@@ -149,11 +129,25 @@ The executable can be found in the build/release/bin folder.
 
 3. Install [bittube](https://github.com/ipbc-dev/bittube) dependencies:
 
-  `brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf`
+  `brew install boost`
+
+  `brew install openssl` - to install openssl headers
+
+  `brew install pkgconfig`
+
+  `brew install cmake`
+
+  `brew install zeromq`
+
+  *Note*: If cmake can not find zmq.hpp file on OS X, installing `zmq.hpp` from https://github.com/zeromq/cppzmq to `/usr/local/include` should fix that error.
 
 4. Install Qt:
 
   `brew install qt5`  (or download QT 5.9.7+ from [qt.io](https://www.qt.io/download-open-source/))
+
+  If you have an older version of Qt installed via homebrew, you can force it to use 5.x like so:
+  
+  `brew link --force --overwrite qt5`
 
 5. Add the Qt bin directory to your path
 
@@ -162,7 +156,7 @@ The executable can be found in the build/release/bin folder.
 
 6. Grab an up-to-date copy of the bittube-gui repository
 
-  `git clone https://github.com/ipbc-dev/bittube-gui.git`
+  `git clone https://github.com/ipbc-dev/bittube-wallet-gui.git`
 
 7. Go into the repository
 
@@ -174,6 +168,19 @@ The executable can be found in the build/release/bin folder.
 
 The executable can be found in the `build/release/bin` folder.
 
+**Note:** Workaround for "ERROR: Xcode not set up properly"
+
+Edit `$HOME/Qt/5.9.7/clang_64/mkspecs/features/mac/default_pre.prf`
+
+replace
+`isEmpty($$list($$system("/usr/bin/xcrun -find xcrun 2>/dev/null")))`
+
+with
+`isEmpty($$list($$system("/usr/bin/xcrun -find xcodebuild 2>/dev/null")))`
+
+More info: http://stackoverflow.com/a/35098040/1683164
+
+
 ### On Windows:
 
 The BitTube GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not officially supported anymore.
@@ -182,7 +189,7 @@ The BitTube GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not of
 
 2. Open an 64-bit MSYS2 shell: Use the *MSYS2 MinGW 64-bit* shortcut, or use the `msys2_shell.cmd` batch file with a `-mingw64` parameter
 
-3. Install MSYS2 packages for Monero dependencies; the needed 64-bit packages have `x86_64` in their names
+3. Install MSYS2 packages for BitTube dependencies; the needed 64-bit packages have `x86_64` in their names
 
     ```
     pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb
@@ -194,7 +201,7 @@ The BitTube GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not of
       pacman -S mingw-w64-x86_64-zbar
       ```
 
-    You find more details about those dependencies in the [Monero documentation](https://github.com/ipbc-dev/bittube). Note that that there is no more need to compile Boost from source; like everything else, you can install it now with a MSYS2 package.
+    You find more details about those dependencies in the [BitTube documentation](https://github.com/ipbc-dev/bittube). Note that that there is no more need to compile Boost from source; like everything else, you can install it now with a MSYS2 package.
 
 4. Install Qt5
 
@@ -213,7 +220,7 @@ The BitTube GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not of
 6. Clone repository
 
     ```
-    git clone https://github.com/ipbc-dev/bittube-gui.git
+    git clone https://github.com/ipbc-dev/bittube-wallet-gui.git
     ```
 
 7. Build
@@ -225,6 +232,6 @@ The BitTube GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not of
     make deploy
     ```
 
-    **Note:** The use of `source` above is a dirty workaround for a suspected bug in the current QT version 5.11.2-3 available in the MSYS2 packaging system, see https://github.com/ipbc-dev/bittube-gui/issues/1559 for more info.
+    **Note:** The use of `source` above is a dirty workaround for a suspected bug in the current QT version 5.11.2-3 available in the MSYS2 packaging system, see https://github.com/ipbc-dev/bittube-wallet-gui/issues/1559 for more info.
 
 The executable can be found in the `.\release\bin` directory.

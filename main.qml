@@ -1335,7 +1335,7 @@ ApplicationWindow {
         id: persistentSettings
         fileName: {
             if(isTails && tailsUsePersistence)
-                return homePath + "/Persistent/Monero/bittube-core.conf";
+                return homePath + "/Persistent/Bittube/bittube-core.conf";
             return "";
         }
 
