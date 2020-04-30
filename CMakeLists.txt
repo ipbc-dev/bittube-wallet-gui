@@ -88,7 +88,7 @@ if(STATIC)
   set(Boost_USE_STATIC_LIBS ON)
   set(Boost_USE_STATIC_RUNTIME ON)
   set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
-  add_definitions(-DMONERO_GUI_STATIC)
+  add_definitions(-DBITTUBE_GUI_STATIC)
 endif()
 
 # Include password strength library
@@ -103,22 +103,22 @@ include(CMakePackageConfigHelpers)
 
 # force version update
 function (bittube_gui_add_library_with_deps)
-  cmake_parse_arguments(MONERO_ADD_LIBRARY "" "NAME" "DEPENDS;SOURCES" ${ARGN})
-  source_group("${MONERO_ADD_LIBRARY_NAME}" FILES ${MONERO_ADD_LIBRARY_SOURCES})
+  cmake_parse_arguments(BITTUBE_ADD_LIBRARY "" "NAME" "DEPENDS;SOURCES" ${ARGN})
+  source_group("${BITTUBE_ADD_LIBRARY_NAME}" FILES ${BITTUBE_ADD_LIBRARY_SOURCES})
 
   # Define a ("virtual") object library and an actual library that links those
   # objects together. The virtual libraries can be arbitrarily combined to link
   # any subset of objects into one library archive. This is used for releasing
   # libwallet, which combines multiple components.
-  set(objlib obj_${MONERO_ADD_LIBRARY_NAME})
-  add_library(${objlib} OBJECT ${MONERO_ADD_LIBRARY_SOURCES})
-  add_library("${MONERO_ADD_LIBRARY_NAME}" $<TARGET_OBJECTS:${objlib}>)
-  if (MONERO_ADD_LIBRARY_DEPENDS)
-    add_dependencies(${objlib} ${MONERO_ADD_LIBRARY_DEPENDS})
+  set(objlib obj_${BITTUBE_ADD_LIBRARY_NAME})
+  add_library(${objlib} OBJECT ${BITTUBE_ADD_LIBRARY_SOURCES})
+  add_library("${BITTUBE_ADD_LIBRARY_NAME}" $<TARGET_OBJECTS:${objlib}>)
+  if (BITTUBE_ADD_LIBRARY_DEPENDS)
+    add_dependencies(${objlib} ${BITTUBE_ADD_LIBRARY_DEPENDS})
   endif()
-  set_property(TARGET "${MONERO_ADD_LIBRARY_NAME}" PROPERTY FOLDER "libs")
+  set_property(TARGET "${BITTUBE_ADD_LIBRARY_NAME}" PROPERTY FOLDER "libs")
   target_compile_definitions(${objlib}
-    PRIVATE $<TARGET_PROPERTY:${MONERO_ADD_LIBRARY_NAME},INTERFACE_COMPILE_DEFINITIONS>)
+    PRIVATE $<TARGET_PROPERTY:${BITTUBE_ADD_LIBRARY_NAME},INTERFACE_COMPILE_DEFINITIONS>)
 endfunction ()
 
 function (bittube_gui_add_library name)

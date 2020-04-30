@@ -64,8 +64,8 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="100"/>
-        <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
-        <translation>Hiermee is het makkelijker om Monero te verzenden of te ontvangen, zonder fouten te maken bij het typen van adressen.</translation>
+        <source>This makes it easier to send or receive BitTube and reduces errors when typing in addresses manually.</source>
+        <translation>Hiermee is het makkelijker om BitTube te verzenden of te ontvangen, zonder fouten te maken bij het typen van adressen.</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
@@ -490,13 +490,13 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="62"/>
-        <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>WAARSCHUWING: Gebruik uw Monero-sleutels niet opnieuw op een andere blockchain. Daarmee wordt uw privacy aangetast, TENZIJ risicobeperking van het hergebruik van sleutels is ingebouwd.</translation>
+        <source>WARNING: Do not reuse your BitTube keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation>WAARSCHUWING: Gebruik uw BitTube-sleutels niet opnieuw op een andere blockchain. Daarmee wordt uw privacy aangetast, TENZIJ risicobeperking van het hergebruik van sleutels is ingebouwd.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
-        <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.</source>
-        <translation>WAARSHUWING: Het kopiëren van je seed kan je blootstellen aan kwaadaardige software, welke je seed zou kunnen Opnemen en uw Monero kan bijgevolg kan stelen. Schrijf uw seed aub handmatig neer.</translation>
+        <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your BitTube. Please write down your seed manually.</source>
+        <translation>WAARSHUWING: Het kopiëren van je seed kan je blootstellen aan kwaadaardige software, welke je seed zou kunnen Opnemen en uw BitTube kan bijgevolg kan stelen. Schrijf uw seed aub handmatig neer.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
@@ -924,12 +924,12 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="71"/>
-        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
+        <source>Mining with your computer helps strengthen the BitTube network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
 
-Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Minen met uw computer helpt het Monero-netwerk sterker te worden. Hoe meer mensen er minen, des te moeilijker het is om het Monero-netwerk aan te vallen. Alle beetjes helpen dus.
+Mining also gives you a small chance to earn some BitTube. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation>Minen met uw computer helpt het BitTube-netwerk sterker te worden. Hoe meer mensen er minen, des te moeilijker het is om het BitTube-netwerk aan te vallen. Alle beetjes helpen dus.
 
-Minen geeft u ook een kleine kans om Monero te verdienen. Uw computer zal namelijk hashes berekenen om de oplossing voor een blok te vinden. Als u een blok vindt, ontvangt u de bijbehorende beloning. Veel success!</translation>
+Minen geeft u ook een kleine kans om BitTube te verdienen. Uw computer zal namelijk hashes berekenen om de oplossing voor een blok te vinden. Als u een blok vindt, ontvangt u de bijbehorende beloning. Veel success!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="83"/>
@@ -1289,8 +1289,8 @@ Minen geeft u ook een kleine kans om Monero te verdienen. Uw computer zal nameli
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="100"/>
-        <source>Embedded Monero version: </source>
-        <translation>Ingesloten Monero-versie: </translation>
+        <source>Embedded BitTube version: </source>
+        <translation>Ingesloten BitTube-versie: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="130"/>
@@ -1499,13 +1499,13 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="230"/>
-        <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation>Er wordt een externe server gebruikt om verbinding te maken met het Monero-netwerk. Minder veilig, maar ook minder werk voor uw computer.</translation>
+        <source>Uses a third-party server to connect to the BitTube network. Less secure, but easier on your computer.</source>
+        <translation>Er wordt een externe server gebruikt om verbinding te maken met het BitTube-netwerk. Minder veilig, maar ook minder werk voor uw computer.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="274"/>
-        <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>Typ &apos;Monero remote node&apos; in uw favoriete zoekmachine om een externe node te vinden. Zorg dat de node beschikbaar wordt gesteld door een derde partij die u vertrouwt.</translation>
+        <source>To find a remote node, type &apos;BitTube remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <translation>Typ &apos;BitTube remote node&apos; in uw favoriete zoekmachine om een externe node te vinden. Zorg dat de node beschikbaar wordt gesteld door een derde partij die u vertrouwt.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="282"/>
@@ -1722,8 +1722,8 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="104"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>Op deze pagina kunt u de database met gedeelde ringen gebruiken. Deze database is bedoeld voor zowel Monero als klonen van Monero waarin Monero-sleutels worden hergebruikt.</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by BitTube wallets as well as wallets from BitTube clones which reuse the BitTube keys.</source>
+        <translation>Op deze pagina kunt u de database met gedeelde ringen gebruiken. Deze database is bedoeld voor zowel BitTube als klonen van BitTube waarin BitTube-sleutels worden hergebruikt.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="117"/>
@@ -1739,9 +1739,9 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translatorcomment>Nobody who is stupid enough to use MoneroV will be smart enough to understand this.</translatorcomment>
-        <translation>Om te verbergen welke inputs in een Monero-transactie worden uitgegeven, moet een derde niet kunnen zien welke inputs in een ring al zijn uitgegeven. Daardoor zou de privacybescherming van ring-handtekeningen worden verzwakt. Als alle inputs op één na al zijn uitgegeven, is zichtbaar welke input echt wordt uitgegeven. Dan hebben ring-handtekeningen, een van de drie beschermingslagen van Monero, geen effect meer.&lt;br&gt;Met een lijst met bekende uitgegeven inputs kunt u voorkomen dat u ze in nieuwe transacties gebruikt. Deze lijst wordt onderhouden door het Monero-project en is beschikbaar op de website getbittube.org. U kunt de lijst hier importeren.&lt;br&gt;Maar u kunt ook zelf de blockchain doorzoeken (en van Monero gekopieerde blockchains waarop sleutels worden hergebruikt) met de tool bittube-blockchain-mark-spent-outputs, om een lijst met bekende uitgegeven outputs te genereren.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a BitTube transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection BitTube uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the BitTube project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing BitTube clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translatorcomment>Nobody who is stupid enough to use BitTubeV will be smart enough to understand this.</translatorcomment>
+        <translation>Om te verbergen welke inputs in een BitTube-transactie worden uitgegeven, moet een derde niet kunnen zien welke inputs in een ring al zijn uitgegeven. Daardoor zou de privacybescherming van ring-handtekeningen worden verzwakt. Als alle inputs op één na al zijn uitgegeven, is zichtbaar welke input echt wordt uitgegeven. Dan hebben ring-handtekeningen, een van de drie beschermingslagen van BitTube, geen effect meer.&lt;br&gt;Met een lijst met bekende uitgegeven inputs kunt u voorkomen dat u ze in nieuwe transacties gebruikt. Deze lijst wordt onderhouden door het BitTube-project en is beschikbaar op de website getbittube.org. U kunt de lijst hier importeren.&lt;br&gt;Maar u kunt ook zelf de blockchain doorzoeken (en van BitTube gekopieerde blockchains waarop sleutels worden hergebruikt) met de tool bittube-blockchain-mark-spent-outputs, om een lijst met bekende uitgegeven outputs te genereren.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -1811,13 +1811,13 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="257"/>
-        <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>Om de bescherming door ring-handtekeningen van Monero in stand te houden, mag een output niet met andere ringen worden uitgegeven op andere blockchains. Dit wordt een probleem als u bestaande outputs uitgeeft op een Monero-kloon met hergebruik van sleutels. In dat geval moet u erop letten dat dezelfde ring op beide blockchains wordt gebruikt voor deze outputs.&lt;br&gt;Dit wordt automatisch gedaan door Monero en software die sleutels hergebruikt maar niet actief probeert uw privacy te verminderen.&lt;br&gt;Als u een Monero-kloon zonder deze bescherming gebruikt, kunt u toch uw transacties beschermen door eerst op de kloon te betalen, en vervolgens de ring op deze pagina in te voeren, zodat u uw Monero veilig kunt uitgeven.&lt;br&gt;Als u geen gebruik maakt van een Monero-kloon met hergebruik van sleutels maar zonder deze beveiliging, hoeft u niets te doen, want alles gaat automatisch.&lt;br&gt;</translation>
+        <source>In order to avoid nullifying the protection afforded by BitTube&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing BitTube clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by BitTube and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing BitTube clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your BitTube safely.&lt;br&gt;If you do not use a key-reusing BitTube clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation>Om de bescherming door ring-handtekeningen van BitTube in stand te houden, mag een output niet met andere ringen worden uitgegeven op andere blockchains. Dit wordt een probleem als u bestaande outputs uitgeeft op een BitTube-kloon met hergebruik van sleutels. In dat geval moet u erop letten dat dezelfde ring op beide blockchains wordt gebruikt voor deze outputs.&lt;br&gt;Dit wordt automatisch gedaan door BitTube en software die sleutels hergebruikt maar niet actief probeert uw privacy te verminderen.&lt;br&gt;Als u een BitTube-kloon zonder deze bescherming gebruikt, kunt u toch uw transacties beschermen door eerst op de kloon te betalen, en vervolgens de ring op deze pagina in te voeren, zodat u uw BitTube veilig kunt uitgeven.&lt;br&gt;Als u geen gebruik maakt van een BitTube-kloon met hergebruik van sleutels maar zonder deze beveiliging, hoeft u niets te doen, want alles gaat automatisch.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
-        <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>Hier voert u in welke ringen zijn gebruikt voor in Monero uitgegeven outputs op een blockchain met hergebruik van sleutels, zodat dezelfde ring kan worden hergebruikt om uw privacy te beschermen.</translation>
+        <source>This records rings used by outputs spent on BitTube on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <translation>Hier voert u in welke ringen zijn gebruikt voor in BitTube uitgegeven outputs op een blockchain met hergebruik van sleutels, zodat dezelfde ring kan worden hergebruikt om uw privacy te beschermen.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="290"/>
@@ -2001,8 +2001,8 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="342"/>
-        <source>Enter the Monero Address (example: 44AFFq5kSiGBoZ...)</source>
-        <translation>Geef het Monero-Adres in (voorbeeld: 44AFFq5kSiGBoZ...)</translation>
+        <source>Enter the BitTube Address (example: 44AFFq5kSiGBoZ...)</source>
+        <translation>Geef het BitTube-Adres in (voorbeeld: 44AFFq5kSiGBoZ...)</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="352"/>
@@ -2137,7 +2137,7 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="161"/>
-        <source>Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.</source>
+        <source>Spendable funds: %1 Tube. Please wait ~%2 minutes for your whole balance to become spendable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2213,8 +2213,8 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="640"/>
-        <source>Monero sent successfully</source>
-        <translation>Monero is verzonden</translation>
+        <source>BitTube sent successfully</source>
+        <translation>BitTube is verzonden</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="724"/>
@@ -2752,8 +2752,8 @@ invoer is wellicht vereist.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="60"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
-        <translation>Om te kunnen communiceren met het Monero-Netwerk moet je portemonnee verbonden zijn met een Monero-node. Voor de beste privacy wordt het aanbevolen je eigen node te draaien.</translation>
+        <source>To be able to communicate with the BitTube network your wallet needs to be connected to a BitTube node. For best privacy it&apos;s recommended to run your own node.</source>
+        <translation>Om te kunnen communiceren met het BitTube-Netwerk moet je portemonnee verbonden zijn met een BitTube-node. Voor de beste privacy wordt het aanbevolen je eigen node te draaien.</translation>
     </message>
 </context>
 <context>
@@ -2803,8 +2803,8 @@ invoer is wellicht vereist.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="115"/>
-        <source>Additionally, you may specify a bootstrap node to use Monero immediately.</source>
-        <translation>Bijkomend kun je een bootstrap-node specifiëren om Monero onmiddellijk te gebruiken.</translation>
+        <source>Additionally, you may specify a bootstrap node to use BitTube immediately.</source>
+        <translation>Bijkomend kun je een bootstrap-node specifiëren om BitTube onmiddellijk te gebruiken.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="163"/>
@@ -2816,7 +2816,7 @@ invoer is wellicht vereist.</translation>
     <name>WizardHome</name>
     <message>
         <location filename="../wizard/WizardHome.qml" line="61"/>
-        <source>Welcome to Monero</source>
+        <source>Welcome to BitTube</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2826,8 +2826,8 @@ invoer is wellicht vereist.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="67"/>
-        <source>Choose this option if this is your first time using Monero.</source>
-        <translation>Kies deze optie als het u voor het eerst gebruik maakt van Monero.</translation>
+        <source>Choose this option if this is your first time using BitTube.</source>
+        <translation>Kies deze optie als het u voor het eerst gebruik maakt van BitTube.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="87"/>
@@ -2836,8 +2836,8 @@ invoer is wellicht vereist.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="88"/>
-        <source>Connect your hardware wallet to create a new Monero wallet.</source>
-        <translation>Verbind uw hardware wallet om een nieuwe Monero portemonnee aan te maken.</translation>
+        <source>Connect your hardware wallet to create a new BitTube wallet.</source>
+        <translation>Verbind uw hardware wallet om een nieuwe BitTube portemonnee aan te maken.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="107"/>
@@ -2894,8 +2894,8 @@ invoer is wellicht vereist.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="94"/>
-        <source>Change the language of the Monero GUI.</source>
-        <translation>De taal van de Monero-interface veranderen.</translation>
+        <source>Change the language of the BitTube GUI.</source>
+        <translation>De taal van de BitTube-interface veranderen.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="183"/>
@@ -2935,8 +2935,8 @@ invoer is wellicht vereist.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
-        <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation>Het gebruik van een externe node is een eenvoudige manier om Monero onmiddellijk te gebruiken (vandaar de naam bootstrap), maar wees alert dat het gebruikt van zulke externe nodes (inclusief de bootstrap-instelling) ervoor kan zorgen dan nodes je ip-adres kunnen volgen, je blokhoogte en blokinfo kunnen volgen en je eventueel foutieve informatie kunnen sturen om zo meer te weten te komen over je transacties. </translation>
+        <source>Temporary use of remote nodes is useful in order to use BitTube immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
+        <translation>Het gebruik van een externe node is een eenvoudige manier om BitTube onmiddellijk te gebruiken (vandaar de naam bootstrap), maar wees alert dat het gebruikt van zulke externe nodes (inclusief de bootstrap-instelling) ervoor kan zorgen dan nodes je ip-adres kunnen volgen, je blokhoogte en blokinfo kunnen volgen en je eventueel foutieve informatie kunnen sturen om zo meer te weten te komen over je transacties. </translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
@@ -2958,8 +2958,8 @@ invoer is wellicht vereist.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="72"/>
-        <source>This mode is ideal for managing small amounts of Monero. You have access to basic features for making and managing transactions. It will automatically connect to the Monero network so you can start using Monero immediately.</source>
-        <translation>Deze modus is ideaal voor het beheer van kleine hoeveelheden Monero. Je hebt toegang tot de basisfuncties voor het maken en beheren van transacties. Het zal automatisch verbinding maken met het Monero netwerk zodat je Monero onmiddellijk kunt gebruiken.</translation>
+        <source>This mode is ideal for managing small amounts of BitTube. You have access to basic features for making and managing transactions. It will automatically connect to the BitTube network so you can start using BitTube immediately.</source>
+        <translation>Deze modus is ideaal voor het beheer van kleine hoeveelheden BitTube. Je hebt toegang tot de basisfuncties voor het maken en beheren van transacties. Het zal automatisch verbinding maken met het BitTube netwerk zodat je BitTube onmiddellijk kunt gebruiken.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="85"/>
@@ -3149,10 +3149,10 @@ invoer is wellicht vereist.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="68"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.
+        <source>To be able to communicate with the BitTube network your wallet needs to be connected to a BitTube node. For best privacy it&apos;s recommended to run your own node.
 
 If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Om te kunnen communiceren met het Monero netwerk dient uw portemonnee te worden verbonden met een Monero node. Voor de beste privacy wordt het aangeraden dat je je eigen node draait.
+        <translation>Om te kunnen communiceren met het BitTube netwerk dient uw portemonnee te worden verbonden met een BitTube node. Voor de beste privacy wordt het aangeraden dat je je eigen node draait.
 
 Als het niet mogelijk is om uw eigen node te draaien, dan is er een optie om verbinding te maken met een externe node.</translation>
     </message>
@@ -3463,8 +3463,8 @@ je invoer is mogelijks vereist. </translation>
     </message>
     <message>
         <location filename="../main.qml" line="964"/>
-        <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation>Monero is verzonden: %1 transactie(s) </translation>
+        <source>BitTube sent successfully: %1 transaction(s) </source>
+        <translation>BitTube is verzonden: %1 transactie(s) </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1004"/>
@@ -3527,7 +3527,7 @@ je invoer is mogelijks vereist. </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1983"/>
-        <source>New version of Monero v%1 is available.</source>
+        <source>New version of BitTube v%1 is available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

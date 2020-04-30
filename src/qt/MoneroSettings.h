@@ -33,8 +33,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-#ifndef MONEROSETTINGS_H
-#define MONEROSETTINGS_H
+#ifndef BITTUBESETTINGS_H
+#define BITTUBESETTINGS_H
 
 #include <QtQml/qqmlparserstatus.h>
 #include <QGuiApplication>
@@ -78,4 +78,4 @@ private:
     int m_timerId = 0;
 };
 
-#endif // MONEROSETTINGS_H
+#endif // BITTUBESETTINGS_H

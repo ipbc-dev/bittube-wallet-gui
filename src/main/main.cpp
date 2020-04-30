@@ -78,7 +78,7 @@
 #include "QR-Code-scanner/QrCodeScanner.h"
 #endif
 
-#ifdef MONERO_GUI_STATIC
+#ifdef BITTUBE_GUI_STATIC
 
 #include <QtPlugin>
 #if defined(Q_OS_OSX)
@@ -246,9 +246,9 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     qInstallMessageHandler(messageHandler);
 
     // loglevel is configured in main.qml. Anything lower than
-    // qWarning is not shown here unless MONERO_LOG_LEVEL env var is set
+    // qWarning is not shown here unless BITTUBE_LOG_LEVEL env var is set
     bool logLevelOk;
-    int logLevel = qEnvironmentVariableIntValue("MONERO_LOG_LEVEL", &logLevelOk);
+    int logLevel = qEnvironmentVariableIntValue("BITTUBE_LOG_LEVEL", &logLevelOk);
     if (logLevelOk && logLevel >= 0 && logLevel <= Monero::WalletManagerFactory::LogLevel_Max){
         Monero::WalletManagerFactory::setLogLevel(logLevel);
     }
