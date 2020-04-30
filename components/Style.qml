@@ -84,7 +84,7 @@ QtObject {
     property string _b_defaultFontColor: "white"
     property string _b_dimmedFontColor: "#BBBBBB"
     property string _b_lightGreyFontColor: "#DFDFDF"
-    property string _b_errorColor: "#FA6800"
+    property string _b_errorColor: "#00ABFF"
     property string _b_textSelectionColor: "#BBBBBB"
     property string _b_textSelectedColor: "white"
 
@@ -97,7 +97,7 @@ QtObject {
     property string _b_inputBorderColorInActive: Qt.rgba(255, 255, 255, 0.32)
     property string _b_inputBorderColorInvalid: Qt.rgba(255, 0, 0, 0.40)
 
-    property string _b_buttonBackgroundColor: "#FA6800"
+    property string _b_buttonBackgroundColor: "#00ABFF"
     property string _b_buttonBackgroundColorHover: "#E65E00"
     property string _b_buttonBackgroundColorDisabled: "#707070"
     property string _b_buttonBackgroundColorDisabledHover: "#808080"
@@ -141,7 +141,7 @@ QtObject {
     property string _w_defaultFontColor: "black"
     property string _w_dimmedFontColor: "#3f3f3f"
     property string _w_lightGreyFontColor: "#515151"
-    property string _w_errorColor: "#FA6800"
+    property string _w_errorColor: "#00ABFF"
     property string _w_textSelectionColor: "#BBBBBB"
     property string _w_textSelectedColor: "black"
 
@@ -154,7 +154,7 @@ QtObject {
     property string _w_inputBorderColorInActive: Qt.rgba(0, 0, 0, 0.16)
     property string _w_inputBorderColorInvalid: Qt.rgba(255, 0, 0, 0.50)
 
-    property string _w_buttonBackgroundColor: "#FA6800"
+    property string _w_buttonBackgroundColor: "#00ABFF"
     property string _w_buttonBackgroundColorHover: "#E65E00"
     property string _w_buttonBackgroundColorDisabled: "#bbbbbb"
     property string _w_buttonBackgroundColorDisabledHover: "#D1D1D1"
@@ -182,7 +182,7 @@ QtObject {
     property string _w_menuButtonGradientStop: "#10FFFFFF"
     property string _w_menuButtonTextColor: "#787878"
     property string _w_menuButtonImageRightSource: "qrc:///images/right.svg"
-    property string _w_menuButtonImageRightColorActive: "#FA6800"
+    property string _w_menuButtonImageRightColorActive: "#00ABFF"
     property string _w_menuButtonImageRightColor: "#808080"
     property string _w_menuButtonImageDotArrowSource: "qrc:///images/arrow-right-medium-white.png"
     property string _w_inlineButtonTextColor: "black"
