@@ -691,6 +691,9 @@ ApplicationWindow {
         simpleModeConnectionTimer.start();
     }
     function onDaemonStopped(){
+        console.log("daemon stopped");
+        hideProcessingSplash();
+        daemonRunning = false;
         currentWallet.connected(true);
     }
 
@@ -2057,11 +2060,11 @@ ApplicationWindow {
     function getDefaultDaemonRpcPort(networkType) {
         switch (networkType) {
             case NetworkType.STAGENET:
-                return 24182;
+                return 44182;
             case NetworkType.TESTNET:
                 return 34182;
             default:
-                return 44182;
+                return 24182;
         }
     }
 
