@@ -9,9 +9,6 @@
         <file>images/whatIsIcon.png</file>
         <file>images/whatIsIcon@2x.png</file>
         <file>components/MenuButton.qml</file>
-        <file>bittube/utils/gpg_keys/binaryfate.asc</file>
-        <file>bittube/utils/gpg_keys/fluffypony.asc</file>
-        <file>bittube/utils/gpg_keys/luigi1111.asc</file>
         <file>pages/Account.qml</file>
         <file>pages/Transfer.qml</file>
         <file>pages/History.qml</file>

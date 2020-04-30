@@ -3,7 +3,6 @@ add_subdirectory(QR-Code-scanner)
 add_subdirectory(daemon)
 add_subdirectory(libwalletqt)
 add_subdirectory(model)
-add_subdirectory(openpgp)
 add_subdirectory(zxcvbn-c)
 
 qt5_add_resources(RESOURCES ../qml.qrc)
@@ -150,7 +149,6 @@ target_link_libraries(bittube-gui
     ${QT5_LIBRARIES}
     ${EXTRA_LIBRARIES}
     ${ICU_LIBRARIES}
-    openpgp
 )
 
 if(WITH_SCANNER)

@@ -34,7 +34,6 @@
 #include <QApplication>
 
 bool fileExists(QString path);
-QByteArray fileGetContents(QString path);
 QByteArray fileOpen(QString path);
 bool fileWrite(QString path, QString data);
 QString getAccountName();
