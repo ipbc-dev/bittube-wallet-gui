@@ -32,7 +32,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 import QtGraphicalEffects 1.0
 import Qt.labs.folderlistmodel 2.1
-import moneroComponents.NetworkType 1.0
+import bittubeComponents.NetworkType 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../components"
@@ -294,7 +294,7 @@ Rectangle {
 
     function onPageCompleted(previousView){
         if(previousView.viewName == "wizardHome"){
-            walletKeysFilesModel.refresh(moneroAccountsDir);
+            walletKeysFilesModel.refresh(bittubeAccountsDir);
             wizardOpenWallet1.walletCount = walletKeysFilesModel.rowCount();
             flow._height = flow.calcHeight();
         }

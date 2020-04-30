@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(monero-gui)
+project(bittube-gui)
 
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
 
@@ -14,7 +14,7 @@ set(STATIC ON)
 option(USE_DEVICE_TREZOR ON)
 option(ENABLE_PASS_STRENGTH_METER "Disable zxcvbn" OFF)
 option(WITH_SCANNER "Enable webcam QR scanner" OFF)
-option(DEV_MODE "Checkout latest monero master on build" OFF)
+option(DEV_MODE "Checkout latest bittube master on build" OFF)
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 set(CMAKE_AUTOMOC ON)
@@ -69,15 +69,15 @@ if(GIT_FOUND)
       endif()
     endfunction ()
     message(STATUS "Checking submodules")
-    check_submodule(monero)
+    check_submodule(bittube)
   else()
-    execute_process(COMMAND cd monero && git checkout origin/master)
+    execute_process(COMMAND cd bittube && git checkout origin/master)
   endif()
 endif()
 
-add_subdirectory(monero)
-set_property(TARGET wallet_merged PROPERTY FOLDER "monero")
-get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
+add_subdirectory(bittube)
+set_property(TARGET wallet_merged PROPERTY FOLDER "bittube")
+get_directory_property(ARCH_WIDTH DIRECTORY "bittube" DEFINITION ARCH_WIDTH)
 
 if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-DQT_NO_DEBUG)
@@ -102,7 +102,7 @@ include(CheckTrezor)  # Trezor support check
 include(CMakePackageConfigHelpers)
 
 # force version update
-function (monero_gui_add_library_with_deps)
+function (bittube_gui_add_library_with_deps)
   cmake_parse_arguments(MONERO_ADD_LIBRARY "" "NAME" "DEPENDS;SOURCES" ${ARGN})
   source_group("${MONERO_ADD_LIBRARY_NAME}" FILES ${MONERO_ADD_LIBRARY_SOURCES})
 
@@ -121,8 +121,8 @@ function (monero_gui_add_library_with_deps)
     PRIVATE $<TARGET_PROPERTY:${MONERO_ADD_LIBRARY_NAME},INTERFACE_COMPILE_DEFINITIONS>)
 endfunction ()
 
-function (monero_gui_add_library name)
-    monero_gui_add_library_with_deps(NAME "${name}" SOURCES ${ARGN})
+function (bittube_gui_add_library name)
+    bittube_gui_add_library_with_deps(NAME "${name}" SOURCES ${ARGN})
 endfunction()
 
 include_directories(${EASYLOGGING_INCLUDE})
@@ -130,7 +130,7 @@ link_directories(${EASYLOGGING_LIBRARY_DIRS})
 
 
 include(VersionGui)
-monero_gui_add_library(gui_version SOURCES version.js DEPENDS genversiongui)
+bittube_gui_add_library(gui_version SOURCES version.js DEPENDS genversiongui)
 
 message(STATUS "${CMAKE_MODULE_PATH}")
 
@@ -432,5 +432,5 @@ endif()
 add_subdirectory(src)
 
 # Required to make wallet_merged build before the gui
-add_dependencies(monero-gui wallet_merged)
+add_dependencies(bittube-gui wallet_merged)
 

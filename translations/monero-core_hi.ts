@@ -1726,8 +1726,8 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>अस्पष्ट लेन-देन में कौन से इनपुट खर्च किए जा रहे हैं, यह अस्पष्ट करने के लिए, किसी तीसरे पक्ष को यह बताने में सक्षम नहीं होना चाहिए कि एक अंगूठी में कौन से इनपुट पहले से ही खर्च किए जाने के लिए जाने जाते हैं। ऐसा करने में सक्षम होने के कारण रिंग सिग्नेचर द्वारा वहन की जाने वाली सुरक्षा कमजोर होगी। यदि सभी लेकिन इनपुटों में से एक को पहले से ही खर्च करने के लिए जाना जाता है, तो वास्तव में खर्च किया जा रहा इनपुट स्पष्ट हो जाता है, जिससे रिंग सिग्नेचर के प्रभाव को कम कर दिया जाता है, गोपनीयता सुरक्षा की तीन मुख्य परतों में से एक मोनरो का उपयोग होता है। &lt;br&gt; लेनदेन से बचने में मदद करने के लिए उन आदानों, ज्ञात खर्चों की एक सूची का उपयोग नए लेनदेन में उपयोग करने से बचने के लिए किया जा सकता है। ऐसी सूची को मोनरो परियोजना द्वारा बनाए रखा गया है और यह getmonero.org वेबसाइट पर उपलब्ध है, और आप यहां इस सूची को आयात कर सकते हैं। &lt;br&gt; वैकल्पिक रूप से, आप ब्लॉकचैन (और कुंजी-पुन: उपयोग करने वाले मोनोरो क्लोन के ब्लॉकचेन को स्वयं स्कैन कर सकते हैं) मोनोरो-ब्लॉकचैन-मार्क-बिताए-आउटपुट टूल ज्ञात खर्च किए गए आउटपुट की एक सूची बनाने के लिए। &lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>अस्पष्ट लेन-देन में कौन से इनपुट खर्च किए जा रहे हैं, यह अस्पष्ट करने के लिए, किसी तीसरे पक्ष को यह बताने में सक्षम नहीं होना चाहिए कि एक अंगूठी में कौन से इनपुट पहले से ही खर्च किए जाने के लिए जाने जाते हैं। ऐसा करने में सक्षम होने के कारण रिंग सिग्नेचर द्वारा वहन की जाने वाली सुरक्षा कमजोर होगी। यदि सभी लेकिन इनपुटों में से एक को पहले से ही खर्च करने के लिए जाना जाता है, तो वास्तव में खर्च किया जा रहा इनपुट स्पष्ट हो जाता है, जिससे रिंग सिग्नेचर के प्रभाव को कम कर दिया जाता है, गोपनीयता सुरक्षा की तीन मुख्य परतों में से एक मोनरो का उपयोग होता है। &lt;br&gt; लेनदेन से बचने में मदद करने के लिए उन आदानों, ज्ञात खर्चों की एक सूची का उपयोग नए लेनदेन में उपयोग करने से बचने के लिए किया जा सकता है। ऐसी सूची को मोनरो परियोजना द्वारा बनाए रखा गया है और यह getbittube.org वेबसाइट पर उपलब्ध है, और आप यहां इस सूची को आयात कर सकते हैं। &lt;br&gt; वैकल्पिक रूप से, आप ब्लॉकचैन (और कुंजी-पुन: उपयोग करने वाले मोनोरो क्लोन के ब्लॉकचेन को स्वयं स्कैन कर सकते हैं) मोनोरो-ब्लॉकचैन-मार्क-बिताए-आउटपुट टूल ज्ञात खर्च किए गए आउटपुट की एक सूची बनाने के लिए। &lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -3485,7 +3485,7 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1987"/>
-        <source>Check out getmonero.org</source>
+        <source>Check out getbittube.org</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3510,12 +3510,12 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1044"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
+        <source>This address received %1 bittube, but the transaction is not yet mined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.qml" line="1047"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
+        <source>This address received %1 bittube, with %2 confirmation(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

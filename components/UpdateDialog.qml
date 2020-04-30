@@ -30,7 +30,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 
-import moneroComponents.Downloader 1.0
+import bittubeComponents.Downloader 1.0
 
 import "../components" as MoneroComponents
 
@@ -95,7 +95,7 @@ Popup {
 
             text: {
                 if (!updateDialog.url) {
-                    return qsTr("Please visit getmonero.org for details") + translationManager.emptyString;
+                    return qsTr("Please visit getbittube.org for details") + translationManager.emptyString;
                 }
                 if (downloader.active) {
                     return "%1 (%2%)"

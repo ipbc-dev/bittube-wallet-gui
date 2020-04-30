@@ -30,7 +30,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import "../components" as MoneroComponents
-import moneroComponents.Wallet 1.0
+import bittubeComponents.Wallet 1.0
 
 Rectangle {
     id: root

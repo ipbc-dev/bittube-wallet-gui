@@ -1729,8 +1729,8 @@ Du kan endre passordet i lommebok-innstillingene.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>For å tilsløre hvilke inndata i en Monero-transaksjon som brukes, vil en tredjepart ikke være i stand til å vite hvilke inndata i en ring som allerede er brukt. Å vite dette ville ha svekket beskyttelsen som ringsignaturer gir. Hvis det er kjent at alle bortsett fra én av inndataene allerede er brukt, vil inndataene som allerede er brukt komme tydelig frem, noe som ugyldiggjør effekten av ringsignaturer, som er én av de tre hovedlagene av personvernbeskyttelse som Monero bruker.&lt;br&gt;For å bidra til at transaksjonene unngår disse inndataene, kan en liste av kjente inndata brukes for å unngå bruke dem i nye transaksjoner. En slik liste vedlikeholdes av Monero-prosjektet og er tilgjengelig på getmonero.org-nettsiden. Du kan importere denne listen her.&lt;br&gt;Alternativt kan du skanne blokkjeden (og blokkjeden av Monero-kloner som gjenbruker nøkler) på egenhånd ved å bruke «monero-blockchain-mark-spent-outputs»-verktøyet for å opprette en liste over kjente, brukte utdata.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>For å tilsløre hvilke inndata i en Monero-transaksjon som brukes, vil en tredjepart ikke være i stand til å vite hvilke inndata i en ring som allerede er brukt. Å vite dette ville ha svekket beskyttelsen som ringsignaturer gir. Hvis det er kjent at alle bortsett fra én av inndataene allerede er brukt, vil inndataene som allerede er brukt komme tydelig frem, noe som ugyldiggjør effekten av ringsignaturer, som er én av de tre hovedlagene av personvernbeskyttelse som Monero bruker.&lt;br&gt;For å bidra til at transaksjonene unngår disse inndataene, kan en liste av kjente inndata brukes for å unngå bruke dem i nye transaksjoner. En slik liste vedlikeholdes av Monero-prosjektet og er tilgjengelig på getbittube.org-nettsiden. Du kan importere denne listen her.&lt;br&gt;Alternativt kan du skanne blokkjeden (og blokkjeden av Monero-kloner som gjenbruker nøkler) på egenhånd ved å bruke «bittube-blockchain-mark-spent-outputs»-verktøyet for å opprette en liste over kjente, brukte utdata.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -3445,8 +3445,8 @@ du må kanskje oppgi inndata.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1047"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Denne adressen mottok %1 monero med %2 bekreftelse(r).</translation>
+        <source>This address received %1 bittube, with %2 confirmation(s).</source>
+        <translation>Denne adressen mottok %1 bittube med %2 bekreftelse(r).</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1058"/>
@@ -3541,7 +3541,7 @@ du må kanskje oppgi inndata.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1987"/>
-        <source>Check out getmonero.org</source>
+        <source>Check out getbittube.org</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3577,8 +3577,8 @@ du må kanskje oppgi inndata.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1044"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Denne adressen mottok %1 monero, men transaksjonen er enda ikke utvunnet</translation>
+        <source>This address received %1 bittube, but the transaction is not yet mined</source>
+        <translation>Denne adressen mottok %1 bittube, men transaksjonen er enda ikke utvunnet</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1051"/>

@@ -9,9 +9,9 @@
         <file>images/whatIsIcon.png</file>
         <file>images/whatIsIcon@2x.png</file>
         <file>components/MenuButton.qml</file>
-        <file>monero/utils/gpg_keys/binaryfate.asc</file>
-        <file>monero/utils/gpg_keys/fluffypony.asc</file>
-        <file>monero/utils/gpg_keys/luigi1111.asc</file>
+        <file>bittube/utils/gpg_keys/binaryfate.asc</file>
+        <file>bittube/utils/gpg_keys/fluffypony.asc</file>
+        <file>bittube/utils/gpg_keys/luigi1111.asc</file>
         <file>pages/Account.qml</file>
         <file>pages/Transfer.qml</file>
         <file>pages/History.qml</file>
@@ -109,7 +109,7 @@
         <file>images/card-background-black@2x.png</file>
         <file>images/card-background-white.png</file>
         <file>images/card-background-white@2x.png</file>
-        <file>images/moneroLogo_white.png</file>
+        <file>images/bittubeLogo_white.png</file>
         <file>images/titlebarLogo.png</file>
         <file>images/titlebarLogo@2x.png</file>
         <file>pages/merchant/MerchantTitlebar.qml</file>
@@ -129,8 +129,8 @@
         <file>images/lightning@2x.png</file>
         <file>images/logout.png</file>
         <file>images/logout@2x.png</file>
-        <file>images/moneroIcon-28x28.png</file>
-        <file>images/moneroIcon-28x28@2x.png</file>
+        <file>images/bittubeIcon-28x28.png</file>
+        <file>images/bittubeIcon-28x28@2x.png</file>
         <file>images/lightning-white.png</file>
         <file>images/lightning-white@2x.png</file>
         <file>components/InputMulti.qml</file>

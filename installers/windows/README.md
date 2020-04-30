@@ -19,7 +19,7 @@ As the setup script in file [Monero.iss](Monero.iss) has to list many
 files and directories of the GUI wallet package to install by name,
 this version of the script only works with exactly the GUI wallet
 for Monero release *Carbon Chamaeleon* that you find on
-[the official download page](https://getmonero.org/downloads/).
+[the official download page](https://getbittube.org/downloads/).
 
 It should however be easy to modify the script for future
 versions of the GUI wallet.
@@ -39,8 +39,8 @@ Note that the installer build process is now reproducible / deterministic. For d
 The build steps in detail:
 
 1. Install *Inno Setup*. You can get it from [here](http://www.jrsoftware.org/isdl.php)
-2. Get the Inno Setup script plus related files by cloning the whole [monero-gui GitHub repository](https://github.com/monero-project/monero-gui); you will only need the files in the installer directory `installers\windows` however. Depending on development state, additionally instead of simply using `master` you may have to checkout a specific branch, like `release-v0.15`.
-3. The setup script is written to take the GUI wallet files from a subdirectory named `bin`; so create `installers\windows\bin`, get the zip file of the GUI wallet from [here](https://getmonero.org/downloads/), unpack it somewhere, and copy all the files and subdirectories in the single subdirectory there (currently named `monero-gui-0.15.0.0`) to this `bin` subdirectory
+2. Get the Inno Setup script plus related files by cloning the whole [bittube-gui GitHub repository](https://github.com/bittube-project/bittube-gui); you will only need the files in the installer directory `installers\windows` however. Depending on development state, additionally instead of simply using `master` you may have to checkout a specific branch, like `release-v0.15`.
+3. The setup script is written to take the GUI wallet files from a subdirectory named `bin`; so create `installers\windows\bin`, get the zip file of the GUI wallet from [here](https://getbittube.org/downloads/), unpack it somewhere, and copy all the files and subdirectories in the single subdirectory there (currently named `bittube-gui-0.15.0.0`) to this `bin` subdirectory
 4. Start Inno Setup, load `Monero.iss` and compile it
 5. The result i.e. the finished installer will be the file `mysetup.exe` in the `installers\windows\Output` subdirectory 
 

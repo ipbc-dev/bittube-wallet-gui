@@ -35,10 +35,10 @@ import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
 
 import "../js/TxUtils.js" as TxUtils
-import moneroComponents.AddressBook 1.0
-import moneroComponents.AddressBookModel 1.0
-import moneroComponents.Clipboard 1.0
-import moneroComponents.NetworkType 1.0
+import bittubeComponents.AddressBook 1.0
+import bittubeComponents.AddressBookModel 1.0
+import bittubeComponents.Clipboard 1.0
+import bittubeComponents.NetworkType 1.0
 import FontAwesome 1.0
 
 Rectangle {

@@ -1731,8 +1731,8 @@ Pode alterar a password nas configurações da carteira.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>De forma a esconder qual é a verdadeira transação que está a ser gasta, Monero utiliza varias transacções selecionadas automaticamente na mesma transação, uma terceira pessoa não deve conseguir distinguir qual é a transação verdadeira das falsas. Caso o consiga fazer irá enfraquecer a a protecção dada pelas ring signatures. Se todas as transacções excepto uma forem conhecidas por já terem sido gastas, então torna-se evidente qual é a transação que está a ser gasta e a utilização de ring signatures fica sem efeito, sendo as ring signatures uma das 3 camadas que permite a protecção de privacidade em Monero.&lt;br&gt;Para ajudar a evitar essas transacções, é-lhe fornecida uma lista com transacções já conhecidas como gastas e assim pode evitar usa-las numa nova transação. Esta lista é mantida pelo Monero Project e está disponivel no site oficinal getmonero.org, e pode importar essa lista para aqui.&lt;br&gt;Em alternativa, pode utilizar a ferramenta monero-blockchain-mark-spent-outputs e criar essa mesma lista de transacções conhecidas como gastas.</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>De forma a esconder qual é a verdadeira transação que está a ser gasta, Monero utiliza varias transacções selecionadas automaticamente na mesma transação, uma terceira pessoa não deve conseguir distinguir qual é a transação verdadeira das falsas. Caso o consiga fazer irá enfraquecer a a protecção dada pelas ring signatures. Se todas as transacções excepto uma forem conhecidas por já terem sido gastas, então torna-se evidente qual é a transação que está a ser gasta e a utilização de ring signatures fica sem efeito, sendo as ring signatures uma das 3 camadas que permite a protecção de privacidade em Monero.&lt;br&gt;Para ajudar a evitar essas transacções, é-lhe fornecida uma lista com transacções já conhecidas como gastas e assim pode evitar usa-las numa nova transação. Esta lista é mantida pelo Monero Project e está disponivel no site oficinal getbittube.org, e pode importar essa lista para aqui.&lt;br&gt;Em alternativa, pode utilizar a ferramenta bittube-blockchain-mark-spent-outputs e criar essa mesma lista de transacções conhecidas como gastas.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -3440,8 +3440,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1047"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Este endereço recebeu %1 monero, com %2 confirmação(ões)</translation>
+        <source>This address received %1 bittube, with %2 confirmation(s).</source>
+        <translation>Este endereço recebeu %1 bittube, com %2 confirmação(ões)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1058"/>
@@ -3536,7 +3536,7 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1987"/>
-        <source>Check out getmonero.org</source>
+        <source>Check out getbittube.org</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3572,8 +3572,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1044"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Este endereço recebeu %1 monero, porém a transação ainda não foi minerada</translation>
+        <source>This address received %1 bittube, but the transaction is not yet mined</source>
+        <translation>Este endereço recebeu %1 bittube, porém a transação ainda não foi minerada</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1051"/>

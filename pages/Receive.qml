@@ -36,13 +36,13 @@ import FontAwesome 1.0
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
 
-import moneroComponents.Clipboard 1.0
-import moneroComponents.Wallet 1.0
-import moneroComponents.WalletManager 1.0
-import moneroComponents.TransactionHistory 1.0
-import moneroComponents.TransactionHistoryModel 1.0
-import moneroComponents.Subaddress 1.0
-import moneroComponents.SubaddressModel 1.0
+import bittubeComponents.Clipboard 1.0
+import bittubeComponents.Wallet 1.0
+import bittubeComponents.WalletManager 1.0
+import bittubeComponents.TransactionHistory 1.0
+import bittubeComponents.TransactionHistoryModel 1.0
+import bittubeComponents.Subaddress 1.0
+import bittubeComponents.SubaddressModel 1.0
 import "../js/TxUtils.js" as TxUtils
 
 Rectangle {

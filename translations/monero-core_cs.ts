@@ -1713,8 +1713,8 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Abychom skryli, který konkrétní vstup bude v Monero transakci utracen, neměla by třetí strana být schopna říci, které z vstupů do kruhového podpisu jsou již známy jako utracené. Pokud by toto možné bylo, oslabilo by to ochranu poskytovanou tzv. kruhovým podpisem. Je-li známo, že všechny vstupy kromě jednoho jsou již utracené, pak pozbývá smyslu s takovými vstupy vytvářet kruhový podpis, což je jedna z tří hlavních vrstev ochrany soukromí, které Monero používá.&lt;br&gt;Vyhnout se použití těchto soukromí oslabujících vstupů při vytváření transakce lze poskytnutím seznamu vstupů jejichž plná privátnost není zaručena. Tento seznam udržuje projekt Monero a je dostupný na webových stránkách getmonero.org a můžete jej importovat zde. &lt;br&gt; Alternativně můžete sami skenovat blockchain pomocí nástroje monero-blockchain-mark-spent-outputs pro vytvoření seznamu známých vyčerpaných výstupů.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Abychom skryli, který konkrétní vstup bude v Monero transakci utracen, neměla by třetí strana být schopna říci, které z vstupů do kruhového podpisu jsou již známy jako utracené. Pokud by toto možné bylo, oslabilo by to ochranu poskytovanou tzv. kruhovým podpisem. Je-li známo, že všechny vstupy kromě jednoho jsou již utracené, pak pozbývá smyslu s takovými vstupy vytvářet kruhový podpis, což je jedna z tří hlavních vrstev ochrany soukromí, které Monero používá.&lt;br&gt;Vyhnout se použití těchto soukromí oslabujících vstupů při vytváření transakce lze poskytnutím seznamu vstupů jejichž plná privátnost není zaručena. Tento seznam udržuje projekt Monero a je dostupný na webových stránkách getbittube.org a můžete jej importovat zde. &lt;br&gt; Alternativně můžete sami skenovat blockchain pomocí nástroje bittube-blockchain-mark-spent-outputs pro vytvoření seznamu známých vyčerpaných výstupů.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="154"/>
@@ -3438,8 +3438,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1047"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Tato adresa obdržela %1 monero a %2 potvrzení.</translation>
+        <source>This address received %1 bittube, with %2 confirmation(s).</source>
+        <translation>Tato adresa obdržela %1 bittube a %2 potvrzení.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1058"/>
@@ -3534,7 +3534,7 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1987"/>
-        <source>Check out getmonero.org</source>
+        <source>Check out getbittube.org</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3570,8 +3570,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1044"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Tato adresa obdžela %1 monero, ale transakce jestě není potvrzená vytěžením</translation>
+        <source>This address received %1 bittube, but the transaction is not yet mined</source>
+        <translation>Tato adresa obdžela %1 bittube, ale transakce jestě není potvrzená vytěžením</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1051"/>

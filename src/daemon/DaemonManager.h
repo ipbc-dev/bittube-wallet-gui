@@ -83,7 +83,7 @@ private:
     static QStringList m_clArgs;
     std::unique_ptr<QProcess> m_daemon;
     QMutex m_daemonMutex;
-    QString m_monerod;
+    QString m_bittubed;
     bool m_app_exit = false;
     bool m_noSync = false;
 

@@ -1729,8 +1729,8 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Для того щоб приховати які входи в транзакціях Monero були витрачені, третя сторона не повинна повідомляти які входи в кільці вже задіяні в витраті. Адже якщо це зробити, то це послабить захист, який забезпечується кільцевими підписами. Якщо відомо, що всі, крім одного з входів, вже витрачені, то фактично трата входу стає очевидною, тим самим анулюється ефект кільцевих підписів, одного з трьох основних рівнів захисту конфіденційності Monero.&lt;br&gt;Щоб допомогти транзакціям уникнути витрати цих входів, можна використовувати список відомих витрачених входів, щоб уникнути їх використання в нових транзакціях. Такий список підтримується проектом Monero і доступний на веб-сайті getmonero.org, і ви можете імпортувати цей список тут.&lt;br&gt;Крім того, ви можете просканувати блокчейн (і блокчейни клонів Monero) самостійно, використовуючи інструмент monero-blockchain-mark-spent-outputs, щоб створити список відомих витрачених входів.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Для того щоб приховати які входи в транзакціях Monero були витрачені, третя сторона не повинна повідомляти які входи в кільці вже задіяні в витраті. Адже якщо це зробити, то це послабить захист, який забезпечується кільцевими підписами. Якщо відомо, що всі, крім одного з входів, вже витрачені, то фактично трата входу стає очевидною, тим самим анулюється ефект кільцевих підписів, одного з трьох основних рівнів захисту конфіденційності Monero.&lt;br&gt;Щоб допомогти транзакціям уникнути витрати цих входів, можна використовувати список відомих витрачених входів, щоб уникнути їх використання в нових транзакціях. Такий список підтримується проектом Monero і доступний на веб-сайті getbittube.org, і ви можете імпортувати цей список тут.&lt;br&gt;Крім того, ви можете просканувати блокчейн (і блокчейни клонів Monero) самостійно, використовуючи інструмент bittube-blockchain-mark-spent-outputs, щоб створити список відомих витрачених входів.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -3502,7 +3502,7 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1047"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
+        <source>This address received %1 bittube, with %2 confirmation(s).</source>
         <translation>Цей адрес отримав %1 XMR, із %2 підтвердженням(и).</translation>
     </message>
     <message>
@@ -3527,7 +3527,7 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1987"/>
-        <source>Check out getmonero.org</source>
+        <source>Check out getbittube.org</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3583,7 +3583,7 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../main.qml" line="1044"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
+        <source>This address received %1 bittube, but the transaction is not yet mined</source>
         <translation>Цей адрес отримав %1 XMR, але транзакція ще не була підтверджена майнерами</translation>
     </message>
     <message>

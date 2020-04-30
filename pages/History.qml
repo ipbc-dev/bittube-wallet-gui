@@ -30,12 +30,12 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
-import moneroComponents.Wallet 1.0
-import moneroComponents.WalletManager 1.0
-import moneroComponents.TransactionHistory 1.0
-import moneroComponents.TransactionInfo 1.0
-import moneroComponents.TransactionHistoryModel 1.0
-import moneroComponents.Clipboard 1.0
+import bittubeComponents.Wallet 1.0
+import bittubeComponents.WalletManager 1.0
+import bittubeComponents.TransactionHistory 1.0
+import bittubeComponents.TransactionInfo 1.0
+import bittubeComponents.TransactionHistoryModel 1.0
+import bittubeComponents.Clipboard 1.0
 import FontAwesome 1.0
 
 import "../components/effects/" as MoneroEffects
@@ -1692,7 +1692,7 @@ Rectangle {
             informationPopup.open();
         }
         Component.onCompleted: {
-            var _folder = 'file://' + moneroAccountsDir;
+            var _folder = 'file://' + bittubeAccountsDir;
             try {
                 _folder = 'file://' + desktopFolder;
             }

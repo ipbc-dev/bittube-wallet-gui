@@ -1729,8 +1729,8 @@ Pot canviar la contrasenya en la configuració del portamonedes.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Per ofuscar quins ingressos s&apos;estan gastant en una transacció de Monero, un tercer no hauria de poder dir quines entrades en un anell han estat gastades. Fer-ho debilitaria la protecció que ofereixen les signatures d&apos;anell. Si es coneixen tots menys un dels ingressos que es gasten, llavors l&apos;entrada que està essent realment gastada es fa evident i per tant anul·la l&apos;efecte de les signatures d&apos;anell, una de les tres capes principals de protecció de la privacitat que utilitza Monero. &lt;br&gt;Per ajudar a evitar aquestes entrades en les transaccions, es pot utilitzar una llista de d&apos;entrades de despeses conegudes per evitar-ne l&apos;ús en noves transaccions. Aquesta llista és mantinguda pel projecte Monero i està disponible al lloc web de getmonero.org, d&apos;on podeu importar aquesta llista.&lt;br&gt;De forma alternatva, vostè mateix pot escanejar la blockchain (i la blockchain dels clons que reutilitzen les claus de Monero) fent servir l&apos;eina de sortides monero-blockchain-mark-spent-outputs per crear una llista coneguda de despeses de sortida. &lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getbittube.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the bittube-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Per ofuscar quins ingressos s&apos;estan gastant en una transacció de Monero, un tercer no hauria de poder dir quines entrades en un anell han estat gastades. Fer-ho debilitaria la protecció que ofereixen les signatures d&apos;anell. Si es coneixen tots menys un dels ingressos que es gasten, llavors l&apos;entrada que està essent realment gastada es fa evident i per tant anul·la l&apos;efecte de les signatures d&apos;anell, una de les tres capes principals de protecció de la privacitat que utilitza Monero. &lt;br&gt;Per ajudar a evitar aquestes entrades en les transaccions, es pot utilitzar una llista de d&apos;entrades de despeses conegudes per evitar-ne l&apos;ús en noves transaccions. Aquesta llista és mantinguda pel projecte Monero i està disponible al lloc web de getbittube.org, d&apos;on podeu importar aquesta llista.&lt;br&gt;De forma alternatva, vostè mateix pot escanejar la blockchain (i la blockchain dels clons que reutilitzen les claus de Monero) fent servir l&apos;eina de sortides bittube-blockchain-mark-spent-outputs per crear una llista coneguda de despeses de sortida. &lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -3397,8 +3397,8 @@ Comissió: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1047"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Aquesta adreça ha rebut %1 monero, amb %2 confirmacion(s).</translation>
+        <source>This address received %1 bittube, with %2 confirmation(s).</source>
+        <translation>Aquesta adreça ha rebut %1 bittube, amb %2 confirmacion(s).</translation>
     </message>
     <message>
         <location filename="../main.qml" line="303"/>
@@ -3476,8 +3476,8 @@ potser se us requereix la participació.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1044"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Aquesta adreça ha rebut %1 monero, però la transacció encara no ha estat minada</translation>
+        <source>This address received %1 bittube, but the transaction is not yet mined</source>
+        <translation>Aquesta adreça ha rebut %1 bittube, però la transacció encara no ha estat minada</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1051"/>
@@ -3531,7 +3531,7 @@ potser se us requereix la participació.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1987"/>
-        <source>Check out getmonero.org</source>
+        <source>Check out getbittube.org</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

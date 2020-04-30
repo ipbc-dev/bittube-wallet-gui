@@ -10,7 +10,7 @@ add_library(openpgp
 
 target_include_directories(openpgp
   PUBLIC
-    ${CMAKE_SOURCE_DIR}/monero/contrib/epee/include)
+    ${CMAKE_SOURCE_DIR}/bittube/contrib/epee/include)
 
 target_link_libraries(openpgp
   PUBLIC

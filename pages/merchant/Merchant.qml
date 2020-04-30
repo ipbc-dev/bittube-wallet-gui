@@ -5,13 +5,13 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
 
-import moneroComponents.Clipboard 1.0
-import moneroComponents.Wallet 1.0
-import moneroComponents.WalletManager 1.0
-import moneroComponents.TransactionHistory 1.0
-import moneroComponents.TransactionHistoryModel 1.0
-import moneroComponents.Subaddress 1.0
-import moneroComponents.SubaddressModel 1.0
+import bittubeComponents.Clipboard 1.0
+import bittubeComponents.Wallet 1.0
+import bittubeComponents.WalletManager 1.0
+import bittubeComponents.TransactionHistory 1.0
+import bittubeComponents.TransactionHistoryModel 1.0
+import bittubeComponents.Subaddress 1.0
+import bittubeComponents.SubaddressModel 1.0
 
 import "../../js/Windows.js" as Windows
 import "../../js/TxUtils.js" as TxUtils
@@ -566,7 +566,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 14
             font.bold: true
-            color: MoneroComponents.Style.moneroGrey
+            color: MoneroComponents.Style.bittubeGrey
             text: qsTr("The merchant page requires a larger window") + translationManager.emptyString
             themeTransition: false
         }
