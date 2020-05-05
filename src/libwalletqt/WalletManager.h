@@ -196,6 +196,9 @@ public:
     Q_INVOKABLE QString stats_json() const;
     Q_INVOKABLE QString info_json() const;
 
+    Q_INVOKABLE bool requestInfo() const;
+    Q_INVOKABLE bool requestStats() const;
+
     Q_INVOKABLE void onWalletPassphraseNeeded(Monero::Wallet * wallet);
     Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool entry_abort=false);
 
