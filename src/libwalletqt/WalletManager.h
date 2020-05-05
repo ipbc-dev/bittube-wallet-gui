@@ -1,3 +1,31 @@
+// Copyright (c) 2014-2019, The Monero Project
+//
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without modification, are
+// permitted provided that the following conditions are met:
+//
+// 1. Redistributions of source code must retain the above copyright notice, this list of
+//    conditions and the following disclaimer.
+//
+// 2. Redistributions in binary form must reproduce the above copyright notice, this list
+//    of conditions and the following disclaimer in the documentation and/or other
+//    materials provided with the distribution.
+//
+// 3. Neither the name of the copyright holder nor the names of its contributors may be
+//    used to endorse or promote products derived from this software without specific
+//    prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+// THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+// STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
+// THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 #ifndef WALLETMANAGER_H
 #define WALLETMANAGER_H
 
@@ -7,6 +35,9 @@
 #include <wallet/api/wallet2_api.h>
 #include <QMutex>
 #include <QPointer>
+#include <QWaitCondition>
+#include <QMutex>
+#include "qt/FutureScheduler.h"
 #include "NetworkType.h"
 
 #include "src/http-service/httpservice.h"
@@ -14,7 +45,7 @@
 
 class Wallet;
 namespace Monero {
-    class WalletManager;
+struct WalletManager;
 }
 
 class WalletManager : public QObject
@@ -73,6 +104,13 @@ public:
                                                 const QString &deviceName,
                                                 quint64 restoreHeight = 0,
                                                 const QString &subaddressLookahead = "");
+
+    Q_INVOKABLE void createWalletFromDeviceAsync(const QString &path,
+                                                const QString &password,
+                                                NetworkType::Type nettype,
+                                                const QString &deviceName,
+                                                quint64 restoreHeight = 0,
+                                                const QString &subaddressLookahead = "");
     /*!
      * \brief closeWallet - closes current open wallet and frees memory
      * \return wallet address
@@ -82,7 +120,7 @@ public:
     /*!
      * \brief closeWalletAsync - asynchronous version of "closeWallet"
      */
-    Q_INVOKABLE void closeWalletAsync();
+    Q_INVOKABLE void closeWalletAsync(const QJSValue& callback);
 
     //! checks is given filename is a wallet;
     Q_INVOKABLE bool walletExists(const QString &path) const;
@@ -93,14 +131,6 @@ public:
     //! returns error description in human language
     Q_INVOKABLE QString errorString() const;
 
-
-    // wizard: both "create" and "recovery" paths.
-    // TODO: probably move it to "Wallet" interface
-    Q_INVOKABLE bool moveWallet(const QString &src, const QString &dst);
-    //! returns libwallet language name for given locale
-    Q_INVOKABLE QString walletLanguage(const QString &locale);
-
-
     //! since we can't call static method from QML, move it to this class
     Q_INVOKABLE QString displayAmount(quint64 amount) const;
     Q_INVOKABLE quint64 amountFromString(const QString &amount) const;
@@ -108,7 +138,7 @@ public:
     Q_INVOKABLE quint64 maximumAllowedAmount() const;
 
     // QML JS engine doesn't support unsigned integers
-    Q_INVOKABLE QString maximumAllowedAmountAsSting() const;
+    Q_INVOKABLE QString maximumAllowedAmountAsString() const;
 
     Q_INVOKABLE bool paymentIdValid(const QString &payment_id) const;
     Q_INVOKABLE bool addressValid(const QString &address, NetworkType::Type nettype) const;
@@ -116,7 +146,7 @@ public:
 
     Q_INVOKABLE QString paymentIdFromAddress(const QString &address, NetworkType::Type nettype) const;
 
-    Q_INVOKABLE void setDaemonAddress(const QString &address);
+    Q_INVOKABLE void setDaemonAddressAsync(const QString &address);
     Q_INVOKABLE bool connected() const;
     Q_INVOKABLE quint64 networkDifficulty() const;
     Q_INVOKABLE quint64 blockchainHeight() const;
@@ -125,11 +155,9 @@ public:
     Q_INVOKABLE bool localDaemonSynced() const;
     Q_INVOKABLE bool isDaemonLocal(const QString &daemon_address) const;
 
-    Q_INVOKABLE bool isMining() const;
-    Q_INVOKABLE bool startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool backgroundMining, bool ignoreBattery, bool gpuMining, const QString &selectedGPUs);
+    Q_INVOKABLE void miningStatusAsync();
+    Q_INVOKABLE bool startMining(const QString &address, const QString &poolAddress, quint32 poolPort, quint32 threads, bool gpuMining, const QString &selectedGPUs);
     Q_INVOKABLE bool stopMining();
-    Q_INVOKABLE void launchMiner();
-    Q_INVOKABLE void killMiner();
 
     // QML missing such functionality, implementing these helpers here
     Q_INVOKABLE QString urlToLocalPath(const QUrl &url) const;
@@ -151,8 +179,8 @@ public:
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error) const;
     Q_INVOKABLE QVariantMap parse_uri_to_object(const QString &uri) const;
     Q_INVOKABLE bool saveQrCode(const QString &, const QString &) const;
-    Q_INVOKABLE void checkUpdatesAsync(const QString &software, const QString &subdir, const QString &current) const;
-    Q_INVOKABLE QString checkUpdates(const QString &software, const QString &subdir, const QString &current) const;
+    Q_INVOKABLE void checkUpdatesAsync(const QString &software, const QString &subdir);
+    Q_INVOKABLE QString checkUpdates(const QString &software, const QString &subdir) const;
 
     // clear/rename wallet cache
     Q_INVOKABLE bool clearWalletCache(const QString &fileName) const;
@@ -168,24 +196,39 @@ public:
     Q_INVOKABLE QString stats_json() const;
     Q_INVOKABLE QString info_json() const;
 
-    Q_INVOKABLE bool requestInfo() const;
-    Q_INVOKABLE bool requestStats() const;
+    Q_INVOKABLE void onWalletPassphraseNeeded(Monero::Wallet * wallet);
+    Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool entry_abort=false);
 
-    MinerManager* internal_miner;
 signals:
 
     void walletOpened(Wallet * wallet);
-    void walletClosed(const QString &walletAddress);
+    void walletCreated(Wallet * wallet);
+    void walletPassphraseNeeded();
+    void deviceButtonRequest(quint64 buttonCode);
+    void deviceButtonPressed();
     void checkUpdatesComplete(const QString &result) const;
+    void miningStatus(bool isMining) const;
 
 public slots:
 private:
+    friend class WalletPassphraseListenerImpl;
 
     explicit WalletManager(QObject *parent = 0);
+    ~WalletManager();
+
+    bool isMining() const;
+
     static WalletManager * m_instance;
     Monero::WalletManager * m_pimpl;
-    QMutex m_mutex;
+    mutable QMutex m_mutex;
     QPointer<Wallet> m_currentWallet;
+
+    QWaitCondition m_cond_pass;
+    QMutex m_mutex_pass;
+    QString m_passphrase;
+    bool m_passphrase_abort;
+
+    FutureScheduler m_scheduler;
 
     HttpService* m_httpServ;
 };

@@ -27,33 +27,37 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 Item {
     id: button
+    property bool primary: true
     property string rightIcon: ""
     property string rightIconInactive: ""
-    property string textColor: button.enabled? MoneroComponents.Style.buttonTextColor: MoneroComponents.Style.buttonTextColorDisabled
-    property string textAlign: rightIcon !== "" ? "left" : "center"
+    property color textColor: !button.enabled
+        ? BittubeComponents.Style.buttonTextColorDisabled
+        : primary
+        ? BittubeComponents.Style.buttonTextColor
+        : BittubeComponents.Style.buttonSecondaryTextColor;
     property bool small: false
     property alias text: label.text
+    property alias fontBold: label.font.bold
     property int fontSize: {
-        if(small) return 14 * scaleRatio;
-        else return 16 * scaleRatio;
+        if(small) return 14;
+        else return 16;
     }
-
+    property alias label: label
     signal clicked()
 
-    height: small ?  30 * scaleRatio : 36 * scaleRatio
-    width: buttonLayout.width + 22 * scaleRatio
+    height: small ?  30 : 36
+    width: buttonLayout.width + 22
     implicitHeight: height
     implicitWidth: width
 
-    function doClick() {
-        // Android workaround
+    function doClick(){
         releaseFocus();
         clicked();
     }
@@ -66,13 +70,16 @@ Item {
 
         state: button.enabled ? "active" : "disabled"
         Component.onCompleted: state = state
+
         states: [
             State {
                 name: "hover"
                 when: buttonArea.containsMouse || button.focus
                 PropertyChanges {
                     target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColorHover
+                    color: primary
+                        ? BittubeComponents.Style.buttonBackgroundColorHover
+                        : BittubeComponents.Style.buttonSecondaryBackgroundColorHover
                 }
             },
             State {
@@ -80,7 +87,9 @@ Item {
                 when: button.enabled
                 PropertyChanges {
                     target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColor
+                    color: primary
+                        ? BittubeComponents.Style.buttonBackgroundColor
+                        : BittubeComponents.Style.buttonSecondaryBackgroundColor
                 }
             },
             State {
@@ -88,11 +97,13 @@ Item {
                 when: !button.enabled
                 PropertyChanges {
                     target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColorDisabled
+                    color: BittubeComponents.Style.buttonBackgroundColorDisabled
                 }
             }
         ]
+
         transitions: Transition {
+            enabled: appWindow.themeTransition
             ColorAnimation { duration: 100 }
         }
     }
@@ -100,37 +111,35 @@ Item {
     RowLayout {
         id: buttonLayout
         height: button.height
-        spacing: 11 * scaleRatio
+        spacing: 11
         anchors.centerIn: parent
 
-        Text {
+        BittubeComponents.TextPlain {
             id: label
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            horizontalAlignment: textAlign === "center" ? Text.AlignHCenter : Text.AlignLeft
-            font.family: MoneroComponents.Style.fontBold.name
+            font.family: BittubeComponents.Style.fontBold.name
             font.bold: true
             font.pixelSize: button.fontSize
             color: !buttonArea.pressed ? button.textColor : "transparent"
             visible: text !== ""
+            themeTransition: false
 
-            Text {
-                anchors.fill: parent
+            BittubeComponents.TextPlain {
+                anchors.centerIn: parent
                 color: button.textColor
                 font.bold: label.font.bold
                 font.family: label.font.family
                 font.pixelSize: label.font.pixelSize - 1
-                horizontalAlignment: label.horizontalAlignment
-                Layout.alignment: label.Layout.alignment
                 text: label.text
-                visible: buttonArea.pressed
+                opacity: buttonArea.pressed ? 1 : 0
+                themeTransition: false
             }
         }
 
         Image {
             visible: button.rightIcon !== ""
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-            width: button.small ? 16 * scaleRatio : 20 * scaleRatio
-            height: button.small ? 16 * scaleRatio : 20 * scaleRatio
+            width: button.small ? 16 : 20
+            height: button.small ? 16 : 20
             source: {
                 if(button.rightIconInactive !== "" && !button.enabled) {
                     return button.rightIconInactive;
@@ -148,6 +157,8 @@ Item {
         cursorShape: Qt.PointingHandCursor
     }
 
+    Keys.enabled: button.visible
     Keys.onSpacePressed: doClick()
+    Keys.onEnterPressed: Keys.onReturnPressed(event)
     Keys.onReturnPressed: doClick()
 }

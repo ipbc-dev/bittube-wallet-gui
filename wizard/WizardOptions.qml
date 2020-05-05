@@ -31,7 +31,7 @@ import QtQuick 2.2
 import QtQml 2.2
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
-import moneroComponents.NetworkType 1.0
+import bittubeComponents.NetworkType 1.0
 import "../components"
 
 ColumnLayout {

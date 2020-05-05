@@ -90,7 +90,7 @@ Item {
             console.log("setting demo token")
             bearerToken = encodeURIComponent(Helper.demoToken())
             tweetsModel.phrase = ""
-            tweetsModel.from = "@monerocurrency"
+            tweetsModel.from = "@bittubecurrency"
             // reload()
             return;
         }

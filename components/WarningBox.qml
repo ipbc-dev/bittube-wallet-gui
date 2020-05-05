@@ -1,21 +1,21 @@
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 
-import "." as MoneroComponents
+import "." as BittubeComponents
 
 Rectangle {
     id: root
     property alias text: content.text
     property alias textColor: content.color
-    property int fontSize: 15 * scaleRatio
+    property int fontSize: 15
 
     Layout.fillWidth: true
     Layout.preferredHeight: warningLayout.height
 
-    color: "#09FFFFFF"
+    color: BittubeComponents.Style.titleBarButtonHoverColor
     radius: 4
-    border.color: MoneroComponents.Style.inputBorderColorInActive
+    border.color: BittubeComponents.Style.inputBorderColorInActive
     border.width: 1
 
     signal linkActivated;
@@ -30,35 +30,32 @@ Rectangle {
             Layout.alignment: Qt.AlignVCenter
             Layout.preferredHeight: 33
             Layout.preferredWidth: 33
-            Layout.rightMargin: 14
-            Layout.leftMargin: 14
+            Layout.rightMargin: 12
+            Layout.leftMargin: 18
             Layout.topMargin: 12
             Layout.bottomMargin: 12
-            source: "../images/warning.png"
+            source: "qrc:///images/warning.png"
         }
 
-        TextArea {
+        Text {
             id: content
             Layout.fillWidth: true
-            color: MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
+            color: BittubeComponents.Style.defaultFontColor
+            font.family: BittubeComponents.Style.fontRegular.name
             font.pixelSize: root.fontSize
             horizontalAlignment: TextInput.AlignLeft
-            selectionColor: MoneroComponents.Style.dimmedFontColor
-            selectByMouse: true
             textFormat: Text.RichText
             wrapMode: Text.WordWrap
-            textMargin: 0
-            leftPadding: 0
-            topPadding: 6
-            readOnly: false
+            leftPadding: 4
+            rightPadding: 18
+            topPadding: 10
+            bottomPadding: 10
             onLinkActivated: root.linkActivated();
 
-            // @TODO: Legacy. Remove after Qt 5.8.
-            // https://stackoverflow.com/questions/41990013
             MouseArea {
                 anchors.fill: parent
-                enabled: false
+                acceptedButtons: Qt.NoButton
+                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
             }
         }
     }

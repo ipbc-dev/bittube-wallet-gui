@@ -27,14 +27,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
+import "effects/" as MoneroEffects
 
 Rectangle {
     id: root
@@ -48,6 +49,7 @@ Rectangle {
     property alias textArea: dialogContent
     property alias okText: okButton.text
     property alias cancelText: cancelButton.text
+    property alias closeVisible: closeButton.visible
 
     property var icon
 
@@ -56,12 +58,18 @@ Rectangle {
     signal rejected()
     signal closeCallback();
 
-    Image {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        source: "../images/middlePanelBg.jpg"
+    // background
+    MoneroEffects.GradientBackground {
+        anchors.fill: parent
+        fallBackColor: BittubeComponents.Style.middlePanelBackgroundColor
+        initialStartColor: BittubeComponents.Style.middlePanelBackgroundGradientStart
+        initialStopColor: BittubeComponents.Style.middlePanelBackgroundGradientStop
+        blackColorStart: BittubeComponents.Style._b_middlePanelBackgroundGradientStart
+        blackColorStop: BittubeComponents.Style._b_middlePanelBackgroundGradientStop
+        whiteColorStart: BittubeComponents.Style._w_middlePanelBackgroundGradientStart
+        whiteColorStop: BittubeComponents.Style._w_middlePanelBackgroundGradientStop
+        start: Qt.point(0, 0)
+        end: Qt.point(height, width)
     }
 
     // Make window draggable
@@ -75,70 +83,82 @@ Rectangle {
 
     function open() {
         // Center
-        if(!isMobile) {
-            root.x = parent.width/2 - root.width/2
-            root.y = 100
-        }
-        show()
+        root.x = parent.width/2 - root.width/2
+        root.y = 100
         root.z = 11
         root.visible = true;
     }
 
     function close() {
         root.visible = false;
+        // reset button text
+        okButton.text = qsTr("OK")
+        cancelButton.text = qsTr("Cancel")
+
         closeCallback();
     }
 
     // TODO: implement without hardcoding sizes
-    width: isMobile ? screenWidth : 520
-    height: isMobile ? screenHeight : 380
+    width: 520
+    height: 380
 
     ColumnLayout {
         id: mainLayout
         spacing: 10
-        anchors { fill: parent; margins: 15 }
+        anchors.fill: parent
+        anchors.margins: 20
 
         RowLayout {
             id: column
-            //anchors {fill: parent; margins: 16 }
-            Layout.topMargin: 14 * scaleRatio
-            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: 14
+            Layout.fillWidth: true
 
-            MoneroComponents.Label {
+            BittubeComponents.Label {
                 id: dialogTitle
-                horizontalAlignment: Text.AlignHCenter
-                fontSize: 18 * scaleRatio
+                fontSize: 18
                 fontFamily: "Arial"
-                color: MoneroComponents.Style.defaultFontColor
+                color: BittubeComponents.Style.defaultFontColor
             }
-
         }
 
-        RowLayout {
-            TextArea {
-                id : dialogContent
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                renderType: Text.QtRendering
-                font.family: MoneroComponents.Style.fontLight.name
-                textFormat: TextEdit.AutoText
-                readOnly: true
-                font.pixelSize: 14 * scaleRatio
-                selectByMouse: false
-                wrapMode: TextEdit.Wrap
-                color: MoneroComponents.Style.defaultFontColor
+        Item {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.preferredHeight: 240
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        appWindow.showStatusMessage(qsTr("Double tap to copy"),3)
-                    }
-                    onDoubleClicked: {
-                        parent.selectAll()
-                        parent.copy()
-                        parent.deselect()
-                        console.log("copied to clipboard");
-                        appWindow.showStatusMessage(qsTr("Content copied to clipboard"),3)
+            Flickable {
+                id: flickable
+                anchors.fill: parent
+                ScrollBar.vertical: ScrollBar {
+                    onActiveChanged: if (!active && !isMac) active = true
+                }
+                boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+
+                TextArea.flickable: TextArea {
+                    id: dialogContent
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    renderType: Text.QtRendering
+                    font.family: BittubeComponents.Style.fontLight.name
+                    textFormat: TextEdit.AutoText
+                    readOnly: true
+                    font.pixelSize: 14
+                    selectByMouse: false
+                    wrapMode: TextEdit.Wrap
+                    color: BittubeComponents.Style.defaultFontColor
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            appWindow.showStatusMessage(qsTr("Double tap to copy"),3)
+                        }
+                        onDoubleClicked: {
+                            parent.selectAll()
+                            parent.copy()
+                            parent.deselect()
+                            console.log("copied to clipboard");
+                            appWindow.showStatusMessage(qsTr("Content copied to clipboard"),3)
+                        }
                     }
                 }
             }
@@ -150,7 +170,7 @@ Rectangle {
             spacing: 60
             Layout.alignment: Qt.AlignHCenter
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: cancelButton
                 text: qsTr("Cancel") + translationManager.emptyString
                 onClicked: {
@@ -159,23 +179,52 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            BittubeComponents.StandardButton {
                 id: okButton
-                text: qsTr("OK")
+                text: qsTr("OK") + translationManager.emptyString
                 KeyNavigation.tab: cancelButton
                 onClicked: {
                     root.close()
                     root.accepted()
-
                 }
             }
+        }
+    }
+
+    // close icon
+    Rectangle {
+        id: closeButton
+        anchors.top: parent.top
+        anchors.right: parent.right
+        width: 48
+        height: 48
+        color: "transparent"
+
+        MoneroEffects.ImageMask {
+            anchors.centerIn: parent
+            width: 16
+            height: 16
+            image: BittubeComponents.Style.titleBarCloseSource
+            color: BittubeComponents.Style.defaultFontColor
+            opacity: 0.75
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                root.close()
+                root.rejected()
+            }
+            cursorShape: Qt.PointingHandCursor
+            onEntered: closeButton.color = "#262626";
+            onExited: closeButton.color = "transparent";
         }
     }
 
     // window borders
     Rectangle{
         width: 1
-        color: MoneroComponents.Style.grey
+        color: BittubeComponents.Style.grey
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -183,7 +232,7 @@ Rectangle {
 
     Rectangle{
         width: 1
-        color: MoneroComponents.Style.grey
+        color: BittubeComponents.Style.grey
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -191,7 +240,7 @@ Rectangle {
 
     Rectangle{
         height: 1
-        color: MoneroComponents.Style.grey
+        color: BittubeComponents.Style.grey
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -199,7 +248,7 @@ Rectangle {
 
     Rectangle{
         height: 1
-        color: MoneroComponents.Style.grey
+        color: BittubeComponents.Style.grey
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.right: parent.right

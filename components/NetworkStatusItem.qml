@@ -27,11 +27,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import moneroComponents.Wallet 1.0
-import "../components" as MoneroComponents
+import FontAwesome 1.0
+import bittubeComponents.Wallet 1.0
+import "../components" as BittubeComponents
 
 Rectangle {
     id: item
@@ -39,27 +40,34 @@ Rectangle {
     property var connected: Wallet.ConnectionStatus_Disconnected
 
     function getConnectionStatusString(status) {
-        if (status == Wallet.ConnectionStatus_Connected) {
-            if(!appWindow.daemonSynced)
-                return qsTr("Synchronizing")
-            if(appWindow.remoteNodeConnected)
-                return qsTr("Remote node")
-            return appWindow.isMining ? qsTr("Connected") + " + " + qsTr("Mining"): qsTr("Connected")
+        switch (status) {
+            case Wallet.ConnectionStatus_Connected:
+                if (!appWindow.daemonSynced)
+                    return qsTr("Synchronizing");
+                if (persistentSettings.useRemoteNode)
+                    return qsTr("Remote node");
+                return appWindow.isMining ? qsTr("Connected") + " + " + qsTr("Mining"): qsTr("Connected");
+            case Wallet.ConnectionStatus_WrongVersion:
+                return qsTr("Wrong version");
+            case Wallet.ConnectionStatus_Disconnected:
+                if (appWindow.walletMode <= 1) {
+                    return qsTr("Searching node") + translationManager.emptyString;
+                }
+                return qsTr("Disconnected");
+            case Wallet.ConnectionStatus_Connecting:
+                return qsTr("Connecting");
+            default:
+                return qsTr("Invalid connection status");
         }
-        if (status == Wallet.ConnectionStatus_WrongVersion)
-            return qsTr("Wrong version")
-        if (status == Wallet.ConnectionStatus_Disconnected)
-            return qsTr("Disconnected")
-        return qsTr("Invalid connection status")
     }
 
     RowLayout {
-        Layout.preferredHeight: 40 * scaleRatio
+        Layout.preferredHeight: 40
 
         Item {
             id: iconItem
-            width: 40 * scaleRatio
-            height: 40 * scaleRatio
+            width: 40
+            height: 40
             opacity: {
                 if(item.connected == Wallet.ConnectionStatus_Connected){
                     return 1
@@ -70,20 +78,21 @@ Rectangle {
 
             Image {
                 anchors.top: parent.top
-                anchors.topMargin: !appWindow.isMining ? 6 * scaleRatio : 4 * scaleRatio
+                anchors.topMargin: !appWindow.isMining ? 6 : 4
                 anchors.right: parent.right
-                anchors.rightMargin: !appWindow.isMining ? 11 * scaleRatio : 0
+                anchors.rightMargin: !appWindow.isMining ? 11 : 0
                 source: {
                     if(appWindow.isMining) {
-                       return "../images/miningxmr.png"
+                       return "qrc:///images/miningtube.png"
                     } else if(item.connected == Wallet.ConnectionStatus_Connected) {
-                        return "../images/lightning.png"
+                        return "qrc:///images/lightning.png"
                     } else {
-                        return "../images/lightning-white.png"
+                        return "qrc:///images/lightning-white.png"
                     }
                 }
                 MouseArea {
                     anchors.fill: parent
+                    visible: appWindow.walletMode >= 2
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         if(!appWindow.isMining) {
@@ -98,33 +107,38 @@ Rectangle {
         }
 
         Item {
-            height: 40 * scaleRatio
-            width: 260 * scaleRatio
+            height: 40
+            width: 260
 
-            Text {
+            BittubeComponents.TextPlain {
                 id: statusText
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.topMargin: 0
-                font.family: MoneroComponents.Style.fontMedium.name
+                font.family: BittubeComponents.Style.fontMedium.name
                 font.bold: true
-                font.pixelSize: 13 * scaleRatio
-                color: MoneroComponents.Style.defaultFontColor
-                opacity: 0.5
+                font.pixelSize: 13
+                color: BittubeComponents.Style.dimmedFontColor
+                opacity: BittubeComponents.Style.blackTheme ? 0.65 : 0.5
                 text: qsTr("Network status") + translationManager.emptyString
+                themeTransition: false
             }
 
-            Text {
+            BittubeComponents.TextPlain {
                 id: statusTextVal
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.topMargin: 14
-                font.family: MoneroComponents.Style.fontMedium.name
-                font.pixelSize: 20 * scaleRatio
-                color: MoneroComponents.Style.defaultFontColor
+                font.family: BittubeComponents.Style.fontMedium.name
+                font.pixelSize: 20
+                color: BittubeComponents.Style.defaultFontColor
                 text: getConnectionStatusString(item.connected) + translationManager.emptyString
+                opacity: BittubeComponents.Style.blackTheme ? 1.0 : 0.7
+                themeTransition: false
+
                 MouseArea {
                     anchors.fill: parent
+                    visible: appWindow.walletMode >= 2
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         if(!appWindow.isMining) {
@@ -133,6 +147,50 @@ Rectangle {
                         } else {
                             appWindow.showPageRequest("Mining")
                         }
+                    }
+                }
+            }
+
+            Text {
+                anchors.left: statusTextVal.right
+                anchors.leftMargin: 16
+                anchors.verticalCenter: parent.verticalCenter
+                color: refreshMouseArea.containsMouse ?  BittubeComponents.Style.dimmedFontColor : BittubeComponents.Style.defaultFontColor
+                font.family: FontAwesome.fontFamilySolid
+                font.pixelSize: 24
+                font.styleName: "Solid"
+                opacity: iconItem.opacity * (refreshMouseArea.visible ? 1 : 0.5)
+                text: FontAwesome.random
+                visible: (
+                    !appWindow.disconnected &&
+                    !persistentSettings.useRemoteNode &&
+                    (persistentSettings.bootstrapNodeAddress == "auto" || persistentSettings.walletMode < 2)
+                )
+
+                MouseArea {
+                    id: refreshMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    visible: true
+                    onClicked: {
+                        const callback = function(result) {
+                            refreshMouseArea.visible = true;
+                            if (result) {
+                                appWindow.showStatusMessage(qsTr("Successfully switched to another public node"), 3);
+                                appWindow.currentWallet.refreshHeightAsync();
+                            } else {
+                                appWindow.showStatusMessage(qsTr("Failed to switch public node"), 3);
+                            }
+                        };
+
+                        daemonManager.sendCommandAsync(
+                            ["set_bootstrap_daemon", "auto"],
+                            appWindow.currentWallet.nettype,
+                            callback);
+
+                        refreshMouseArea.visible = false;
+                        appWindow.showStatusMessage(qsTr("Switching to another public node"), 3);
                     }
                 }
             }

@@ -26,17 +26,17 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import "../../js/Windows.js" as Windows
 import "../../js/Utils.js" as Utils
-import "../../components" as MoneroComponents
+import "../../components" as BittubeComponents
 import "../../pages"
 import "."
-import moneroComponents.Clipboard 1.0
+import bittubeComponents.Clipboard 1.0
 
 ColumnLayout {
     id: settingsPage
@@ -83,18 +83,23 @@ ColumnLayout {
             State {
                 name: "Wallet"
                 PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsWalletView }
+                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsWalletView.settingsHeight + 140 }
             }, State {
                 name: "UI"
                 PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsLayoutView }
+                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsLayoutView.layoutHeight + 140 }
             }, State {
                 name: "Node"
                 PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsNodeView }
+                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsNodeView.nodeHeight + 140 }
             }, State {
                 name: "Log"
                 PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsLogView }
+                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsLogView.logHeight + 140 }
             }, State {
                 name: "Info"
                 PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsInfoView }
+                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsInfoView.infoHeight + 140 }
             }
         ]
 

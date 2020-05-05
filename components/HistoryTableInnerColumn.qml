@@ -30,9 +30,9 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
-import moneroComponents.Clipboard 1.0
-import moneroComponents.PendingTransaction 1.0
-import moneroComponents.Wallet 1.0
+import bittubeComponents.Clipboard 1.0
+import bittubeComponents.PendingTransaction 1.0
+import bittubeComponents.Wallet 1.0
 
 import "." as MoneroComponents
 

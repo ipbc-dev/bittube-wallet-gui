@@ -28,38 +28,53 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick.Controls 2.0
-import QtQuick 2.7
+import QtQuick 2.9
 
 import "../js/TxUtils.js" as TxUtils
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 TextArea {
-    property int fontSize: 18 * scaleRatio
+    property int fontSize: 18
     property bool fontBold: false
-    property string fontColor: MoneroComponents.Style.defaultFontColor
+    property string fontColor: BittubeComponents.Style.defaultFontColor
 
     property bool mouseSelection: true
     property bool error: false
     property bool addressValidation: false
 
     id: textArea
-    font.family: MoneroComponents.Style.fontRegular.name
+    font.family: BittubeComponents.Style.fontRegular.name
     color: fontColor
     font.pixelSize: fontSize
     font.bold: fontBold
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: mouseSelection
-    selectionColor: MoneroComponents.Style.dimmedFontColor
-    selectedTextColor: MoneroComponents.Style.defaultFontColor
+    selectionColor: BittubeComponents.Style.textSelectionColor
+    selectedTextColor: BittubeComponents.Style.textSelectedColor
+
+    property int minimumHeight: 100
+    height: contentHeight > minimumHeight ? contentHeight : minimumHeight
 
     onTextChanged: {
         if(addressValidation){
             // js replacement for `RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }`
-            textArea.text = textArea.text.replace(/[^a-z0-9.@]/gi,'');
+            if (textArea.text.startsWith("bittube:")) {
+                error = false;
+                return;
+            }
+            textArea.text = textArea.text.replace(/[^a-z0-9.@\-]/gi,'');
             var address_ok = TxUtils.checkAddress(textArea.text, appWindow.persistentSettings.nettype) || TxUtils.isValidOpenAliasAddress(textArea.text);
             if(!address_ok) error = true;
             else error = false;
             TextArea.cursorPosition = textArea.text.length;
+        }
+    }
+
+    BittubeComponents.ContextMenu {
+        cursorShape: Qt.IBeamCursor
+        onPaste: {
+            textArea.clear();
+            textArea.paste();
         }
     }
 }

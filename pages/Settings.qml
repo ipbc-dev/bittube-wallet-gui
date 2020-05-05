@@ -38,7 +38,7 @@ import "../js/Utils.js" as Utils
 
 
 import "../components"
-import moneroComponents.Clipboard 1.0
+import bittubeComponents.Clipboard 1.0
 
 Rectangle {
     property bool viewOnly: false

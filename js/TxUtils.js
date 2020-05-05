@@ -12,8 +12,17 @@ function destinationsToAddress(destinations){
 }
 
 function addressTruncate(address, range){
+    if(typeof(address) === "undefined") return "";
     if(typeof(range) === "undefined") range = 8;
     return address.substring(0, range) + "..." + address.substring(address.length-range);
+}
+
+function addressTruncatePretty(address, blocks){
+    if(typeof(address) === "undefined") return "";
+    if(typeof(blocks) === "undefined") blocks = 2;
+    blocks = blocks <= 1 ? 1 : blocks >= 23 ? 23 : blocks;
+    var ret = "";
+    return address.substring(0, 4 * blocks).match(/.{1,4}/g).join(' ') + " .. " + address.substring(address.length - 4 * blocks).match(/.{1,4}/g).join(' ');
 }
 
 function check256(str, length) {

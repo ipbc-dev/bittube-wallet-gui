@@ -28,22 +28,31 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick.Controls 2.0
-import QtQuick 2.7
+import QtQuick 2.9
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 TextField {
-    font.family: MoneroComponents.Style.fontRegular.name
-    font.pixelSize: 18 * scaleRatio
+    id: textField
+    font.family: BittubeComponents.Style.fontRegular.name
+    font.pixelSize: 18
     font.bold: true
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
-    color: MoneroComponents.Style.defaultFontColor
-    selectionColor: MoneroComponents.Style.dimmedFontColor
-    selectedTextColor: MoneroComponents.Style.defaultFontColor
+    color: BittubeComponents.Style.defaultFontColor
+    selectionColor: BittubeComponents.Style.textSelectionColor
+    selectedTextColor: BittubeComponents.Style.textSelectedColor
 
     background: Rectangle {
         color: MoneroComponents.Style.inputBackgroundColor
         radius: 4
+    }
+
+    BittubeComponents.ContextMenu {
+        cursorShape: Qt.IBeamCursor
+        onPaste: {
+            textField.clear();
+            textField.paste();
+        }
     }
 }

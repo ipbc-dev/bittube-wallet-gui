@@ -27,93 +27,91 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 
-import "../components"
-import moneroComponents.Clipboard 1.0
+import "../components" as BittubeComponents
+import bittubeComponents.Clipboard 1.0
 
 import "../js/TxUtils.js" as TxUtils
 
 Rectangle {
-
     color: "transparent"
+    property alias txkeyHeight: mainLayout.height
 
     Clipboard { id: clipboard }
 
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
-        anchors.topMargin: 40 * scaleRatio
+        anchors.margins: 20
+        anchors.topMargin: 40
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        spacing: 20 * scaleRatio
+        spacing: 20
 
         // solo
         ColumnLayout {
             id: soloBox
-            spacing: 20 * scaleRatio
+            spacing: 20
 
-            Label {
+            BittubeComponents.Label {
                 id: soloTitleLabel
-                fontSize: 24 * scaleRatio
+                fontSize: 24
                 text: qsTr("Prove Transaction") + translationManager.emptyString
             }
 
-            Text {
+            BittubeComponents.TextPlain {
+                Layout.fillWidth: true
                 text: qsTr("Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. \n" +
                            "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address.") + translationManager.emptyString
                 wrapMode: Text.Wrap
+                font.family: BittubeComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                color: BittubeComponents.Style.defaultFontColor
+            }
+
+            BittubeComponents.LineEdit {
+                id: getProofTxIdLine
                 Layout.fillWidth: true
-                font.family: Style.fontRegular.name
-                font.pixelSize: 14 * scaleRatio
-                color: Style.defaultFontColor
+                labelFontSize: 14
+                labelText: qsTr("Transaction ID") + translationManager.emptyString
+                fontSize: 16
+                placeholderFontSize: 16
+                placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
+                readOnly: false
+                copyButton: true
             }
 
-            RowLayout {
-                LineEdit {
-                    labelText: qsTr("Transaction ID") + translationManager.emptyString
-                    id: getProofTxIdLine
-                    fontSize: 16 * scaleRatio
-                    placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
-                    readOnly: false
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
+            BittubeComponents.LineEdit {
+                id: getProofAddressLine
+                Layout.fillWidth: true
+                labelFontSize: 14
+                labelText: qsTr("Address") + translationManager.emptyString
+                fontSize: 16
+                placeholderFontSize: 16
+                placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
+                readOnly: false
+                copyButton: true
             }
 
-            RowLayout {
-                LineEdit {
-                    id: getProofAddressLine
-                    labelText: qsTr("Address") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
-                    placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
-                    readOnly: false
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
+            BittubeComponents.LineEdit {
+                id: getProofMessageLine
+                Layout.fillWidth: true
+                fontSize: 16
+                labelFontSize: 14
+                labelText: qsTr("Message") + translationManager.emptyString
+                placeholderFontSize: 16
+                placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
+                readOnly: false
+                copyButton: true
             }
 
-            RowLayout {
-                LineEdit {
-                    id: getProofMessageLine
-                    fontSize: 16 * scaleRatio
-                    labelText: qsTr("Message") + translationManager.emptyString
-                    placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
-                    readOnly: false
-                    width: mainLayout.editWidth
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
-            }
-
-            StandardButton {
-                Layout.topMargin: 17 * scaleRatio
-                width: 60 * scaleRatio
+            BittubeComponents.StandardButton {
+                Layout.topMargin: 16
                 small: true
                 text: qsTr("Generate") + translationManager.emptyString
                 enabled: TxUtils.checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || TxUtils.checkAddress(getProofAddressLine.text, appWindow.persistentSettings.nettype))
@@ -126,83 +124,79 @@ Rectangle {
             // underline
             Rectangle {
                 height: 1
-                color: "#404040"
+                color: BittubeComponents.Style.dividerColor
+                opacity: BittubeComponents.Style.dividerOpacity
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
-                anchors.bottomMargin: 3 * scaleRatio
+                anchors.bottomMargin: 3
             }
 
-            Label {
+            BittubeComponents.Label {
                 id: soloTitleLabel2
-                fontSize: 24 * scaleRatio
+                fontSize: 24
                 text: qsTr("Check Transaction") + translationManager.emptyString
             }
 
-            Text {
+            BittubeComponents.TextPlain {
                 text: qsTr("Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.\n" +
                            "For the case with Spend Proof, you don't need to specify the recipient address.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                font.family: Style.fontRegular.name
-                font.pixelSize: 14 * scaleRatio
-                color: Style.defaultFontColor
+                font.family: BittubeComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                color: BittubeComponents.Style.defaultFontColor
             }
 
-            RowLayout {
-                LineEdit {
-                    id: checkProofTxIdLine
-                    labelText: qsTr("Transaction ID") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
-                    placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
-                    readOnly: false
-                    width: mainLayout.editWidth
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
+            BittubeComponents.LineEdit {
+                id: checkProofTxIdLine
+                Layout.fillWidth: true
+                labelFontSize: 14
+                labelText: qsTr("Transaction ID") + translationManager.emptyString
+                fontSize: 16
+                placeholderFontSize: 16
+                placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
+                readOnly: false
+                copyButton: true
             }
 
-            RowLayout {
-                LineEdit {
-                    id: checkProofAddressLine
-                    labelText: qsTr("Address") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
-                    placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
-                    readOnly: false
-                    width: mainLayout.editWidth
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
+            BittubeComponents.LineEdit {
+                id: checkProofAddressLine
+                Layout.fillWidth: true
+                labelFontSize: 14
+                labelText: qsTr("Address") + translationManager.emptyString
+                fontSize: 16
+                placeholderFontSize: 16
+                placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
+                readOnly: false
+                copyButton: true
             }
 
-            RowLayout {
-                LineEdit {
-                    id: checkProofMessageLine
-                    fontSize: 16 * scaleRatio
-                    labelText: qsTr("Message") + translationManager.emptyString
-                    placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
-                    readOnly: false
-                    width: mainLayout.editWidth
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
+            BittubeComponents.LineEdit {
+                id: checkProofMessageLine
+                Layout.fillWidth: true
+                fontSize: 16
+                labelFontSize: 14
+                labelText: qsTr("Message") + translationManager.emptyString
+                placeholderFontSize: 16
+                placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
+                readOnly: false
+                copyButton: true
             }
 
-            RowLayout {
-                LineEdit {
-                    id: checkProofSignatureLine
-                    fontSize: 16 * scaleRatio
-                    labelText: qsTr("Signature") + translationManager.emptyString
-                    placeholderText: qsTr("Paste tx proof") + translationManager.emptyString;
-                    readOnly: false
-                    width: mainLayout.editWidth
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
+            BittubeComponents.LineEdit {
+                id: checkProofSignatureLine
+                Layout.fillWidth: true
+                fontSize: 16
+                labelFontSize: 14
+                labelText: qsTr("Signature") + translationManager.emptyString
+                placeholderFontSize: 16
+                placeholderText: qsTr("Paste tx proof") + translationManager.emptyString;
+                readOnly: false
+                copyButton: true
             }
 
-            StandardButton {
-                Layout.topMargin: 17 * scaleRatio
-                width: 60
+            BittubeComponents.StandardButton {
+                Layout.topMargin: 16
                 small: true
                 text: qsTr("Check") + translationManager.emptyString
                 enabled: TxUtils.checkTxID(checkProofTxIdLine.text) && TxUtils.checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && TxUtils.checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.nettype)))
@@ -215,20 +209,20 @@ Rectangle {
             // underline
             Rectangle {
                 height: 1
-                color: "#404040"
+                color: BittubeComponents.Style.dividerColor
+                opacity: BittubeComponents.Style.dividerOpacity
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
-                anchors.bottomMargin: 3 * scaleRatio
-
+                anchors.bottomMargin: 3
             }
 
-            Text {
+            BittubeComponents.TextPlain {
                 text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                font.family: Style.fontRegular.name
-                font.pixelSize: 14 * scaleRatio
-                color: Style.defaultFontColor
+                font.family: BittubeComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                color: BittubeComponents.Style.defaultFontColor
             }
         }
     }

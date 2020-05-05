@@ -29,7 +29,7 @@
 
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
-import moneroComponents.NetworkType 1.0
+import bittubeComponents.NetworkType 1.0
 
 
 ColumnLayout {

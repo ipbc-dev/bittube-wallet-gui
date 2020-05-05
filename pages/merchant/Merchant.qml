@@ -1,22 +1,22 @@
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
 
-import moneroComponents.Clipboard 1.0
-import moneroComponents.Wallet 1.0
-import moneroComponents.WalletManager 1.0
-import moneroComponents.TransactionHistory 1.0
-import moneroComponents.TransactionHistoryModel 1.0
-import moneroComponents.Subaddress 1.0
-import moneroComponents.SubaddressModel 1.0
+import bittubeComponents.Clipboard 1.0
+import bittubeComponents.Wallet 1.0
+import bittubeComponents.WalletManager 1.0
+import bittubeComponents.TransactionHistory 1.0
+import bittubeComponents.TransactionHistoryModel 1.0
+import bittubeComponents.Subaddress 1.0
+import bittubeComponents.SubaddressModel 1.0
 
 import "../../js/Windows.js" as Windows
 import "../../js/TxUtils.js" as TxUtils
 import "../../js/Utils.js" as Utils
-import "../../components" as MoneroComponents
+import "../../components" as BittubeComponents
 import "../../pages"
 import "."
 
@@ -24,8 +24,8 @@ Item {
     id: root
     anchors.margins: 0
 
-    property int    minWidth: 900 * scaleRatio
-    property int    qrCodeSize: 220 * scaleRatio
+    property int    minWidth: 900
+    property int    qrCodeSize: 220
     property bool   enableTracking: false
     property string trackingError: ""  // setting this will show a message @ tracking table
     property alias  merchantHeight: mainLayout.height
@@ -33,9 +33,6 @@ Item {
     property var    hiddenAmounts: []
 
     function onPageCompleted() {
-        appWindow.titlebarToggleOrange();
-        appWindow.hideMenu();
-
         // prepare tracking
         trackingCheckbox.checked = root.enableTracking
         root.update();
@@ -53,22 +50,18 @@ Item {
     }
 
     function onPageClosed() {
-        appWindow.titlebarToggleOrange();
-
         // reset component objects
         timer.running = false
         root.enableTracking = false
         trackingModel.clear()
-
-        appWindow.showMenu();
     }
 
     Image {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 300 * scaleRatio
-        source: "../../images/merchant/bg.png"
+        height: 300
+        source: "qrc:///images/merchant/bg.png"
         smooth: false
     }
 
@@ -78,8 +71,8 @@ Item {
         spacing: 0
 
         // emulates max-width + center for container
-        property int maxWidth: 1200 * scaleRatio
-        property int defaultMargin: 50 * scaleRatio
+        property int maxWidth: 1200
+        property int defaultMargin: 50
         property int horizontalMargin: {
             if(appWindow.width >= maxWidth){
                 return ((appWindow.width - maxWidth) / 2) + defaultMargin;
@@ -96,16 +89,15 @@ Item {
         anchors.right: parent.right
 
         Item {
-            height: 220 * scaleRatio
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.preferredHeight: 220
+            Layout.fillWidth: true
 
             Rectangle {
                 id: tracker
                 anchors.left: parent.left
                 anchors.top: parent.top
-                height: 220 * scaleRatio
-                width: (parent.width - qrImg.width) - 50 * scaleRatio
+                height: 220
+                width: (parent.width - qrImg.width) - 50
                 radius: 5
 
                 ColumnLayout {
@@ -116,24 +108,25 @@ Item {
 
                     RowLayout {
                         spacing: 0
-                        height: 56 * scaleRatio
+                        height: 56
 
                         RowLayout {
                             Layout.alignment: Qt.AlignLeft
-                            Layout.preferredWidth: 260 * scaleRatio
+                            Layout.preferredWidth: 260
                             Layout.preferredHeight: parent.height
                             Layout.fillHeight: true
-                            spacing: 8 * scaleRatio
+                            spacing: 8
 
                             Item {
-                                Layout.preferredWidth: 10 * scaleRatio
+                                Layout.preferredWidth: 10
                             }
 
-                            Text {
-                                font.pixelSize: 16 * scaleRatio
+                            BittubeComponents.TextPlain {
+                                font.pixelSize: 16
                                 font.bold: true
                                 color: "#767676"
-                                text: qsTr("Sales")
+                                text: qsTr("Sales") + translationManager.emptyString
+                                themeTransition: false
                             }
 
                             Item {
@@ -148,24 +141,20 @@ Item {
 
                     Rectangle {
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 1 * scaleRatio
+                        Layout.preferredHeight: 1
                         color: "#d9d9d9"
                     }
 
                     MerchantTrackingList {
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 400 * scaleRatio
+                        Layout.preferredHeight: 400
                         model: trackingModel
                         message: {
                             if(!root.enableTracking){
-                                return qsTr(
-                                        "<style>p{font-size:14px;}</style>" +
-                                        "<p>This page will automatically scan the blockchain and the tx pool " +
-                                        "for incoming transactions using the QR code.</p>" +
-                                        "<p>It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
-                                        "confirmed in short order, but there is still a possibility they might not, so for larger " +
-                                        "values you may want to wait for one or more confirmation(s).</p>"
-                                    );
+                                return "<style>p{font-size:14px;}</style> <p>%1</p> <p>%2</p>"
+                                    .arg(qsTr("This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code."))
+                                    .arg(qsTr("It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)"))
+                                    + translationManager.emptyString;
                             } else if(root.trackingError !== ""){
                                 return root.trackingError;
                             } else if(trackingModel.count < 1){
@@ -214,7 +203,7 @@ Item {
                 Image {
                     id: qrCode
                     anchors.fill: parent
-                    anchors.margins: 1 * scaleRatio
+                    anchors.margins: 1
 
                     smooth: false
                     fillMode: Image.PreserveAspectFit
@@ -259,22 +248,25 @@ Item {
         }
 
         Item {
-            Layout.preferredHeight: 40 * scaleRatio
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.preferredHeight: 40
+            Layout.fillWidth: true
 
             Item {
-                width: (parent.width - qrImg.width) - (50 * scaleRatio)
-                height: 32 * scaleRatio
+                width: (parent.width - qrImg.width) - (50)
+                height: 32
 
-                Text {
+                BittubeComponents.TextPlain {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
-                    font.pixelSize: 12 * scaleRatio
+                    font.pixelSize: 12
                     font.bold: false
                     color: "white"
-                    text: "<style type='text/css'>a {text-decoration: none; color: Style.highlitedFontColor; font-size: 12px;}</style>Currently selected address: " + addressLabel + " <a href='#'>(Change)</a>"
+                    text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 12px;}</style>%1: %2 <a href='#'>(%3)</a>"
+                        .arg(qsTr("Currently selected address"))
+                        .arg(addressLabel)
+                        .arg(qsTr("Change")) + translationManager.emptyString
                     textFormat: Text.RichText
+                    themeTransition: false
 
                     MouseArea {
                         anchors.fill: parent
@@ -288,31 +280,32 @@ Item {
             Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
-                width: 220 * scaleRatio
-                height: 32 * scaleRatio
+                width: 220
+                height: 32
 
-                Text {
+                BittubeComponents.TextPlain {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
-                    font.pixelSize: 12 * scaleRatio
+                    font.pixelSize: 12
                     font.bold: false
                     color: "white"
-                    text: qsTr("(right-click, save as)")
+                    text: qsTr("(right-click, save as)") + translationManager.emptyString
+                    themeTransition: false
                 }
             }
         }
 
         Item {
-            Layout.preferredHeight: 120 * scaleRatio
-            Layout.topMargin: 20 * scaleRatio
+            Layout.preferredHeight: 120
+            Layout.topMargin: 20
             Layout.fillWidth: true
 
             Rectangle {
                 id: payment_url_container
                 anchors.left: parent.left
                 anchors.top: parent.top
-                implicitHeight: 120 * scaleRatio
-                width: (parent.width - qrImg.width) - (50 * scaleRatio)
+                implicitHeight: 120
+                width: (parent.width - qrImg.width) - (50)
                 radius: 5
 
                 ColumnLayout {
@@ -323,24 +316,25 @@ Item {
 
                     RowLayout {
                         spacing: 0
-                        height: 56 * scaleRatio
+                        height: 56
 
                         RowLayout {
                             Layout.alignment: Qt.AlignLeft
-                            Layout.preferredWidth: 260 * scaleRatio
+                            Layout.preferredWidth: 260
                             Layout.preferredHeight: parent.height
                             Layout.fillHeight: true
                             spacing: 8
 
                             Item {
-                                Layout.preferredWidth: 10 * scaleRatio
+                                Layout.preferredWidth: 10
                             }
 
-                            Text {
-                                font.pixelSize: 14 * scaleRatio
+                            BittubeComponents.TextPlain {
+                                font.pixelSize: 14
                                 font.bold: true
                                 color: "#767676"
-                                text: qsTr("Payment URL")
+                                text: qsTr("Payment URL") + translationManager.emptyString
+                                themeTransition: false
                             }
 
                             Item {
@@ -352,15 +346,15 @@ Item {
 //                        Rectangle {
 //                            // help box
 //                            Layout.alignment: Qt.AlignLeft
-//                            Layout.preferredWidth: 40 * scaleRatio
+//                            Layout.preferredWidth: 40
 //                            Layout.fillHeight: true
 //                            color: "transparent"
 
-//                            Text {
+//                            BittubeComponents.TextPlain {
 //                                anchors.verticalCenter: parent.verticalCenter
 //                                anchors.right: parent.right
-//                                anchors.rightMargin: 20 * scaleRatio
-//                                font.pixelSize: 16 * scaleRatio
+//                                anchors.rightMargin: 20
+//                                font.pixelSize: 16
 //                                font.bold: true
 //                                color: "#767676"
 //                                text:"?"
@@ -390,26 +384,27 @@ Item {
                         color: "#d9d9d9"
                     }
 
-                    Text {
+                    BittubeComponents.TextPlain {
                         property string _color: "#767676"
                         Layout.fillWidth: true
-                        Layout.margins: 20 * scaleRatio
-                        Layout.topMargin: 10 * scaleRatio
+                        Layout.margins: 20
+                        Layout.topMargin: 10
 
                         wrapMode: Text.WrapAnywhere
                         elide: Text.ElideRight
 
-                        font.pixelSize: 12 * scaleRatio
+                        font.pixelSize: 12
                         font.bold: true
                         color: _color
                         text: TxUtils.makeQRCodeString(appWindow.current_address, amountToReceive.text)
+                        themeTransition: false
 
                         MouseArea {
                             anchors.fill: parent
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
                             onEntered: {
-                                parent.color = MoneroComponents.Style.blue
+                                parent.color = BittubeComponents.Style.orange
                             }
                             onExited: {
                                 parent.color = parent._color
@@ -439,35 +434,36 @@ Item {
             Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
-                width: 220 * scaleRatio
-                height: 32 * scaleRatio
+                width: 220
+                height: 32
 
                 ColumnLayout {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
-                    Text {
-                        font.pixelSize: 14 * scaleRatio
+                    BittubeComponents.TextPlain {
+                        font.pixelSize: 14
                         font.bold: false
                         color: "white"
-                        text: qsTr("Amount to receive") + " (XMR)"
+                        text: qsTr("Amount to receive") + " (Tube)" + translationManager.emptyString
+                        themeTransition: false
                     }
 
                     Image {
-                        height: 28 * scaleRatio
-                        width: 220 * scaleRatio
-                        source: "../../images/merchant/input_box.png"
+                        height: 28
+                        width: 220
+                        source: "qrc:///images/merchant/input_box.png"
 
-                        TextField {
+                        BittubeComponents.Input {
                             id: amountToReceive
                             topPadding: 0
-                            leftPadding: 10 * scaleRatio
+                            leftPadding: 10
 
                             anchors.left: parent.left
                             anchors.right: parent.right
                             anchors.top: parent.top
-                            anchors.topMargin: 3 * scaleRatio
-                            font.pixelSize: 16 * scaleRatio
+                            anchors.topMargin: 3
+                            font.pixelSize: 16
                             font.bold: true
                             horizontalAlignment: TextInput.AlignLeft
                             verticalAlignment: TextInput.AlignVCenter
@@ -475,6 +471,7 @@ Item {
                             color: "#424242"
                             selectionColor: "#3f3fe3"
                             selectedTextColor: "white"
+                            placeholderText: "0.00"
 
                             background: Rectangle {
                                 color: "transparent"
@@ -491,25 +488,26 @@ Item {
                     }
 
                     Item {
-                        height: 2 * scaleRatio
-                        width: 220 * scaleRatio
+                        height: 2
+                        width: 220
                     }
 
-                    Text {
-                        // @TODO: When we have XMR/USD rate avi. in the future.
+                    BittubeComponents.TextPlain {
+                        // @TODO: When we have Tube/USD rate avi. in the future.
                         visible: false
-                        font.pixelSize: 14 * scaleRatio
+                        font.pixelSize: 14
                         font.bold: false
                         color: "white"
                         text: qsTr("Amount to receive") + " (USD)"
                         opacity: 0.2
+                        themeTransition: false
                     }
 
                     Image {
                         visible: false
-                        height: 28 * scaleRatio
-                        width: 220 * scaleRatio
-                        source: "../../images/merchant/input_box.png"
+                        height: 28
+                        width: 220
+                        source: "qrc:///images/merchant/input_box.png"
                         opacity: 0.2
                     }
                 }
@@ -517,36 +515,36 @@ Item {
         }
 
         Item {
-            Layout.topMargin: 32 * scaleRatio
-            Layout.preferredHeight: 40 * scaleRatio
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.topMargin: 32
+            Layout.preferredHeight: 40
+            Layout.fillWidth: true
 
             ColumnLayout {
-                spacing: 16 * scaleRatio
+                spacing: 16
 
                 MerchantCheckbox {
                     id: trackingCheckbox
                     checked: root.enableTracking
-                    text: qsTr("Enable sales tracker")
+                    text: qsTr("Enable sales tracker") + translationManager.emptyString
 
                     onChanged: {
                         root.enableTracking = this.checked;
                     }
                 }
 
-                Text {
+                BittubeComponents.TextPlain {
                     id: content
-                    font.pixelSize: 14 * scaleRatio
+                    font.pixelSize: 14
                     font.bold: false
                     color: "white"
-                    text: qsTr("Leave this page")
+                    text: qsTr("Leave this page") + translationManager.emptyString
+                    themeTransition: false
 
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: appWindow.showPageRequest("Receive")
+                        onClicked: appWindow.showPageRequest("Settings")
                     }
                 }
             }
@@ -557,19 +555,20 @@ Item {
         // Shows when the window is too small
         visible: parent.width < root.minWidth
         anchors.top: parent.top
-        anchors.topMargin: 100 * scaleRatio;
+        anchors.topMargin: 100;
         anchors.horizontalCenter: parent.horizontalCenter
-        height: 120 * scaleRatio
-        width: 400 * scaleRatio
+        height: 120
+        width: 400
         radius: 5
 
-        Text {
+        BittubeComponents.TextPlain {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: 14 * scaleRatio
+            font.pixelSize: 14
             font.bold: true
-            color: MoneroComponents.Style.moneroGrey
-            text: qsTr("The merchant page requires a larger window")
+            color: BittubeComponents.Style.bittubeGrey
+            text: qsTr("The merchant page requires a larger window") + translationManager.emptyString
+            themeTransition: false
         }
     }
 
@@ -582,7 +581,7 @@ Item {
             return
         }
 
-        if (appWindow.currentWallet.connected() == Wallet.ConnectionStatus_Disconnected) {
+        if (appWindow.disconnected) {
             root.trackingError = qsTr("WARNING: no connection to daemon");
             trackingModel.clear();
             return
@@ -623,7 +622,7 @@ Item {
                     in_txpool = true;
                 } else {
                     if (blockchainHeight == null)
-                        blockchainHeight = appWindow.currentWallet.blockChainHeight()
+                        blockchainHeight = walletManager.blockchainHeight()
                     confirmations = blockchainHeight - blockHeight - 1
                     displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
                 }

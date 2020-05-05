@@ -26,379 +26,127 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
+import FontAwesome 1.0
 
 import "../../js/Utils.js" as Utils
-import "../../components" as MoneroComponents
+import "../../components" as BittubeComponents
 
 Rectangle {
     color: "transparent"
-    height: 1400
     Layout.fillWidth: true
+    property alias settingsHeight: settingsWallet.height
 
     ColumnLayout {
         id: settingsWallet
-        property int itemHeight: 60 * scaleRatio
         Layout.fillWidth: true
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
+        anchors.margins: 20
         anchors.topMargin: 0
         spacing: 0
 
-        Rectangle {
-            // divider
-            Layout.preferredHeight: 1 * scaleRatio
-            Layout.fillWidth: true
-            Layout.bottomMargin: 8 * scaleRatio
-            color: MoneroComponents.Style.dividerColor
-            opacity: MoneroComponents.Style.dividerOpacity
+        BittubeComponents.SettingsListItem {
+            iconText: FontAwesome.signOutAlt
+            description: qsTr("Logs out of this wallet.") + translationManager.emptyString
+            title: qsTr("Close this wallet") + translationManager.emptyString
+
+            onClicked: appWindow.showWizard()
         }
 
-        GridLayout {
-            Layout.fillWidth: true
-            Layout.preferredHeight: settingsWallet.itemHeight
-            columnSpacing: 0
+        BittubeComponents.SettingsListItem {
+            iconText: FontAwesome.eye
+            description: qsTr("Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.") + translationManager.emptyString
+            title: qsTr("Create a view-only wallet") + translationManager.emptyString
+            visible: !appWindow.viewOnly
 
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
-                spacing: 0
-
-                Text {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 20 * scaleRatio
-                    Layout.topMargin: 8 * scaleRatio
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
-                    text: qsTr("Close this wallet") + translationManager.emptyString
+            onClicked: {
+                var newPath = currentWallet.path + "_viewonly";
+                if (currentWallet.createViewOnly(newPath, appWindow.walletPassword)) {
+                    console.log("view only wallet created in " + newPath);
+                    informationPopup.title  = qsTr("Success") + translationManager.emptyString;
+                    informationPopup.text = qsTr('The view only wallet has been created with the same password as the current wallet. You can open it by closing this current wallet, clicking the "Open wallet from file" option, and selecting the view wallet in: \n%1\nYou can change the password in the wallet settings.').arg(newPath);
+                    informationPopup.open()
+                    informationPopup.onCloseCallback = null
+                } else {
+                    informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                    informationPopup.text = currentWallet.errorString;
+                    informationPopup.open()
                 }
-
-                TextArea {
-                    Layout.fillWidth: true
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    horizontalAlignment: TextInput.AlignLeft
-                    selectByMouse: false
-                    wrapMode: Text.WordWrap;
-                    textMargin: 0
-                    leftPadding: 0
-                    topPadding: 0
-                    text: qsTr("Logs out of this wallet.") + translationManager.emptyString
-                    width: parent.width
-                    readOnly: true
-
-                    // @TODO: Legacy. Remove after Qt 5.8.
-                    // https://stackoverflow.com/questions/41990013
-                    MouseArea {
-                        anchors.fill: parent
-                        enabled: false
-                    }
-                } 
-            }
-
-            MoneroComponents.StandardButton {
-                small: true
-                text: qsTr("Close wallet") + translationManager.emptyString
-                onClicked: {
-                    middlePanel.addressBookView.clearFields();
-                    middlePanel.transferView.clearFields();
-                    middlePanel.receiveView.clearFields();
-                    appWindow.showWizard();
-                }
-                width: 135 * scaleRatio
             }
         }
 
-        Rectangle {
-            // divider
-            Layout.preferredHeight: 1 * scaleRatio
-            Layout.fillWidth: true
-            Layout.topMargin: 8 * scaleRatio
-            Layout.bottomMargin: 8 * scaleRatio
-            color: MoneroComponents.Style.dividerColor
-            opacity: MoneroComponents.Style.dividerOpacity
-        }
+        BittubeComponents.SettingsListItem {
+            iconText: FontAwesome.key
+            description: qsTr("Store this information safely to recover your wallet in the future.") + translationManager.emptyString
+            title: qsTr("Show seed & keys") + translationManager.emptyString
 
-        GridLayout {
-            Layout.fillWidth: true
-            Layout.preferredHeight: settingsWallet.itemHeight
-            columnSpacing: 0
-
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
-                spacing: 0
-
-                Text {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 20 * scaleRatio
-                    Layout.topMargin: 8 * scaleRatio
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
-                    text: qsTr("Create a view-only wallet") + translationManager.emptyString
-                }
-
-                TextArea {
-                    Layout.fillWidth: true
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    horizontalAlignment: TextInput.AlignLeft
-                    selectByMouse: false
-                    wrapMode: Text.WordWrap;
-                    textMargin: 0
-                    leftPadding: 0
-                    topPadding: 0
-                    text: qsTr("Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.") + translationManager.emptyString
-                    width: parent.width
-                    readOnly: true
-
-                    // @TODO: Legacy. Remove after Qt 5.8.
-                    // https://stackoverflow.com/questions/41990013
-                    MouseArea {
-                        anchors.fill: parent
-                        enabled: false
-                    }
-                } 
-            }
-
-            MoneroComponents.StandardButton {
-                small: true
-                text: qsTr("Create wallet") + translationManager.emptyString
-                onClicked: {
-                    wizard.openCreateViewOnlyWalletPage();
-                }
-                width: 135 * scaleRatio
+            onClicked: {
+                Utils.showSeedPage();
             }
         }
 
-        Rectangle {
-            // divider
-            Layout.preferredHeight: 1 * scaleRatio
-            Layout.fillWidth: true
-            Layout.topMargin: 8 * scaleRatio
-            Layout.bottomMargin: 8 * scaleRatio
-            color: MoneroComponents.Style.dividerColor
-            opacity: MoneroComponents.Style.dividerOpacity
-        }
+        BittubeComponents.SettingsListItem {
+            iconText: FontAwesome.repeat
+            description: qsTr("Use this feature if you think the shown balance is not accurate.") + translationManager.emptyString
+            title: qsTr("Rescan wallet balance") + translationManager.emptyString
+            visible: appWindow.walletMode >= 2
 
-        GridLayout {
-            Layout.fillWidth: true
-            Layout.preferredHeight: settingsWallet.itemHeight
-            columnSpacing: 0
-
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
-                spacing: 0
-
-                Text {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 20 * scaleRatio
-                    Layout.topMargin: 8 * scaleRatio
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
-                    text: qsTr("Show seed & keys") + translationManager.emptyString
+            onClicked: {
+                if (!currentWallet.rescanSpent()) {
+                    console.error("Error: ", currentWallet.errorString);
+                    informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                    informationPopup.text  = qsTr("Error: ") + currentWallet.errorString
+                    informationPopup.icon  = StandardIcon.Critical
+                    informationPopup.onCloseCallback = null
+                    informationPopup.open();
+                } else {
+                    informationPopup.title = qsTr("Information") + translationManager.emptyString
+                    informationPopup.text  = qsTr("Successfully rescanned spent outputs.") + translationManager.emptyString
+                    informationPopup.icon  = StandardIcon.Information
+                    informationPopup.onCloseCallback = null
+                    informationPopup.open();
                 }
-
-                TextArea {
-                    Layout.fillWidth: true
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    horizontalAlignment: TextInput.AlignLeft
-                    selectByMouse: false
-                    wrapMode: Text.WordWrap;
-                    textMargin: 0 * scaleRatio
-                    leftPadding: 0
-                    topPadding: 0
-                    text: qsTr("Store this information safely to recover your wallet in the future.") + translationManager.emptyString
-                    width: parent.width
-                    readOnly: true
-
-                    // @TODO: Legacy. Remove after Qt 5.8.
-                    // https://stackoverflow.com/questions/41990013
-                    MouseArea {
-                        anchors.fill: parent
-                        enabled: false
-                    }
-                } 
-            }
-
-            MoneroComponents.StandardButton {
-                small: true
-                text: qsTr("Show seed") + translationManager.emptyString
-                onClicked: {
-                    Utils.showSeedPage();
-                }
-                width: 135 * scaleRatio
             }
         }
 
-        Rectangle {
-            // divider
-            Layout.preferredHeight: 1 * scaleRatio
-            Layout.fillWidth: true
-            Layout.topMargin: 8 * scaleRatio
-            Layout.bottomMargin: 8 * scaleRatio
-            color: MoneroComponents.Style.dividerColor
-            opacity: MoneroComponents.Style.dividerOpacity
-        }
+        BittubeComponents.SettingsListItem {
+            iconText: FontAwesome.ellipsisH
+            description: qsTr("Change the password of your wallet.") + translationManager.emptyString
+            title: qsTr("Change wallet password") + translationManager.emptyString
 
-        GridLayout {
-            Layout.fillWidth: true
-            Layout.preferredHeight: settingsWallet.itemHeight
-            columnSpacing: 0
-
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
-                spacing: 0
-
-                Text {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 20 * scaleRatio
-                    Layout.topMargin: 8 * scaleRatio
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
-                    text: qsTr("Rescan wallet balance") + translationManager.emptyString
-                }
-
-                TextArea {
-                    Layout.fillWidth: true
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    horizontalAlignment: TextInput.AlignLeft
-                    selectByMouse: false
-                    wrapMode: Text.WordWrap;
-                    textMargin: 0
-                    leftPadding: 0
-                    topPadding: 0
-                    text: qsTr("Use this feature if you think the shown balance is not accurate.") + translationManager.emptyString
-                    width: parent.width
-                    readOnly: true
-
-                    // @TODO: Legacy. Remove after Qt 5.8.
-                    // https://stackoverflow.com/questions/41990013
-                    MouseArea {
-                        anchors.fill: parent
-                        enabled: false
-                    }
-                } 
-            }
-
-            MoneroComponents.StandardButton {
-                small: true
-                text: qsTr("Rescan") + translationManager.emptyString
-                onClicked: {
-                    if (!currentWallet.rescanSpent()) {
-                        console.error("Error: ", currentWallet.errorString);
-                        informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                        informationPopup.text  = qsTr("Error: ") + currentWallet.errorString
-                        informationPopup.icon  = StandardIcon.Critical
-                        informationPopup.onCloseCallback = null
-                        informationPopup.open();
+            onClicked: {
+                passwordDialog.onAcceptedCallback = function() {
+                    if(appWindow.walletPassword === passwordDialog.password){
+                        passwordDialog.openNewPasswordDialog()
                     } else {
-                        informationPopup.title = qsTr("Information") + translationManager.emptyString
-                        informationPopup.text  = qsTr("Successfully rescanned spent outputs.") + translationManager.emptyString
-                        informationPopup.icon  = StandardIcon.Information
-                        informationPopup.onCloseCallback = null
-                        informationPopup.open();
+                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                        informationPopup.text = qsTr("Wrong password") + translationManager.emptyString;
+                        informationPopup.open()
+                        informationPopup.onCloseCallback = function() {
+                            passwordDialog.open()
+                        }
                     }
                 }
-                width: 135 * scaleRatio
+                passwordDialog.onRejectedCallback = null;
+                passwordDialog.open()
             }
         }
-        Rectangle {
-            // divider
-            Layout.preferredHeight: 1 * scaleRatio
-            Layout.fillWidth: true
-            Layout.topMargin: 8 * scaleRatio
-            Layout.bottomMargin: 8 * scaleRatio
-            color: MoneroComponents.Style.dividerColor
-            opacity: MoneroComponents.Style.dividerOpacity
-        }
 
-        GridLayout {
-            Layout.fillWidth: true
-            Layout.preferredHeight: settingsWallet.itemHeight
-            columnSpacing: 0
+        BittubeComponents.SettingsListItem {
+            iconText: FontAwesome.cashRegister
+            isLast: true
+            description: qsTr("Receive BitTube for your business, easily.") + translationManager.emptyString
+            title: qsTr("Enter merchant mode") + translationManager.emptyString
 
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
-                spacing: 0
-
-                Text {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 20 * scaleRatio
-                    Layout.topMargin: 8 * scaleRatio
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
-                    text: qsTr("Change wallet password") + translationManager.emptyString
-                }
-
-                TextArea {
-                    Layout.fillWidth: true
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    horizontalAlignment: TextInput.AlignLeft
-                    selectByMouse: false
-                    wrapMode: Text.WordWrap;
-                    textMargin: 0
-                    leftPadding: 0
-                    topPadding: 0
-                    text: qsTr("Change the password of your wallet.") + translationManager.emptyString
-                    width: parent.width
-                    readOnly: true
-
-                    // @TODO: Legacy. Remove after Qt 5.8.
-                    // https://stackoverflow.com/questions/41990013
-                    MouseArea {
-                        anchors.fill: parent
-                        enabled: false
-                    }
-                } 
-            }
-
-            MoneroComponents.StandardButton {
-                small: true
-                text: qsTr("Change password") + translationManager.emptyString
-                onClicked: {
-                    passwordDialog.onAcceptedCallback = function() {
-	                    if(appWindow.walletPassword === passwordDialog.password){
-	                        newPasswordDialog.open()
-	                    } else {
-	                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-	                        informationPopup.text = qsTr("Wrong password");
-	                        informationPopup.open()
-	                        informationPopup.onCloseCallback = function() {
-	                            passwordDialog.open()
-	                        }
-	                    }
-	                }
-                    passwordDialog.onRejectedCallback = null;
-                    passwordDialog.open()
-                }
-                width: 135 * scaleRatio
+            onClicked: {
+                middlePanel.state = "Merchant";
+                middlePanel.flickable.contentY = 0;
+                updateBalance();
             }
         }
     }

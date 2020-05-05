@@ -29,7 +29,7 @@
 
 import QtQuick 2.2
 import QtQuick.Dialogs 1.2
-import moneroComponents.Wallet 1.0
+import bittubeComponents.Wallet 1.0
 import QtQuick.Layouts 1.1
 import 'utils.js' as Utils
 

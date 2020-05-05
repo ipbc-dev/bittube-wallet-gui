@@ -9,6 +9,28 @@ moc_*
 *.mak
 *.build
 *.xcodeproj
-monero-wallet-gui_plugin_import.cpp
-monero-wallet-gui_qml_plugin_import.cpp
-launcher/build
+bittube-wallet-gui_plugin_import.cpp
+bittube-wallet-gui_qml_plugin_import.cpp
+*.qmlc
+*.jsc
+qml_qmlcache.qrc
+
+### Vim ###
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+
+# Temporary                                                                                                                                                                                             
+.netrwhist
+*~
+*.autosave
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~

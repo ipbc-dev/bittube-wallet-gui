@@ -16,37 +16,36 @@ if [ ! -d $BITTUBE_DIR/src ]; then
     git submodule init bittube
 fi
 git submodule update --remote
-# git -C $BITTUBE_DIR fetch
-# git -C $BITTUBE_DIR checkout release-v0.12
+git -C $BITTUBE_DIR fetch
+git -C $BITTUBE_DIR checkout master
 
 # get bittube core tag
-# get_tag
-# # create local bittube branch
-# git -C $BITTUBE_DIR checkout -B $VERSIONTAG
-
-# git -C $BITTUBE_DIR submodule init
-# git -C $BITTUBE_DIR submodule update
+pushd $BITTUBE_DIR
+get_tag
+popd
+# create local bittube branch
+git -C $BITTUBE_DIR checkout -B $VERSIONTAG
 
 # Merge bittube PR dependencies
 
 # Workaround for git username requirements
 # Save current user settings and revert back when we are done with merging PR's
-# OLD_GIT_USER=$(git -C $BITTUBE_DIR config --local user.name)
-# OLD_GIT_EMAIL=$(git -C $BITTUBE_DIR config --local user.email)
-# git -C $BITTUBE_DIR config user.name "Bittube GUI"
-# git -C $BITTUBE_DIR config user.email "gui@bittube.local"
-# # check for PR requirements in most recent commit message (i.e requires #xxxx)
-# for PR in $(git log --format=%B -n 1 | grep -io "requires #[0-9]*" | sed 's/[^0-9]*//g'); do
-#     echo "Merging bittube push request #$PR"
-#     # fetch pull request and merge
-#     git -C $BITTUBE_DIR fetch origin pull/$PR/head:PR-$PR
-#     git -C $BITTUBE_DIR merge --quiet PR-$PR  -m "Merge bittube PR #$PR"
-#     BUILD_LIBWALLET=true
-# done
+OLD_GIT_USER=$(git -C $BITTUBE_DIR config --local user.name)
+OLD_GIT_EMAIL=$(git -C $BITTUBE_DIR config --local user.email)
+git -C $BITTUBE_DIR config user.name "BitTube GUI"
+git -C $BITTUBE_DIR config user.email "gui@bittube.local"
+# check for PR requirements in most recent commit message (i.e requires #xxxx)
+for PR in $(git log --format=%B -n 1 | grep -io "requires #[0-9]*" | sed 's/[^0-9]*//g'); do
+    echo "Merging bittube push request #$PR"
+    # fetch pull request and merge
+    git -C $BITTUBE_DIR fetch origin pull/$PR/head:PR-$PR
+    git -C $BITTUBE_DIR merge --quiet PR-$PR  -m "Merge bittube PR #$PR"
+    BUILD_LIBWALLET=true
+done
 
 # revert back to old git config
-# $(git -C $BITTUBE_DIR config user.name "$OLD_GIT_USER")
-# $(git -C $BITTUBE_DIR config user.email "$OLD_GIT_EMAIL")
+$(git -C $BITTUBE_DIR config user.name "$OLD_GIT_USER")
+$(git -C $BITTUBE_DIR config user.email "$OLD_GIT_EMAIL")
 
 git -C $BITTUBE_DIR submodule init
 git -C $BITTUBE_DIR submodule update
@@ -95,6 +94,7 @@ BUILD_TREZOR_FLAGS=" -DUSE_DEVICE_TREZOR=ON"
 if [ "$BUILD_TREZOR" == false ]; then
     BUILD_TREZOR_FLAGS=" -DUSE_DEVICE_TREZOR=OFF"
 fi
+BUILD_TREZOR_FLAGS=" -DUSE_DEVICE_TREZOR_UDP_RELEASE=ON ${BUILD_TREZOR_FLAGS}"
 
 STATIC=false
 ANDROID=false
@@ -140,13 +140,40 @@ platform=$(get_platform)
 # default make executable
 make_exec="make"
 
+if [ -z "$ARCH" ]; then
+    ARCH="native"
+    if [ "$platform" == "darwin" ]; then
+        if [ "$STATIC" == true ]; then
+            ARCH="x86-64"
+        fi
+    elif [ "$platform" == "linux64" ]; then
+        if [ "$ANDROID" == true ]; then
+            ARCH="armv7-a"
+        elif [ "$STATIC" == true ]; then
+            ARCH="x86-64"
+        fi
+    elif [ "$platform" == "linux32" ]; then
+        if [ "$STATIC" == true ]; then
+            ARCH="i686"
+        fi
+    elif [ "$platform" == "linuxarmv7" ]; then
+        ARCH="armv7-a"
+    elif [ "$platform" == "mingw32" ]; then
+        ARCH="i686"
+    elif [ "$platform" == "mingw64" ]; then
+        ARCH="x86-64"
+    fi
+fi
+
+echo "Building for ARCH=$ARCH"
+
 ## OS X
 if [ "$platform" == "darwin" ]; then
     echo "Configuring build for MacOS.."
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR" ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="$ARCH" -D BUILD_64=ON -D BUILD_TAG="mac-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR" ../..
     else
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE  -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D ARCH="$ARCH" -D BUILD_TAG="mac-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     fi
 
 ## LINUX 64
@@ -154,38 +181,38 @@ elif [ "$platform" == "linux64" ]; then
     echo "Configuring build for Linux x64"
     if [ "$ANDROID" == true ]; then
         echo "Configuring build for Android on Linux host"
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="armv7-a" -D ANDROID=true -D BUILD_GUI_DEPS=ON -D USE_LTO=OFF -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="$ARCH" -D ANDROID=true -D BUILD_GUI_DEPS=ON -D USE_LTO=OFF -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     elif [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="$ARCH" -D BUILD_64=ON -D BUILD_TAG="linux-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     else
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D ARCH="$ARCH" -D BUILD_TAG="linux-x64" -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     fi
 
 ## LINUX 32
 elif [ "$platform" == "linux32" ]; then
     echo "Configuring build for Linux i686"
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="$ARCH" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     else
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D ARCH="$ARCH" -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     fi
 
 ## LINUX ARMv7
 elif [ "$platform" == "linuxarmv7" ]; then
     echo "Configuring build for Linux armv7"
     if [ "$STATIC" == true ]; then
-        cmake -D BUILD_TESTS=OFF -D ARCH="armv7-a" -D STATIC=ON -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D BUILD_TESTS=OFF -D ARCH="$ARCH" -D STATIC=ON -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     else
-        cmake -D BUILD_TESTS=OFF -D ARCH="armv7-a" -D -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D BUILD_TESTS=OFF -D ARCH="$ARCH" -D -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     fi
 
 ## LINUX other 
 elif [ "$platform" == "linux" ]; then
     echo "Configuring build for Linux general"
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="$ARCH" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     else
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D ARCH="$ARCH" -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     fi
 
 ## Windows 64
@@ -194,28 +221,28 @@ elif [ "$platform" == "mingw64" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW64.."
     BOOST_ROOT=/mingw64/boost
-    cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BOOST_ROOT="$BOOST_ROOT" -D ARCH="x86-64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR" -G "MSYS Makefiles" -D CMAKE_TOOLCHAIN_FILE=../../cmake/64-bit-toolchain.cmake -D MSYS2_FOLDER=c:/msys64 ../..
+    cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BOOST_ROOT="$BOOST_ROOT" -D ARCH="$ARCH" -D BUILD_TAG="win-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR" -G "MSYS Makefiles" -D CMAKE_TOOLCHAIN_FILE=../../cmake/64-bit-toolchain.cmake -D MSYS2_FOLDER=$(cd $MINGW_PREFIX/.. && pwd -W) ../..
 
 ## Windows 32
 elif [ "$platform" == "mingw32" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW32.."
     BOOST_ROOT=/mingw32/boost
-    cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D Boost_DEBUG=ON -D BOOST_ROOT="$BOOST_ROOT" -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR" -G "MSYS Makefiles" -D CMAKE_TOOLCHAIN_FILE=../../cmake/32-bit-toolchain.cmake -D MSYS2_FOLDER=c:/msys32 ../..
+    cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D Boost_DEBUG=ON -D BOOST_ROOT="$BOOST_ROOT" -D ARCH="$ARCH" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR" -G "MSYS Makefiles" -D CMAKE_TOOLCHAIN_FILE=../../cmake/32-bit-toolchain.cmake -D MSYS2_FOLDER=$(cd $MINGW_PREFIX/.. && pwd -W) ../..
     make_exec="mingw32-make"
 else
     echo "Unknown platform, configuring general build"
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="$ARCH" -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     else
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D ARCH="$ARCH" -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$BITTUBE_DIR"  ../..
     fi
 fi
 
 # set CPU core count
 # thanks to SO: http://stackoverflow.com/a/20283965/4118915
 if test -z "$CPU_CORE_COUNT"; then
-  CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+  CPU_CORE_COUNT=2
 fi
 
 # Build libwallet_merged
@@ -252,5 +279,8 @@ if [ -d $BITTUBE_DIR/build/$BUILD_TYPE/external/unbound ]; then
     $make_exec install -j$CPU_CORE_COUNT
     popd
 fi
+
+# install randomx
+eval make -C $BITTUBE_DIR/build/$BUILD_TYPE/external/randomx all install
 
 popd

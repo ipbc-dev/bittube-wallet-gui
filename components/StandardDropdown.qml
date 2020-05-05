@@ -27,27 +27,30 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
+import QtQuick.Controls 2.2
+import QtGraphicalEffects 1.0
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
+import "../components/effects/" as MoneroEffects
 
 Item {
     id: dropdown
     property int itemTopMargin: 0
     property alias dataModel: repeater.model
-    property string shadowPressedColor: MoneroComponents.Style.dropdownContentSelectedFontColor
-    property string shadowReleasedColor: MoneroComponents.Style.dropdownContentSelectedFontColor
-    property string pressedColor: MoneroComponents.Style.dropdownContentBackgroundColor
-    property string releasedColor: MoneroComponents.Style.dropdownContentSelectedBackgroundColor
-    property string textColor: MoneroComponents.Style.defaultFontColor
+    property string shadowPressedColor
+    property string shadowReleasedColor
+    property string pressedColor: BittubeComponents.Style.appWindowBorderColor
+    property string releasedColor: BittubeComponents.Style.titleBarButtonHoverColor
+    property string textColor: BittubeComponents.Style.defaultFontColor
     property alias currentIndex: columnid.currentIndex
-    property bool expanded: false
+    readonly property alias expanded: popup.visible
     property int dropdownHeight: 42
-    property int fontHeaderSize: 16 * scaleRatio
-    property int fontItemSize: 14 * scaleRatio
-    property string colorBorder: MoneroComponents.Style.inputBorderColorInActive
-    property string colorHeaderBackground: MoneroComponents.Style.dropdownHeaderBackgroundColor
-    property bool headerBorder: false
+    property int fontHeaderSize: 16
+    property int fontItemSize: 14
+    property string colorBorder: BittubeComponents.Style.inputBorderColorInActive
+    property string colorHeaderBackground: "transparent"
+    property bool headerBorder: true
     property bool headerFontBold: false
     
     height: dropdownHeight
@@ -55,18 +58,6 @@ Item {
     signal changed();
 
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
-    function hide() { dropdown.expanded = false }
-    function containsPoint(px, py) {
-        if(px < 0)
-            return false
-        if(px > width)
-            return false
-        if(py < 0)
-            return false
-        if(py > height + droplist.height)
-            return false
-        return true
-    }
 
     // Workaroud for suspected memory leak in 5.8 causing malloc crash on app exit
     function update() {
@@ -82,23 +73,23 @@ Item {
         height: dropdown.dropdownHeight
 
         Rectangle {
-            color: dropdown.colorHeaderBackground
+            color: "transparent"
             border.width: dropdown.headerBorder ? 1 : 0
             border.color: dropdown.colorBorder
             radius: 4
             anchors.fill: parent
         }
 
-        Text {
+        BittubeComponents.TextPlain {
             id: firstColText
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: 12 * scaleRatio
+            anchors.leftMargin: 12
             elide: Text.ElideRight
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: BittubeComponents.Style.fontRegular.name
             font.bold: dropdown.headerFontBold
             font.pixelSize: dropdown.fontHeaderSize
-            color: MoneroComponents.Style.defaultFontColor
+            color: dropdown.textColor
         }
 
         Item {
@@ -106,133 +97,126 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            width: 32 * scaleRatio
+            width: 32
 
             Image {
+                id: dropdownIcon
                 anchors.centerIn: parent
-                source: "../images/whiteDropIndicator.png"
-                rotation: dropdown.expanded ? 180  * scaleRatio : 0
+                source: "qrc:///images/whiteDropIndicator.png"
+                visible: false
+            }
+
+            ColorOverlay {
+                source: dropdownIcon
+                anchors.fill: dropdownIcon
+                color: BittubeComponents.Style.defaultFontColor
+                rotation: dropdown.expanded ? 180  : 0
+                opacity: 1
             }
         }
 
         MouseArea {
             id: dropArea
             anchors.fill: parent
-            onClicked: dropdown.expanded = !dropdown.expanded
+            onClicked: dropdown.expanded ? popup.close() : popup.open()
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
         }
     }
 
-    Rectangle {
-        id: droplist
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: head.bottom
-        clip: true
-        height: dropdown.expanded ? columnid.height : 0
-        color: dropdown.pressedColor
-        //radius: 4
+    Popup {
+        id: popup
+        padding: 0
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
 
         Rectangle {
-            anchors.left: parent.left
-            anchors.top: parent.top
-            width: 3 * scaleRatio; height: 3 * scaleRatio
+            id: droplist
+            x: dropdown.x
+            width: dropdown.width
+            y: head.y + head.height
+            clip: true
+            height: dropdown.expanded ? columnid.height : 0
             color: dropdown.pressedColor
-        }
 
-        Rectangle {
-            anchors.right: parent.right
-            anchors.top: parent.top
-            width: 3 * scaleRatio; height: 3 * scaleRatio
-            color: dropdown.pressedColor
-        }
+            Behavior on height {
+                NumberAnimation { duration: 100; easing.type: Easing.InQuad }
+            }
 
-        Behavior on height {
-            NumberAnimation { duration: 100; easing.type: Easing.InQuad }
-        }
+            Column {
+                id: columnid
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                property int currentIndex: 0
 
-        Column {
-            id: columnid
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            property int currentIndex: 0
+                Repeater {
+                    id: repeater
 
-            Repeater {
-                id: repeater
+                    // Workaround for translations in listElements. All translated strings needs to be listed in this file.
+                    property string stringAutomatic: qsTr("Automatic") + translationManager.emptyString
+                    property string stringSlow: qsTr("Slow (x0.2 fee)") + translationManager.emptyString
+                    property string stringNormal: qsTr("Normal (x1 fee)")  + translationManager.emptyString
+                    property string stringFast: qsTr("Fast (x5 fee)")  + translationManager.emptyString
+                    property string stringFastest: qsTr("Fastest (x200 fee)") + translationManager.emptyString
 
-                // Workaround for translations in listElements. All translated strings needs to be listed in this file.
-                property string stringLow: qsTr("Low (x1 fee)") + translationManager.emptyString
-                property string stringMedium:  qsTr("Medium (x20 fee)") + translationManager.emptyString
-                property string stringHigh:  qsTr("High (x166 fee)") + translationManager.emptyString
-                property string stringSlow: qsTr("Slow (x0.25 fee)") + translationManager.emptyString
-                property string stringDefault: qsTr("Default") + translationManager.emptyString
-                property string stringFast: qsTr("Fast (x5 fee)") + translationManager.emptyString
-                property string stringFastest: qsTr("Fastest (x41.5 fee)") + translationManager.emptyString
-                property string stringAll:  qsTr("All") + translationManager.emptyString
-                property string stringSent:  qsTr("Sent") + translationManager.emptyString
-                property string stringReceived:  qsTr("Received") + translationManager.emptyString
-                property string stringNormal: qsTr("Normal (x1 fee)") + translationManager.emptyString
-
-
-                delegate: Rectangle {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    height: (dropdown.dropdownHeight * 0.75) * scaleRatio
-                    //radius: index === repeater.count - 1 ? 4 : 0
-                    color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
-
-                    Text {
-                        id: col1Text
-                        anchors.verticalCenter: parent.verticalCenter
+                    delegate: Rectangle {
                         anchors.left: parent.left
-                        anchors.right: col2Text.left
-                        anchors.leftMargin: 12 * scaleRatio
-                        anchors.rightMargin: 0
-                        font.family: MoneroComponents.Style.fontRegular.name
-                        font.bold: true
-                        font.pixelSize: fontItemSize
-                        color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? MoneroComponents.Style.dropdownContentSelectedFontColor : MoneroComponents.Style.dropdownContentFontColor
-                        text: qsTr(column1) + translationManager.emptyString
-                    }
-
-                    Text {
-                        id: col2Text
-                        anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
-                        anchors.rightMargin: 45 * scaleRatio
-                        font.family: MoneroComponents.Style.fontRegular.name
-                        font.pixelSize: 14 * scaleRatio
-                        color: MoneroComponents.Style.defaultFontColor
-                        text: ""
-                    }
+                        height: (dropdown.dropdownHeight * 0.75)
+                        //radius: index === repeater.count - 1 ? 4 : 0
+                        color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
-                    Rectangle {
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-                        width: 3 * scaleRatio; height: 3 * scaleRatio
-                        color: parent.color
-                    }
+                        BittubeComponents.TextPlain {
+                            id: col1Text
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.right: col2Text.left
+                            anchors.leftMargin: 12
+                            anchors.rightMargin: 0
+                            font.family: BittubeComponents.Style.fontRegular.name
+                            font.bold: true
+                            font.pixelSize: fontItemSize
+                            color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? "#00ABFF" : "#FFFFFF"
+                            text: qsTr(column1) + translationManager.emptyString
+                        }
 
-                    Rectangle {
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                        width: 3 * scaleRatio; height: 3 * scaleRatio
-                        color: parent.color
-                    }
+                        BittubeComponents.TextPlain {
+                            id: col2Text
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.right: parent.right
+                            anchors.rightMargin: 45
+                            font.family: BittubeComponents.Style.fontRegular.name
+                            font.pixelSize: 14
+                            color: "#FFFFFF"
+                            text: ""
+                        }
 
-                    MouseArea {
-                        id: itemArea
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
+                        Rectangle {
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            width: 3; height: 3
+                            color: parent.color
+                        }
 
-                        onClicked: {
-                            dropdown.expanded = false
-                            columnid.currentIndex = index
-                            changed();
-                            dropdown.update()
+                        Rectangle {
+                            anchors.right: parent.right
+                            anchors.top: parent.top
+                            width: 3; height: 3
+                            color: parent.color
+                        }
+
+                        MouseArea {
+                            id: itemArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+
+                            onClicked: {
+                                popup.close()
+                                columnid.currentIndex = index
+                                changed();
+                                dropdown.update()
+                            }
                         }
                     }
                 }

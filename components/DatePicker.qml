@@ -27,18 +27,22 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.2
+import QtQuick 2.9
 import QtQuick.Controls 1.2
+import QtQuick.Controls 2.2 as QtQuickControls2
+import QtQuick.Layouts 1.2
+import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.2
 
-import "../components" as MoneroComponents
+import "." as BittubeComponents
+import "effects/" as MoneroEffects
 
 Item {
     id: datePicker
-    property bool expanded: false
+    readonly property alias expanded: popup.visible
     property date currentDate
     property bool showCurrentDate: true
-    property color backgroundColor : MoneroComponents.Style.datepickerBackgroundColor
+    property color backgroundColor : BittubeComponents.Style.appWindowBorderColor
     property color errorColor : "red"
     property bool error: false
     property alias inputLabel: inputLabel
@@ -51,35 +55,23 @@ Item {
 
     onExpandedChanged: if(expanded) appWindow.currentItem = datePicker
 
-    function hide() { datePicker.expanded = false }
-    function containsPoint(px, py) {
-        if(px < 0)
-            return false
-        if(px > width)
-            return false
-        if(py < 0)
-            return false
-        if(py > height + calendarRect.height)
-            return false
-        return true
-    }
-
     Rectangle {
         id: inputLabelRect
         color: "transparent"
         height: 22
         width: parent.width
 
-        Text {
+        BittubeComponents.TextPlain {
             id: inputLabel
             anchors.top: parent.top
             anchors.topMargin: 2
             anchors.left: parent.left
-            font.family: MoneroComponents.Style.fontLight.name
+            font.family: BittubeComponents.Style.fontLight.name
             font.pixelSize: 14
             font.bold: false
             textFormat: Text.RichText
-            color: MoneroComponents.Style.defaultFontColor
+            color: BittubeComponents.Style.defaultFontColor
+            themeTransition: false
 
             MouseArea {
                 anchors.fill: parent
@@ -92,7 +84,7 @@ Item {
     Item {
         id: head
         anchors.top: inputLabelRect.bottom
-        anchors.topMargin: 6 * scaleRatio
+        anchors.topMargin: 6
         anchors.left: parent.left
         anchors.right: parent.right
         height: 28
@@ -111,45 +103,14 @@ Item {
             border.color: datePicker.colorBorder
         }
 
-        Item {
-            id: buttonItem
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.margins: 4
-            width: height
-
-            Image {
-                id: button
-                anchors.centerIn: parent
-                source: "../images/whiteDropIndicator.png"
-                rotation: datePicker.expanded ? 180 : 0
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: datePicker.expanded = !datePicker.expanded
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-            }
-        }
-
-        Rectangle {
-            id: separator
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: buttonItem.left
-            anchors.rightMargin: 4
-            height: 16
-            width: 1
-            color: "#808080"
-            visible: datePicker.expanded
-        }
-
-        Row {
+        RowLayout {
             id: dateInput
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: 10
+            anchors.leftMargin: 2
+            anchors.right: parent.right
+            property string headerFontColor: BittubeComponents.Style.blackTheme ? "#e6e6e6" : "#333333"
+            spacing: 0
 
             function setDate(date) {
                 var day = date.getDate()
@@ -169,12 +130,14 @@ Item {
             TextInput {
                 id: dayInput
                 readOnly: true
-                width: 22
-                font.family: MoneroComponents.Style.fontRegular.name
+                Layout.preferredWidth: childrenRect.width + 40
+                font.family: BittubeComponents.Style.fontRegular.name
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
-                maximumLength: 2
+                color: datePicker.error ? errorColor : parent.headerFontColor
+                selectionColor: BittubeComponents.Style.dimmedFontColor
+                selectByMouse: true
                 horizontalAlignment: TextInput.AlignHCenter
+                maximumLength: 2
                 validator: IntValidator{bottom: 01; top: 31;}
                 KeyNavigation.tab: monthInput
 
@@ -192,22 +155,25 @@ Item {
                 }
             }
 
-            Text {
-                font.family: MoneroComponents.Style.fontRegular.name
+            BittubeComponents.TextPlain {
+                font.family: BittubeComponents.Style.fontRegular.name
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
+                color: datePicker.error ? errorColor : BittubeComponents.Style.defaultFontColor
                 text: "-"
+                themeTransition: false
             }
 
             TextInput {
                 id: monthInput
                 readOnly: true
-                width: 22
-                font.family: MoneroComponents.Style.fontRegular.name
+                Layout.preferredWidth: childrenRect.width + 40
+                font.family: BittubeComponents.Style.fontRegular.name
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
-                maximumLength: 2
+                color: datePicker.error ? errorColor : parent.headerFontColor
+                selectionColor: BittubeComponents.Style.dimmedFontColor
+                selectByMouse: true
                 horizontalAlignment: TextInput.AlignHCenter
+                maximumLength: 2
                 validator: IntValidator{bottom: 01; top: 12;}
                 KeyNavigation.tab: yearInput
                 text: {
@@ -224,23 +190,27 @@ Item {
                 }
             }
 
-            Text {
-                font.family: MoneroComponents.Style.fontRegular.name
+            BittubeComponents.TextPlain {
+                font.family: BittubeComponents.Style.fontRegular.name
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
+                color: datePicker.error ? errorColor : BittubeComponents.Style.defaultFontColor
                 text: "-"
+                themeTransition: false
             }
 
             TextInput {
                 id: yearInput
-                width: 44
-                font.family: MoneroComponents.Style.fontRegular.name
+                Layout.preferredWidth: childrenRect.width + 60
+                font.family: BittubeComponents.Style.fontRegular.name
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
-                maximumLength: 4
+                color: datePicker.error ? errorColor : parent.headerFontColor
+                selectionColor: BittubeComponents.Style.dimmedFontColor
+                selectByMouse: true
                 horizontalAlignment: TextInput.AlignHCenter
+                maximumLength: 4
                 validator: IntValidator{bottom: 1000; top: 9999;}
                 text: if(datePicker.showCurrentDate) datePicker.currentDate.getFullYear()
+
                 onFocusChanged: {
                     if(focus === false) {
                         var d = new Date()
@@ -250,153 +220,238 @@ Item {
                     }
                 }
             }
+
+            Rectangle {
+                Layout.preferredHeight: parent.height
+                Layout.fillWidth: true
+                color: "transparent"
+
+                Image {
+                    id: button
+                    anchors.right: parent.right
+                    anchors.rightMargin: 10
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: "qrc:///images/whiteDropIndicator.png"
+                    visible: false
+                }
+
+                ColorOverlay {
+                    source: button
+                    anchors.fill: button
+                    color: BittubeComponents.Style.defaultFontColor
+                    rotation: datePicker.expanded ? 180 : 0
+                    opacity: 1
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: datePicker.expanded ? popup.close() : popup.open()
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                }
+            }
         }
     }
 
-    Rectangle {
-        id: calendarRect
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: head.bottom
-        color: MoneroComponents.Style.datepickerBackgroundColor
-        border.width: 1
-        border.color: "#DBDBDB"
-        height: datePicker.expanded ? calendar.height + 2 : 0
-        clip: true
-        //radius: 4
-
-        Behavior on height {
-            NumberAnimation { duration: 100; easing.type: Easing.InQuad }
-        }
+    QtQuickControls2.Popup {
+        id: popup
+        padding: 0
+        closePolicy: QtQuickControls2.Popup.CloseOnEscape | QtQuickControls2.Popup.CloseOnPressOutsideParent
 
         Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: 1
-            anchors.rightMargin: 1
-            anchors.top: parent.top
-            color: MoneroComponents.Style.datepickerBackgroundColor
-            height: 1
-        }
+            id: calendarRect
+            width: head.width
+            x: head.x
+            y: head.y + head.height + 10
 
-        Calendar {
-            id: calendar
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.margins: 1
-            height: 180
-            frameVisible: false
+            color: BittubeComponents.Style.middlePanelBackgroundColor
+            border.width: 1
+            border.color: BittubeComponents.Style.appWindowBorderColor
+            height: datePicker.expanded ? calendar.height + 2 : 0
+            clip: true
 
-            style: CalendarStyle {
-                gridVisible: false
-                background: Rectangle { color: "transparent" }
-                dayDelegate: Item {
-                    z: parent.z + 1
-                    implicitHeight: implicitWidth
-                    implicitWidth: calendar.width / 7
+            Behavior on height {
+                NumberAnimation { duration: 100; easing.type: Easing.InQuad }
+            }
 
-                    Rectangle {
-                        anchors.fill: parent
-                        radius: parent.implicitHeight / 2
-                        color: dayArea.pressed && styleData.visibleMonth ? MoneroComponents.Style.calendarSelectedBackgroundColor : "transparent"
-                    }
+            MouseArea {
+                anchors.fill: parent
+            }
 
-                    Text {
-                        anchors.centerIn: parent
-                        font.family: "Arial"
-                        font.pixelSize: 12
-                        font.bold: dayArea.pressed
-                        text: styleData.date.getDate()
-                        color: {
-                            if(!styleData.visibleMonth) return "#DBDBDB"
-                            if(dayArea.pressed) return "#FFFFFF"
-                            if(styleData.today) return "#FF6C3B"
-                            return "#4A4848"
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 1
+                anchors.rightMargin: 1
+                anchors.top: parent.top
+                color: BittubeComponents.Style.appWindowBorderColor
+                height: 1
+            }
+
+            Calendar {
+                id: calendar
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: 1
+                anchors.bottomMargin: 10
+                height: 220
+                frameVisible: false
+
+                style: CalendarStyle {
+                    gridVisible: false
+                    background: Rectangle { color: BittubeComponents.Style.middlePanelBackgroundColor }
+                    dayDelegate: Item {
+                        z: parent.z + 1
+                        implicitHeight: implicitWidth
+                        implicitWidth: calendar.width / 7
+
+                        Rectangle {
+                            id: dayRect
+                            anchors.fill: parent
+                            radius: parent.implicitHeight / 2
+                            color: {
+                                if(dayArea.pressed && styleData.visibleMonth)
+                                    return BittubeComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
+                                return "transparent";
+                            }
+                        }
+
+                        BittubeComponents.TextPlain {
+                            id: dayText
+                            anchors.centerIn: parent
+                            font.family: BittubeComponents.Style.fontMonoRegular.name
+                            font.pixelSize: {
+                                if(!styleData.visibleMonth) return 12
+                                return 14
+                            }
+                            font.bold: {
+                                if(dayArea.pressed || styleData.visibleMonth) return true;
+                                return false;
+                            }
+                            text: styleData.date.getDate()
+                            themeTransition: false
+                            color: {
+                                if(!styleData.visibleMonth) return BittubeComponents.Style.lightGreyFontColor
+                                if(dayArea.pressed) return BittubeComponents.Style.defaultFontColor
+                                if(styleData.today) return BittubeComponents.Style.orange
+                                return BittubeComponents.Style.defaultFontColor
+                            }
+                        }
+
+                        MouseArea {
+                            id: dayArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            onEntered: dayRect.color = BittubeComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
+                            onExited: dayRect.color = "transparent"
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                if(styleData.visibleMonth) {
+                                    currentDate = styleData.date
+                                    popup.close()
+                                } else {
+                                    var date = styleData.date
+                                    if(date.getMonth() > calendar.visibleMonth)
+                                        calendar.showNextMonth()
+                                    else calendar.showPreviousMonth()
+                                }
+
+                                datePicker.dateChanged();
+                            }
                         }
                     }
 
-                    MouseArea {
-                        id: dayArea
-                        anchors.fill: parent
-                        onClicked: {
-                            if(styleData.visibleMonth) {
-                                currentDate = styleData.date
-                                datePicker.expanded = false
-                            } else {
-                                var date = styleData.date
-                                if(date.getMonth() > calendar.visibleMonth)
-                                    calendar.showNextMonth()
-                                else calendar.showPreviousMonth()
+                    dayOfWeekDelegate: Item {
+                        implicitHeight: 20
+                        implicitWidth: calendar.width / 7
+
+                        BittubeComponents.TextPlain {
+                            anchors.centerIn: parent
+                            elide: Text.ElideRight
+                            font.family: BittubeComponents.Style.fontMonoRegular.name
+                            font.pixelSize: 12
+                            color: BittubeComponents.Style.lightGreyFontColor
+                            themeTransition: false
+                            text: {
+                                var locale = Qt.locale()
+                                return locale.dayName(styleData.dayOfWeek, Locale.ShortFormat)
+                            }
+                        }
+                    }
+
+                    navigationBar: Rectangle {
+                        color: BittubeComponents.Style.middlePanelBackgroundColor
+                        implicitWidth: calendar.width
+                        implicitHeight: 30
+
+                        BittubeComponents.TextPlain {
+                            anchors.centerIn: parent
+                            font.family: BittubeComponents.Style.fontMonoRegular.name
+                            font.pixelSize: 14
+                            color: BittubeComponents.Style.dimmedFontColor
+                            themeTransition: false
+                            text: styleData.title
+                        }
+
+
+                        Item {
+                            anchors.left: parent.left
+                            anchors.leftMargin: 4
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            width: height
+
+                            Image {
+                                id: prevMonthIcon
+                                anchors.centerIn: parent
+                                source: "qrc:///images/prevMonth.png"
+                                visible: false
                             }
 
-                            dateChanged();
-                        }
-                    }
-                }
+                            ColorOverlay {
+                                source: prevMonthIcon
+                                anchors.fill: prevMonthIcon
+                                color: BittubeComponents.Style.defaultFontColor
+                                opacity: 0.5
+                            }
 
-                dayOfWeekDelegate: Item {
-                    implicitHeight: 20
-                    implicitWidth: calendar.width / 7
-
-                    Text {
-                        anchors.centerIn: parent
-                        elide: Text.ElideRight
-                        font.family: "Arial"
-                        font.pixelSize: 9
-                        color: "#535353"
-                        text: {
-                            var locale = Qt.locale()
-                            return locale.dayName(styleData.dayOfWeek, Locale.ShortFormat)
-                        }
-                    }
-                }
-
-                navigationBar: Rectangle {
-                    implicitWidth: calendar.width
-                    implicitHeight: 30
-
-                    Text {
-                        anchors.centerIn: parent
-                        font.family: "Arial"
-                        font.pixelSize: 12
-                        color: "#4A4646"
-                        text: styleData.title
-                    }
-
-                    Item {
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        width: height
-
-                        Image {
-                            anchors.centerIn: parent
-                            source: "../images/prevMonth.png"
+                            MouseArea {
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                anchors.fill: parent
+                                onClicked: calendar.showPreviousMonth()
+                            }
                         }
 
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: calendar.showPreviousMonth()
-                        }
-                    }
+                        Item {
+                            anchors.right: parent.right
+                            anchors.rightMargin: 4
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            width: height
 
-                    Item {
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        width: height
+                            Image {
+                                id: nextMonthIcon
+                                anchors.centerIn: parent
+                                source: "qrc:///images/prevMonth.png"
+                                visible: false
+                            }
 
-                        Image {
-                            anchors.centerIn: parent
-                            source: "../images/prevMonth.png"
-                            transformOrigin: Item.Center
-                            rotation: 180
-                        }
+                            ColorOverlay {
+                                source: nextMonthIcon
+                                anchors.fill: nextMonthIcon
+                                color: BittubeComponents.Style.defaultFontColor
+                                opacity: 0.5
+                                rotation: 180
+                            }
 
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: calendar.showNextMonth()
+                            MouseArea {
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                anchors.fill: parent
+                                onClicked: calendar.showNextMonth()
+                            }
                         }
                     }
                 }

@@ -27,10 +27,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.5
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import "../components" as MoneroComponents
+import "../components" as BittubeComponents
 
 Item {
     id: item
@@ -38,30 +38,31 @@ Item {
     property alias color: label.color
     property int textFormat: Text.PlainText
     property string tipText: ""
-    property int fontSize: 16 * scaleRatio
+    property int fontSize: 16
     property bool fontBold: false
-    property string fontColor: MoneroComponents.Style.defaultFontColor
+    property string fontColor: BittubeComponents.Style.defaultFontColor
     property string fontFamily: ""
     property alias wrapMode: label.wrapMode
     property alias horizontalAlignment: label.horizontalAlignment
-    property alias hoveredLink: label.hoveredLink
     property alias elide: label.elide
     property alias textWidth: label.width
+    property alias styleName: label.font.styleName
+    property alias themeTransition: label.themeTransition
     signal linkActivated()
-    height: label.height * scaleRatio
-    width: label.width * scaleRatio
-    Layout.topMargin: 10 * scaleRatio
+    height: label.height
+    width: label.width
+    Layout.topMargin: 10
 
-    Text {
+    BittubeComponents.TextPlain {
         id: label
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 2 * scaleRatio
+        anchors.bottomMargin: 2
         anchors.left: parent.left
         font.family: {
             if(fontFamily){
                 return fontFamily;
             } else {
-                return MoneroComponents.Style.fontRegular.name;
+                return BittubeComponents.Style.fontRegular.name;
             }
         }
         font.pixelSize: fontSize
@@ -69,5 +70,10 @@ Item {
         color: fontColor
         onLinkActivated: item.linkActivated()
         textFormat: parent.textFormat
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.NoButton
+            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+        }
     }
 }

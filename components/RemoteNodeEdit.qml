@@ -29,13 +29,14 @@
 
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
-import QtQuick 2.2
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import "../components" as MoneroComponents
+import "../js/Utils.js" as Utils
+import "../components" as BittubeComponents
 
 GridLayout {
-    columns: (isMobile) ? 1 : 2
+    columns: 2
     columnSpacing: 32
     id: root
     property alias daemonAddrText: daemonAddr.text
@@ -45,18 +46,18 @@ GridLayout {
 
     // TODO: LEGACY; remove these placeHolder variables when
     // the wizards get redesigned to the black-theme
-    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
+    property string placeholderFontFamily: BittubeComponents.Style.fontRegular.name
     property bool placeholderFontBold: false
-    property int placeholderFontSize: 18 * scaleRatio
-    property string placeholderColor: MoneroComponents.Style.defaultFontColor
+    property int placeholderFontSize: 15
+    property string placeholderColor: BittubeComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
+    property int labelFontSize: 14
 
-    property string lineEditBorderColor: Qt.rgba(0, 0, 0, 0.15)
-    property string lineEditBackgroundColor: "white"
-    property string lineEditFontColor: "black"
-    property int lineEditFontSize: 18 * scaleRatio
-    property int labelFontSize: 16 * scaleRatio
-    property bool lineEditFontBold: true
+    property string lineEditBackgroundColor: "transparent"
+    property string lineEditBorderColor: BittubeComponents.Style.inputBorderColorInActive
+    property string lineEditFontColor: BittubeComponents.Style.defaultFontColor
+    property bool lineEditFontBold: false
+    property int lineEditFontSize: 15
 
     signal editingFinished()
     signal textChanged()
@@ -66,7 +67,14 @@ GridLayout {
     }
 
     function getAddress() {
-        return daemonAddr.text.trim() + ":" + daemonPort.text.trim()
+        var addr = daemonAddr.text.trim();
+        var port = daemonPort.text.trim();
+
+        // validation
+        if(addr === "" || addr.length < 2) return "";
+        if(!Utils.isNumeric(port)) return "";
+
+        return addr + ":" + port;
     }
 
     LineEdit {

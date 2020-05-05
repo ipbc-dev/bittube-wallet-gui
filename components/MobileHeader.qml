@@ -2,7 +2,7 @@ import QtQuick 2.2
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.1
 
-import moneroComponents.Wallet 1.0
+import bittubeComponents.Wallet 1.0
 import "../components" as MoneroComponents
 
 // BasicPanel header

@@ -28,8 +28,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
-import moneroComponents.WalletManager 1.0
-import moneroComponents.Wallet 1.0
+import bittubeComponents.WalletManager 1.0
+import bittubeComponents.Wallet 1.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import 'utils.js' as Utils

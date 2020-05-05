@@ -1,22 +1,21 @@
-// Copyright (c) 2018, The Monero Project
-// Copyright (c) 2018, The BitTube Project
-// 
+// Copyright (c) 2014-2019, The Monero Project
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -36,43 +35,45 @@
 SubaddressModel::SubaddressModel(QObject *parent, Subaddress *subaddress)
     : QAbstractListModel(parent), m_subaddress(subaddress)
 {
-    qDebug(__FUNCTION__);
     connect(m_subaddress,SIGNAL(refreshStarted()),this,SLOT(startReset()));
     connect(m_subaddress,SIGNAL(refreshFinished()),this,SLOT(endReset()));
 
 }
 
 void SubaddressModel::startReset(){
-    qDebug(__FUNCTION__);
     beginResetModel();
 }
 void SubaddressModel::endReset(){
-    qDebug(__FUNCTION__);
     endResetModel();
 }
 
-int SubaddressModel::rowCount(const QModelIndex &parent) const
+int SubaddressModel::rowCount(const QModelIndex &) const
 {
     return m_subaddress->count();
 }
 
 QVariant SubaddressModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.row() < 0 || (unsigned)index.row() >= m_subaddress->count())
+    if (!index.isValid() || index.row() < 0 || static_cast<quint64>(index.row()) >= m_subaddress->count())
         return {};
 
-    Monero::SubaddressRow * sr = m_subaddress->getRow(index.row());
-    if (!sr)
-        return {};
+    QVariant result;
 
-    QVariant result = "";
-    switch (role) {
-    case SubaddressAddressRole:
-        result = QString::fromStdString(sr->getAddress());
-        break;
-    case SubaddressLabelRole:
-        result = index.row() == 0 ? tr("Primary address") : QString::fromStdString(sr->getLabel());
-        break;
+    bool found = m_subaddress->getRow(index.row(), [&index, &result, &role](const Monero::SubaddressRow &subaddress) {
+        switch (role) {
+        case SubaddressAddressRole:
+            result = QString::fromStdString(subaddress.getAddress());
+            break;
+        case SubaddressLabelRole:
+            result = index.row() == 0 ? tr("Primary address") : QString::fromStdString(subaddress.getLabel());
+            break;
+        default:
+            qCritical() << "Unimplemented role" << role;
+        }
+    });
+    if (!found)
+    {
+        qCritical("%s: internal error: invalid index %d", __FUNCTION__, index.row());
     }
 
     return result;

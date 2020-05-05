@@ -27,14 +27,17 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
+import FontAwesome 1.0
 
-import "../components" as MoneroComponents
+import "." as BittubeComponents
+import "effects/" as MoneroEffects
+import "../js/Utils.js" as Utils
 
 Item {
     id: root
@@ -42,28 +45,60 @@ Item {
     z: parent.z + 2
 
     property bool isHidden: true
-    property alias password: passwordInput.text
+    property alias password: passwordInput1.text
     property string walletName
     property string errorText
+    property bool passwordDialogMode
+    property bool passphraseDialogMode
+    property bool newPasswordDialogMode
 
     // same signals as Dialog has
     signal accepted()
+    signal acceptedNewPassword()
+    signal acceptedPassphrase()
     signal rejected()
+    signal rejectedNewPassword()
+    signal rejectedPassphrase()
     signal closeCallback()
 
-    function open(walletName, errorText) {
-        inactiveOverlay.visible = true // draw appwindow inactive
+    function _openInit(walletName, errorText) {
+        isHidden = true
+        capsLockTextLabel.visible = oshelper.isCapsLock();
+        passwordInput1.echoMode = TextInput.Password
+        passwordInput2.echoMode = TextInput.Password
+        passwordInput1.text = ""
+        passwordInput2.text = ""
+        passwordInput1.forceActiveFocus();
         root.walletName = walletName ? walletName : ""
-        root.errorText = errorText ? errorText : "";
+        errorTextLabel.text = errorText ? errorText : "";
         leftPanel.enabled = false
         middlePanel.enabled = false
-        titleBar.enabled = false
-        show()
+        wizard.enabled = false
+        titleBar.state = "essentials"
         root.visible = true;
-        passwordInput.forceActiveFocus();
-        passwordInput.text = ""
         appWindow.hideBalanceForced = true;
         appWindow.updateBalance();
+    }
+
+    function open(walletName, errorText) {
+        passwordDialogMode = true;
+        passphraseDialogMode = false;
+        newPasswordDialogMode = false;
+        _openInit(walletName, errorText);
+    }
+
+    function openPassphraseDialog() {
+        passwordDialogMode = false;
+        passphraseDialogMode = true;
+        newPasswordDialogMode = false;
+        _openInit("", "");
+    }
+
+    function openNewPasswordDialog() {
+        passwordDialogMode = false;
+        passphraseDialogMode = false;
+        newPasswordDialogMode = true;
+        _openInit("", "");
     }
 
     function showError(errorText) {
@@ -71,147 +106,328 @@ Item {
     }
 
     function close() {
-        inactiveOverlay.visible = false
         leftPanel.enabled = true
         middlePanel.enabled = true
-        titleBar.enabled = true
+        wizard.enabled = true
+        titleBar.state = "default"
+
         root.visible = false;
         appWindow.hideBalanceForced = false;
         appWindow.updateBalance();
         closeCallback();
     }
 
+    function toggleIsHidden() {
+        passwordInput1.echoMode = isHidden ? TextInput.Normal : TextInput.Password;
+        passwordInput2.echoMode = isHidden ? TextInput.Normal : TextInput.Password;
+        isHidden = !isHidden;
+    }
+
     ColumnLayout {
-        z: inactiveOverlay.z + 1
         id: mainLayout
         spacing: 10
-        anchors { fill: parent; margins: 35 * scaleRatio }
+        anchors { fill: parent; margins: 35 }
 
         ColumnLayout {
             id: column
 
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter
-            Layout.maximumWidth: 400 * scaleRatio
+            Layout.maximumWidth: 400
 
             Label {
-                text: root.walletName.length > 0 ? qsTr("Please enter wallet password for: ") + root.walletName : qsTr("Please enter wallet password")
+                text: {
+                    if (newPasswordDialogMode) {
+                        return qsTr("Please enter new wallet password") + translationManager.emptyString;
+                    } else {
+                        var device = passwordDialogMode ? qsTr("wallet password") : qsTr("wallet device passphrase");
+                        return (root.walletName.length > 0 ? qsTr("Please enter %1 for: ").arg(device) + root.walletName : qsTr("Please enter %1").arg(device)) + translationManager.emptyString;
+                    }
+                }
                 Layout.fillWidth: true
 
-                font.pixelSize: 16 * scaleRatio
-                font.family: MoneroComponents.Style.fontLight.name
+                font.pixelSize: 16
+                font.family: BittubeComponents.Style.fontLight.name
 
-                color: MoneroComponents.Style.passwordDialogHeaderFontColor
+                color: BittubeComponents.Style.defaultFontColor
             }
 
             Label {
-                text: root.errorText
-                visible: root.errorText
+                text: qsTr("Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.") + translationManager.emptyString
+                visible: passphraseDialogMode
+                Layout.fillWidth: true
+                wrapMode: Text.Wrap
 
-                color: MoneroComponents.Style.errorColor
-                font.pixelSize: 16 * scaleRatio
-                font.family: MoneroComponents.Style.fontLight.name                
+                font.pixelSize: 14
+                font.family: BittubeComponents.Style.fontLight.name
+
+                color: BittubeComponents.Style.warningColor
+            }
+
+            Label {
+                id: errorTextLabel
+                visible: root.errorText || text !== ""
+                color: BittubeComponents.Style.errorColor
+                font.pixelSize: 16
+                font.family: BittubeComponents.Style.fontLight.name
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
             }
 
-            TextField {
-                id : passwordInput
+            Label {
+                id: capsLockTextLabel
+                visible: false
+                color: BittubeComponents.Style.errorColor
+                font.pixelSize: 16
+                font.family: BittubeComponents.Style.fontLight.name
+                Layout.fillWidth: true
+                wrapMode: Text.Wrap
+                text: qsTr("CAPSLOCKS IS ON.") + translationManager.emptyString;
+            }
+
+            BittubeComponents.Input {
+                id: passwordInput1
                 Layout.topMargin: 6
                 Layout.fillWidth: true
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: MoneroComponents.Style.fontLight.name
-                font.pixelSize: 24 * scaleRatio
+                font.family: BittubeComponents.Style.fontLight.name
+                font.pixelSize: 24
                 echoMode: TextInput.Password
-                KeyNavigation.tab: okButton
+                KeyNavigation.tab: {
+                    if (passwordDialogMode) {
+                        return okButton
+                    } else {
+                        return passwordInput2
+                    }
+                }
+                implicitHeight: 50
                 bottomPadding: 10
                 leftPadding: 10
                 topPadding: 10
-                color: MoneroComponents.Style.defaultFontColor
-                selectionColor: MoneroComponents.Style.dimmedFontColor
-                selectedTextColor: MoneroComponents.Style.defaultFontColor
+                color: BittubeComponents.Style.defaultFontColor
+                selectionColor: BittubeComponents.Style.textSelectionColor
+                selectedTextColor: BittubeComponents.Style.textSelectedColor
+                onTextChanged: capsLockTextLabel.visible = oshelper.isCapsLock();
 
                 background: Rectangle {
                     radius: 2
-                    border.color: Qt.rgba(255, 255, 255, 0.35)
+                    color: BittubeComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
+                    border.color: BittubeComponents.Style.inputBorderColorInActive
                     border.width: 1
-                    color: MoneroComponents.Style.passwordDialogBackgroundColor
 
-                    Image {
-                        width: 26 * scaleRatio
-                        height: 26 * scaleRatio
+                    MoneroEffects.ColorTransition {
+                        targetObj: parent
+                        blackColor: "black"
+                        whiteColor: "#A9FFFFFF"
+                    }
+
+                    BittubeComponents.Label {
+                        fontSize: 20
+                        text: isHidden ? FontAwesome.eye : FontAwesome.eyeSlash
                         opacity: 0.7
-                        fillMode: Image.PreserveAspectFit
-                        source: isHidden ? "../images/eyeShow.png" : "../images/eyeHide.png"
-                        anchors.verticalCenter: parent.verticalCenter
+                        fontFamily: FontAwesome.fontFamily
                         anchors.right: parent.right
-                        anchors.rightMargin: 20
+                        anchors.rightMargin: 15
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.verticalCenterOffset: 1
+
                         MouseArea {
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
                             hoverEnabled: true
                             onClicked: {
-                                passwordInput.echoMode = isHidden ? TextInput.Normal : TextInput.Password;
-                                isHidden = !isHidden;
+                                toggleIsHidden();
                             }
                             onEntered: {
                                 parent.opacity = 0.9
-                                parent.width = 28 * scaleRatio
-                                parent.height = 28 * scaleRatio
+                                parent.fontSize = 24
                             }
                             onExited: {
                                 parent.opacity = 0.7
-                                parent.width = 26 * scaleRatio
-                                parent.height = 26 * scaleRatio
+                                parent.fontSize = 20
                             }
                         }
                     }
                 }
 
                 Keys.enabled: root.visible
+                Keys.onEnterPressed: Keys.onReturnPressed(event)
                 Keys.onReturnPressed: {
+                    if (!passwordDialogMode && passwordInput1.text !== passwordInput2.text) {
+                        return;
+                    }
                     root.close()
-                    root.accepted()
-
+                    if (passwordDialogMode) {
+                        root.accepted()
+                    } else if (newPasswordDialogMode) {
+                        root.acceptedNewPassword()
+                    } else if (passphraseDialogMode) {
+                        root.acceptedPassphrase()
+                    }
                 }
                 Keys.onEscapePressed: {
                     root.close()
-                    root.rejected()
-
+                    if (passwordDialogMode) {
+                        root.rejected()
+                    } else if (newPasswordDialogMode) {
+                        root.rejectedNewPassword()
+                    } else if (passphraseDialogMode) {
+                        root.rejectedPassphrase()
+                    }
                 }
+            }
+
+            // padding
+            Rectangle {
+                visible: !passwordDialogMode
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                height: 10
+                opacity: 0
+                color: "black"
+            }
+
+            Label {
+                visible: !passwordDialogMode
+                text: newPasswordDialogMode ? qsTr("Please confirm new password") : qsTr("Please confirm wallet device passphrase") + translationManager.emptyString
+                Layout.fillWidth: true
+
+                font.pixelSize: 16
+                font.family: BittubeComponents.Style.fontLight.name
+
+                color: BittubeComponents.Style.defaultFontColor
+            }
+
+            BittubeComponents.Input {
+                id: passwordInput2
+                visible: !passwordDialogMode
+                Layout.topMargin: 6
+                Layout.fillWidth: true
+                horizontalAlignment: TextInput.AlignLeft
+                verticalAlignment: TextInput.AlignVCenter
+                font.family: BittubeComponents.Style.fontLight.name
+                font.pixelSize: 24
+                echoMode: TextInput.Password
+                KeyNavigation.tab: okButton
+                implicitHeight: 50
+                bottomPadding: 10
+                leftPadding: 10
+                topPadding: 10
+                color: BittubeComponents.Style.defaultFontColor
+                selectionColor: BittubeComponents.Style.textSelectionColor
+                selectedTextColor: BittubeComponents.Style.textSelectedColor
+                onTextChanged: capsLockTextLabel.visible = oshelper.isCapsLock();
+
+                background: Rectangle {
+                    radius: 2
+                    border.color: BittubeComponents.Style.inputBorderColorInActive
+                    border.width: 1
+                    color: BittubeComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
+
+                    BittubeComponents.Label {
+                        fontSize: 20
+                        text: isHidden ? FontAwesome.eye : FontAwesome.eyeSlash
+                        opacity: 0.7
+                        fontFamily: FontAwesome.fontFamily
+                        anchors.right: parent.right
+                        anchors.rightMargin: 15
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.verticalCenterOffset: 1
+
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            hoverEnabled: true
+                            onClicked: {
+                                toggleIsHidden()
+                            }
+                            onEntered: {
+                                parent.opacity = 0.9
+                                parent.fontSize = 24
+                            }
+                            onExited: {
+                                parent.opacity = 0.7
+                                parent.fontSize = 20
+                            }
+                        }
+                    }
+                }
+
+                Keys.enabled: root.visible
+                Keys.onEnterPressed: Keys.onReturnPressed(event)
+                Keys.onReturnPressed: {
+                    if (passwordInput1.text === passwordInput2.text) {
+                        root.close()
+                        if (newPasswordDialogMode) {
+                            root.acceptedNewPassword()
+                        } else if (passphraseDialogMode) {
+                            root.acceptedPassphrase()
+                        }
+                    }
+                }
+                Keys.onEscapePressed: {
+                    root.close()
+                    if (newPasswordDialogMode) {
+                        root.rejectedNewPassword()
+                    } else if (passphraseDialogMode) {
+                        root.rejectedPassphrase()
+                    }
+                }
+            }
+
+            // padding
+            Rectangle {
+                visible: !passwordDialogMode
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                height: 10
+                opacity: 0
+                color: "black"
             }
 
             // Ok/Cancel buttons
             RowLayout {
                 id: buttons
-                spacing: 16 * scaleRatio
+                spacing: 16
                 Layout.topMargin: 16
                 Layout.alignment: Qt.AlignRight
 
-                MoneroComponents.StandardButton {
+                BittubeComponents.StandardButton {
                     id: cancelButton
                     small: true
-                    text: root.walletName.length > 0 ? qsTr("Change wallet") + translationManager.emptyString : qsTr("Cancel") + translationManager.emptyString
-                    KeyNavigation.tab: passwordInput
+                    text: qsTr("Cancel") + translationManager.emptyString
+                    KeyNavigation.tab: passwordInput1
                     onClicked: {
                         root.close()
-                        root.rejected()
+                        if (passwordDialogMode) {
+                            root.rejected()
+                        } else if (newPasswordDialogMode) {
+                            root.rejectedNewPassword()
+                        } else if (passphraseDialogMode) {
+                            root.rejectedPassphrase()
+                        }
                     }
                 }
 
-                MoneroComponents.StandardButton {
+                BittubeComponents.StandardButton {
                     id: okButton
                     small: true
-                    text: qsTr("Continue")
+                    text: qsTr("Ok") + translationManager.emptyString
                     KeyNavigation.tab: cancelButton
+                    enabled: (passwordDialogMode == true) ? true : passwordInput1.text === passwordInput2.text
                     onClicked: {
                         root.close()
-                        root.accepted()
+                        if (passwordDialogMode) {
+                            root.accepted()
+                        } else if (newPasswordDialogMode) {
+                            root.acceptedNewPassword()
+                        } else if (passphraseDialogMode) {
+                            root.acceptedPassphrase()
+                        }
                     }
                 }
             }
-
         }
     }
 }

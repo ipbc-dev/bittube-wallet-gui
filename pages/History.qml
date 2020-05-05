@@ -2,21 +2,21 @@
 // Copyright (c) 2018, The BitTube Project
 // 
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -30,357 +30,1646 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
-import moneroComponents.Wallet 1.0
-import moneroComponents.WalletManager 1.0
-import moneroComponents.TransactionHistory 1.0
-import moneroComponents.TransactionInfo 1.0
-import moneroComponents.TransactionHistoryModel 1.0
+import QtGraphicalEffects 1.0
+import bittubeComponents.Wallet 1.0
+import bittubeComponents.WalletManager 1.0
+import bittubeComponents.TransactionHistory 1.0
+import bittubeComponents.TransactionInfo 1.0
+import bittubeComponents.TransactionHistoryModel 1.0
+import bittubeComponents.Clipboard 1.0
+import FontAwesome 1.0
 
-import "../components"
+import "../components/effects/" as MoneroEffects
+import "../components" as BittubeComponents
+import "../js/Utils.js" as Utils
+import "../js/TxUtils.js" as TxUtils
+
 
 Rectangle {
-    id: mainLayout
+    id: root
     property var model
-    property int tableHeight: !isMobile ? table.contentHeight : tableMobile.contentHeight
+    property int sideMargin: 50
+    property var initialized: false
+    property int txMax: Math.max(5, ((appWindow.height - 250) / 60))
+    property int txOffset: 0
+    property int txPage: (txOffset / txMax) + 1
+    property int txCount: 0
+    property var sortSearchString: null
+    property bool sortDirection: true  // true = desc, false = asc
+    property string sortBy: "blockheight"
+    property var txModelData: []  // representation of transaction data (appWindow.currentWallet.historyModel)
+    property var txData: []  // representation of FILTERED transation data
+    property var txDataCollapsed: []  // keep track of which txs are collapsed
+    property string historyStatusMessage: ""
+    property alias contentHeight: pageRoot.height
 
-    QtObject {
-        id: d
-        property bool initialized: false
-    }
+    Clipboard { id: clipboard }
+    ListModel { id: txListViewModel }
 
     color: "transparent"
 
-    function getSelectedAmount() {
-      if (typeof model === 'undefined' || model == null)
-        return ""
-      var total = 0
-      var count = model.rowCount()
-      for (var i = 0; i < count; ++i) {
-          var idx = model.index(i, 0)
-          var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
-          var amount = model.data(idx, TransactionHistoryModel.TransactionAtomicAmountRole);
-          if (isout)
-              total = walletManager.subi(total, amount)
-          else
-              total = walletManager.addi(total, amount)
-      }
-
-      var sign = ""
-      if (total < 0) {
-        total = -total
-        sign = "-"
-      }
-      return count + qsTr(" selected: ") + sign + walletManager.displayAmount(total);
-    }
-
-    function resetFilter(model) {
-        model.dateFromFilter = "2014-04-18" // genesis block
-        model.dateToFilter = "9999-09-09" // fix before september 9999
-        // negative values disable filters here;
-        model.amountFromFilter = -1;
-        model.amountToFilter = -1;
-        model.directionFilter = TransactionInfo.Direction_Both;
-    }
-
-    onModelChanged: {
-        if (typeof model !== 'undefined' && model != null) {
-            if (!d.initialized) {
-                // setup date filter scope according to real transactions
-                fromDatePicker.currentDate = model.transactionHistory.firstDateTime
-                toDatePicker.currentDate = model.transactionHistory.lastDateTime
-
-                model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole
-                model.sort(0, Qt.DescendingOrder);
-                d.initialized = true
-            }
-        }
-    }
-
-    function onFilterChanged() {
-        // set datepicker error states
-        var datesValid = fromDatePicker.currentDate <= toDatePicker.currentDate
-        fromDatePicker.error = !datesValid;
-        toDatePicker.error = !datesValid;
-
-        if(datesValid){
-            resetFilter(model)
-
-            if (fromDatePicker.currentDate > toDatePicker.currentDate) {
-                console.error("Invalid date filter set: ", fromDatePicker.currentDate, toDatePicker.currentDate)
-            } else {
-                model.dateFromFilter  = fromDatePicker.currentDate
-                model.dateToFilter    = toDatePicker.currentDate
-            }
-
-            model.searchFilter = searchLine.text;
-            tableHeader.visible = model.rowCount() > 0;
-        }
-    }
-
-    Rectangle{
-        id: rootLayout
-        visible: false
-    }
+    onTxMaxChanged: root.updateDisplay(root.txOffset, root.txMax);
 
     ColumnLayout {
         id: pageRoot
-        anchors.margins: isMobile ? 17 : 20 * scaleRatio
-        anchors.topMargin: isMobile ? 0 : 40 * scaleRatio
+        anchors.topMargin: 40
 
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
 
-        spacing: 10 * scaleRatio
+        RowLayout {
+            Layout.preferredHeight: 24
+            Layout.preferredWidth: parent.width - root.sideMargin
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+            Layout.bottomMargin: 10
 
-        GridLayout {
-            property int column_width: {
-                if(!isMobile){
-                    return (parent.width / 2) - 20;
-                } else {
-                    return parent.width - 20;
-                }
+            BittubeComponents.Label {
+                fontSize: 24
+                text: qsTr("Transactions") + translationManager.emptyString
             }
 
+            Item {
+                Layout.fillWidth: true
+            }
+
+            RowLayout {
+                id: sortAndFilter
+                visible: root.txCount > 0
+                property bool collapsed: false
+                Layout.alignment: Qt.AlignRight | Qt.AlignBottom
+                Layout.preferredWidth: 100
+                Layout.preferredHeight: 15
+                spacing: 8
+
+                BittubeComponents.TextPlain {
+                    Layout.alignment: Qt.AlignVCenter
+                    font.family: BittubeComponents.Style.fontRegular.name
+                    font.pixelSize: 15
+                    text: qsTr("Sort & filter") + translationManager.emptyString
+                    color: BittubeComponents.Style.defaultFontColor
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+                        onClicked: {
+                            sortAndFilter.collapsed = !sortAndFilter.collapsed
+                        }
+                    }
+                }
+
+                MoneroEffects.ImageMask {
+                    id: sortCollapsedIcon
+                    Layout.alignment: Qt.AlignVCenter
+                    height: 8
+                    width: 12
+                    image: "qrc:///images/whiteDropIndicator.png"
+                    fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                    fontAwesomeFallbackSize: 14
+                    rotation: sortAndFilter.collapsed ? 0 : 180
+                    color: BittubeComponents.Style.defaultFontColor
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+                        onClicked: {
+                            sortAndFilter.collapsed = !sortAndFilter.collapsed
+                        }
+                    }
+                }
+            }
+        }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.topMargin: 8
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+            visible: sortAndFilter.collapsed
+
+            BittubeComponents.LineEdit {
+                id: searchInput
+                Layout.fillWidth: true
+                input.topPadding: 6
+                input.bottomPadding: 6
+                fontSize: 16
+                labelFontSize: 14
+                placeholderText: qsTr("Search by Transaction ID, Address, Description, Amount or Blockheight") + translationManager.emptyString
+                placeholderFontSize: 16
+                inputHeight: 34
+                onTextUpdated: {
+                    if(searchInput.text != null && searchInput.text.length >= 3){
+                        root.sortSearchString = searchInput.text;
+                        root.reset();
+                        root.updateFilter();
+                    } else {
+                        root.sortSearchString = null;
+                        root.reset();
+                        root.updateFilter();
+                    }
+                }
+            }
+        }
+
+        GridLayout {
+            visible: sortAndFilter.collapsed
+            Layout.fillWidth: true
+            Layout.topMargin: 4
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
             columns: 2
+            columnSpacing: 20
+
+            BittubeComponents.DatePicker {
+                id: fromDatePicker
+                Layout.fillWidth: true
+                width: 100
+                inputLabel.text: qsTr("Date from") + translationManager.emptyString
+                inputLabel.font.pixelSize: 14
+                onCurrentDateChanged: {
+                    if(root.initialized){
+                        root.reset();
+                        root.updateFilter();
+                    }
+                }
+            }
+
+            BittubeComponents.DatePicker {
+                id: toDatePicker
+                Layout.fillWidth: true
+                width: 100
+                inputLabel.text: qsTr("Date to") + translationManager.emptyString
+
+                onCurrentDateChanged: {
+                    if(root.initialized){
+                        root.reset();
+                        root.updateFilter();
+                    }
+                }
+            }
+        }
+
+        RowLayout {
+            Layout.topMargin: 20
+            Layout.bottomMargin: 20
             Layout.fillWidth: true
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
 
-            RowLayout {
-                visible: !isMobile
-                Layout.preferredWidth: parent.column_width
+            Rectangle {
+                visible: sortAndFilter.collapsed
+                color: "transparent"
+                Layout.preferredWidth: childrenRect.width + 38
+                Layout.preferredHeight: 20
 
-                StandardButton {
-                    visible: !isIOS
-                    small: true
-                    text: qsTr("Export") + translationManager.emptyString
+                BittubeComponents.TextPlain {
+                    font.family: BittubeComponents.Style.fontRegular.name
+                    font.pixelSize: 15
+                    text: qsTr("Sort by") + ":" + translationManager.emptyString
+                    color: BittubeComponents.Style.defaultFontColor
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+
+            Rectangle {
+                visible: sortAndFilter.collapsed
+                id: sortBlockheight
+                color: "transparent"
+                Layout.preferredWidth: sortBlockheightText.width + 42
+                Layout.preferredHeight: 20
+
+                RowLayout {
+                    clip: true
+                    anchors.fill: parent
+
+                    BittubeComponents.TextPlain {
+                        id: sortBlockheightText
+                        font.family: BittubeComponents.Style.fontRegular.name
+                        font.pixelSize: 15
+                        text: qsTr("Blockheight") + translationManager.emptyString
+                        color: root.sortBy === "blockheight" ? BittubeComponents.Style.defaultFontColor : BittubeComponents.Style.dimmedFontColor
+                        themeTransition: false
+                    }
+
+                    MoneroEffects.ImageMask {
+                        height: 8
+                        width: 12
+                        visible: root.sortBy === "blockheight" ? true : false
+                        opacity: root.sortBy === "blockheight" ? 1 : 0.2
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
+                        color: BittubeComponents.Style.defaultFontColor
+                        rotation: {
+                            if(root.sortBy === "blockheight"){
+                                return root.sortDirection ? 0 : 180
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
                     onClicked: {
-                        writeCSVFileDialog.open();
+                        if(root.sortBy !== "blockheight") {
+                            root.sortDirection = true;
+                        } else {
+                            root.sortDirection = !root.sortDirection
+                        }
+
+                        root.sortBy = "blockheight";
+                        root.updateSort();
                     }
                 }
+            }
+
+            Rectangle {
+                visible: sortAndFilter.collapsed
+                color: "transparent"
+                Layout.preferredWidth: sortDateText.width + 42
+                Layout.preferredHeight: 20
+
+                RowLayout {
+                    clip: true
+                    anchors.fill: parent
+
+                    BittubeComponents.TextPlain {
+                        id: sortDateText
+                        font.family: BittubeComponents.Style.fontRegular.name
+                        font.pixelSize: 15
+                        text: qsTr("Date") + translationManager.emptyString
+                        color: root.sortBy === "timestamp" ? BittubeComponents.Style.defaultFontColor : BittubeComponents.Style.dimmedFontColor
+                        themeTransition: false
+                    }
+
+                    MoneroEffects.ImageMask {
+                        height: 8
+                        width: 12
+                        visible: root.sortBy === "timestamp" ? true : false
+                        opacity: root.sortBy === "timestamp" ? 1 : 0.2
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
+                        color: BittubeComponents.Style.defaultFontColor
+                        rotation: {
+                            if(root.sortBy === "timestamp"){
+                                return root.sortDirection ? 0 : 180
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onClicked: {
+                        if(root.sortBy !== "timestamp") {
+                            root.sortDirection = true;
+                        } else {
+                            root.sortDirection = !root.sortDirection
+                        }
+
+                        root.sortBy = "timestamp";
+                        root.updateSort();
+                    }
+                }
+            }
+
+            Rectangle {
+                visible: sortAndFilter.collapsed
+                color: "transparent"
+                Layout.preferredWidth: sortAmountText.width + 42
+                Layout.preferredHeight: 20
+
+                RowLayout {
+                    clip: true
+                    anchors.fill: parent
+
+                    BittubeComponents.TextPlain {
+                        id: sortAmountText
+                        font.family: BittubeComponents.Style.fontRegular.name
+                        font.pixelSize: 15
+                        text: qsTr("Amount") + translationManager.emptyString
+                        color: root.sortBy === "amount" ? BittubeComponents.Style.defaultFontColor : BittubeComponents.Style.dimmedFontColor
+                        themeTransition: false
+                    }
+
+                    MoneroEffects.ImageMask {
+                        height: 8
+                        width: 12
+                        visible: root.sortBy === "amount" ? true : false
+                        opacity: root.sortBy === "amount" ? 1 : 0.2
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
+                        color: BittubeComponents.Style.defaultFontColor
+                        rotation: {
+                            if(root.sortBy === "amount"){
+                                return root.sortDirection ? 0 : 180
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onClicked: {
+                        if(root.sortBy !== "amount") {
+                            root.sortDirection = true;
+                        } else {
+                            root.sortDirection = !root.sortDirection
+                        }
+
+                        root.sortBy = "amount";
+                        root.updateSort();
+                    }
+                }
+            }
+
+            Rectangle {
+                visible: !sortAndFilter.collapsed
+                Layout.preferredHeight: 20
+
+                BittubeComponents.TextPlain {
+                    // status message
+                    font.family: BittubeComponents.Style.fontRegular.name
+                    font.pixelSize: 15
+                    text: root.historyStatusMessage
+
+                    color: BittubeComponents.Style.defaultFontColor
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+
+            Item {
+                Layout.fillWidth: true
             }
 
             RowLayout {
-                Layout.preferredWidth: parent.column_width
-                LineEdit {
-                    id: searchLine
-                    fontSize: 14 * scaleRatio
-                    inputHeight: 36 * scaleRatio
-                    borderDisabled: true
-                    Layout.fillWidth: true
-                    backgroundColor: "#ffffff"
-                    placeholderText: qsTr("Search") + translationManager.emptyString
-                    placeholderCenter: true
-                    onTextChanged:  {
-                        onFilterChanged();
-                    }
-                }
-            }
-        }
-
-        GridLayout {
-            z: 6
-            columns: (isMobile)? 1 : 3
-            Layout.fillWidth: true
-            columnSpacing: 22 * scaleRatio
-            visible: !isMobile
-
-            ColumnLayout {
-                Layout.fillWidth: true
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    id: fromDateRow
-                    Layout.minimumWidth: 150 * scaleRatio
-
-                    DatePicker {
-                        visible: !isMobile
-
-                        id: fromDatePicker
-                        Layout.fillWidth: true
-                        width: 100 * scaleRatio
-                        inputLabel.text: qsTr("Date from") + translationManager.emptyString
-
-                        onCurrentDateChanged: {
-                            onFilterChanged()
-                        }
-                    }
-                }
-            }
-
-            ColumnLayout {
-                Layout.fillWidth: true
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    id: toDateRow
-                    Layout.minimumWidth: 150 * scaleRatio
-
-                    DatePicker {
-                        visible: !isMobile
-
-                        id: toDatePicker
-                        Layout.fillWidth: true
-                        width: 100 * scaleRatio
-                        inputLabel.text: qsTr("Date to") + translationManager.emptyString
-
-                        onCurrentDateChanged: {
-                            onFilterChanged()
-                        }
-                    }
-                }
-            }
-
-            ColumnLayout {
-                Layout.fillWidth: true
-
-                Label {
-                    id: transactionPriority
-                    Layout.minimumWidth: 120 * scaleRatio
-                    text: qsTr("Sort") + translationManager.emptyString
-                    fontSize: 14
-                }
-
-                ListModel {
-                    id: priorityModelV5
-
-                    ListElement { 
-                        column1: qsTr("Block height");
-                        column2: "";
-                    }
-                    ListElement {
-                        column1: qsTr("Date");
-                        column2: "";
-                    }
-                 }
-
-                StandardDropdown {
-                    id: priorityDropdown
-                    anchors.topMargin: 2 * scaleRatio
-                    fontHeaderSize: 14 * scaleRatio
-                    dropdownHeight: 28 * scaleRatio
-
-                    Layout.fillWidth: true
-                    // shadowReleasedColor: "#86af49"
-                    // shadowPressedColor: "#B32D00"
-                    // releasedColor: "#e3e3e3"
-                    // pressedColor: "#bebebe"
-                    // colorBorder: "#404040"
-                    // colorHeaderBackground: "#ffffff"
-
-                    onChanged: {
-                        switch(priorityDropdown.currentIndex){
-                            case 0:
-                                // block sort
-                                model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole;
-                                break;
-                            case 1:
-                                // amount sort
-                                model.sortRole = TransactionHistoryModel.TransactionDateRole;
-                                break;
-                        }
-                        model.sort(0, Qt.DescendingOrder);
-                    }
-                }
-            }
-        }
-
-        GridLayout {
-            Layout.topMargin: 20
-            visible: table.count === 0
-
-            Label {
-                fontSize: 16 * scaleRatio
-                text: qsTr("No history...") + translationManager.emptyString
-            }
-        }
-
-        GridLayout {
-            id: tableHeader
-            columns: 1
-            columnSpacing: 0
-            rowSpacing: 0
-            Layout.topMargin: 20
-            Layout.fillWidth: true
-
-            RowLayout{
-                Layout.preferredHeight: 10
-                Layout.fillWidth: true
+                id: pagination
+                visible: root.txCount > 0
+                spacing: 0
+                Layout.alignment: Qt.AlignRight
+                Layout.preferredWidth: childrenRect.width
+                Layout.preferredHeight: 20
 
                 Rectangle {
-                    id: header
-                    Layout.fillWidth: true
-                    visible: table.count > 0
+                    color: "transparent"
+                    Layout.preferredWidth: childrenRect.width + 2
+                    Layout.preferredHeight: 20
 
-                    height: 10
+                    BittubeComponents.TextPlain {
+                        font.family: BittubeComponents.Style.fontRegular.name
+                        font.pixelSize: 15
+                        text: qsTr("Page") + ":" + translationManager.emptyString
+                        color: BittubeComponents.Style.defaultFontColor
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+
+                Rectangle {
+                    color: "transparent"
+                    Layout.preferredWidth: childrenRect.width + 10
+                    Layout.leftMargin: 4
+                    Layout.preferredHeight: 20
+
+                    BittubeComponents.TextPlain {
+                        id: paginationText
+                        text: root.txPage + "/" + Math.ceil(root.txCount / root.txMax)
+                        color: BittubeComponents.Style.defaultFontColor
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        MouseArea {
+                            // jump to page functionality
+                            property int pages: Math.ceil(root.txCount / root.txMax)
+                            anchors.fill: parent
+                            hoverEnabled: pages > 1
+                            cursorShape: hoverEnabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+                            onEntered: parent.color = BittubeComponents.Style.orange
+                            onExited: parent.color = BittubeComponents.Style.defaultFontColor
+                            onClicked: {
+                                if(pages === 1)
+                                    return;
+
+                                inputDialog.labelText = qsTr("Jump to page (1-%1)").arg(pages) + translationManager.emptyString;
+                                inputDialog.onAcceptedCallback = function() {
+                                    var pageNumber = parseInt(inputDialog.inputText);
+                                    if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= pages) {
+                                        root.paginationJump(parseInt(pageNumber));
+                                        return;
+                                    }
+
+                                    appWindow.showStatusMessage(qsTr("Invalid page. Must be a number within the specified range."), 4);
+                                }
+                                inputDialog.onRejectedCallback = null;
+                                inputDialog.open()
+                            }
+                        }
+                    }
+                }
+
+                Rectangle {
+                    id: paginationPrev
+                    Layout.preferredWidth: 18
+                    Layout.preferredHeight: 20
+                    color: "transparent"
+                    opacity: enabled ? 1.0 : 0.2
+                    enabled: false
+
+                    MoneroEffects.ImageMask {
+                        id: prevIcon
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        height: 8
+                        width: 12
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
+                        color: BittubeComponents.Style.defaultFontColor
+                        rotation: 90
+                    }
+
+                    MouseArea {
+                        enabled: parent.enabled
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            root.paginationPrevClicked();
+                        }
+                    }
+                }
+
+                Rectangle {
+                    id: paginationNext
+                    Layout.preferredWidth: 18
+                    Layout.preferredHeight: 20
+                    color: "transparent"
+                    opacity: enabled ? 1.0 : 0.2
+                    enabled: false
+
+                    MoneroEffects.ImageMask {
+                        id: nextIcon
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        height: 8
+                        width: 12
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
+                        rotation: 270
+                        color: BittubeComponents.Style.defaultFontColor
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            root.paginationNextClicked();
+                        }
+                    }
+                }
+            }
+        }
+
+        ListView {
+            visible: true
+            id: txListview
+            Layout.fillWidth: true
+            Layout.preferredHeight: contentHeight;
+            model: txListViewModel
+            interactive: false
+
+            delegate: Rectangle {
+                id: delegate
+                property bool collapsed: root.txDataCollapsed.indexOf(hash) >= 0 ? true : false
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: {
+                    if(!collapsed) return 60;
+                    if(isout && delegate.address !== "") return 320;
+                    return 220;
+                }
+                color: {
+                    if(!collapsed) return "transparent"
+                    return BittubeComponents.Style.blackTheme ? "#06FFFFFF" : "#04000000"
+                }
+
+                Rectangle {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
+                    width: sideMargin
                     color: "transparent"
 
                     Rectangle {
                         anchors.top: parent.top
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.rightMargin: 10
-                        anchors.leftMargin: 10
-
-                        height: 1
-                        color: "#404040"
-                    }
-
-                    Image {
-                        anchors.top: parent.top
-                        anchors.left: parent.left
-
+                        anchors.topMargin: 24
+                        anchors.horizontalCenter: parent.horizontalCenter
                         width: 10
                         height: 10
+                        radius: 8
+                        color: isout ? "#d85a00" : "#2eb358"
+                    }
+                }
 
-                        source: "../images/historyBorderRadius.png"
+                ColumnLayout {
+                    spacing: 0
+                    clip: true
+                    height: parent.height
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.leftMargin: sideMargin
+                    anchors.rightMargin: sideMargin
+
+                    RowLayout {
+                        spacing: 0
+                        Layout.fillWidth: true
+                        height: 60
+                        Layout.preferredHeight: 60
+
+                        ColumnLayout {
+                            spacing: 0
+                            clip: true
+                            Layout.preferredHeight: 120
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                BittubeComponents.TextPlain {
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    font.pixelSize: 15
+                                    text: {
+                                        if (!isout) {
+                                            return qsTr("Received") + translationManager.emptyString;
+                                        }
+                                        const addressBookName = currentWallet ? currentWallet.addressBook.getDescription(address) : null;
+                                        if (!addressBookName)
+                                        {
+                                            return qsTr("Sent") + translationManager.emptyString;
+                                        }
+                                        return addressBookName;
+                                    }
+                                    color: BittubeComponents.Style.historyHeaderTextColor
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    themeTransitionBlackColor: BittubeComponents.Style._b_historyHeaderTextColor
+                                    themeTransitionWhiteColor: BittubeComponents.Style._w_historyHeaderTextColor
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                BittubeComponents.TextPlain {
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    font.pixelSize: 15
+                                    text: displayAmount
+                                    color: BittubeComponents.Style.defaultFontColor
+                                    anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        state: "copyable"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.color = BittubeComponents.Style.orange
+                                        onExited: parent.color = BittubeComponents.Style.defaultFontColor
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                BittubeComponents.TextPlain {
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    font.pixelSize: 15
+                                    text: isout ? qsTr("Fee") : confirmationsRequired === 60 ? qsTr("Mined") : qsTr("Fee") + translationManager.emptyString
+                                    color: BittubeComponents.Style.historyHeaderTextColor
+                                    themeTransitionBlackColor: BittubeComponents.Style._b_historyHeaderTextColor
+                                    themeTransitionWhiteColor: BittubeComponents.Style._w_historyHeaderTextColor
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                BittubeComponents.TextPlain {
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    font.pixelSize: 15
+                                    text: {
+                                        if(!isout && confirmationsRequired === 60) return qsTr("Yes") + translationManager.emptyString;
+                                        if(fee !== "") return fee + " Tube";
+                                        return "-";
+                                    }
+
+                                    color: BittubeComponents.Style.defaultFontColor
+                                    anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        state: "copyable"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.color = BittubeComponents.Style.orange
+                                        onExited: parent.color = BittubeComponents.Style.defaultFontColor
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+                        }
+
+                        ColumnLayout {
+                            spacing: 0
+                            clip: true
+                            Layout.preferredHeight: 120
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                BittubeComponents.TextPlain {
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    font.pixelSize: 15
+                                    text: qsTr("Blockheight") + translationManager.emptyString
+                                    color: BittubeComponents.Style.historyHeaderTextColor
+                                    themeTransitionBlackColor: BittubeComponents.Style._b_historyHeaderTextColor
+                                    themeTransitionWhiteColor: BittubeComponents.Style._w_historyHeaderTextColor
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                BittubeComponents.TextPlain {
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    font.pixelSize: 14
+                                    text: blockheight > 0 ? blockheight : qsTr('Pending') + translationManager.emptyString;
+
+                                    color: BittubeComponents.Style.defaultFontColor
+                                    anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        state: "copyable"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.color = BittubeComponents.Style.orange
+                                        onExited: parent.color = BittubeComponents.Style.defaultFontColor
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                BittubeComponents.TextPlain {
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    font.pixelSize: 15
+                                    text: qsTr("Confirmations") + translationManager.emptyString
+                                    color: BittubeComponents.Style.historyHeaderTextColor
+                                    themeTransitionBlackColor: BittubeComponents.Style._b_historyHeaderTextColor
+                                    themeTransitionWhiteColor: BittubeComponents.Style._w_historyHeaderTextColor
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                BittubeComponents.TextPlain {
+                                    property bool confirmed: confirmations < confirmationsRequired ? false : true
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    font.pixelSize: 15
+                                    text: confirmed ? confirmations : confirmations + "/" + confirmationsRequired
+                                    color: BittubeComponents.Style.defaultFontColor
+                                    anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        state: "copyable"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.color = BittubeComponents.Style.orange
+                                        onExited: parent.color = BittubeComponents.Style.defaultFontColor
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+                        }
+
+                        ColumnLayout {
+                            spacing: 0
+                            clip: true
+                            Layout.preferredHeight: 120
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                BittubeComponents.TextPlain {
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    font.pixelSize: 15
+                                    text: qsTr("Date")
+                                    color: BittubeComponents.Style.historyHeaderTextColor
+                                    themeTransitionBlackColor: BittubeComponents.Style._b_historyHeaderTextColor
+                                    themeTransitionWhiteColor: BittubeComponents.Style._w_historyHeaderTextColor
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                BittubeComponents.TextPlain {
+                                    font.family: BittubeComponents.Style.fontRegular.name
+                                    font.pixelSize: 15
+                                    text: persistentSettings.historyHumanDates ? dateHuman : dateTime
+
+                                    color: BittubeComponents.Style.defaultFontColor
+                                    anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        state: "copyable"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: {
+                                            parent.color = BittubeComponents.Style.orange
+                                            if (persistentSettings.historyHumanDates) {
+                                                parent.text = dateTime;
+                                            }
+                                        }
+                                        onExited: {
+                                            parent.color = BittubeComponents.Style.defaultFontColor
+                                            if (persistentSettings.historyHumanDates) {
+                                                parent.text = dateHuman
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Item {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 60
+
+                                BittubeComponents.StandardButton {
+                                    id: btnDetails
+                                    text: FontAwesome.info
+                                    small: true
+                                    label.font.family: FontAwesome.fontFamily
+                                    fontSize: 18
+                                    width: 28
+
+                                    MouseArea {
+                                        state: "details"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        z: parent.z + 1
+
+                                        onEntered: parent.opacity = 0.8;
+                                        onExited: parent.opacity = 1.0;
+                                    }
+                                }
+
+                                Image {
+                                    visible: !isout && confirmationsRequired === 60
+                                    anchors.left: btnDetails.right
+                                    anchors.leftMargin: 16
+                                    width: 28
+                                    height: 28
+                                    source: "qrc:///images/miningtube.png"
+                                }
+
+                                BittubeComponents.StandardButton {
+                                    visible: isout
+                                    anchors.left: btnDetails.right
+                                    anchors.leftMargin: 10
+                                    text: FontAwesome.productHunt
+                                    small: true
+                                    label.font.family: FontAwesome.fontFamilyBrands
+                                    fontSize: 18
+                                    width: 36
+
+                                    MouseArea {
+                                        state: "proof"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        z: parent.z + 1
+
+                                        onEntered: parent.opacity = 0.8;
+                                        onExited: parent.opacity = 1.0;
+                                    }
+                                }
+                            }
+                        }
                     }
 
-                    Image {
+                    ColumnLayout {
+                        spacing: 0
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 40
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            BittubeComponents.TextPlain {
+                                font.family: BittubeComponents.Style.fontRegular.name
+                                font.pixelSize: 15
+                                text: qsTr("Description") + translationManager.emptyString
+                                color: BittubeComponents.Style.historyHeaderTextColor
+                                themeTransitionBlackColor: BittubeComponents.Style._b_historyHeaderTextColor
+                                themeTransitionWhiteColor: BittubeComponents.Style._w_historyHeaderTextColor
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            BittubeComponents.TextPlain {
+                                id: txNoteText
+                                font.family: BittubeComponents.Style.fontRegular.name
+                                font.pixelSize: 15
+                                text: tx_note !== "" ? tx_note : "-"
+                                color: BittubeComponents.Style.defaultFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    state: "copyable"
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.color = BittubeComponents.Style.orange
+                                    onExited: parent.color = BittubeComponents.Style.defaultFontColor
+                                }
+                            }
+
+                            MoneroEffects.ImageMask {
+                                anchors.top: parent.top
+                                anchors.left: txNoteText.right
+                                anchors.leftMargin: 12
+                                image: "qrc:///images/edit.svg"
+                                fontAwesomeFallbackIcon: FontAwesome.pencilSquare
+                                fontAwesomeFallbackSize: 22
+                                color: BittubeComponents.Style.defaultFontColor
+                                opacity: 0.75
+                                width: 23
+                                height: 21
+
+                                MouseArea {
+                                    id: txNoteArea
+                                    state: "set_tx_note"
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.opacity = 0.4;
+                                    onExited: parent.opacity = 0.75;
+                                    cursorShape: Qt.PointingHandCursor
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 10
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            BittubeComponents.TextPlain {
+                                font.family: BittubeComponents.Style.fontRegular.name
+                                font.pixelSize: 15
+                                text: qsTr("Transaction ID") + translationManager.emptyString
+                                color: BittubeComponents.Style.historyHeaderTextColor
+                                themeTransitionBlackColor: BittubeComponents.Style._b_historyHeaderTextColor
+                                themeTransitionWhiteColor: BittubeComponents.Style._w_historyHeaderTextColor
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            BittubeComponents.TextPlain {
+                                font.family: BittubeComponents.Style.fontRegular.name
+                                font.pixelSize: 15
+                                text: hash
+                                color: BittubeComponents.Style.defaultFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    state: "copyable"
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.color = BittubeComponents.Style.orange
+                                    onExited: parent.color = BittubeComponents.Style.defaultFontColor
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 10
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            BittubeComponents.TextPlain {
+                                font.family: BittubeComponents.Style.fontRegular.name
+                                font.pixelSize: 15
+                                text: qsTr("Transaction key") + translationManager.emptyString
+                                color: BittubeComponents.Style.historyHeaderTextColor
+                                themeTransitionBlackColor: BittubeComponents.Style._b_historyHeaderTextColor
+                                themeTransitionWhiteColor: BittubeComponents.Style._w_historyHeaderTextColor
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            BittubeComponents.TextPlain {
+                                font.family: BittubeComponents.Style.fontRegular.name
+                                font.pixelSize: 15
+                                text: qsTr("Click to reveal")
+                                color: BittubeComponents.Style.defaultFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+                                state: "txkey_hidden"
+
+                                MouseArea {
+                                    state: "copyable_txkey"
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.color = BittubeComponents.Style.orange
+                                    onExited: parent.color = BittubeComponents.Style.defaultFontColor
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 10
+                        }
+
+                        Rectangle {
+                            visible: isout
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            BittubeComponents.TextPlain {
+                                font.family: BittubeComponents.Style.fontRegular.name
+                                font.pixelSize: 15
+                                text: qsTr("Address sent to") + translationManager.emptyString
+                                color: BittubeComponents.Style.historyHeaderTextColor
+                                themeTransitionBlackColor: BittubeComponents.Style._b_historyHeaderTextColor
+                                themeTransitionWhiteColor: BittubeComponents.Style._w_historyHeaderTextColor
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        Rectangle {
+                            visible: isout
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            BittubeComponents.TextPlain {
+                                font.family: BittubeComponents.Style.fontRegular.name
+                                font.pixelSize: 15
+                                text: {
+                                    if(isout && address !== ""){
+                                        return TxUtils.addressTruncate(address, 24);
+                                    }
+
+                                    if(isout && blockheight === 0)
+                                        return qsTr("Waiting for transaction to leave txpool.") + translationManager.emptyString
+                                    else
+                                        return qsTr("Unknown recipient") + translationManager.emptyString;
+                                }
+
+                                color: BittubeComponents.Style.defaultFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    state: "copyable_address"
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.color = BittubeComponents.Style.orange
+                                    onExited: parent.color = BittubeComponents.Style.defaultFontColor
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 10
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                    }
+                }
+
+                MouseArea {
+                    id: collapseArea
+                    objectName: "collapseArea"
+                    cursorShape: Qt.PointingHandCursor
+                    anchors.fill: parent
+                    onClicked: {
+                        // detect clicks on text (for copying), otherwise toggle collapse
+                        var doCollapse = true;
+                        var res = Utils.qmlEach(delegate, ['containsMouse', 'preventStealing', 'scrollGestureEnabled'], ['collapseArea'], []);
+                        for(var i = 0; i < res.length; i+=1){
+                            if(res[i].containsMouse === true){
+                                if(res[i].state === 'copyable' && res[i].parent.hasOwnProperty('text')) toClipboard(res[i].parent.text);
+                                if(res[i].state === 'copyable_address') root.toClipboard(address);
+                                if(res[i].state === 'copyable_txkey') root.getTxKey(hash, res[i]);
+                                if(res[i].state === 'set_tx_note') root.editDescription(hash, tx_note);
+                                if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, displayAmount, isout);
+                                if(res[i].state === 'proof') root.showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
+                                doCollapse = false;
+                                break;
+                            }
+                        }
+
+                        if(doCollapse){
+                            collapsed = !collapsed;
+
+                            // remember collapsed state
+                            if(collapsed){
+                                root.txDataCollapsed.push(hash);
+                            } else {
+                                root.removeFromCollapsedList(hash);
+                            }
+                        }
+                    }
+                }
+
+                Rectangle {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    width: sideMargin
+
+                    color: "transparent"
+
+                    MoneroEffects.ImageMask {
+                        id: collapsedIcon
                         anchors.top: parent.top
-                        anchors.right: parent.right
+                        anchors.topMargin: 24
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        height: 8
+                        width: 12
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        rotation: delegate.collapsed ? 180 : 0
+                        color: BittubeComponents.Style.defaultFontColor
+                    }
+                }
 
-                        width: 10
-                        height: 10
+                Rectangle {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    height: 1
+                    color: BittubeComponents.Style.appWindowBorderColor
 
-                        source: "../images/historyBorderRadius.png"
-                        rotation: 90
+                    MoneroEffects.ColorTransition {
+                        targetObj: parent
+                        blackColor: BittubeComponents.Style._b_appWindowBorderColor
+                        whiteColor: BittubeComponents.Style._w_appWindowBorderColor
+                    }
+                }
+
+                Rectangle {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.bottom
+                    height: 1
+                    color: BittubeComponents.Style.appWindowBorderColor
+
+                    MoneroEffects.ColorTransition {
+                        targetObj: parent
+                        blackColor: BittubeComponents.Style._b_appWindowBorderColor
+                        whiteColor: BittubeComponents.Style._w_appWindowBorderColor
                     }
                 }
             }
+        }
 
-            RowLayout {
-                Layout.preferredHeight: isMobile ? tableMobile.contentHeight : table.contentHeight
+        Item {
+            visible: sortAndFilter.collapsed
+            Layout.topMargin: 10
+            Layout.bottomMargin: 10
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+
+            BittubeComponents.TextPlain {
+                // status message
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.alignment: Qt.AlignHCenter
+                font.family: BittubeComponents.Style.fontRegular.name
+                font.pixelSize: 15
+                text: root.historyStatusMessage;
+                color: BittubeComponents.Style.dimmedFontColor
+                themeTransitionBlackColor: BittubeComponents.Style._b_dimmedFontColor
+                themeTransitionWhiteColor: BittubeComponents.Style._w_dimmedFontColor
+            }
+        }
 
-                HistoryTable {
-                    id: table
-                    visible: !isMobile
-                    onContentYChanged: flickableScroll.flickableContentYChanged()
-                    model: !isMobile ? mainLayout.model : null
-                    addressBookModel: null
+        BittubeComponents.CheckBox2 {
+            id: showAdvancedCheckbox
+            Layout.topMargin: 30
+            Layout.bottomMargin: 20
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+            checked: persistentSettings.historyShowAdvanced
+            onClicked: persistentSettings.historyShowAdvanced = !persistentSettings.historyShowAdvanced
+            text: qsTr("Advanced options") + translationManager.emptyString
+        }
 
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
+        ColumnLayout {
+            visible: persistentSettings.historyShowAdvanced
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+            spacing: 20
+
+            BittubeComponents.CheckBox {
+                id: humanDatesCheckBox
+                checked: persistentSettings.historyHumanDates
+                onClicked: {
+                    persistentSettings.historyHumanDates = !persistentSettings.historyHumanDates
+                    root.updateDisplay(root.txOffset, root.txMax, false);
                 }
+                text: qsTr("Human readable date format") + translationManager.emptyString
+            }
 
-                HistoryTableMobile {
-                    id: tableMobile
-                    visible: isMobile
-                    onContentYChanged: flickableScroll.flickableContentYChanged()
-                    model: isMobile ? mainLayout.model : null
-                    addressBookModel: null
-
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
+            BittubeComponents.StandardButton {
+                visible: !isIOS
+                small: true
+                text: qsTr("Export all history") + translationManager.emptyString
+                onClicked: {
+                    writeCSVFileDialog.open();
                 }
             }
         }
     }
 
+    function refresh(){
+        if(appWindow.currentWallet != null && typeof appWindow.currentWallet.history !== "undefined" ) {
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
+        }
+
+        if (typeof root.model !== 'undefined' && root.model != null) {
+            toDatePicker.currentDate = root.model.transactionHistory.lastDateTime
+        }
+
+        // extract from model, create JS array of txs
+        root.updateTransactionsFromModel();
+
+        // fill listview, update UI
+        root.updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function reset(keepDate) {
+        root.txOffset = 0;
+
+        if (typeof root.model !== 'undefined' && root.model != null) {
+            if (!keepDate) {
+                root.model.dateFromFilter = "2014-04-18" // genesis block
+                root.model.dateToFilter = "9999-09-09" // fix before september 9999
+            }
+            // negative values disable filters here;
+            root.model.amountFromFilter = -1;
+            root.model.amountToFilter = -1;
+            root.model.directionFilter = TransactionInfo.Direction_Both;
+        }
+    }
+
+    function updateFilter(){
+        // applying filters
+        root.txData = JSON.parse(JSON.stringify(root.txModelData)); // deepcopy
+
+        const timezoneOffset = new Date().getTimezoneOffset() * 60;
+        var fromDate = Math.floor(fromDatePicker.currentDate.getTime() / 86400000) * 86400 + timezoneOffset;
+        var toDate = (Math.floor(toDatePicker.currentDate.getTime() / 86400000) + 1) * 86400 + timezoneOffset;
+
+        var txs = [];
+        for (var i = 0; i < root.txData.length; i++){
+            var item = root.txData[i];
+            var matched = "";
+
+            // daterange filtering
+            if(item.timestamp < fromDate || item.timestamp > toDate){
+                continue;
+            }
+
+            // search string filtering
+            if(root.sortSearchString == null || root.sortSearchString === ""){
+                txs.push(root.txData[i]);
+                continue;
+            }
+
+            if(root.sortSearchString.length >= 1){
+                if(item.amount && item.amount.toString().startsWith(root.sortSearchString)){
+                    txs.push(item);
+                } else if(item.address !== "" && item.address.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                    txs.push(item);
+                } else if(item.blockheight.toString().startsWith(root.sortSearchString)) {
+                    txs.push(item);
+                } else if(item.tx_note.toLowerCase().indexOf(root.sortSearchString.toLowerCase()) !== -1) {
+                    txs.push(item);
+                } else if (item.hash.startsWith(root.sortSearchString)){
+                    txs.push(item);
+                }
+            }
+        }
+
+        root.txData = txs;
+        root.txCount = root.txData.length;
+
+        root.updateSort();
+        root.updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function updateSort(){
+        // applying sorts
+        root.txOffset = 0;
+        root.txData.sort(function(a, b) {
+            return a[root.sortBy] - b[root.sortBy];
+        });
+
+        if(root.sortDirection)
+            root.txData.reverse();
+
+        root.updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function updateDisplay(tx_offset, tx_max, auto_collapse) {
+        if(typeof auto_collapse === 'undefined') auto_collapse = false;
+        txListViewModel.clear();
+
+        // limit results as per tx_max (root.txMax)
+        var txs = root.txData.slice(tx_offset, tx_offset + tx_max);
+
+        // make first result on the first page collapsed by default
+        if(auto_collapse && root.txPage === 1 && txs.length > 0 && (root.sortSearchString == null || root.sortSearchString === ""))
+            root.txDataCollapsed.push(txs[0]['hash']);
+
+        // populate listview
+        for (var i = 0; i < txs.length; i++){
+            txListViewModel.append(txs[i]);
+        }
+
+        root.updateHistoryStatusMessage();
+
+        // determine pagination button states
+        var count = txData.length;
+        if(count <= root.txMax) {
+            paginationPrev.enabled = false;
+            paginationNext.enabled = false;
+            return;
+        }
+
+        if(root.txOffset < root.txMax)
+            paginationPrev.enabled = false;
+        else
+            paginationPrev.enabled = true;
+
+        if((root.txOffset + root.txMax) >= count)
+            paginationNext.enabled = false;
+        else
+            paginationNext.enabled = true;
+    }
+
+    function updateTransactionsFromModel() {
+        // This function copies the items of `appWindow.currentWallet.historyModel` to `root.txModelData`, as a list of javascript objects
+        if(currentWallet == null || typeof currentWallet.history === "undefined" ) return;
+
+        var _model = root.model;
+        var total = 0
+        var count = _model.rowCount()
+        root.txModelData = [];
+
+        for (var i = 0; i < count; ++i) {
+            var idx = _model.index(i, 0);
+            var isout = _model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
+            var amount = _model.data(idx, TransactionHistoryModel.TransactionAmountRole);
+            var hash = _model.data(idx, TransactionHistoryModel.TransactionHashRole);
+            var paymentId = _model.data(idx, TransactionHistoryModel.TransactionPaymentIdRole);
+            var destinations = _model.data(idx, TransactionHistoryModel.TransactionDestinationsRole);
+            var time = _model.data(idx, TransactionHistoryModel.TransactionTimeRole);
+            var date = _model.data(idx, TransactionHistoryModel.TransactionDateRole);
+            var blockheight = _model.data(idx, TransactionHistoryModel.TransactionBlockHeightRole);
+            var confirmations = _model.data(idx, TransactionHistoryModel.TransactionConfirmationsRole);
+            var confirmationsRequired = _model.data(idx, TransactionHistoryModel.TransactionConfirmationsRequiredRole);
+            var fee = _model.data(idx, TransactionHistoryModel.TransactionFeeRole);
+            var subaddrAccount = model.data(idx, TransactionHistoryModel.TransactionSubaddrAccountRole);
+            var subaddrIndex = model.data(idx, TransactionHistoryModel.TransactionSubaddrIndexRole);
+            var timestamp = new Date(date + " " + time).getTime() / 1000;
+            var dateHuman = Utils.ago(timestamp);
+
+            var displayAmount = amount;
+            if(displayAmount === 0){
+                // *sometimes* amount is 0, while the 'destinations string'
+                // has the correct amount, so we try to fetch it from that instead.
+                displayAmount = TxUtils.destinationsToAmount(destinations);
+                displayAmount = Number(displayAmount *1);
+            }
+
+            var tx_note = currentWallet.getUserNote(hash);
+            var address = "";
+            if(isout) {
+                address = TxUtils.destinationsToAddress(destinations);
+            }
+
+            if (isout)
+                total = walletManager.subi(total, amount)
+            else
+                total = walletManager.addi(total, amount)
+
+            root.txModelData.push({
+                "i": i,
+                "isout": isout,
+                "amount": Number(amount),
+                "displayAmount": displayAmount + " Tube",
+                "hash": hash,
+                "paymentId": paymentId,
+                "address": address,
+                "destinations": destinations,
+                "tx_note": tx_note,
+                "dateHuman": dateHuman,
+                "dateTime": date + " " + time,
+                "blockheight": blockheight,
+                "address": address,
+                "timestamp": timestamp,
+                "fee": fee,
+                "confirmations": confirmations,
+                "confirmationsRequired": confirmationsRequired,
+                "subaddrAccount": subaddrAccount,
+                "subaddrIndex": subaddrIndex
+            });
+        }
+
+        root.txData = JSON.parse(JSON.stringify(root.txModelData)); // deepcopy
+        root.txCount = root.txData.length;
+    }
+
+    function update() {
+        // handle outside mutation of tx model; incoming/outgoing funds or new blocks. Update table.
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
+
+        root.updateTransactionsFromModel();
+        root.updateFilter();
+    }
+
+    function editDescription(_hash, _tx_note){
+        inputDialog.labelText = qsTr("Set description:") + translationManager.emptyString;
+        inputDialog.onAcceptedCallback = function() {
+            appWindow.currentWallet.setUserNote(_hash, inputDialog.inputText);
+            appWindow.showStatusMessage(qsTr("Updated description."),3);
+            root.update();
+        }
+        inputDialog.onRejectedCallback = null;
+        inputDialog.open(_tx_note);
+    }
+
+    function paginationPrevClicked(){
+        root.txOffset -= root.txMax;
+        updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function paginationNextClicked(){
+        root.txOffset += root.txMax;
+        updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function paginationJump(pageNumber){
+        root.txOffset = root.txMax * Math.ceil(pageNumber - 1 || 0);
+        updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function removeFromCollapsedList(hash){
+        root.txDataCollapsed = root.txDataCollapsed.filter(function(item) {
+            return item !== hash
+        });
+    }
+
+    function updateHistoryStatusMessage(){
+        if(root.txModelData.length <= 0){
+            root.historyStatusMessage = qsTr("No transaction history yet.") + translationManager.emptyString;
+        } else if (root.txData.length <= 0){
+            root.historyStatusMessage = qsTr("No results.") + translationManager.emptyString;
+        } else {
+            root.historyStatusMessage = qsTr("%1 transactions total, showing %2.").arg(root.txData.length).arg(txListViewModel.count) + translationManager.emptyString;
+        }
+    }
+
+    function getTxKey(hash, elem){
+        if (elem.parent.state != 'ready'){
+            currentWallet.getTxKeyAsync(hash, function(hash, txKey) {
+                elem.parent.text = txKey ? txKey : '-';
+                elem.parent.state = 'ready';
+            });
+        } else {
+            toClipboard(elem.parent.text);
+        }
+    }
+
+    function showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, amount, isout) {
+        var tx_note = currentWallet.getUserNote(hash)
+        var rings = currentWallet.getRings(hash)
+        var address_label = subaddrIndex == 0 ? (qsTr("Primary address") + translationManager.emptyString) : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex)
+        var address = currentWallet.address(subaddrAccount, subaddrIndex)
+        const hasPaymentId = parseInt(paymentId, 16);
+        const integratedAddress = !isout && hasPaymentId ? currentWallet.integratedAddress(paymentId) : null;
+
+        if (rings)
+            rings = rings.replace(/\|/g, '\n')
+
+        currentWallet.getTxKeyAsync(hash, function(hash, tx_key) {
+            informationPopup.title = qsTr("Transaction details") + translationManager.emptyString;
+            informationPopup.content = buildTxDetailsString(hash, hasPaymentId ? paymentId : null, tx_key, tx_note, destinations, rings, address, address_label, integratedAddress, dateTime, amount);
+            informationPopup.onCloseCallback = null
+            informationPopup.open();
+        });
+    }
+
+    function showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex){
+        var address = TxUtils.destinationsToAddress(destinations);
+        if(address === undefined){
+            console.log('getProof: Error fetching address')
+            return;
+        }
+
+        var checked = (TxUtils.checkTxID(hash) && TxUtils.checkAddress(address, appWindow.persistentSettings.nettype));
+        if(!checked){
+            console.log('getProof: Error checking TxId and/or address');
+        }
+
+        console.log("getProof: Generate clicked: txid " + hash + ", address " + address);
+        middlePanel.getProofClicked(hash, address, '');
+    }
+
+    function toClipboard(text){
+        console.log("Copied to clipboard");
+        clipboard.setText(text);
+        appWindow.showStatusMessage(qsTr("Copied to clipboard"),3);
+    }
+
+    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations, rings, address, address_label, integratedAddress, dateTime, amount) {
+        var trStart = '<tr><td style="white-space: nowrap; padding-top:5px"><b>',
+            trMiddle = '</b></td><td style="padding-left:10px;padding-top:5px;">',
+            trEnd = "</td></tr>";
+
+        return '<table border="0">'
+            + (tx_id ? trStart + qsTr("Tx ID:") + trMiddle + tx_id + trEnd : "")
+            + (dateTime ? trStart + qsTr("Date") + ":" + trMiddle + dateTime + trEnd : "")
+            + (amount ? trStart + qsTr("Amount") + ":" + trMiddle + amount + trEnd : "")
+            + (address ? trStart + qsTr("Address:") + trMiddle + address + trEnd : "")
+            + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId + trEnd : "")
+            + (integratedAddress ? trStart + qsTr("Integrated address") + ":" + trMiddle + integratedAddress + trEnd : "")
+            + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
+            + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note + trEnd : "")
+            + (destinations ? trStart + qsTr("Destinations:") + trMiddle + destinations + trEnd : "")
+            + (rings ? trStart + qsTr("Rings:") + trMiddle + rings + trEnd : "")
+            + "</table>"
+            + translationManager.emptyString;
+    }
+
+    function lookupPaymentID(paymentId) {
+        if (!addressBookModel)
+            return ""
+        var idx = addressBookModel.lookupPaymentID(paymentId)
+        if (idx < 0)
+            return ""
+        idx = addressBookModel.index(idx, 0)
+        return addressBookModel.data(idx, AddressBookModel.AddressBookDescriptionRole)
+    }
+
     FileDialog {
         id: writeCSVFileDialog
-        title: "Please choose a folder"
+        title: qsTr("Please choose a folder") + translationManager.emptyString
         selectFolder: true
         onRejected: {
             console.log("csv write canceled")
@@ -404,7 +1693,7 @@ Rectangle {
             informationPopup.open();
         }
         Component.onCompleted: {
-            var _folder = 'file://' + moneroAccountsDir;
+            var _folder = 'file://' + bittubeAccountsDir;
             try {
                 _folder = 'file://' + desktopFolder;
             }
@@ -416,18 +1705,21 @@ Rectangle {
     }
 
     function onPageCompleted() {
-        if(currentWallet != null && typeof currentWallet.history !== "undefined" ) {
-            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
-            table.addressBookModel = currentWallet ? currentWallet.addressBookModel : null
-            //transactionTypeDropdown.update()
+        // setup date filter scope according to real transactions
+        if(appWindow.currentWallet != null){
+            root.model = appWindow.currentWallet.historyModel;
+            root.model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole
+            root.model.sort(0, Qt.DescendingOrder);
+            fromDatePicker.currentDate = model.transactionHistory.firstDateTime
         }
 
-        priorityDropdown.dataModel = priorityModelV5;
-        priorityDropdown.currentIndex = 0;
-        priorityDropdown.update();
+        root.reset();
+        root.refresh();
+        root.initialized = true;
     }
 
-    function update() {
-            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
+    function onPageClosed(){
+        root.initialized = false;
+        root.reset(true);
     }
 }

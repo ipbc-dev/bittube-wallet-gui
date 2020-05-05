@@ -27,10 +27,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtMultimedia 5.4
 import QtQuick.Dialogs 1.2
-import moneroComponents.QRCodeScanner 1.0
+import bittubeComponents.QRCodeScanner 1.0
 
 Rectangle {
     id : root
@@ -54,6 +54,7 @@ Rectangle {
                 script: {
 		    root.visible = true
                     camera.captureMode = Camera.CaptureStillImage
+                    camera.cameraState = Camera.ActiveState
                     camera.start()
                     finder.enabled = true
                 }
@@ -66,6 +67,7 @@ Rectangle {
                     camera.stop()
 		    root.visible = false
                     finder.enabled = false
+                    camera.cameraState = Camera.UnloadedState
                 }
             }
         }
@@ -75,6 +77,7 @@ Rectangle {
         id: camera
         objectName: "qrCameraQML"
         captureMode: Camera.CaptureStillImage
+        cameraState: Camera.UnloadedState
 
         focus {
             focusMode: Camera.FocusContinuous

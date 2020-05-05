@@ -29,8 +29,8 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import moneroComponents.Clipboard 1.0
-import moneroComponents.AddressBookModel 1.0
+import bittubeComponents.Clipboard 1.0
+import bittubeComponents.AddressBookModel 1.0
 
 import "../components" as MoneroComponents
 

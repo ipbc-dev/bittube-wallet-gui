@@ -26,49 +26,39 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 
 import "../../js/Utils.js" as Utils
 import "../../js/Windows.js" as Windows
-import "../../components" as MoneroComponents
+import "../../components" as BittubeComponents
 
 Rectangle {
     color: "transparent"
-    height: 1400
     Layout.fillWidth: true
-
-    function onPageCompleted() {
-        userInactivitySliderTimer.running = true;
-    }
-
-    function onPageClosed() {
-        userInactivitySliderTimer.running = false;
-    }
+    property alias layoutHeight: settingsUI.height
 
     ColumnLayout {
         id: settingsUI
-        property int itemHeight: 60 * scaleRatio
+        property int itemHeight: 60
         Layout.fillWidth: true
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
+        anchors.margins: 20
         anchors.topMargin: 0
-        spacing: 6 * scaleRatio
+        spacing: 6
 
-        MoneroComponents.CheckBox {
-            visible: !isMobile
+        BittubeComponents.CheckBox {
             id: customDecorationsCheckBox
             checked: persistentSettings.customDecorations
             onClicked: Windows.setCustomWindowDecorations(checked)
             text: qsTr("Custom decorations") + translationManager.emptyString
         }
 
-        MoneroComponents.CheckBox {
-            visible: !isMobile
+        BittubeComponents.CheckBox {
             id: hideBalanceCheckBox
             checked: persistentSettings.hideBalance
             onClicked: {
@@ -78,19 +68,34 @@ Rectangle {
             text: qsTr("Hide balance") + translationManager.emptyString
         }
 
-        MoneroComponents.CheckBox {
-            visible: !isMobile
+        BittubeComponents.CheckBox {
             id: showPidCheckBox
             checked: persistentSettings.showPid
             onClicked: {
                 persistentSettings.showPid = !persistentSettings.showPid
-                middlePanel.transferView.clearFields();
             }
             text: qsTr("Enable transfer with payment ID (OBSOLETE)") + translationManager.emptyString
         }
 
-        MoneroComponents.CheckBox {
-            visible: !isMobile
+        BittubeComponents.CheckBox {
+            id: themeCheckbox
+            checked: !BittubeComponents.Style.blackTheme
+            text: qsTr("Light theme") + translationManager.emptyString
+            toggleOnClick: false
+            onClicked: {
+                BittubeComponents.Style.blackTheme = !BittubeComponents.Style.blackTheme;
+                persistentSettings.blackTheme = BittubeComponents.Style.blackTheme;
+            }
+        }
+        
+        BittubeComponents.CheckBox {
+            id: askPasswordBeforeSendingCheckbox
+            checked: persistentSettings.askPasswordBeforeSending
+            onClicked: persistentSettings.askPasswordBeforeSending = !persistentSettings.askPasswordBeforeSending
+            text: qsTr("Ask for password before sending a transaction") + translationManager.emptyString
+        }
+
+        BittubeComponents.CheckBox {
             id: userInActivityCheckbox
             checked: persistentSettings.lockOnUserInActivity
             onClicked: persistentSettings.lockOnUserInActivity = !persistentSettings.lockOnUserInActivity
@@ -100,12 +105,13 @@ Rectangle {
         ColumnLayout {
             visible: userInActivityCheckbox.checked
             Layout.fillWidth: true
-            Layout.topMargin: 6 * scaleRatio
-            Layout.leftMargin: 42 * scaleRatio
+            Layout.topMargin: 6
+            Layout.leftMargin: 42
             spacing: 0
 
-            MoneroComponents.TextBlock {
-                font.pixelSize: 14 * scaleRatio
+            Text {
+                color: BittubeComponents.Style.defaultFontColor
+                font.pixelSize: 14
                 Layout.fillWidth: true
                 text: {
                     var val = userInactivitySlider.value;
@@ -127,17 +133,17 @@ Rectangle {
                 background: Rectangle {
                     x: parent.leftPadding
                     y: parent.topPadding + parent.availableHeight / 2 - height / 2
-                    implicitWidth: 200 * scaleRatio
-                    implicitHeight: 4 * scaleRatio
+                    implicitWidth: 200
+                    implicitHeight: 4
                     width: parent.availableWidth
                     height: implicitHeight
                     radius: 2
-                    color: MoneroComponents.Style.grey
+                    color: BittubeComponents.Style.progressBarBackgroundColor
 
                     Rectangle {
                         width: parent.visualPosition * parent.width
                         height: parent.height
-                        color: MoneroComponents.Style.green
+                        color: BittubeComponents.Style.green
                         radius: 2
                     }
                 }
@@ -145,36 +151,172 @@ Rectangle {
                 handle: Rectangle {
                     x: parent.leftPadding + parent.visualPosition * (parent.availableWidth - width)
                     y: parent.topPadding + parent.availableHeight / 2 - height / 2
-                    implicitWidth: 18 * scaleRatio
-                    implicitHeight: 18 * scaleRatio
+                    implicitWidth: 18
+                    implicitHeight: 18
                     radius: 8
                     color: parent.pressed ? "#f0f0f0" : "#f6f6f6"
-                    border.color: MoneroComponents.Style.grey
+                    border.color: BittubeComponents.Style.grey
+                }
+
+                onMoved: persistentSettings.lockOnUserInActivityInterval = userInactivitySlider.value;
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.NoButton
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                 }
             }
+        }
 
-            Timer {
-                // @TODO: Slider.onMoved{} is available in Qt > 5.9, use a hacky timer for now
-                id: userInactivitySliderTimer
-                interval: 1000; running: false; repeat: true
-                onTriggered: {
-                    if(persistentSettings.lockOnUserInActivityInterval != userInactivitySlider.value) {
-                        persistentSettings.lockOnUserInActivityInterval = userInactivitySlider.value;
+        //! Manage pricing
+        RowLayout {
+            BittubeComponents.CheckBox {
+                id: enableConvertCurrency
+                text: qsTr("Enable displaying balance in other currencies") + translationManager.emptyString
+                checked: persistentSettings.fiatPriceEnabled
+                onCheckedChanged: {
+                    if (!checked) {
+                        console.log("Disabled price conversion");
+                        persistentSettings.fiatPriceEnabled = false;
+                        appWindow.fiatTimerStop();
                     }
                 }
             }
         }
 
-        MoneroComponents.TextBlock {
-            visible: isMobile
-            font.pixelSize: 14
-            textFormat: Text.RichText
+        GridLayout {
+            visible: enableConvertCurrency.checked
+            columns: 2
             Layout.fillWidth: true
-            text: qsTr("No Layout options exist yet in mobile mode.") + translationManager.emptyString;
+            Layout.leftMargin: 36
+            columnSpacing: 32
+
+            ColumnLayout {
+                spacing: 10
+                Layout.fillWidth: true
+
+                BittubeComponents.Label {
+                    Layout.fillWidth: true
+                    fontSize: 14
+                    text: qsTr("Price source") + translationManager.emptyString
+                }
+
+                BittubeComponents.StandardDropdown {
+                    id: fiatPriceProviderDropDown
+                    Layout.fillWidth: true
+                    dataModel: fiatPriceProvidersModel
+                    onChanged: {
+                        var obj = dataModel.get(currentIndex);
+                        persistentSettings.fiatPriceProvider = obj.data;
+
+                        if(persistentSettings.fiatPriceEnabled)
+                            appWindow.fiatApiRefresh();
+                    }
+                }
+            }
+
+            ColumnLayout {
+                spacing: 10
+                Layout.fillWidth: true
+
+                BittubeComponents.Label {
+                    Layout.fillWidth: true
+                    fontSize: 14
+                    text: qsTr("Currency") + translationManager.emptyString
+                }
+
+                BittubeComponents.StandardDropdown {
+                    id: fiatPriceCurrencyDropdown
+                    Layout.fillWidth: true
+                    dataModel: fiatPriceCurrencyModel
+                    onChanged: {
+                        var obj = dataModel.get(currentIndex);
+                        persistentSettings.fiatPriceCurrency = obj.data;
+
+                        if(persistentSettings.fiatPriceEnabled)
+                            appWindow.fiatApiRefresh();
+                    }
+                }
+            }
+
+            z: parent.z + 1
+        }
+
+        ColumnLayout {
+            // Feature needs to be double enabled for security purposes (miss-clicks)
+            visible: enableConvertCurrency.checked && !persistentSettings.fiatPriceEnabled
+            spacing: 0
+            Layout.topMargin: 5
+            Layout.leftMargin: 36
+
+            BittubeComponents.WarningBox {
+                text: qsTr("Enabling price conversion exposes your IP address to the selected price source.") + translationManager.emptyString;
+            }
+
+            BittubeComponents.StandardButton {
+                Layout.topMargin: 10
+                Layout.bottomMargin: 10
+                small: true
+                text: qsTr("Confirm and enable") + translationManager.emptyString
+
+                onClicked: {
+                    console.log("Enabled price conversion");
+                    persistentSettings.fiatPriceEnabled = true;
+                    appWindow.fiatApiRefresh();
+                    appWindow.fiatTimerStart();
+                }
+            }
+        }
+
+        BittubeComponents.StandardButton {
+            visible: !persistentSettings.customDecorations
+            Layout.topMargin: 10
+            small: true
+            text: qsTr("Change language") + translationManager.emptyString
+
+            onClicked: {
+                appWindow.toggleLanguageView();
+            }
+        }
+    }
+
+    ListModel {
+        id: fiatPriceProvidersModel
+    }
+
+    ListModel {
+        id: fiatPriceCurrencyModel
+        ListElement {
+            data: "xmrusd"
+            column1: "USD"
+        }
+        ListElement {
+            data: "xmreur"
+            column1: "EUR"
         }
     }
 
     Component.onCompleted: {
+        // Dynamically fill fiatPrice dropdown based on `appWindow.fiatPriceAPIs`
+        var apis = appWindow.fiatPriceAPIs;
+        fiatPriceProvidersModel.clear();
+
+        var i = 0;
+        for (var api in apis){
+            if (!apis.hasOwnProperty(api))
+               continue;
+
+            fiatPriceProvidersModel.append({"column1": Utils.capitalize(api), "data": api});
+
+            if(api === persistentSettings.fiatPriceProvider)
+                fiatPriceProviderDropDown.currentIndex = i;
+            i += 1;
+        }
+
+        fiatPriceProviderDropDown.update();
+        fiatPriceCurrencyDropdown.currentIndex = persistentSettings.fiatPriceCurrency === "xmrusd" ? 0 : 1;
+        fiatPriceCurrencyDropdown.update();
+
         console.log('SettingsLayout loaded');
     }
 }

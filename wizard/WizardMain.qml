@@ -188,7 +188,7 @@ ColumnLayout {
 
     function walletPathValid(path){
         if(isIOS)
-            path = moneroAccountsDir + path;
+            path = bittubeAccountsDir + path;
         if (walletManager.walletExists(path)) {
             walletErrorDialog.text = qsTr("A wallet with same name already exists. Please change wallet name") + translationManager.emptyString;
             walletErrorDialog.open();
@@ -211,8 +211,8 @@ ColumnLayout {
         // Save wallet files in user specified location
         var new_wallet_filename = createWalletPath(settings.wallet_path,settings.account_name)
         if(isIOS) {
-            console.log("saving in ios: "+ moneroAccountsDir + new_wallet_filename)
-            m_wallet.store(moneroAccountsDir + new_wallet_filename);
+            console.log("saving in ios: "+ bittubeAccountsDir + new_wallet_filename)
+            m_wallet.store(bittubeAccountsDir + new_wallet_filename);
         } else {
             console.log("saving in wizard: "+ new_wallet_filename)
             m_wallet.store(new_wallet_filename);

@@ -1,5 +1,5 @@
-var flagsCustomDecorations = (Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint);
-var flags = (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint);
+var flagsCustomDecorations = (Qt.FramelessWindowHint | Qt.CustomizeWindowHint | Qt.WindowSystemMenuHint | Qt.Window);
+var flags = (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint | Qt.WindowFullscreenButtonHint);
 
 /**
  * Toggles window decorations
@@ -19,10 +19,8 @@ function setCustomWindowDecorations(custom) {
 
     if (custom) {
         appWindow.flags = flagsCustomDecorations;
-        daemonConsolePopup.flags = flagsCustomDecorations;
     } else {
         appWindow.flags = flags;
-        daemonConsolePopup.flags = flags;
     }
 
     // Reset window
