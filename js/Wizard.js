@@ -138,7 +138,6 @@ function getApproximateBlockchainHeight(_date, _nettype){
     // time in UTC
     var requestedTime = Math.floor(new Date(_date) / 1000);
     var approxBlockchainHeight;
-    var secondsPerBlock;
     // before bittube's birth
     if (requestedTime < bittubeBirthTime){
         console.log("Calculated blockchain height: 0, requestedTime < bittubeBirthTime " );
