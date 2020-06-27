@@ -102,20 +102,18 @@ void WalletKeysFilesModel::clear()
     endResetModel();
 }
 
-void WalletKeysFilesModel::refresh(const QString &bittubeAccountsDir)
+void WalletKeysFilesModel::refresh(const QString &bittubeAccountsDir,int nettype)
 {
     this->clear();
-    this->findWallets(bittubeAccountsDir);
+    this->findWallets(bittubeAccountsDir,nettype);
 }
 
-void WalletKeysFilesModel::findWallets(const QString &bittubeAccountsDir)
+void WalletKeysFilesModel::findWallets(const QString &bittubeAccountsDir, int nettype)
 {
     QStringList walletDir = this->m_walletManager->findWallets(bittubeAccountsDir);
     foreach(QString wallet, walletDir){
         if(!fileExists(wallet + ".keys"))
             continue;
-
-        quint8 networkType = NetworkType::MAINNET;
         QString address = QString("");
 
         // attempt to retreive wallet address
@@ -126,17 +124,12 @@ void WalletKeysFilesModel::findWallets(const QString &bittubeAccountsDir)
 
             if(!_address.isEmpty()){
                 address = _address;
-                if(address.startsWith("5") || address.startsWith("7")){
-                    networkType = NetworkType::STAGENET;
-                } else if(address.startsWith("9") || address.startsWith("B")){
-                    networkType = NetworkType::TESTNET;
-                }
             }
 
             file.close();
         }
 
-        this->addWalletKeysFile(WalletKeysFiles(wallet, networkType, std::move(address)));
+        this->addWalletKeysFile(WalletKeysFiles(wallet, nettype, std::move(address)));
     }
 }
 

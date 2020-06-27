@@ -128,9 +128,9 @@ Rectangle {
                             return parent.width / 3
                         }
                         property string networkType: {
-                            if(networktype === 0) return qsTr("Mainnet");
-                            else if(networktype === 1) return qsTr("Testnet");
-                            else if(networktype === 2) return qsTr("Stagenet");
+                            //if(networktype === 0) return qsTr("Mainnet");
+                            //else if(networktype === 1) return qsTr("Testnet");
+                            //else if(networktype === 2) return qsTr("Stagenet");
                             return "";
                         }
                         color: "transparent"
@@ -294,7 +294,7 @@ Rectangle {
 
     function onPageCompleted(previousView){
         if(previousView.viewName == "wizardHome"){
-            walletKeysFilesModel.refresh(bittubeAccountsDir);
+            walletKeysFilesModel.refresh(bittubeAccountsDir,persistentSettings.nettype);
             wizardOpenWallet1.walletCount = walletKeysFilesModel.rowCount();
             flow._height = flow.calcHeight();
         }
