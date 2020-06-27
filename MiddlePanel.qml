@@ -65,6 +65,7 @@ Rectangle {
 
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
     signal sweepUnmixableClicked()
+    signal sweepTube4Clicked()
     signal generatePaymentIdInvoked()
     signal getProofClicked(string txid, string address, string message);
     signal checkProofClicked(string txid, string address, string message, string signature);
@@ -272,6 +273,10 @@ Rectangle {
         onSweepUnmixableClicked : {
             console.log("MiddlePanel: sweepUnmixableClicked")
             sweepUnmixableClicked()
+        }
+        onSweepTube4Clicked : {
+            console.log("MiddlePanel: sweepTube4Clicked")
+            sweepTube4Clicked()
         }
     }
 }

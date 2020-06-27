@@ -45,6 +45,7 @@ Rectangle {
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount,
                           int priority, string description)
     signal sweepUnmixableClicked()
+    signal sweepTube4Clicked()
 
     color: "transparent"
     property alias transferHeight1: pageRoot.height
@@ -467,6 +468,19 @@ Rectangle {
                   root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
               }
           }
+      }
+            
+      RowLayout {
+            StandardButton {
+                id: sweepTube4Button
+                Layout.topMargin: 4
+                text: qsTr("Convert to BitTubeCash 4.0") + translationManager.emptyString
+                enabled : pageRoot.enabled
+                onClicked: {
+                    console.log("Transfer: sweepTube4Clicked")
+                    root.sweepTube4Clicked()
+                }
+            }
       }
 
       function checkInformation(amount, address, nettype) {

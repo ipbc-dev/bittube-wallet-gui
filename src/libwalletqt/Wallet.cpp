@@ -565,10 +565,25 @@ PendingTransaction *Wallet::createSweepUnmixableTransaction()
     return result;
 }
 
+PendingTransaction *Wallet::createSweepTube4Transaction()
+{
+    Monero::PendingTransaction * ptImpl = m_walletImpl->createSweepTube4Transaction();
+    PendingTransaction * result = new PendingTransaction(ptImpl, this);
+    return result;
+}
+
 void Wallet::createSweepUnmixableTransactionAsync()
 {
     m_scheduler.run([this] {
         PendingTransaction *tx = createSweepUnmixableTransaction();
+        emit transactionCreated(tx, "", "", 0);
+    });
+}
+
+void Wallet::createSweepTube4TransactionAsync()
+{
+    m_scheduler.run([this] {
+        PendingTransaction *tx = createSweepTube4Transaction();
         emit transactionCreated(tx, "", "", 0);
     });
 }
