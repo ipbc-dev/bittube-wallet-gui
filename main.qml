@@ -294,6 +294,7 @@ ApplicationWindow {
         currentWallet.transactionCommitted.disconnect(onTransactionCommitted);
         middlePanel.paymentClicked.disconnect(handlePayment);
         middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
+        middlePanel.sweepTube4Clicked.disconnect(handleSweepTube4);
         middlePanel.getProofClicked.disconnect(handleGetProof);
         middlePanel.checkProofClicked.disconnect(handleCheckProof);
 
@@ -361,6 +362,7 @@ ApplicationWindow {
         currentWallet.transactionCommitted.connect(onTransactionCommitted);
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
+        middlePanel.sweepTube4Clicked.connect(handleSweepTube4);
         middlePanel.getProofClicked.connect(handleGetProof);
         middlePanel.checkProofClicked.connect(handleCheckProof);
 
@@ -906,6 +908,45 @@ ApplicationWindow {
         } else if (transaction.txCount == 0) {
             informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.icon = StandardIcon.Information
+            informationPopup.onCloseCallback = null
+            informationPopup.open()
+            // deleting transaction object, we don't want memleaks
+            currentWallet.disposeTransaction(transaction);
+        } else {
+            console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
+                    + ", fee: " + walletManager.displayAmount(transaction.fee));
+
+            // here we show confirmation popup;
+
+            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
+            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
+                        + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
+                        + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
+                        + translationManager.emptyString
+            transactionConfirmationPopup.icon = StandardIcon.Question
+            transactionConfirmationPopup.open()
+            // committing transaction
+        }
+    }
+
+    function handleSweepTube4() {
+        console.log("Creating transaction: ")
+
+        transaction = currentWallet.createSweepTube4Transaction();
+        if (transaction.status !== PendingTransaction.Status_Ok) {
+            console.error("Can't create transaction: ", transaction.errorString);
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open();
+            // deleting transaction object, we don't want memleaks
+            currentWallet.disposeTransaction(transaction);
+
+        } else if (transaction.txCount == 0) {
+            informationPopup.title = qsTr("Error") + translationManager.emptyString
+            informationPopup.text  = qsTr("No outputs to sweep") + translationManager.emptyString
             informationPopup.icon = StandardIcon.Information
             informationPopup.onCloseCallback = null
             informationPopup.open()

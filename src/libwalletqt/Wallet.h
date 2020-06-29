@@ -235,6 +235,12 @@ public:
     //! creates async sweep unmixable transaction
     Q_INVOKABLE void createSweepUnmixableTransactionAsync();
 
+    //! creates sweep tube4 transaction
+    Q_INVOKABLE PendingTransaction * createSweepTube4Transaction();
+
+    //! creates async sweep tube4 transaction
+    Q_INVOKABLE void createSweepTube4TransactionAsync();
+
     //! Sign a transfer from file
     Q_INVOKABLE UnsignedTransaction * loadTxFile(const QString &fileName);
 

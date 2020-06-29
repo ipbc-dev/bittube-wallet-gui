@@ -67,10 +67,10 @@ public:
 
     WalletKeysFilesModel(WalletManager *walletManager, QObject *parent = 0);
 
-    Q_INVOKABLE void refresh(const QString &bittubeAccountsDir);
+    Q_INVOKABLE void refresh(const QString &bittubeAccountsDir,int nettype);
     Q_INVOKABLE void clear();
 
-    void findWallets(const QString &bittubeAccountsDir);
+    void findWallets(const QString &bittubeAccountsDir,int nettype);
     void addWalletKeysFile(const WalletKeysFiles &walletKeysFile);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
