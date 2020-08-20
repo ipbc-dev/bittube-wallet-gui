@@ -11,8 +11,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: update brew and install dependencies
       run: brew update && brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf qt5
-    - name: downgrade boost to version 1.60
-      run: brew install boost@1.60 && brew link boost@1.60 --overwrite --force
+    - name: downgrade boost to version 1.72
+      run: (cd $(brew --repository)/Library/Taps/homebrew/homebrew-core && git checkout 0b9ee3127763e8ebce62599bae85f37ab1687622 -- Formula/boost.rb && brew unlink boost && HOMEBREW_NO_AUTO_UPDATE=1 brew install boost)
     - name: build
       run: export PATH=$PATH:/usr/local/opt/qt/bin && ./build.sh
     - name: test qml
