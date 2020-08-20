@@ -6,20 +6,22 @@ jobs:
   build-macos:
 
     runs-on: macOS-latest
-    
+
     steps:
     - uses: actions/checkout@v1
     - name: update brew and install dependencies
-      run: brew update && brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf qt5 
+      run: brew update && brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf qt5
+    - name: downgrade boost to version 1.60
+      run: brew install boost@1.60 && brew link boost@1.60 --overwrite --force
     - name: build
       run: export PATH=$PATH:/usr/local/opt/qt/bin && ./build.sh
     - name: test qml
       run: build/release/bin/bittube-wallet-gui.app/Contents/MacOS/bittube-wallet-gui --test-qml
 
   build-ubuntu:
- 
+
     runs-on: ubuntu-latest
- 
+
     steps:
     - uses: actions/checkout@v1
     - name: remove bundled boost

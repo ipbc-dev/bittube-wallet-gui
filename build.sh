@@ -112,6 +112,10 @@ if ! QMAKE=$(find_command qmake qmake-qt5); then
     exit 1
 fi
 $QMAKE ../bittube-wallet-gui.pro "$CONFIG" || exit
+if [ "$platform" == "mingw64" ] || [ "$platform" == "mingw32" ]; then
+    $MAKE -f Makefile.Debug compiler_qmlcache_loader_make_all || true
+    $MAKE -f Makefile.Release compiler_qmlcache_loader_make_all || true
+fi
 $MAKE || exit 
 
 # Copy bittubed to bin folder
